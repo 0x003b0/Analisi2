@@ -1,0 +1,3118 @@
+\documentclass{article}  % Tipo di documento
+\usepackage[utf8]{inputenc} % Per caratteri accentati
+\usepackage[italian]{babel} % Lingua italiana
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}  % simboli matematici avanzati
+\usepackage{xcolor} % Per i colori
+\usepackage{titlesec} % Per personalizzare i titoli
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees}
+\usepackage[most]{tcolorbox}
+\usepackage{subcaption}  % per avere subfigure
+\tcbuselibrary{theorems}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+\tcbuselibrary{breakable}
+\usepackage{graphicx}
+\usepackage[table]{xcolor} % da mettere nel preambolo
+\usepackage{mathrsfs} % https://www.ctan.org/pkg/mathrsfs
+\graphicspath{ {./media/} }
+\usepackage{centernot}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cancel}
+
+
+\newtcbtheorem[no counter]{theorem}{Teorema}%
+{colback=blue!5, 
+colframe=blue!50!black, 
+fonttitle=\bfseries,
+    breakable,            % permette di spezzare il box su più pagine
+    enhanced,
+    break at=0pt}{}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+% Imposto colore delle subsection
+\titleformat{\subsection}
+  {\normalfont\large\color{red}} % stile del titolo
+  {\thesubsection}{1em}{} % numerazione e spaziatura
+
+% Definiamo un nuovo ambiente per gli esempi
+\newtcolorbox{esempio}[1][]{
+    colback=white,       % colore di sfondo
+    colframe=gray,       % colore del bordo
+    fonttitle=\bfseries,
+    title=#1,
+    boxrule=0.5pt,       % spessore del bordo
+    arc=4pt,             % angoli arrotondati
+    left=4pt, right=4pt, top=4pt, bottom=4pt,
+	breakable,            % permette di spezzare il box su più pagine
+    enhanced,
+    break at=0pt
+}
+
+\newtcolorbox{esercizio}[1][]{
+    colback=white,       % colore di sfondo
+    colframe=green!60!black,       % colore del bordo
+    fonttitle=\bfseries,
+    title=#1,
+    boxrule=0.5pt,       % spessore del bordo
+    arc=4pt,             % angoli arrotondati
+    left=4pt, right=4pt, top=4pt, bottom=4pt,
+    breakable,            % permette di spezzare il box su più pagine
+    enhanced,
+    break at=0pt
+}
+
+\newtcolorbox{osservazioni}[1][]{
+    colback=white,       % colore di sfondo
+    colframe=yellow!80!orange,       % colore del bordo
+    fonttitle=\bfseries,
+    title=#1,
+    boxrule=0.5pt,       % spessore del bordo
+    arc=4pt,             % angoli arrotondati
+    left=4pt, right=4pt, top=4pt, bottom=4pt,
+    breakable,            % permette di spezzare il box su più pagine
+    enhanced,
+    break at=0pt
+}
+
+% Creo un nuovo ambiente "ragionamento" senza quadratino
+\newenvironment{ragionamento}[1][]
+  {\begin{proof}[Ragionamento#1]\renewcommand{\qedsymbol}{}\normalfont}
+  {\end{proof}}
+
+\title{Statistica}
+\author{Ede Boanini}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents % genera automaticamente l’indice
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduzione}
+\subsection{Classificazione delle Variabili}
+\begin{center}
+	\begin{tikzpicture}[
+			level 1/.style={
+					sibling distance=50mm,
+					level distance=15mm,
+					every node/.append style={font=\small} % qui riduco il font dei figli
+				},
+			level 2/.style={
+					sibling distance=25mm, % distanza tra i nodi di livello 2
+					level distance=15mm    % distanza verticale
+				},
+			every node/.style={
+					rectangle, draw, rounded corners,
+					align=center,
+					top color=orange!60,
+					bottom color=orange!10
+				}
+		]
+		\node {Variabili}
+		child {node {Quantitative (numeriche)}
+				child {node {Discrete \\ $n \in \mathbb{N}$}}
+				child {node {Continue \\ $n \in \mathbb{R}$}}
+			}
+		child {node {Qualitative (categoriche)}
+				child {node {Ordinali}}
+				child {node {Nominali}}
+			};
+	\end{tikzpicture}
+\end{center}
+Differenza tra ordinali e nominali:
+\begin{itemize}
+	\item \textbf{Ordinali:} categorie che hanno un ordine, puoi solo dire se un valore è minore o maggiore rispetto ad un altro.
+	      \footnotesize
+	      \textit{
+		      \begin{itemize}
+			      \item Livello di istruzione: elementare $<$ media $< \cdots$
+			      \item Grado di soddisfazione: nullo $<$ basso $<$ medio $< \cdots$
+			      \item Classifica di una gara: quinto$<$quarto$< \cdots$
+			      \item Matricola: 17345 $<$ 17346 $< \cdots$
+		      \end{itemize}}
+	\item \textbf{Nominali:} categorie che non hanno un ordine.
+	      \footnotesize
+	      \textit{
+		      \begin{itemize}
+			      \item Colore occhi: blu, verdi, marroni, $\cdots$
+			      \item Genere: M, F
+			      \item Marche auto: Toyota, Ford, $\cdots$
+			      \item Nazionalità: Giapponese, Italiano, $\cdots$
+		      \end{itemize}
+	      }
+\end{itemize}
+\subsection{Distribuzioni di Frequenza}
+È una tabella che contiene modalità e frequenze.
+\begin{center}
+	\includegraphics[width=0.5\linewidth]{dist-freq.png}
+\end{center}
+\subsubsection{Tipi di Frequenza}
+\begin{enumerate}
+	\item \textcolor{red}{Frequenza assoluta:} numero di ripetizioni di una certa modalità (es: quanti studenti hanno preso 28 all'esame)
+	      \begin{center}
+		      $freq_{assoluta}=f_i$
+	      \end{center}
+	\item \textcolor{red}{Frequenza relativa:}
+	      \begin{center}
+		      $freq_{relativa}=\frac{f_i}{N}$
+	      \end{center}
+	\item \textcolor{red}{Frequenza percentuale:}
+	      \begin{center}
+		      $freq_{\%}=\frac{f_i}{N}\cdot 100$ \\oppure\\
+		      $freq_{\%}= freq_{relativa} \cdot 100$
+	      \end{center}
+	\item \textcolor{red}{Frequenza cumulata:} somma progressiva delle frequenze assolute o relative.
+	      \[ freq_{cumulataAssoluta}= \sum_{i=1}^{n} f_i \]
+	      \[ freq_{cumulataRelativa}= \sum_{i=1}^{n} \frac{f_i}{N} = \sum_{i=1}^{n} freq_{relativa_i}\]
+	\item \textcolor{red}{Frequenza cumulata percentuale:}
+	      \[ freq_{cumulataAssoluta\%}= \sum_{i=1}^{n} f_i \cdot 100 \]
+	      \[ freq_{cumulataRelativa\%}= \sum_{i=1}^{n} \frac{f_i}{N} \cdot 100 = \sum_{i=1}^{n} freq_{relativa_i} \cdot 100 \]
+\end{enumerate}
+\break
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statistica Descrittiva}
+\subsection{Diagrammi a barre vs Istogrammi}
+\begin{definition}[\textcolor{red}{Diagrammi a barre}]
+	Descrivono la distribuzione di frequenza di una o più variabili qualitative (categoriche). Le barre devono avere tutte la stessa base
+	ed essere equi-spaziate (lasciare un pò di spazio tra una barra e l'altra).
+	\begin{itemize}
+		\item altezza barre: frequenza
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{diag.png}
+	\end{center}
+\end{definition}
+\begin{definition}[\textcolor{red}{Istogrammi}]
+	Descrivono la distribuzione di frequenza di una o più variabili quantitative. Ogni barra rappresenta una classe e la sua frequenza.
+	\begin{itemize}
+		\item altezza barre: densità di frequenza
+		      \[
+			      densita_{freq}=\frac{\text{Frequenza}}{\text{Ampiezza classe}}
+		      \]
+		\item base barre: ampiezza delle classi
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.6\linewidth]{isto.png}
+	\end{center}
+\end{definition}
+\footnotesize
+\begin{osservazioni}[Osservazione: Definire $k$ classi di uguale ampiezza]
+	\[
+		\text{Ampiezza classe} = \frac{\text{max}-\text{min}}{k}
+	\]
+	I dati sulla statura di 48 adulti vanno da un minimo di 160 a 180 cm. Come fare $k$ classi di ugual ampiezza?
+	\begin{enumerate}
+		\item Scelgo $k$ (es: $k=5$)
+		\item Uso formula $\text{Ampiezza classe} = \frac{\text{max}-\text{min}}{k}$ (es: $\text{Ampiezza classe} = \frac{\text{180}-\text{160}}{5}=4$ cm);
+		      quindi ogni classe avrà ampiezza 4.
+		\item Gli estremi inferiore della classe sono (contando ampiezza 4):
+		      \begin{itemize}
+			      \item 160
+			      \item 164
+			      \item 168
+			      \item 172
+			      \item 176
+		      \end{itemize}
+	\end{enumerate}
+	Conclusione: le $k=5$ classi di ugual ampiezza sono:
+	\[
+		[160,164),\;
+		[164,168),\;
+		[168,172),\;
+		[172,176),\;
+		[176,180]
+	\]
+\end{osservazioni}
+
+\subsection{Media}
+Qual è il centro dei dati? \textcolor{red}{valore tipico} attorno a cui si concentrano i dati. \\
+$f_i$ indica la frequenza assoluta.
+\begin{itemize}
+	\item \textbf{Formula della media per distribuzione di frequenze:} (variabili discrete)
+	      \[
+		      \overline{x}=  \frac{\sum_{i=1}^{n} (x_i \cdot f_i)}{N} = \sum_{i=1}^{n} (x_i \cdot freq_{relativa_i})
+	      \]
+	\item \textbf{Formula della media per distribuzione di frequenze:} (variabili continue)
+	      \[
+		      \overline{x}=  \frac{\sum_{i=1}^{n} (m_i \cdot f_i)}{N} = \sum_{i=1}^{n} (m_i \cdot freq_{relativa_i})
+	      \]
+	      dove $a,b$ estremi dell'intervallo e $m_i= \frac{a+b}{2}$ il valore centrale della classe.
+\end{itemize}
+\subsection{Moda}
+Qual è il centro dei dati? \textcolor{red}{valore tipico} attorno a cui si concentrano i dati. \\
+La Moda è il valore che si ripete più spesso nei dati.
+\begin{itemize}
+	\item \textbf{Formula della moda per distribuzione di frequenze:} (variabili discrete)
+	      \[
+		      Moda =  x_i \text{ con maggior frequenza}
+	      \]
+	\item \textbf{Formula della media per distribuzione di frequenze:} (variabili continue)
+	      \[
+		      Moda = \frac{a+b}{2}
+	      \]
+\end{itemize}
+\begin{esempio}[Esempio Moda]
+	Per esempio, per l'esame di analisi 2 ci sono stati tanti studenti che hanno preso tra il 20 e il 25 (classe), allora
+		[20-25] è la classe modale.
+	Pertanto, nel nostro esempio $Moda =  \frac{20+25}{2}=22.5$
+\end{esempio}
+
+\subsection{Mediana}
+Qual è il centro dei dati? \textcolor{red}{valore tipico} attorno a cui si concentrano i dati. \\
+La Mediana è il valore che è più grande (o uguale) della prima metà dei dati e allo stesso tempo, più piccolo (o uguale) della seconda metà dei dati. \\
+\textbf{È il valore che sta in mezzo a dati ordinati}; quindi per poter stimare la $Me$ è necessario ordinare i dati:
+\begin{itemize}
+	\item \textbf{Formula della mediana per distribuzione di frequenze:} (variabili discrete)
+	      \begin{enumerate}
+		      \item Ordina i dati
+		      \item Trova indice $i$:
+		            \begin{itemize}
+			            \item se $N$ pari: $i_1=\frac{N}{2}$, $\quad i_2=\frac{N}{2}+1$
+			            \item se $N$ dispari: $i=\frac{N}{2}$
+		            \end{itemize}
+		      \item La mediana è il valore associato all'indice trovato ($i=x_i$):
+		            \begin{itemize}
+			            \item Se ho due indici $i_1, i_2$, allora $Me=\frac{x_1+x_2}{2}$
+			            \item Se ho un solo indice $i$, allora $Me=x_i$
+		            \end{itemize}
+	      \end{enumerate}
+	\item \textbf{Formula della mediana per distribuzione di frequenze:} (variabili continue)
+	      \begin{enumerate}
+		      \item Calcola frequenza cumulata di ogni classe
+		            \[ freq_{cumulataAssoluta}= \sum_{i=1}^{n} f_i \]
+		      \item Trova indice $i$:
+		            \begin{itemize}
+			            \item se $N$ pari: $i_1=\frac{N}{2}$, $\quad i_2=\frac{N}{2}+1$
+			            \item se $N$ dispari: $i=\frac{N}{2}$
+		            \end{itemize}
+		      \item Osserva $i$ in che classe cade (vedi frequenza cumulata), allora $Me=classe$. \\
+		            Oppure, se abbiamo due indici $i_1,i_2$ con valori $x_1, x_2$, allora $Me=\frac{x_1+x_2}{2}$
+	      \end{enumerate}
+\end{itemize}
+
+\subsection{Quartili}
+Il $p-$esimo percentile è il valore che ha $\%p$ dei dati sotto/dietro di sè.
+\begin{itemize}
+	\item $Q_1=$25-esimo percentile \\
+	      (25\% dei dati sotto questo valore)
+	\item $Q_2=$50-esimo percentile= Mediana \\
+	      (50\% dei dati sotto questo valore)
+	\item $Q_1=$75-esimo percentile \\
+	      (75\% dei dati sotto questo valore)
+\end{itemize}
+Divido la distribuzione in 4 parti uguali, per questo si chiamano "quartili". \\
+\begin{itemize}
+	\item \textbf{Come trovare il $Q_k$ per distribuzione di frequenze:} (variabili discrete)
+	      \begin{enumerate}
+		      \item Ordina i dati
+		      \item Trova indice: $i=\frac{N+1}{4}\cdot k$
+		      \item $Q_k$ è il valore associato all'indice:
+		            \begin{itemize}
+			            \item Se $i \in \mathbb{N}$, allora $Q_k=x_i$
+			            \item Se $i \in \mathbb{Q}$, allora $Q_k=\frac{\text{somma dei valori associati}}{2}$ \\ \\
+			                  Esempio: se $i=6.75$ allora $i_1=6, i_2=7$, e i valori associati a $i_1=20, i_2=25$, allora $Q_k=\frac{x_1+x_2}{2}=\frac{20+25}{2}=22.5$
+		            \end{itemize}
+	      \end{enumerate}
+	\item \textbf{Come trovare il $Q_k$ per distribuzione di frequenze:} (variabili continue)
+	      \begin{enumerate}
+		      \item Calcola frequenza cumulata di ogni classe
+		            \[ freq_{cumulataAssoluta}= \sum_{i=1}^{n} f_i \]
+		      \item Trova indice: $i=\frac{N+1}{4}\cdot k$
+		      \item Osserva $i$ in che classe cade (vedi frequenza cumulata)
+		      \item Allora avremo:
+		            \[
+			            Q_k = L + \frac{i - f_{cumulata}}{f_i}\cdot h
+		            \]
+		            dove:
+		            \begin{itemize}
+			            \item $L$: estremo inferiore della classe attuale (dell'indice)
+			            \item $i$: indice
+			            \item $f_{cumulata}$: frequenza cumulata classe precedente
+			            \item $f_i$: frequenza assoluta classe attuale
+			            \item $h$: ampiezza classe attuale
+		            \end{itemize}
+	      \end{enumerate}
+\end{itemize}
+
+\subsection{Campo di Variazione / Range}
+Distanza tra min e max.
+\[Range = max-min\]
+\subsection{Differenza Interquartile}
+Si usano i quartili per capire la variabilità centrale.
+\[
+	IQR=Q_3-Q_1
+\]
+\subsection{Varianza}
+Quanto sono variabili i dati? i dati sono \textcolor{red}{vicini o molto sparsi}. \\
+Quanto i dati si allontanano dalla loro media ($\mu$ oppure $\overline{x}$).
+\begin{itemize}
+	\item \textbf{Formula varianza per distribuzione di frequenze:} (variabili discrete)
+	      \begin{itemize}
+		      \item Varianza della popolazione ($P$):
+		            \[ \sigma^2= \frac{\sum_{i=1}^{n} (x_i-\mu)^2}{N} \]
+		      \item Varianza campionaria ($C \subseteq P$):
+		            \[ s^2= \frac{\sum_{i=1}^{n} (x_i-\overline{x})^2}{N-1} \]
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Deviazione standard}
+Quanto sono variabili i dati? i dati sono \textcolor{red}{vicini o molto sparsi}.
+\[\sigma=\sqrt{\sigma^2}\]
+dove $\sigma^2$ è la varianza.
+\subsection{Coefficiente di variazione}
+Si calcola quando $\mu, \overline{x}, \sigma$ sono positivi e si esprime in percentuale.
+\[
+	CV=\frac{\sigma}{\mu} \quad \text{oppure} \quad CV=\frac{\sigma}{\overline{x}}
+\]
+\break
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calcolo Combinatorio}
+\textbf{Ordine conta:} $abc \neq cba$ vuol dire "2 modi diversi di ordinare gli elementi".  \\
+\textbf{Ordine non conta:} $abc = cba$ vuol dire "c'è solo 1 modo per ordinare gli elementi". \\
+
+\textcolor{red}{Trucco:}
+\begin{itemize}
+	\item \textbf{Permutazioni:} uso tutti gli $n$ oggetti. Ordine conta
+	\item \textbf{Disposizioni:} non uso tutti gli $n$ oggetti ma solo $r$ oggetti scelti dall'insieme dove $r<n$. Ordine conta
+	\item \textbf{Combinazioni:} si parla di gruppi di $k$ elementi. Ordine non conta
+\end{itemize}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{} & \textbf{Ordine conta?}                        & \textbf{Oggetti usati} \\[6pt]
+		\hline
+
+		\textbf{Permutazioni}
+		          & \textcolor{green}{\scalebox{1.6}{\checkmark}}
+		          & Uso \textbf{tutti} gli $n$ oggetti                                     \\[8pt]
+
+		\hline
+		\textbf{Disposizioni}
+		          & \textcolor{green}{\scalebox{1.6}{\checkmark}}
+		          & Uso \textbf{$r$ oggetti su $n$}                                        \\[8pt]
+
+		\hline
+		\textbf{Combinazioni}
+		          & \textcolor{red}{\scalebox{1.6}{\texttimes}}
+		          & Uso \textbf{gruppi di $k$ oggetti su $n$}                              \\[8pt]
+
+		\hline
+	\end{tabular}
+\end{center}
+
+
+
+\subsection{Permutazioni Semplici}
+Una permutazione semplice è un modo di ordinare in successione oggetti distinti (qui non esistono oggetti uguali tra loro, sono tutti distinti).
+\begin{theorem}{}
+	IIl \textbf{numero di permutazioni} di $n$ oggetti distinti è il
+	numero di modi diversi per ordinare tali oggetti.
+	\[
+		P_n=n!
+	\]
+\end{theorem}
+
+\begin{esercizio}[Esempio]
+	Se ho $10$ libri, allora avrò:
+	\[
+		P_{10}=10!=3628800 \text{ modi diversi di ordinare 10 libri}
+	\]
+\end{esercizio}
+
+\subsection{Permutazioni con Ripetizione}
+Una permutazione con ripetizione è un modo di ordinare oggetti tra cui alcuni uguali tra loro.
+\begin{theorem}{}
+	IIl \textbf{numero di permutazioni} di $n$ oggetti alcuni uguali tra loro è il
+	numero di modi diversi per ordinare tali oggetti.
+	\[
+		P_{\text{numero tot di oggetti}}^{\text{numero di scatole}}=P_n^r=\frac{n!}{r_1!r_2! \cdots r_k!}
+	\]
+	Devo pensarlo così:
+	\begin{enumerate}
+		\item Dividi gli oggetti distinti come se fossero scatole distinte, senza ripetizione \\ ($k$ = conta quante scatole sono)
+		\item Inserisci ogni oggetto nella corrispettiva scatola \\ ($r$ = conta quanti oggetti ha ogni scatola)
+	\end{enumerate}
+\end{theorem}
+
+\begin{esercizio}[Esempio]
+	Se io ho la parola STATISTICA, ho $n=10$ allora:
+	\begin{enumerate}
+		\item Dividi gli oggetti distinti come se fossero scatole distinte \\ ($k$ = conta quante scatole sono) \\
+		      S, T, A, I, C quindi $k=5$ scatole
+		\item Inserisci ogni ripetizione nella corrispettiva scatola \\ ($r$ = conta quanti oggetti ha ogni scatola)
+		      \begin{itemize}
+			      \item scatola S: la parola ha 2 "S" ripetute, quindi $r_1=2$ \\
+			            \textcolor{red}{S}TATI\textcolor{red}{S}TICA
+			      \item scatola T: la parola ha 3 "T" ripetute, quindi $r_2=3$ \\
+			            S\textcolor{red}{T}A\textcolor{red}{T}IS\textcolor{red}{T}ICA
+			      \item scatola A: la parola ha 2 "A" ripetute, quindi $r_3=2$ \\
+			            ST\textcolor{red}{A}TISTIC\textcolor{red}{A}
+			      \item scatola I: la parola ha 2 "I" ripetute, quindi $r_4=2$ \\
+			            STAT\textcolor{red}{I}ST\textcolor{red}{I}CA
+			      \item scatola C: la parola ha 1 "C" ripetuta, quindi $r_5=1$ \\
+			            STATISTI\textcolor{red}{C}A
+		      \end{itemize}
+	\end{enumerate}
+	Quindi: \\
+	\[
+		P_{10}^5=\frac{10!}{r_1!r_2!r_3!r_4!r_5!}=\frac{10!}{2!3!2!2!1!}=75600 \text{ modi diversi di ordinare la parola}
+	\]
+\end{esercizio}
+
+\subsection{Disposizioni Semplici}
+Nel caso delle disposizioni, non uso tutti gli $n$ oggetti (come nelle permutazioni) ma solo un sottoinsieme scelto $k$ di $n$ dove $k \leq n$.
+\begin{theorem}{}
+	IIl \textbf{numero di disposizioni} di oggetti scelti $k$ tra $n$ oggetti totali distinti è il
+	numero di modi diversi per ordinare $k$ oggetti.
+	\[
+		D_{n,k}=\frac{n!}{(n-k)!}
+	\]
+	\begin{enumerate}
+		\item Scelgo $k$ oggetti tra $n$ oggetti totali
+		\item $D_{n,k}$ è il numero di modi diversi per ordinare $k$ oggetti
+	\end{enumerate}
+\end{theorem}
+
+\begin{esercizio}[Esempio]
+	In quanti modi diversi posso sistemare su una liberia 7 libri scelti da un insieme di 20 libri?
+	\[
+		D_{20,7}=\frac{20!}{(20-7)!}=390700800
+	\]
+\end{esercizio}
+
+\subsection{Disposizioni con Ripetizione}
+Nel caso delle disposizioni con ripetizione, non uso tutti gli $n$ oggetti (come nelle permutazioni) ma solo un sottoinsieme scelto $k$ di $n$ dove $k \leq n$.
+\begin{theorem}{}
+	IIl \textbf{numero di disposizioni con ripetizione} di oggetti scelti $k$ tra $n$ oggetti totali distinti è il
+	numero di modi diversi per ordinare $k$ oggetti in cui alcuni possono ripetersi nella stessa sequenza.
+	\[
+		D_{n,k}^R=n^k
+	\]
+\end{theorem}
+
+\begin{esercizio}[Esempio]
+	Quante password di 5 caratteri si possono creare con un alfabeto di 26 lettere?
+	\begin{enumerate}
+		\item Scelgo $k=5$ sottoinsieme di $n=26$
+		\item Alcune lettere possono ripetersi nella stessa sequenza
+	\end{enumerate}
+	\[
+		D_{26,5}^R=26\cdot26\cdot26\cdot26\cdot26=26^5=11881376
+	\]
+\end{esercizio}
+
+\subsection{Combinazioni}
+Nel caso delle combinazioni, si parla di gruppi il cui numero corrisponde esattamente a quanti oggetti $k$ ho scelto da $n$.
+La scelta $k$ corrisponde solo al numero da cui è formato ogni gruppo.
+\\ \\
+Ovvero, se io scelgo 10 oggetti su 20, allora ogni gruppo dovrà avere esattamente 10 oggetti.
+L'ordine non conta perchè l'importante è la presenza dell'oggetto all'interno del gruppo, che sia primo o ultimo non cambia niente.
+\\ \\
+La domanda è: quanti modi diversi ho di formare questi gruppi?
+\begin{theorem}{}
+	IIl \textbf{numero di combinazioni} è il numero di modi diversi per formare gruppi di $k$ elementi ($k \leq n$).
+	\[
+		C_{n,k}=\binom{n}{k}=\frac{n!}{k!(n-k)!}
+	\]
+	\begin{enumerate}
+		\item Scelgo un numero $k$ dove $k \leq n$
+		\item Ogni gruppo dovrà avere esattamente $k$ oggetti
+		\item Quanti modi diversi ho di formare questi gruppi che contengono esattamente $k$ oggetti?
+	\end{enumerate}
+\end{theorem}
+
+\begin{esercizio}[Esempio]
+	Ho 3 frutti diversi ma la io voglio fare merenda solo con 2. Quante tipe di merende posso creare con 2 frutti?
+	\begin{enumerate}
+		\item Scelgo $k=2$ dove $2<3$
+		\item Ogni gruppo avrà esattamente $2$ frutti
+	\end{enumerate}
+	\[
+		C_{3,2}=\binom{3}{2}=\frac{3!}{2!(3-2)!}=\frac{1 \cdot 2  \cdot 3}{2!1!}=\frac{6}{2}=3
+	\]
+	Ho 3 modi diversi di formare gruppi di $2$ frutti, quindi ho 3 tipi di merende diverse.
+\end{esercizio}
+\begin{esercizio}[Esempio]
+	Voglio giocare a basket e devo formare 2 gruppi di persone per la partita. So che ogni squadra deve avere esattamente 5 giocatori. Le persone che si son presentate come candidate
+	sono 40. Quanti modi diversi ho per formare una squadra? e per formarne due? sapendo che la persona non puo essere contemporanemente scelta in entrambe?
+	\begin{enumerate}
+		\item Scelgo $k=5$ dove $5<40$
+		\item Ogni gruppo avrà esattamente $5$ persone
+		      \[
+			      C_{40,5}=\binom{40}{5}=\frac{40!}{5!(40-5)!}= 657708 \text{ modi diversi per formare una sola squadra}
+		      \]
+		      Ho 657708 modi diversi di formare gruppi di $5$ persone, quindi posso scegliere 1 tra 657708 da mandare in campo.
+
+		\item Se invece voglio formare due squadre (sapendo che la stessa persona non può essere in entrambe) ? quante scelte avrei?
+		      \[
+			      \text{Prima squadra: } C_{40,5}=\binom{40}{5}=\frac{40!}{5!(40-5)!}= 657708
+		      \]
+		      Dato che le persone non possono ripetersi, se io ho formato la prima squadra, avrò per la seconda 35-5 persone ancora disponibili (perchè 5 le ho già scelte nella 1ª squadra):
+		      \[
+			      \text{Seconda squadra: } C_{35,5}=\binom{35}{5}=\frac{35!}{5!(35-5)!}=324632
+		      \]
+		      Quindi i diversi modi per formare le due squadre saranno in totale $657708 \cdot 324632=213846580000$
+	\end{enumerate}
+\end{esercizio}
+\break
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Probabilità}
+\subsection{Operazione insiemi}
+\[
+	A_1 \cup A_2 = \{\omega \mid \omega \in A_1 \lor \omega \in A_2\}
+\]
+\[
+	A_1 \cap A_2 = \{\omega \mid \omega \in A_1 \land \omega \in A_2\}
+\]
+\[
+	A_1 - A_2 = \{\omega \mid \omega \in A_1 \land \omega \notin A_2\}
+\]
+\[
+	\overline{A} = \{\omega \mid \omega \notin A\}
+\]
+\subsection{Proprietà operazione tra eventi}
+Siano $A_1,A_2,A_3$ tre eventi.
+\begin{itemize}
+	\item \textbf{Proprietà commutativa}: l'ordine non cambia il risultato
+	      \[
+		      E_1 \cup E_2 = E_2 \cup E_1
+	      \]
+	      \[
+		      E_1 \cap E_2 = E_2 \cap E_1
+	      \]
+	\item \textbf{Proprietà associativa}:
+	      \[
+		      (E_1 \cup E_2) \cup E_3 = E_1 \cup (E_2 \cup E_3)
+	      \]
+	      \[
+		      (E_1 \cap E_2) \cap E_3 = E_1 \cap (E_2 \cap E_3)
+	      \]
+	\item \textbf{Proprietà distributiva}:
+	      \[
+		      (E_1 \cup E_2) \cap E_3 = (E_1 \cap E_3) \cup (E_2 \cap E_3)
+	      \]
+	      \[
+		      (E_1 \cap E_2) \cup E_3 = (E_1 \cup E_3) \cap (E_2 \cup E_3)
+	      \]
+	\item \textbf{Leggi di De Morgan}:
+	      \[
+		      \overline{E_1 \cap E_2}=\overline{E_1} \cup \overline{E_2}
+	      \]
+	      \[
+		      \overline{E_1 \cup E_2}=\overline{E_1} \cap \overline{E_2}
+	      \]
+\end{itemize}
+\subsection{Tipi di eventi}
+\subsubsection{Eventi compatibili}
+Due eventi che possono verificarsi congiuntamente.
+\[
+	A_1,A_2 \text{ compatibili} \iff A_1 \cap A_2 \neq \emptyset
+\]
+\subsubsection{Eventi incompatibili}
+Due eventi che non possono verificarsi congiuntamente.
+\[
+	A_1,A_2 \text{ incompatibili} \iff A_1 \cap A_2 = \emptyset
+\]
+\subsubsection{Eventi complementari}
+Due eventi che non possono verificarsi congiuntamente e tale che uno dei due si verifica di sicuro.
+\[
+	A_1, A_2 \text{ complementari}\iff
+	\begin{cases}
+		A_1 \cap A_2 = \emptyset \\
+		A_1 \cup A_2 = \Omega
+	\end{cases}
+\]
+
+\subsection{Definizione}
+Sia $A$ un evento e $\Omega$ lo spazio campionario. Definisco $P(A)$ la probabilità che si verifichi $A$ dove $0 \leq P(A) \leq 1$:
+\[
+	P(A)=\frac{\text{numero di casi favorevoli}}{\text{numero di casi possibili}}
+\]
+
+\subsection{Assiomi}
+\begin{enumerate}
+	\item \textbf{Primo assioma:} la probabilità di un evento $A$ è un numero reale non negativo
+	\item \textbf{Secondo assioma:} la probabilità dell'intero spazio campionario è uguale a 1
+	      \[P(\Omega)=1\]
+	\item \textbf{Terzo assioma:} Se $A_1, A_2$ sono eventi \textcolor{red}{incompatibili}, allora la probabilità dell'unione dei due eventi e la somma
+	      delle loro probabilità
+	      \[
+		      P(A_1 \cup A_2)=P(A_1)+P(A_2)
+	      \]
+\end{enumerate}
+\subsubsection{Conseguenze degli assiomi}
+\begin{enumerate}
+	\item \textbf{Probabilità del complementare di un evento:}
+	      \[
+		      P(\overline{A})=1-P(A)
+	      \]
+	      oppure:
+	      \[
+		      P(A)=1-P(\overline{A})
+	      \]
+	\item \textbf{Probabilità dell'evento impossibile:}
+	      \[
+		      P(\emptyset)=0
+	      \]
+	\item \textbf{Proprietà di monoticità:} Se $B$ è un evento incluso in un evento $A$, allora la probabilità di $B$ è minore
+	      o uguale alla probabilità di $A$
+	      \[
+		      B \subseteq A \implies P(B) \leq P(A)
+	      \]
+	\item \textbf{Probabilità dell'unione di eventi incompatibili:} la probabilità dell'unione di eventi incompatibili
+	      è la somma delle loro probabilità
+	      \[
+		      P\!\left( \bigcup_{i=1}^{n} A_i \right)
+		      =
+		      \sum_{i=1}^{n} P(A_i)
+	      \]
+\end{enumerate}
+\subsection{Probabilità Totale}
+\begin{theorem}{Teorema delle probabilità totali a $2$ eventi}
+	SSiano $A_1,A_2$ due eventi, la probabilità dell'unione dei due eventi è uguale alla somma delle due probabilità meno la loro intersezione:
+	\[
+		P(A_1 \cup A_2)=P(A_1)+P(A_2)-P(A_1 \cap A_2)
+	\]
+	Vuol dire: "probabilità che si verifichi almeno uno dei due eventi"
+\end{theorem}
+
+\begin{itemize}
+	\item Se i due eventi sono incompatibili $A_1 \cap A_2 = \emptyset$ allora,
+	      \[
+		      P(A_1 \cup A_2)=P(A_1)+P(A_2)-P(A_1 \cap A_2)=P(A_1)+P(A_2)-\emptyset =P(A_1)+P(A_2)
+	      \]
+	      (assioma 3)
+	\item Se i due eventi sono compatibili $A_1 \cap A_2 \neq \emptyset$ allora,
+	      \[
+		      P(A_1 \cup A_2)=P(A_1)+P(A_2)-P(A_1 \cap A_2)
+	      \]
+	      (resta uguale)
+\end{itemize}
+
+\begin{theorem}{Teorema delle probabilità totali a $k$ eventi}
+	SSiano $k$ eventi, la probabilità dell'unione di $k$ eventi è uguale a:
+	\begin{align*}
+		P(A_1 \cup A_2 \cup \dots \cup A_k)
+		 & = \sum_{i=1}^{k} P(A_i) +                                              \\
+		 & - \sum_{1 \leq i<j\leq k}^{k} P(A_i \cap A_j) +                        \\
+		 & + \sum_{1 \leq i<j<r \leq k}^{k} P(A_i \cap A_j \cap A_r) +            \\
+		 & - \sum_{1 \leq i<j<r<s \leq k}^{k} P(A_i \cap A_j \cap A_r \cap A_s) + \\
+		 & \cdots                                                                 \\
+		 & +(-1)^{k+1}P(A_1 \cap A_2 \cap A_3 \cap A_4 \cap \cdots \cap A_k) =
+	\end{align*}
+	Ovvero:
+	\begin{align*}
+		P(A_1 \cup A_2 \cup \dots \cup A_k)
+		 & = \text{ somma delle probabilità dei singoli eventi } +               \\
+		 & \quad - [\text{ somma dell'intersezioni degli eventi presi 2 a 2 }] + \\
+		 & + [\text{ somma dell'intersezioni degli eventi presi 3 a 3 }] +       \\
+		 & - [\text{ somma dell'intersezioni degli eventi presi 4 a 4 }] +       \\
+		 & \cdots                                                                \\
+		 & +/- [\text{ somma dell'intersezioni degli eventi presi $k$ a $k$ }]
+	\end{align*}
+	Vuol dire: "probabilità che si verifichi almeno uno tra i $k$ eventi"
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Una segretaria distratta prepara 3 lettere e 3 buste da inviare a 5 persone diverse e mette le lettere nelle buste a caso. \\
+	Qual è la probabilità che \underline{\textbf{almeno una}} delle 3 lettere sia inserita nella busta corrispondente?
+	\begin{enumerate}
+		\item Descrivi a parole quanto richiesto nell'esercizio: \\
+		      $E=$almeno una delle tre lettere è inserita nella busta corrispondente
+		\item Suddividi l'evento:
+		      \begin{enumerate}
+			      \item $E_1=$la lettera 1 è nella busta 1
+			      \item $E_2=$la lettera 2 è nella busta 2
+			      \item $E_3=$la lettera 3 è nella busta 3
+			      \item Quindi, l'evento $E=$almeno una delle tre lettere è inserita nella busta corrispondente diventa: \\ $E=E_1 \cup E_2 \cup E_3$
+			      \item Qual è la probabilità che si verifichi $E=E_1 \cup E_2 \cup E_3$? \\ Infatti qui si calcola la probabilità che almeno uno si verifichi.
+		      \end{enumerate}
+	\end{enumerate}
+	\textcolor{red}{Dunque applico la formula di probabilità totale per $3$ eventi:}
+	\begin{align*}
+		P(E_1 \cup E_2 \cup E_3)
+		 & = [P(E_1)+P(E_2)+P(E_3)] +                          \\
+		 & - [P(E_1 \cap E_2)+P(E_1 \cap E_3)+P(E_2 \cap E_3)] \\
+		 & + [P(E_1 \cap E_2 \cap E_3)] =
+	\end{align*}
+	\begin{itemize}
+		\item $P(E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{?}{3!}=\frac{2}{6}=\frac{1}{3}$ \\
+		      Casi favorevoli che accada $P(E_1)$:
+		      \begin{itemize}
+			      \item 123
+			      \item 132
+			      \item $\cancel{213}$
+			      \item $\cancel{231}$
+			      \item $\cancel{312}$
+			      \item $\cancel{321}$
+		      \end{itemize}
+		      2 casi favorevoli.
+		\item $P(E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{3}$ \\
+		      Casi favorevoli che accada $P(E_2)$: uguale a $P(E_1)$
+		\item $P(E_3)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{3}$ \\
+		      Casi favorevoli che accada $P(E_3)$: uguale a $P(E_1)$
+		\item $P(E_1 \cap E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{?}{3!}=\frac{1}{6}$ \\
+		      Casi favorevoli che accada $P(E_1 \cap E_2)$, ovvero che la lettera 1 sia in prima posizione e allo stesso tempo 2 sia alla seconda posizione:
+		      \begin{itemize}
+			      \item 123
+			      \item $\cancel{132}$
+			      \item $\cancel{213}$
+			      \item $\cancel{231}$
+			      \item $\cancel{312}$
+			      \item $\cancel{321}$
+		      \end{itemize}
+		      1 caso favorevole.
+		\item $P(E_1 \cap E_3)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\text{uguale a }P(E_1 \cap E_2)=\frac{1}{6}$
+		\item $P(E_2 \cap E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\text{uguale a }P(E_1 \cap E_2)=\frac{1}{6}$
+		\item $P(E_1 \cap E_2 \cap E_3)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{?}{3!}=\frac{1}{6}$ \\
+		      Casi favorevoli che accada $P(E_1 \cap E_2 \cap E_3)$, ovvero che allora stesso tempo la lettera 1 sia in prima posizione, la 2 in seconda posizione e la 3 in terza posizione:
+		      \begin{itemize}
+			      \item 123
+			      \item $\cancel{132}$
+			      \item $\cancel{213}$
+			      \item $\cancel{231}$
+			      \item $\cancel{312}$
+			      \item $\cancel{321}$
+		      \end{itemize}
+		      1 caso favorevole.
+	\end{itemize}
+	Pertanto la formula:
+	\begin{align*}
+		P(E_1 \cup E_2 \cup E_3)
+		 & = [P(E_1)+P(E_2)+P(E_3)] +                          \\
+		 & - [P(E_1 \cap E_2)+P(E_1 \cap E_3)+P(E_2 \cap E_3)] \\
+		 & + [P(E_1 \cap E_2 \cap E_3)] =
+	\end{align*}
+	Sostituendo con i valori trovati, diventa:
+	\begin{align*}
+		P(E_1 \cup E_2 \cup E_3)
+		 & = \left[\frac{1}{3}+\frac{1}{3}+\frac{1}{3}\right] +                                            \\
+		 & - \left[\frac{1}{6}+\frac{1}{6}+\frac{1}{6}\right]                                              \\
+		 & + \left[\frac{1}{6}\right] = \frac{2}{3}=0.67 \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+
+	\textcolor{red}{Oppure posso utilizzare la negazione $P(E)=1-P(\overline{E})$:}
+	\begin{itemize}
+		\item $E=$almeno una delle tre lettere è inserita nella busta corrispondente
+		\item $\overline{E}=$nessuna delle tre lettere è inserita nella busta corrispondente
+	\end{itemize}
+	Usando la negazione:
+	$\overline{E}=$nessuna delle tre lettere è inserita nella busta corrispondente
+	\begin{itemize}
+		\item $\overline{E_1}=$la lettera 1 non è nella busta 1
+		\item $\overline{E_2}=$la lettera 2 non è nella busta 2
+		\item $\overline{E_3}=$la lettera 3 non è nella busta 3
+	\end{itemize}
+	e quindi se voglio che accadano tutti gli eventi insieme allora sarebbe intersezione e non unione (probabilità congiunta): \\
+	$\overline{E}=$nessuna delle tre lettere è inserita nella busta corrispondente $\implies \overline{E}=\overline{E_1} \cap \overline{E_2} \cap \overline{E_3}$
+	quindi uso la formula della probabilità congiunta per 3 eventi:
+	\begin{align*}
+		P(\overline{E})
+		 & = P(\overline{E_1} \cap \overline{E_2} \cap \overline{E_3}) =                                                                   \\
+		 & = P(\overline{E_1}) \cdot P(\overline{E_2} \mid \overline{E_1}) \cdot P(\overline{E_3} \mid \overline{E_1} \cap \overline{E_2}) \\
+		 & = \frac{2}{3} \cdot \frac{3}{4} \cdot \frac{2}{3}=\frac{1}{3}
+	\end{align*}
+	\begin{itemize}
+		\item $P(\overline{E_1})=\frac{\text{numero casi favoreli}}{\text{numero casi possibili}}=\frac{4}{3!}=\frac{4}{6}=\frac{2}{3}$ \\
+		      Uso tutti gli elementi, ordine conta, ripetizioni no $\implies$ permutazioni semplici $n!$ \\
+		      Quindi, casi possibili $3!=6$, ovvero $6$ possibili modi di ordinare gli elementi:
+		      \begin{itemize}
+			      \item 123
+			      \item 132
+			      \item 213
+			      \item 231
+			      \item 312
+			      \item 321
+		      \end{itemize}
+		      \begin{enumerate}
+			      \item casi favorevoli che accada $P(\overline{E})$, ovvero tutte le combinazioni in cui $1$ non è nella prima posizione:
+			            \begin{itemize}
+				            \item $\cancel{123}$
+				            \item $\cancel{132}$
+				            \item 213
+				            \item 231
+				            \item 312
+				            \item 321
+			            \end{itemize}
+			            Ci sono $4$ combinazioni favorevoli
+		      \end{enumerate}
+		\item $P(\overline{E_2} \mid \overline{E_1})=\frac{\overline{E_2} \cap \overline{E_1}}{P(\overline{E_1})}=\frac{?}{\frac{2}{3}}=\frac{\frac{1}{2}}{\frac{2}{3}}=\frac{3}{4}$ \\
+		      tutte e due le buste non vanno nelle buste corrispondenti: \\
+		      $P(\overline{E_2} \cap \overline{E_1})=\frac{\text{numero casi favoreli}}{\text{numero casi possibili}}=\frac{?}{3!}=\frac{3}{3!}=\frac{3}{6}=\frac{1}{2}$ \\
+
+		      casi favorevoli che accada $P(\overline{E})$, ovvero tutte le combinazioni in cui $1,2$ non sono nella corrispettiva posizione:
+		      \begin{itemize}
+			      \item $\cancel{123}$
+			      \item $\cancel{132}$
+			      \item 213
+			      \item 231
+			      \item 312
+			      \item $\cancel{321}$
+		      \end{itemize}
+		      Ci sono $3$ combinazioni favorevoli
+
+		\item $P(\overline{E_3} \mid \overline{E_1} \cap \overline{E_2})=\frac{P(\overline{E_3} \cap \overline{E_1} \cap \overline{E_2})}{P(\overline{E_1} \cap \overline{E_2})}
+			      =\frac{?}{\frac{1}{2}}=\frac{\frac{1}{3}}{\frac{1}{2}}=\frac{2}{3}$ \\
+		      tutte e tre le buste non vanno nelle buste corrispondenti: \\
+		      $P(\overline{E_3} \cap \overline{E_1} \cap \overline{E_2})=\frac{\text{numero casi favoreli}}{\text{numero casi possibili}}=\frac{?}{3!}=\frac{2}{3!}=\frac{2}{6}=\frac{1}{3}$ \\
+		      casi favorevoli che accada $P(\overline{E_3} \cap \overline{E_1} \cap \overline{E_2})$, ovvero tutte le combinazioni in cui $1,2,3$ non sono nella corrispettiva posizione:
+		      \begin{itemize}
+			      \item $\cancel{123}$
+			      \item $\cancel{132}$
+			      \item $\cancel{213}$
+			      \item 231
+			      \item 312
+			      \item $\cancel{321}$
+		      \end{itemize}
+		      Ci sono $2$ combinazioni favorevoli
+	\end{itemize}
+	Pertanto:
+	\[
+		P(E)=1-P(\overline{E})=1-\frac{1}{3}=\frac{2}{3}=0.67 \quad \textcolor{green}{\text{Risposta corretta}}
+	\]
+	\textcolor{red}{Oppure un modo più veloce sempre con la negazione $P(E)=1-P(\overline{E})$:} \\
+	$\overline{E}=$nessuna delle tre lettere è inserita nella busta corrispondente
+	\begin{itemize}
+		\item $\overline{E_1}=$la lettera 1 non è nella busta 1
+		\item $\overline{E_2}=$la lettera 2 non è nella busta 2
+		\item $\overline{E_3}=$la lettera 3 non è nella busta 3
+	\end{itemize}
+	Voglio calcolare $P(\overline{E})=P(\overline{E_1} \cap \overline{E_2} \cap \overline{E_3})$ e poi fare $P(E)=1-P(\overline{E})$, quindi:
+	\begin{enumerate}
+		\item Elenco tutti i possibili modi di ordinare le buste:
+		      \begin{itemize}
+			      \item 123
+			      \item 132
+			      \item 213
+			      \item 231
+			      \item 312
+			      \item 321
+		      \end{itemize}
+		\item Tengo fissato un ordine (lettera 1 - busta 1 - prima posizione; lettera 2 - busta 2 - seconda posizione; lettera 3 - busta 3 - terza posizione)
+		\item Elimino i casi in cui 1 è nella prima posizione $\land$ 2 è nella seconda posizione $\land$ 3 è nella terza posizione:
+		      \begin{itemize}
+			      \item $\cancel{123}$ - elimino perchè 1 è nella prima posizione, 2 nella seconda, 3 nella terza
+			      \item $\cancel{132}$ - elimino perchè 1 è nella prima posizione
+			      \item $\cancel{213}$ - elimino perchè 3 è nella terza posizione
+			      \item 231
+			      \item 312
+			      \item $\cancel{321}$ - elimino perchè 2 è nella seconda posizione
+		      \end{itemize}
+		      Mi rimangono 2 casi favorevoli.
+		\item Pertanto, $P(\overline{E})=P(\overline{E_1} \cap \overline{E_2} \cap \overline{E_3})=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{2}{3!}=\frac{2}{6}=\frac{1}{3}$
+		\item Alla fine:
+		      \[
+			      P(E)=1-P(\overline{E})=1-\frac{1}{3}=\frac{2}{3}=0.67 \quad \textcolor{green}{\text{Risposta corretta}}
+		      \]
+	\end{enumerate}
+
+\end{esercizio}
+
+\break
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Probabilità Condizionata e Indipendenza}
+\subsection{Probabilità Condizionata}
+\begin{theorem}{}
+	SSi definisce probabilità condizionata la \textbf{probabilità che si verifichi un evento $E$ sapendo che si è già verificato l'evento $B$}:
+	"probabilità di $E$ dato $B$."
+	\[
+		P(E \mid B)=\frac{P(E \cap B)}{P(B)}
+	\]
+	Inoltre, si ricavano le seguenti formule:
+	\[
+		P(E \cap B)=P(E \mid B) \cdot P(B)
+	\]
+	e:
+	\[
+		P(B)=\frac{P(E \cap B)}{P(E \mid B)}
+	\]
+\end{theorem}
+Prima osservazione:
+\[
+	\begin{aligned}
+		P(E \cup A \mid B)
+		 & = \frac{P((E \cup A)\cap B)}{P(B)}                         \\
+		 & = \frac{P((E \cap B)\cup (A \cap B))}{P(B)}                \\
+		 & = \text{per teorema delle probabilità totali}\footnotemark \\ \\
+		 & = \frac{P(E \cap B)+P(A \cap B)-P(E \cap B \cap A)}{P(B)}
+	\end{aligned}
+\]
+\footnotetext{$P(A_1 \cup A_2)=P(A_1)+P(A_2)-P(A_1 \cap A_2)$}
+
+Seconda osservazione:
+\[
+	\begin{aligned}
+		P(E \cap A \mid B)
+		 & = \frac{P(E \cap A\cap B)}{P(B)}
+	\end{aligned}
+\]
+
+Terza osservazione:
+\[
+	P(\overline{E} \mid B)=1-P(E \mid B)
+\]
+\[
+	P(E \mid B)=1-P(\overline{E} \mid B)
+\]
+\begin{osservazioni}[Osservazione:]
+	\begin{align*}
+		P(E \mid \overline{B})
+		 & = \frac{P(E \cap \overline{B})}{P(\overline{B})} =                                                    \\
+		 & \text{per l'assioma 3}                                                                                \\
+		 & = \frac{P(E \cap \overline{B})}{\textcolor{red}{1 - P(B)}} =                                          \\
+		 & \text{sapendo che } P(E \cap \overline{B})=P(E \mid \overline{B})\cdot P(\overline{B}) \text{ e che,} \\
+		 & \text{le due probabilità sono non nulle } P(E),P(\overline{B}) \neq 0,                                \\
+		 & \text{allora posso usare } P(E \cap \overline{B})=P(\overline{B} \mid E)\cdot P(E)                    \\
+		 & \text{poichè il risultato di } P(E \cap \overline{B}) \text{ rimane invariato. Quindi:}               \\
+		 & =  \frac{\textcolor{red}{P(\overline{B} \mid E)\cdot P(E)}}{1 - P(B)}=                                \\
+		 & =  \frac{\textcolor{red}{P(\overline{B} \mid E)}\cdot P(E)}{1 - P(B)} =                               \\
+		 & \text{per l'assioma 3}                                                                                \\
+		 & =  \frac{(\textcolor{red}{1- P(B \mid E)})\cdot P(E)}{1 - P(B)} =
+	\end{align*}
+\end{osservazioni}
+\subsection{Probabilità Congiunta / Composta}
+La probabilità congiunta è la probabilità che due o più eventi si verifichino insieme (accadano entrambi), ossia che si verifichi l'intersezione
+degli eventi.
+\begin{theorem}{Legge delle probabilità composte per 2 eventi}
+	SSi definisce probabilità congiunta la \textbf{probabilità che si verifichino entrambi gli eventi}:
+	\[
+		P(A_1 \cap A_2)=P(A_2 \mid A_1)\cdot P(A_1) \text{ con } P(A_1) \neq 0
+	\]
+	Oppure:
+	\[
+		P(A_1 \cap A_2)=P(A_1 \mid A_2)\cdot P(A_2) \text{ con } P(A_2) \neq 0
+	\]
+	\\
+	Se entrambe sono non nulle, $P(A_1)\land P(A_2) \neq 0$, allora posso usare una delle due formule, il risultato rimane invariato: \\
+	Posso usare questa:
+	\[
+		P(A_1 \cap A_2)=P(A_2 \mid A_1)\cdot P(A_1)
+	\]
+	Oppure questa:
+	\[
+		P(A_1 \cap A_2)=P(A_1 \mid A_2)\cdot P(A_2)
+	\]
+\end{theorem}
+Prima osservazione: $P(A_1) \neq 0$
+\[
+	\begin{aligned}
+		P(A_1 \cap A_2)
+		 & = P(A_2 \mid A_1)\cdot P(A_1)                                                                 \\ \\
+		 & = \frac{P(A_2 \cap A_1)}{P(A_1)} \cdot P(A_1)                                                 \\ \\
+		 & = P(A_2 \cap A_1) \text{ giusto, intersezione è simmetrica, } P(A_1 \cap A_2)=P(A_2 \cap A_1)
+	\end{aligned}
+\]
+Seconda osservazione: $P(A_2) \neq 0$
+\[
+	\begin{aligned}
+		P(A_2 \cap A_1)
+		 & = P(A_1 \mid A_2)\cdot P(A_2)                                                                 \\ \\
+		 & = \frac{P(A_1 \cap A_2)}{P(A_2)} \cdot P(A_2)                                                 \\ \\
+		 & = P(A_1 \cap A_2) \text{ giusto, intersezione è simmetrica, } P(A_1 \cap A_2)=P(A_2 \cap A_1)
+	\end{aligned}
+\]
+\begin{theorem}{Legge delle probabilità composte per $k$ eventi}
+	IGeneralizzato a $k$ eventi, \textcolor{green}{questa formula vale solo se} gli eventi su cui condizioniamo
+	\footnote{eventi su cui condizioniamo sono quelli in rosso, dopo la sbarra:
+		$P(A_1 \mid \textcolor{red}{X})$} sono maggiori di zero $P(X)>0$:
+	\[
+		P(A_1 \cap A_2 \cap \dots \cap A_k)
+		= \prod_{i=1}^{k} P\Big(A_i \;\big|\; \bigcap_{j=1}^{i-1} A_j\Big)
+	\]
+	Ovvero:
+	\begin{align*}
+		P(A_1 \cap A_2 \cap \dots \cap A_k)
+		 & = P(A_1) \cdot P(A_2 \mid A_1) \cdot P(A_3 \mid A_1 \cap A_2) \cdot \\
+		 & \quad \cdot P(A_4 \mid A_1 \cap A_2 \cap A_3) \cdots
+		\cdot P(A_k \mid A_1 \cap \dots \cap A_{k-1})
+	\end{align*}
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Un cliente di un'azienda acquista 3 pc da un lotto di 50 pc di cui 4 sono difettosi. Qual è la probabilità che tutti i 3 pc acquistati siano difettosi? \\
+	Ricordo che: intersezione$=\cap=\land=AND$
+	\begin{enumerate}
+		\item Descrivi a parole quanto richiesto in un evento: \\ $E$=tutti i pc acquistati sono difettosi
+		\item Suddividi l'evento:
+		      \begin{enumerate}
+			      \item $E_1$= primo pc difettoso
+			      \item $E_2$= secondo pc difettoso
+			      \item $E_3$= terzo pc difettoso
+		      \end{enumerate}
+		\item Quindi, l'evento $E$=tutti i pc acquistati sono difettosi diventa: \\ $E=E_1 \cap E_2 \cap E_3$
+		\item Qual è la probabilità che si verifichi $E=E_1 \cap E_2 \cap E_3$? Infatti qui si calcola la probabilità che si verifichino tutti gli eventi insieme
+	\end{enumerate}
+	Dunque applico formula della probabilità congiunta/composta:
+	\[
+		P(E_1 \cap E_2 \cap E_3)=P(E_1)\cdot P(E_2 \mid E_1) \cdot (E_3 \mid E_1 \cap E_2)
+	\]
+	\[
+		P(E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{4}{50}
+	\]
+	\[
+		P(E_2 \mid E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{49}
+	\]
+	\[
+		P(E_3 \mid E_1 \cap E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{2}{48}
+	\]
+	Dunque:
+	\[
+		P(E_1 \cap E_2 \cap E_3)=\frac{4}{50} \cdot \frac{3}{49} \cdot \frac{2}{48}=0.0002=0.02\%
+	\]
+\end{esercizio}
+\begin{esercizio}[Esercizio]
+	Se invece fosse stato: Qual è la probabilità che \textbf{\underline{almeno uno} dei pc fosse difettoso?} \\Non avrei utilizzato probabilità congiunta
+	ma teorema delle probabilità totali (unione). \\ Ricordo che: l'unione $=\cup = \lor = OR$
+	\begin{enumerate}
+		\item Descrivo a parole quanto richiesto in un evento: \\ $E=$almeno un pc acquistato è difettoso
+		\item Suddividi l'evento:
+		      \begin{enumerate}
+			      \item $E_1$= primo pc difettoso
+			      \item $E_2$= secondo pc difettoso
+			      \item $E_3$= terzo pc difettoso
+		      \end{enumerate}
+		\item Quindi, l'evento $E=$almeno un pc acquistato è difettoso, diventa: \\ $E=E_1 \cup E_2 \cup E_3$
+		\item Qual è la probabilità che si verifichi $E=E_1 \cup E_2 \cup E_3$?
+	\end{enumerate}
+	\textcolor{red}{Dunque, ho due approcci:}
+	\begin{itemize}
+		\item \textbf{Uso formula delle probabilità totali a $k=3$ eventi:}
+		      \begin{align*}
+			      P(E_1 \cup E_2 \cup E_3)
+			       & = [P(E_1) + P(E_2) + P(E_3)] +                        \\
+			       & - [P(E_1 \cap E_2)+P(E_1 \cap E_3)+P(E_2 \cap E_3)] + \\
+			       & + [P(E_1 \cap E_2 \cap E_3)] =
+		      \end{align*}
+		      quindi:
+		      \begin{itemize}
+			      \item $P(E_1)=?$
+			      \item $P(E_2)=?$
+			      \item $P(E_3)=?$
+			      \item $P(E_1 \cap E_2)=?$
+			      \item $P(E_1 \cap E_3)=?$
+			      \item $P(E_2 \cap E_3)=?$
+			      \item $P(E_1 \cap E_2 \cap E_3)=?$
+		      \end{itemize}
+		      \begin{align*}
+			      P(E_1 \cup E_2 \cup E_3)
+			       & = [P(E_1) + P(E_2) + P(E_3)] +                        \\
+			       & - [P(E_1 \cap E_2)+P(E_1 \cap E_3)+P(E_2 \cap E_3)] + \\
+			       & + [P(E_1 \cap E_2 \cap E_3)] =
+		      \end{align*}
+		      Se avessi tutti i dati, sarebbe facile, ma dato che non li ho è meglio il secondo approccio. \\
+		\item \textbf{Uso negazione dell'evento:} \\
+		      La negazione di "almeno uno dei pc è difettoso" è "nessuno dei pc è difettoso". Quindi posso usare la sequente formula:
+		      \[
+			      P(E)=1-P(\overline{E})
+		      \]
+		      \begin{enumerate}
+			      \item Descrivi a parole l'evento contrario: \\ $\overline{E}=$nessuno dei pc è difettoso
+			      \item Suddividi l'evento:
+			            \begin{enumerate}
+				            \item $E_1=$ primo pc funzionante
+				            \item $E_2=$ secondo pc funzionante
+				            \item $E_3=$ terzo pc funzionante
+			            \end{enumerate}
+			      \item Quindi, l'evento $\overline{E}=$nessuno dei pc è difettoso diventa: \\ $\overline{E}=E_1 \cap E_2 \cap E_3$
+			      \item Qual è la probabilità che si verifichi $\overline{E}=E_1 \cap E_2 \cap E_3$? Applico probabilità congiunta/composta:
+			            \[
+				            P(E_1 \cap E_2 \cap E_3)=P(E_1)\cdot P(E_2 \mid E_1) \cdot (E_3 \mid E_1 \cap E_2)
+			            \]
+			            \[
+				            P(E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{46}{50}
+			            \]
+			            \[
+				            P(E_2 \mid E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{45}{49}
+			            \]
+			            \[
+				            P(E_3 \mid E_1 \cap E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{44}{48}
+			            \]
+			            Dunque:
+			            \[
+				            P(E_1 \cap E_2 \cap E_3)=\frac{46}{50} \cdot \frac{45}{49} \cdot \frac{44}{48}=0.774
+			            \]
+			            Quindi:
+			            \[
+				            P(E)=1-P(\overline{E})=1-0.774=0.226=22.6\%
+			            \]
+		      \end{enumerate}
+	\end{itemize}
+	Pertanto, la probabilità che almeno uno dei pc sia difettoso è $P(E)=0.226$
+\end{esercizio}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Eventi Indipendenti $\&$ Eventi Dipendenti}
+\begin{theorem}{Probabilità dell'intersezione di 2 eventi indipendenti}
+	SSiano $E_1, E_2$ due eventi \textcolor{red}{indipendenti}. \\
+	La probabilità della loro intersezione è uguale al prodotto delle singole probabilità:
+	\[
+		P(E_1 \cap E_2)=P(E_1) \cdot P(E_2)
+	\]
+	La probabilità che si verifichi uno non modifica la probabilità dell'altro.
+\end{theorem}
+\begin{theorem}{Indipendenza debole di $k$ eventi}
+	SSiano $k$ eventi. $E_1, E_2, ..., E_k$ sono \textcolor{red}{indipendenti due a due} se, presa l'intersezione di tutti gli eventi due a due, sono tutti
+	indipendenti:
+	\[
+		P(E_i \cap E_j)=P(E_i) \cdot P(E_j) \quad \quad \forall{i < j}
+	\]
+	Ovvero: \\ Considero $E_1,E_2,E_3$. Essi sono indipendenti due a due se valgono tutte le uguaglianze:
+	\begin{itemize}
+		\item $P(E_1 \cap E_2)=P(E_1) \cdot P(E_2)$
+		\item $P(E_1 \cap E_3)=P(E_1) \cdot P(E_3)$
+		\item $P(E_2 \cap E_3)=P(E_2) \cdot P(E_3)$
+	\end{itemize}
+\end{theorem}
+\begin{theorem}{Indipendenza forte di $k$ eventi}
+	SSiano $k$ eventi. $E_1, E_2, ..., E_k$ sono \textcolor{red}{reciprocamente indipendenti} se, presa l'intersezione di tutti gli eventi due a $k$, sono tutti
+	indipendenti:
+	\[
+		P\Big(\bigcap_{i=1}^{k} E_{i}\Big)
+		=
+		\prod_{j=1}^{k} P(E_{i})
+	\]
+	Ovvero:
+	\\ Considero $E_1,E_2,E_3$. Essi sono reciprocamente indipendenti se valgono tutte le uguaglianze:
+	\begin{itemize}
+		\item $P(E_1 \cap E_2)=P(E_1) \cdot P(E_2)$
+		\item $P(E_1 \cap E_3)=P(E_1) \cdot P(E_3)$
+		\item $P(E_2 \cap E_3)=P(E_2) \cdot P(E_3)$
+		\item $P(E_1 \cap E_2 \cap E_3)=P(E_1) \cdot P(E_2) \cdot P(E_3)$
+	\end{itemize}
+\end{theorem}
+\subsubsection{Come capire se due eventi sono dipendenti o indipendenti}
+Basta verificare questa uguaglianza:
+\[
+	P(E_1 \cap E_2)=P(E_1) \cdot P(E_2)
+\]
+\begin{enumerate}
+	\item Calcolo la probabilità a sinistra dell'uguale: $\underbrace{P(A \cap B)}_{\text{questa}}
+		      = P(E_1) \cdot P(E_2)$ \\
+	      Secondo la formula classica:
+	      \[
+		      P(A \cap B)=P(A) \cdot P(B \mid A)=x
+	      \]
+	\item Calcolo la probabilità a destra dell'uguale: $P(A \cap B)
+		      =\underbrace{P(E_1) \cdot P(E_2)}_{\text{questa}}$ \\
+	      \[
+		      P(E_1) \cdot P(E_2)=y
+	      \]
+	\item Se:
+	      \begin{itemize}
+		      \item $x=y \implies$ gli eventi $E_1,E_2$ sono indipendenti
+		      \item $x \neq y \implies$ gli eventi $E_1,E_2$ sono dipendenti
+	      \end{itemize}
+\end{enumerate}
+\subsubsection{Non confondere eventi indipendenti con eventi incompatibili}
+\begin{osservazioni}[Ricorda che:]
+	\begin{itemize}
+		\item \textbf{Eventi incompatibili:} eventi che non possono verificarsi contemporanemente $E \cap F = \emptyset$\footnote{$\emptyset$: evento impossibile} e ciò vuol dire che $P(E \cap F)=0$.
+		      \begin{esempio}
+			      Lancio un dado, qual è probabilità che esca 1 e 6 allo stesso tempo?
+			      \begin{itemize}
+				      \item $E=$esce 1
+				      \item $F=$esce 6
+			      \end{itemize}
+			      È facile capire che è impossibile che il dado mostri due facce allo stesso tempo, quindi $E \cap F = \emptyset$.
+			      \\ Inoltre, $P(E \cap F)=0$ perchè $E \cap F = \emptyset$ e quindi $P(E \cap F)=P(\emptyset)=0$
+		      \end{esempio}
+		\item \textbf{Eventi indipendenti:} eventi che possono verificarsi insieme ma la probabilità di uno non cambia la probabilità dell'altro.
+		      \begin{esempio}
+			      Lancio un dado e una moneta, qual è probabilità che esca 1 e testa allo stesso tempo?
+			      \begin{itemize}
+				      \item $E=$esce 1
+				      \item $F=$esce testa
+			      \end{itemize}
+			      È facile capire che il verificarsi di $E$ non influenza il verificarsi di $F$, quindi $E \cap F \neq \emptyset$.
+		      \end{esempio}
+	\end{itemize}
+\end{osservazioni}
+\subsection{Fattorizzazione di un evento}
+Formula probabilità condizionata:
+\[
+	P(A \mid B)=\frac{P(A \cap B)}{P(B)}
+\]
+posso modificarla algebricamente e ottenere:
+\[
+	P(A \cap B)=P(A \mid B) \cdot P(B)
+\]
+\begin{osservazioni}[Osservazione:]
+	Siano $A,B$ due eventi, vale sempre:
+	\[
+		A=A \cap (B \cup \overline{B}) \implies A=(A \cap B)\cup(A \cap \overline{B})
+	\]
+	$B$ e $\overline{B}$ sono incompatibili, non possono capitare insieme:
+	\begin{itemize}
+		\item $B=$ ho passato Statistica
+		\item $\overline{B}=$ non ho passato Statistica
+	\end{itemize}
+	è ovvio che non possono accadere insieme, l'hai passata oppure no. \\
+	Quindi, $B$ e $\overline{B}$ sono incompatibili:
+	\[
+		B \cap \overline{B} = \emptyset
+	\]
+	Pertanto, \textcolor{red}{se $B$ e $\overline{B}$ sono incompatibili anche gli eventi $(A \cap B)$ e $(A \cap \overline{B})$ lo sono.}
+\end{osservazioni}
+\begin{theorem}{Fattorizzazione di un evento}
+	LLa fattorizzazione di un evento si scrive come:
+	\[
+		P(A \cap B)=P(A \mid B) \cdot P(B)
+	\]
+\end{theorem}
+Quindi:
+\[
+	P(A) = \text{per l'osservazione fatta} = P \left( (A \cap B)\cup (A \cap \overline{B}) \right) =
+\]
+\[
+	(P(A \cap B))\cup (P(A \cap \overline{B})) = \text{formula fattorizzazione evento} = (P(A \mid B) \cdot P(B))\cup(P(A \mid \overline{B}) \cdot P(\overline{B})) =
+\]
+\[
+	=\footnote{dato che gli eventi $(A \cap B)$ e $(A \cap \overline{B})$ sono incompatibili ricordando il 4º assioma: \\
+		\textbf{Probabilità dell'unione di eventi incompatibili:} la probabilità dell'unione di eventi incompatibili
+		è la somma delle loro probabilità
+		\[
+			P\!\left( \bigcup_{i=1}^{n} A_i \right)
+			=
+			\sum_{i=1}^{n} P(A_i)
+		\]} \text{per il 4º assioma}=
+	(P(A \mid B) \cdot P(B)) \textcolor{red}{+}(P(A \mid \overline{B}) \cdot P(\overline{B}))
+\]
+
+\begin{esercizio}[Esercizio]
+	Siano due eventi:
+	\begin{itemize}
+		\item $M=$avere una certa malattia
+		\item $T=$il risultato del test è positivo
+	\end{itemize}
+	Siano i seguenti dati
+	\begin{itemize}
+		\item $P(M)=0.01$ \\
+		      Probabilità di avere una certa malattia
+		\item $P(T \mid M)=0.9$ \\
+		      Probabilità che il test sia positivo quando ho già una certa malattia
+		\item $P(\overline{T} \mid \overline{M})=0.98$ \\
+		      Probabilità che il test sia negativo quando so di non avere una certa malattia
+	\end{itemize}
+	\textcolor{red}{Qual è la probabilità che il test sia positivo? $P(T)=?$} \\
+	Ricordo dall'osservazione che:
+	\[
+		T=(T \cap M)\cup(T \cap \overline{M})
+	\]
+	Dato che $M, \overline{M}$ sono incompatibili, anche $T \cap M$ e $T \cap \overline{M}$ lo sono.
+	Quindi:
+	\begin{align*}
+		P(T)
+		 & = P((T \cap M) \cup (T \cap \overline{M}))                                 \\
+		 & = (P(T \cap M) \cup P(T \cap \overline{M}))                                \\
+		 & =\text{per l'assioma 4}                                                    \\
+		 & =P(T \cap M) \textcolor{red}{+} P(T \cap \overline{M})                     \\
+		 & = \text{per la formula di fattorizzazione}                                 \\
+		 & = P(T \mid M) \cdot P(M) + P(T \mid \overline{M}) \cdot P(\overline{M})    \\
+		 & = 0.9 \cdot 0.01 + 0.02 \cdot 0.99                                         \\
+		 & =0.009 + 0.0198 = 0.0288 \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+	Mi manca trovare:
+	\begin{itemize}
+		\item $P(T \mid \overline{M})=?$ \\
+		      Ricordo che $P(E)=1-P(\overline{E})$, di conseguenza:
+		      \[
+			      P(T \mid \overline{M})=1-P(\overline{T} \mid \overline{M})=1-0.98=0.02
+		      \]
+		\item $P(\overline{M})=?$ \\
+		      Ricordo che $P(\overline{E})=1-P(E)$, di conseguenza:
+		      \[
+			      P(\overline{M})=1-P(M)=1-0.01=0.99
+		      \]
+	\end{itemize}
+\end{esercizio}
+\break
+\subsection{Teorema della Probabilità Assoluta}
+Questo teorema vale se e solo se:
+\begin{itemize}
+	\item Nessuno degli eventi è l'evento impossibile \\
+	      \[
+		      E_i \neq \emptyset \quad \forall{i} \in \left\{1,2,...,n\right\}
+	      \]
+	\item Tutti gli eventi sono due a due incompatibili \\
+	      \[
+		      E_i \cap E_j=\emptyset \quad \forall{i,j} \in \left\{1,2,...,n\right\} i \neq j
+	      \]
+	\item L'unione degli eventi corrisponde allo spazio campionario ("l'unione contiene tutti gli esiti possibili"), ovvero
+	      gli eventi formano una partizione di $\Omega$ \\
+	      \[
+		      \bigcup_{i} E_i = \Omega
+	      \]
+	      Nell'esempio di un dado, $\Omega=\left\{1,2,3,4,5,6\right\}$:
+	      \begin{itemize}
+		      \item $E_1=$esce 1
+		      \item $E_2=$esce 2
+		      \item $E_3=$esce 3
+		      \item $E_4=$esce 4
+		      \item $E_5=$esce 5
+		      \item $E_6=$esce 6
+	      \end{itemize}
+	      \[
+		      \bigcup_{i} E_i = \Omega \implies E_1 \cup E_2 \cup E_3 \cup E_4 \cup E_5 \cup E_6 = \Omega \implies 1 \cup 2 \cup 3 \cup 4 \cup 5 \cup 6 = \Omega
+	      \]
+\end{itemize}
+\begin{theorem}{Teorema della Probabilità Assoluta per 2 eventi}
+	QQuesta è valida solo quando ho 2 eventi nello spazio campionario. \\
+	Siano $E_1, E_2$ due eventi:
+	\begin{itemize}
+		\item con probabilità non nulle $P(E_1),P(E_2) \neq 0$
+		\item incompatibili
+		\item partizioni di $\Omega$
+	\end{itemize}
+	La formula della probabilità assoluta se voglio calcolare $P(E_1)$:
+	\begin{align*}
+		P(E_1)
+		 & = P(E_1 \mid E_2) \cdot P(E_2)+P(E_1 \mid \overline{E_2})\cdot P(\overline{E_2}) = \\
+		 & \text{ma $E_1,E_2$ incompatibili, quindi $P(E_1 \mid E_2)=0$}                      \\
+		 & = P(E_1 \mid \overline{E_2})\cdot P(\overline{E_2}) =
+	\end{align*}
+	oppure se voglio calcolare $P(E_2)$:
+	\begin{align*}
+		P(E_2)
+		 & = P(E_2 \mid E_1) \cdot P(E_1)+P(E_2 \mid \overline{E_1})\cdot P(\overline{E_1}) = \\
+		 & \text{ma $E_2,E_1$ incompatibili, quindi $P(E_2 \mid E_1)=0$}                      \\
+		 & = P(E_2 \mid \overline{E_1})\cdot P(\overline{E_1}) =
+	\end{align*}
+\end{theorem}
+\begin{theorem}{Teorema della Probabilità Assoluta per $k$ eventi}
+	SSiano $E_1,\cdots, E_k$ eventi:
+	\begin{itemize}
+		\item con probabilità non nulle
+		\item incompatibili
+		\item partizioni di $\Omega$
+	\end{itemize}
+	Sia $E$ un qualsiasi tra gli $k$ eventi, allora la sua probabilità è uguale a:
+	\[
+		P(E) = \sum_{i}^{k} P(E \mid E_i) \cdot P(E_i)
+	\]
+	Ovvero:
+	\[
+		P(E) = P(E \mid E_1) \cdot P(E_1) + P(E \mid E_2) \cdot P(E_2) + \cdots + P(E \mid E_k) \cdot P(E_k)
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	In data 29/10/2025 un'azienda acquista microchip da 3 fornitori.
+	\begin{itemize}
+		\item I microchip del fornitore 1 hanno il 10$\%$ di probabilità di essere difettosi
+		\item I microchip del fornitore 2 hanno il 5$\%$ di probabilità di essere difettosi
+		\item I microchip del fornitore 3 hanno il 2$\%$ di probabilità di essere difettosi
+	\end{itemize}
+	Supponendo che
+	\begin{itemize}
+		\item il 20$\%$ della fornitura proviene dal fornitore 1
+		\item il 35$\%$ della fornitura proviene dal fornitore 2
+		\item il 45$\%$ della fornitura proviene dal fornitore 3
+	\end{itemize}
+	\textcolor{red}{Se un microchip viene selezionato a caso tra quelli acquistati in tale data qual è la probabilità che sia difettoso? $P(E)=?$}
+	\begin{enumerate}
+		\item Definisco cosa mi sta chiedendo: \\
+		      Qual è la probabilità che un microchip pescato a caso tra quelli acquistati sia difettoso? \\
+		      $E=$il microchip è difettoso
+		\item Dato che i microchip provengono da fornitori diversi, suddivido gli eventi:
+		      \begin{itemize}
+			      \item $E_1=$il microchip proviene dal fornitore 1
+			      \item $E_2=$il microchip proviene dal fornitore 2
+			      \item $E_3=$il microchip proviene dal fornitore 3
+		      \end{itemize}
+	\end{enumerate}
+	Ripondo alle seguenti domande:
+	\begin{itemize}
+		\item Gli eventi sono eventi impossibili? No \\
+		      Perchè:
+		      \begin{itemize}
+			      \item $P(E_1)=0.20$
+			      \item $P(E_2)=0.35$
+			      \item $P(E_3)=0.45$
+		      \end{itemize}
+		\item Gli eventi sono incompatibili? Si \\
+		      Perchè è impossibile che il microchip pescato provenda da due fornitori diversi
+		\item L'unione degli eventi $E_1,E_2,E_3$ è uguale a $\Omega$? Sì \\
+	\end{itemize}
+	Quindi uso la formula della probabilità assoluta $P(E) = \sum_{i}^{k} P(E \mid E_i) \cdot P(E_i)$
+	\begin{align*}
+		P(E)
+		 & = P(E \mid E_1) \cdot P(E_1) + \\
+		 & + P(E \mid E_2) \cdot P(E_2)   \\
+		 & + P(E \mid E_3) \cdot P(E_3) =
+	\end{align*}
+	Dove:
+	\begin{itemize}
+		\item $P(E \mid E_1)=0.10$ \\
+		      Probabilità che il microchip sia difettoso dato che proviene dal fornitore 1
+		\item $P(E \mid E_2)=0.05$ \\
+		      Probabilità che il microchip sia difettoso dato che proviene dal fornitore 2
+		\item $P(E \mid E_3)=0.02$ \\
+		      Probabilità che il microchip sia difettoso dato che proviene dal fornitore 3
+	\end{itemize}
+	Quindi:
+	\[
+		P(E)=(0.10 \cdot 0.20)+(0.05 \cdot 0.35)+(0.02 \cdot 0.45)=0.0465 \quad \textcolor{green}{\text{Risposta corretta}}
+	\]
+\end{esercizio}
+
+\subsection{Formula di Bayes}
+Questo teorema vale se e solo se:
+\begin{itemize}
+	\item Nessuno degli eventi è l'evento impossibile \\
+	      \[
+		      E_i \neq \emptyset \quad \forall{i} \in \left\{1,2,...,n\right\}
+	      \]
+	\item Tutti gli eventi sono due a due incompatibili \\
+	      \[
+		      E_i \cap E_j=\emptyset \quad \forall{i,j} \in \left\{1,2,...,n\right\} i \neq j
+	      \]
+	\item L'unione degli eventi corrisponde allo spazio campionario ("l'unione contiene tutti gli esiti possibili"), ovvero
+	      gli eventi formano una partizione di $\Omega$ \\
+	      \[
+		      \bigcup_{i} E_i = \Omega
+	      \]
+\end{itemize}
+\begin{theorem}{Teorema di Bayes a 2 eventi}
+	SSiano $E_1, E_2$ due eventi:
+	\begin{itemize}
+		\item con probabilità non nulle $P(E_1),P(E_2) \neq 0$
+		\item incompatibili
+		\item partizioni di $\Omega$
+	\end{itemize}
+	La probabilità condizionata di $E_1$ rispetto a $E_2$ è uguale a:
+	\begin{align*}
+		\textcolor{red}{P(E_1 \mid E_2)=}
+		 & \frac{P(E_2 \mid E_1) \cdot P(E_1)}{P(E_2)}=                                                                                \\
+		 & \text{al denominatore sostituisco, per il teorema della probabilità}                                                        \\
+		 & \text{assoluta } P(E_2) = P(E_2 \mid E_1) \cdot P(E_1)+P(E_2 \mid \overline{E_1}) \cdot P(\overline{E_1}) \text{ avrò che:} \\
+		 & = \frac{P(E_2 \mid E_1) \cdot P(E_1)}{P(E_2 \mid E_1) \cdot P(E_1)+P(E_2 \mid \overline{E_1}) \cdot P(\overline{E_1})} =
+	\end{align*}
+
+	Dove:
+	\begin{itemize}
+		\item $P(E_1)$ è la probabilità a priori dell'evento $E_1$ (dato che ho già)
+		\item $P(E_1 \mid E_2)$ è la probabilità a posteriori dell'evento $E_1$ (che calcolo con Bayes)
+	\end{itemize}
+	Quello che fa la formula di Bayes è: \\
+	aggiornare la probabilità dell'evento $E_1$ (probabilità a priori) con informazioni contenute nell'evento $E_2$
+	(ottenendo così una probabilità a posteriori).
+\end{theorem}
+
+\begin{theorem}{Teorema di Bayes a $k$ eventi}
+	SSiano $E_1, \cdots, E_k$ eventi:
+	\begin{itemize}
+		\item con probabilità non nulle
+		\item incompatibili
+		\item partizioni di $\Omega$
+	\end{itemize}
+	Dato un qualsiasi evento $E$ tra i $k$ eventi, allora la probabilità condizionata di $E_k$ dato $E$
+	\begin{align*}
+		\textcolor{red}{P(E_k \mid E)=}
+		 & \frac{P(E \mid E_k) \cdot P(E_k)}{P(E)}=                                                      \\
+		 & \text{al denominatore sostituisco, per il teorema della}                                      \\
+		 & \text{probabilità assoluta } P(E) = \sum_{i}^{k} P(E \mid E_i) \cdot P(E_i) \text{ avrò che:} \\
+		 & = \frac{P(E \mid E_k) \cdot P(E_k)}{\sum_{i}^{k} P(E \mid E_i) \cdot P(E_i)} =
+	\end{align*}
+\end{theorem}
+\begin{osservazioni}[Osservazione su formula di Bayes:]
+	Prima di calcolare correttamente la formula di Bayes, è necessario aver già calcolato la probabilità assoluta (che nella formula di Bayes
+	è al denominatore).
+	\begin{enumerate}
+		\item Scrivi formula di Bayes:
+		      \[
+			      \textcolor{red}{P(E_k \mid E)=}\frac{P(E \mid E_k) \cdot P(E_k)}{P(E)}=
+		      \]
+		\item Calcola separatamente il denominatore della formula nello step 1, $P(E)$, con la formula della probabilità assoluta:
+		      \[
+			      P(E) = \sum_{i}^{k} P(E \mid E_i) \cdot P(E_i)=valore
+		      \]
+		\item Inserisci il valore ottenuto dallo step 2 nel denominatore della formula di Bayes nello step 1:
+		      \begin{align*}
+			      \textcolor{red}{P(E_k \mid E)=}
+			       & \frac{P(E \mid E_k) \cdot P(E_k)}{P(E)}=      \\
+			       & = \frac{P(E \mid E_k) \cdot P(E_k)}{valore} =
+		      \end{align*}
+	\end{enumerate}
+\end{osservazioni}
+\begin{esercizio}[Esercizio 1]
+	Siano due eventi:
+	\begin{itemize}
+		\item $M=$avere una certa malattia
+		\item $T=$il risultato del test è positivo
+	\end{itemize}
+	Siano i seguenti dati
+	\begin{itemize}
+		\item $P(M)=0.01$ \\
+		      Probabilità di avere una certa malattia
+		\item $P(T \mid M)=0.9$ \\
+		      Probabilità che il test sia positivo quando ho già una certa malattia
+		\item $P(\overline{T} \mid \overline{M})=0.98$ \\
+		      Probabilità che il test sia negativo quando so di non avere una certa malattia
+	\end{itemize}
+	\textcolor{red}{Qual è la probabilità che il test sia positivo? $P(T)=?$} \\
+	Ricordo dall'osservazione che:
+	\[
+		T=(T \cap M)\cup(T \cap \overline{M})
+	\]
+	Dato che $M, \overline{M}$ sono incompatibili, anche $T \cap M$ e $T \cap \overline{M}$ lo sono.
+	Quindi:
+	\begin{align*}
+		P(T)
+		 & = P((T \cap M) \cup (T \cap \overline{M}))                                 \\
+		 & = (P(T \cap M) \cup P(T \cap \overline{M}))                                \\
+		 & =\text{per l'assioma 4}                                                    \\
+		 & =P(T \cap M) \textcolor{red}{+} P(T \cap \overline{M})                     \\
+		 & = \text{per la formula di fattorizzazione}                                 \\
+		 & = P(T \mid M) \cdot P(M) + P(T \mid \overline{M}) \cdot P(\overline{M})    \\
+		 & = 0.9 \cdot 0.01 + 0.02 \cdot 0.99                                         \\
+		 & =0.009 + 0.0198 = 0.0288 \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+	Mi manca trovare:
+	\begin{itemize}
+		\item $P(T \mid \overline{M})=?$ \\
+		      Ricordo che $P(E)=1-P(\overline{E})$, di conseguenza:
+		      \[
+			      P(T \mid \overline{M})=1-P(\overline{T} \mid \overline{M})=1-0.98=0.02
+		      \]
+		\item $P(\overline{M})=?$ \\
+		      Ricordo che $P(\overline{E})=1-P(E)$, di conseguenza:
+		      \[
+			      P(\overline{M})=1-P(M)=1-0.01=0.99
+		      \]
+	\end{itemize}
+	Adesso mi chiedo: \\
+	\textcolor{red}{Qual è la probabilità che un individuo sia affetto dalla malattia sapendo che il test diagnostico ha dato esito positivo? $P(M \mid T)=?$} \\
+	\textbf{Uso Bayes perchè conosco i valori di $P(T \mid M), P(M)$ e posso calcolare $P(T)$ con la probabilità assoluta; se non avessi queste condizioni, non potrei
+		utilizzare la formula di Bayes.}
+	\begin{enumerate}
+		\item Scrivo la formula di Bayes:
+		      \[
+			      \textcolor{red}{P(M \mid T)=}\frac{P(T \mid M)\cdot P(M)}{P(T)}
+		      \]
+		\item Calcolo separatamente il denominatore con la formula della probabilità assoluta per 2 eventi (M,T):
+		      \begin{align*}
+			      P(T)
+			       & = P(T \mid M) \cdot P(M)+P(T \mid \overline{M}) \cdot P(\overline{M}) = \\
+			       & \text{$T,M$ non sono incompatibili, quindi} P(T \mid M) \neq 0          \\
+			       & = 0.9 \cdot 0.01 + 0.02 \cdot 0.99 = 0.0288
+		      \end{align*}
+		\item Inserisco il valore trovato nello step 2 al denominatore nella formula di Bayes nello step 1:
+		      \begin{align*}
+			      \textcolor{red}{P(M \mid T)}
+			       & = \frac{P(T \mid M)\cdot P(M)}{P(T)} =                                                  \\
+			       & = \frac{P(T \mid M)\cdot P(M)}{0.0288} =                                                \\
+			       & = \frac{0.9\cdot 0.01}{0.0288}=0.3125 \quad \textcolor{green}{\text{Risposta corretta}}
+		      \end{align*}
+	\end{enumerate}
+\end{esercizio}
+\begin{esercizio}[Esercizio 2]
+	In data 29/10/2025 un'azienda acquista microchip da 3 fornitori.
+	\begin{itemize}
+		\item I microchip del fornitore 1 hanno il 10$\%$ di probabilità di essere difettosi
+		\item I microchip del fornitore 2 hanno il 5$\%$ di probabilità di essere difettosi
+		\item I microchip del fornitore 3 hanno il 2$\%$ di probabilità di essere difettosi
+	\end{itemize}
+	Supponendo che
+	\begin{itemize}
+		\item il 20$\%$ della fornitura proviene dal fornitore 1
+		\item il 35$\%$ della fornitura proviene dal fornitore 2
+		\item il 45$\%$ della fornitura proviene dal fornitore 3
+	\end{itemize}
+	\textcolor{red}{Se un microchip viene selezionato a caso tra quelli acquistati in tale data qual è la probabilità che sia difettoso? $P(E)=?$}
+	\begin{enumerate}
+		\item Definisco cosa mi sta chiedendo: \\
+		      Qual è la probabilità che un microchip pescato a caso tra quelli acquistati sia difettoso? \\
+		      $E=$il microchip è difettoso
+		\item Dato che i microchip provengono da fornitori diversi, suddivido gli eventi:
+		      \begin{itemize}
+			      \item $E_1=$il microchip proviene dal fornitore 1
+			      \item $E_2=$il microchip proviene dal fornitore 2
+			      \item $E_3=$il microchip proviene dal fornitore 3
+		      \end{itemize}
+	\end{enumerate}
+	Ripondo alle seguenti domande:
+	\begin{itemize}
+		\item Gli eventi sono eventi impossibili? No \\
+		      Perchè:
+		      \begin{itemize}
+			      \item $P(E_1)=0.20$
+			      \item $P(E_2)=0.35$
+			      \item $P(E_3)=0.45$
+		      \end{itemize}
+		\item Gli eventi sono incompatibili? Si \\
+		      Perchè è impossibile che il microchip pescato provenda da due fornitori diversi
+		\item L'unione degli eventi $E_1,E_2,E_3$ è uguale a $\Omega$? Sì \\
+	\end{itemize}
+	Quindi uso la formula della probabilità assoluta $P(E) = \sum_{i}^{k} P(E \mid E_i) \cdot P(E_i)$
+	\begin{align*}
+		P(E)
+		 & = P(E \mid E_1) \cdot P(E_1) + \\
+		 & + P(E \mid E_2) \cdot P(E_2)   \\
+		 & + P(E \mid E_3) \cdot P(E_3) =
+	\end{align*}
+	Dove:
+	\begin{itemize}
+		\item $P(E \mid E_1)=0.10$ \\
+		      Probabilità che il microchip sia difettoso dato che proviene dal fornitore 1
+		\item $P(E \mid E_2)=0.05$ \\
+		      Probabilità che il microchip sia difettoso dato che proviene dal fornitore 2
+		\item $P(E \mid E_3)=0.02$ \\
+		      Probabilità che il microchip sia difettoso dato che proviene dal fornitore 3
+	\end{itemize}
+	Quindi:
+	\[
+		P(E)=(0.10 \cdot 0.20)+(0.05 \cdot 0.35)+(0.02 \cdot 0.45)=0.0465 \quad \textcolor{green}{\text{Risposta corretta}}
+	\]
+	Adesso mi chiedo: \\
+	\textcolor{red}{Qual è la probabilità che un microchip scelto a caso sia stato fornito dal produttore 2 sapendo che esso è difettoso? $P(E_2 \mid E)=?$}
+	\textbf{Uso Bayes perchè conosco i valori di $P(E \mid E_2), P(E_2)$ e posso calcolare $P(E)$ con la probabilità assoluta; se non avessi queste condizioni, non potrei
+		utilizzare la formula di Bayes.}
+	\begin{enumerate}
+		\item Scrivo la formula di Bayes:
+		      \[
+			      \textcolor{red}{P(E_2 \mid E)=}\frac{P(E \mid E_2) \cdot P(E_2)}{P(E)}
+		      \]
+		\item Calcolo separatamente il denominatore con la formula della probabilità assoluta per 3 eventi $(E_1,E_2,E_3)$:
+		      \begin{align*}
+			      P(E)
+			       & = \sum_{i=1}^{3} P(E \mid E_i)\cdot P(E_i) =                         \\
+			       & = \left( P(E \mid E_1)\cdot P(E_1) \right)
+			      + \left( P(E \mid E_2)\cdot P(E_2) \right)
+			      + \left( P(E \mid E_3)\cdot P(E_3) \right) =                            \\
+			       & = (0.10 \cdot 0.20) + (0.05 \cdot 0.35) + (0.02 \cdot 0.45) = 0.0465
+		      \end{align*}
+		\item Inserisco il valore trovato nello step 2 al denominatore nella formula di Bayes nello step 1:
+		      \begin{align*}
+			      \textcolor{red}{P(E_2 \mid E)}
+			       & = \frac{P(E \mid E_2) \cdot P(E_2)}{P(E)} =                                               \\
+			       & = \frac{P(E \mid E_2) \cdot P(E_2)}{0.0465} =                                             \\
+			       & = \frac{0.05 \cdot 0.35}{0.0465}=0.3763 \quad \textcolor{green}{\text{Risposta corretta}}
+		      \end{align*}
+	\end{enumerate}
+\end{esercizio}
+\break
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variabili Aleatorie}
+\subsection{Funzione di massa}
+La funzione di massa indica la probabilità che ha ogni variabile aleatoria discreta che fa parte del supporto $\mathscr{X}$ studiato.
+\begin{theorem}{Funzione di massa per var discrete}
+	LLa \textcolor{red}{funzione di massa di probabilità} di una variabile aleatoria discreta $X$ è definita come:
+	\[
+		p_{X}(x)=P(X=x) \quad \forall{x \in \mathscr{X}}
+	\]
+\end{theorem}
+\begin{osservazioni}[Osservazione:]
+	La funzione assegna una probabilità a ogni variabile aleatoria discreta di $\mathscr{X}$ t.c. la loro somma è uguale a uno:
+	\[
+		\sum_{x \in X} P(X = x) = 1
+	\]
+\end{osservazioni}
+\begin{esercizio}[Esercizio]
+	Lancio tre volte una moneta con due facce: Croce (C) e Testa (T).
+	\begin{enumerate}
+		\item \textbf{Definisco spazio campionario:} \\
+		      Ovvero tutti i possibili esiti, che sono $2 \cdot 2 \cdot 2 = 2^3=8$ quindi 2 possibili esiti ad ogni lancio.
+		      \[
+			      \Omega= \left\{CCC, CTC, CTT, CCT, TTT, TTC, TCT, TCC \right\}
+		      \]
+		\item \textbf{Definisco la variabile aleatoria discreta:} \\
+		      Sia $X$ la variabile aleatoria che conta il numero di teste.
+		      \[
+			      X(\omega)=
+			      \begin{cases}
+				      0 & \text{se } \omega = CCC               \\
+				      1 & \text{se } \omega = CCT,\, CTC,\, TCC \\
+				      2 & \text{se } \omega = TTC,\, TCT,\, CTT \\
+				      3 & \text{se } \omega = TTT
+			      \end{cases}
+		      \]
+
+		\item \textbf{Supporto della variabile aleatoria:} \\
+		      Il supporto di $X$ sarà:
+		      \[
+			      \mathscr{X}= \left\{0,1,2,3 \right\}
+		      \]
+		\item \textbf{Calcolo la funzione di massa per ogni variabile aleatoria del supporto:}
+		      \begin{itemize}
+			      \item $P(X=0)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca tre volte di seguito Croce? $\omega=CCC$
+			            \[
+				            P(X=0)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{8}
+			            \]
+			      \item $P(X=1)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca una sola volta testa? $\omega=CCT,CTC,TCC$
+			            \[
+				            P(X=1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{8}
+			            \]
+			      \item $P(X=2)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca due volte testa? $\omega=TTC,TCT,CTT$
+			            \[
+				            P(X=2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{8}
+			            \]
+			      \item $P(X=3)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca tre volte di seguito Testa? $\omega=TTT$
+			            \[
+				            P(X=2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{8}
+			            \]
+		      \end{itemize}
+		\item \textbf{Controllo se ho correttamente calcolato le funzioni di massa:} per vedere se è corretto, la loro somma deve essere uguale a 1.
+		      \begin{align*}
+			      \sum_{x \in X} P(X = x)
+			       & = 1                       \\[6pt]
+			      P(X = 0) + P(X = 1) + P(X = 2) + P(X = 3)
+			       & = 1                       \\[6pt]
+			      \frac{1}{8}+\frac{3}{8}+\frac{3}{8}+\frac{1}{8}
+			       & = 1                       \\[6pt]
+			      1
+			       & \overset{\checkmark}{=} 1
+		      \end{align*}
+	\end{enumerate}
+\end{esercizio}
+
+\subsection{Funzione di densità}
+La funzione di densità indica la probabilità che ha una variabile aleatoria continua di appartenere ad un certo intervallo (supporto $\mathscr{X}$).
+\begin{theorem}{Funzione di densità per var continue}
+	LLa \textcolor{red}{funzione di densità di probabilità} di una variabile aleatoria continua $X$ è definita come:
+	\[
+		f_{X}(x)=P(X \in [x_1,x_2])=P(x_1 \leq X \leq x_2)=\int_{x_1}^{x_2}f_X(x)dx
+	\]
+	La probabilità dell'appartenenza della variabile aleatoria in un certo intervallo si calcola con l'integrale definito.
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Sia $X$ variabile aleatoria con supporto $\mathscr{X}=(0,2)$ (intervallo) con funzione di densità di probabilità:
+	\[
+		f_X(x) =
+		\begin{cases}
+			\dfrac{1}{2} & \text{se } 0 < x < 2, \\[2mm]
+			0            & \text{altrimenti.}
+		\end{cases}
+	\]
+	Scelgo ora un sottointervallo di $(0,2)$ e ne calcolo la funzione di densità:
+
+	\begin{align*}
+		P(0.25 \leq X \leq 0.75)
+		 & = \int_{0.25}^{0.75} f_X(x) \, dx                                           \\[1mm]
+		 & = \int_{0.25}^{0.75} \frac{1}{2} \, dx                                      \\[1mm]
+		 & = \frac{1}{2} x \Big|_{0.25}^{0.75}                                         \\[1mm]
+		 & = \left(\frac{1}{2}\cdot 0.75 \right) - \left(\frac{1}{2}\cdot 0.25 \right) \\[1mm]
+		 & = 0.25                                                                      \\
+		 & \text{la probabilità che la var $X$ ha di appartenere a $[0.25,0.75]$}      \\
+		 & \text{è uguale a 0.25}
+	\end{align*}
+	Se io invece calcolo la funzione di densità nell'intervallo $(0,2)$:
+	\begin{align*}
+		P(0 < X < 2)
+		 & = \int_{0}^{2} f_X(x) \, dx                                           \\[1mm]
+		 & = \int_{0}^{2} \frac{1}{2} \, dx                                      \\[1mm]
+		 & = \frac{1}{2} x \Big|_{0}^{2}                                         \\[1mm]
+		 & = \left(\frac{1}{2}\cdot 2 \right) - \left(\frac{1}{2}\cdot 0 \right) \\[1mm]
+		 & = 1                                                                   \\
+		 & \text{corretto poichè è una proprietà della funzione di densità}
+	\end{align*}
+\end{esercizio}
+
+\subsection{Funzione di ripartizione}
+La funzione di ripartizione indica la probabilità che la variabile aleatoria $X$ sia minore e/o uguale ad un certo valore $x$.
+\begin{osservazioni}[Osservazione:]
+	Sia $F_X(x)=P(X \leq x)$ la funzione di ripartizione di una variabile aleatoria. Vale sempre che:
+	\[
+		P(X > x) = 1 - P(X \leq x)
+	\]
+\end{osservazioni}
+\subsubsection{Funzione di ripartizione per variabile aleatoria discreta}
+\begin{theorem}{Funzione di ripartizione per var discrete}
+	LLa \textcolor{red}{funzione di ripartizione} di una variabile aleatoria discreta $X$ è definita come:
+	\[
+		F_{X}(x)=P(X \leq x)=\sum_{i=1, u_i \leq x}^{x} P(X=u_i)
+	\]
+	La probabilità che la variabile aleatoria $X$ sia minore e/o uguale a $x$ è uguale alla somma cumulative delle funzioni di massa di probabilità fino a $x$. \\
+	\[
+		P(X \leq x) = P(X=u_1)+P(X=u_2)+\cdots+P(X=u_{x})
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Lancio tre volte una moneta con due facce: Croce (C) e Testa (T).
+	\begin{enumerate}
+		\item \textbf{Definisco spazio campionario:} \\
+		      Ovvero tutti i possibili esiti, che sono $2 \cdot 2 \cdot 2 = 2^3=8$ quindi 2 possibili esiti ad ogni lancio.
+		      \[
+			      \Omega= \left\{CCC, CTC, CTT, CCT, TTT, TTC, TCT, TCC \right\}
+		      \]
+		\item \textbf{Definisco la variabile aleatoria discreta:} \\
+		      Sia $X$ la variabile aleatoria che conta il numero di teste.
+		      \[
+			      X(\omega)=
+			      \begin{cases}
+				      0 & \text{se } \omega = CCC               \\
+				      1 & \text{se } \omega = CCT,\, CTC,\, TCC \\
+				      2 & \text{se } \omega = TTC,\, TCT,\, CTT \\
+				      3 & \text{se } \omega = TTT
+			      \end{cases}
+		      \]
+
+		\item \textbf{Supporto della variabile aleatoria:} \\
+		      Il supporto di $X$ sarà:
+		      \[
+			      \mathscr{X}= \left\{0,1,2,3 \right\}
+		      \]
+		\item \textbf{Calcolo la funzione di massa per ogni variabile aleatoria del supporto:}
+		      \begin{itemize}
+			      \item $P(X=0)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca tre volte di seguito Croce? $\omega=CCC$
+			            \[
+				            P(X=0)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{8}
+			            \]
+			      \item $P(X=1)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca una sola volta testa? $\omega=CCT,CTC,TCC$
+			            \[
+				            P(X=1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{8}
+			            \]
+			      \item $P(X=2)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca due volte testa? $\omega=TTC,TCT,CTT$
+			            \[
+				            P(X=2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{8}
+			            \]
+			      \item $P(X=3)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca tre volte di seguito Testa? $\omega=TTT$
+			            \[
+				            P(X=2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{8}
+			            \]
+		      \end{itemize}
+
+		\item \textbf{Calcolo la funzione di ripartizione per ogni valore $x$ del supporto:}
+		      \begin{itemize}
+			      \item $P(X \leq 0)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che non escano affatto Teste?
+			            \[
+				            \textcolor{red}{P(X \leq 0)=}P(X=0)=\frac{1}{8}
+			            \]
+			      \item $P(X \leq 1)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca una testa oppure zero teste?
+			            \[
+				            \textcolor{red}{P(X \leq 1)=}\left[P(X=0)+P(X=1)\right]=\frac{1}{8}+\frac{3}{8}=\frac{1}{2}
+			            \]
+			      \item $P(X \leq 2)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca nessuna, una o due volte testa?
+			            \[
+				            \textcolor{red}{P(X \leq 2)=}\left[P(X=0)+P(X=1)+P(X=2)\right]=\frac{1}{8}+\frac{3}{8}+\frac{3}{8}=\frac{7}{8}
+			            \]
+			      \item $P(X \leq 3)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca nessuna, una, due o tre volte di seguito Testa?
+			            \[
+				            \textcolor{red}{P(X \leq 3)=}\left[P(X=0)+P(X=1)+P(X=2)+P(X=3)\right]=\frac{8}{8}=1
+			            \]
+		      \end{itemize}
+		      Quindi:
+		      \[
+			      F_X(x) =
+			      \begin{cases}
+				      \frac{1}{8} & 0 \le x < 1, \\[2mm]
+				      \frac{4}{8} & 1 \le x < 2, \\[2mm]
+				      \frac{7}{8} & 2 \le x < 3, \\[2mm]
+				      1           & x \ge 3.
+			      \end{cases}
+		      \]
+	\end{enumerate}
+\end{esercizio}
+
+\subsubsection{Funzione di ripartizione per variabile aleatoria continua}
+\begin{theorem}{Funzione di ripartizione per var continue}
+	LLa \textcolor{red}{funzione di ripartizione} di una variabile aleatoria continua $X$ è definita come:
+	\[
+		F_{X}(x)=P(X \leq x)=\int_{- \infty}^{x}f_X(u)du
+	\]
+	La probabilità che la variabile aleatoria $X$ sia minore e/o uguale a $x$ è uguale all'integrale definito da - inf a $x$. \\
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Sia $X$ variabile aleatoria con supporto $\mathscr{X}=(0,2)$ (intervallo) con funzione di densità di probabilità:
+	\[
+		f_X(x) =
+		\begin{cases}
+			\dfrac{1}{2} & \text{se } 0 < x < 2, \\[2mm]
+			0            & \text{altrimenti}
+		\end{cases}
+	\]
+	\textbf{Calcolo la funzione di ripartizione per $x$:}
+	\begin{enumerate}
+		\item $P(X \leq x)=?$
+		      \begin{align*}
+			      P(X \leq x)
+			       & = \int_{0}^{x}f_X(u)du                                  \\
+			       & = \int_{0}^{x}\frac{1}{2}du                             \\
+			       & = \frac{1}{2}u \Big|_{0}^{x}                            \\
+			       & = \frac{1}{2}\cdot x - \frac{1}{2}\cdot 0 = \frac{x}{2}
+		      \end{align*}
+		\item Adesso che ho $P(X \leq x)=\frac{x}{2}$ posso calcolarlo per qualsiasi valore di $x$ che sta nell'intervallo (0,2):
+		      \begin{itemize}
+			      \item $P(X \leq 0.2)=?$
+			            \[
+				            \textcolor{red}{P(X \leq 0.2)=}\frac{x}{2}=\frac{0.2}{2}
+			            \]
+			      \item $P(X \leq 0.5)=?$
+			            \[
+				            \textcolor{red}{P(X \leq 0.5)=}\frac{x}{2}=\frac{0.5}{2}
+			            \]
+			      \item $P(X \leq 1)=?$
+			            \[
+				            \textcolor{red}{P(X \leq 1)=}\frac{x}{2}=\frac{1}{2}
+			            \]
+			      \item $P(X \leq 1.5)=?$
+			            \[
+				            \textcolor{red}{P(X \leq 1.5)=}\frac{x}{2}=\frac{1.5}{2}
+			            \]
+			      \item $P(X \leq 2)=?$
+			            \[
+				            \textcolor{red}{P(X \leq 2)=}\frac{x}{2}=\frac{2}{2}=1
+			            \]
+		      \end{itemize}
+	\end{enumerate}
+\end{esercizio}
+
+\subsection{Valore atteso}
+Il valore atteso di una variabile aleatoria è la media pesata delle variabili aleatorie.
+\subsubsection{Valore atteso di una variabile aleatoria discreta}
+\begin{theorem}{Valore atteso di var discreta}
+	Il valore atteso di una variabile aleatoria discreta $X$ con funzione di massa di probabilità $p_X(x)$ è definito come:
+	\[
+		\mathbb{E}[X]=\sum_{x \in \mathscr{X}}(x \cdot p_X(x))=\sum_{x \in \mathscr{X}}(x \cdot P(X=x))
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Lancio tre volte una moneta con due facce: Croce (C) e Testa (T).
+	\begin{enumerate}
+		\item \textbf{Definisco spazio campionario:} \\
+		      Ovvero tutti i possibili esiti, che sono $2 \cdot 2 \cdot 2 = 2^3=8$ quindi 2 possibili esiti ad ogni lancio.
+		      \[
+			      \Omega= \left\{CCC, CTC, CTT, CCT, TTT, TTC, TCT, TCC \right\}
+		      \]
+		\item \textbf{Definisco la variabile aleatoria discreta:} \\
+		      Sia $X$ la variabile aleatoria che conta il numero di teste.
+		      \[
+			      X(\omega)=
+			      \begin{cases}
+				      0 & \text{se } \omega = CCC               \\
+				      1 & \text{se } \omega = CCT,\, CTC,\, TCC \\
+				      2 & \text{se } \omega = TTC,\, TCT,\, CTT \\
+				      3 & \text{se } \omega = TTT
+			      \end{cases}
+		      \]
+
+		\item \textbf{Supporto della variabile aleatoria:} \\
+		      Il supporto di $X$ sarà:
+		      \[
+			      \mathscr{X}= \left\{0,1,2,3 \right\}
+		      \]
+		\item \textbf{Calcolo la funzione di massa per ogni variabile aleatoria del supporto:}
+		      \begin{itemize}
+			      \item $P(X=0)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca tre volte di seguito Croce? $\omega=CCC$
+			            \[
+				            P(X=0)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{8}
+			            \]
+			      \item $P(X=1)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca una sola volta testa? $\omega=CCT,CTC,TCC$
+			            \[
+				            P(X=1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{8}
+			            \]
+			      \item $P(X=2)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca due volte testa? $\omega=TTC,TCT,CTT$
+			            \[
+				            P(X=2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{8}
+			            \]
+			      \item $P(X=3)=?$ \\
+			            Lanciano tre volte una moneta, qual è la probabilità che esca tre volte di seguito Testa? $\omega=TTT$
+			            \[
+				            P(X=2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{8}
+			            \]
+		      \end{itemize}
+
+		\item \textbf{Calcolo il valore atteso:}
+		      \[
+			      \textcolor{red}{\mathbb{E}[X]}
+			      =
+			      \sum_{x \in \mathscr{X}} x \cdot P(X=x)
+			      =
+			      0 \cdot \frac{1}{8}
+			      +
+			      1 \cdot \frac{3}{8}
+			      +
+			      2 \cdot \frac{3}{8}
+			      +
+			      3 \cdot \frac{1}{8}= \frac{3}{2}
+		      \]
+	\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Esercizio]
+	Lancio due dadi a sei facce:
+	\begin{itemize}
+		\item Se la somma degli esiti è 2 o 3, perdo 10 euro
+		\item Se la somma degli esiti è 4,5 o 6, perdo 4 euro
+		\item Se la somma degli esiti è 7, 8 o 9 vinco 4 euro
+		\item Se la somma degli esiti è 10, 11 o 12 vinco 10 euro
+	\end{itemize}
+	\begin{enumerate}
+		\item \textbf{Definisco le variabili aleatorie discrete che rappresentano ogni vincita:}
+		      \begin{itemize}
+			      \item $P(X=-10)$
+			      \item $P(X=-4)$
+			      \item $P(X=4)$
+			      \item $P(X=10)$
+		      \end{itemize}
+		\item \textbf{Calcolo la funzione di massa:}
+		      \begin{itemize}
+			      \item $P(X=-10)$
+			            \[
+				            P(X=-10)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{36}=\frac{1}{12}
+			            \]
+			            Spiegazione\footnote{\tiny
+				            \textcolor{blue}{\textbf{Probabilità che la somma degli esiti sia 2 o 3:}}
+				            \begin{itemize}
+					            \item $E_1=$somma degli esiti è 2
+					            \item $E_2=$somma degli esiti è 3
+				            \end{itemize}
+				            Quindi mi chiedo: $P(E_1 \cup E_2)=?$ \\
+				            Ricordo la formula: $P(E_1 \cup E_2)=P(E_1)+P(E_2)-P(E_1 \cap E_2)$, quindi:
+				            \begin{enumerate}
+					            \item $P(E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{36}$
+					            \item $P(E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{2}{36}$
+					            \item $P(E_1 \cap E_2)=0$ perchè $E_1,E_2$ sono due eventi incompatibili (non possono accadere insieme)
+				            \end{enumerate}
+				            Pertanto: $P(E_1 \cup E_2)=P(E_1)+P(E_2)-P(E_1 \cap E_2)=\frac{1}{36}+\frac{2}{36}-0=\frac{3}{36}$
+			            }
+			      \item $P(X=-4)$
+			            \[
+				            P(X=-4)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{12}{36}=\frac{1}{13}
+			            \]
+			            Spiegazione\footnote{\tiny
+				            \textcolor{blue}{\textbf{Probabilità che la somma degli esiti sia 4, 5 o 6:}}
+				            \begin{itemize}
+					            \item $E_1=$somma degli esiti è 4
+					            \item $E_2=$somma degli esiti è 5
+					            \item $E_3=$somma degli esiti è 6
+				            \end{itemize}
+				            Quindi mi chiedo: $P(E_1 \cup E_2 \cup E_3)=?$ \\
+				            Ricordo la formula:
+				            \[
+					            P(E_1 \cup E_2 \cup E_3)=\left[P(E_1)+P(E_2)+P(E_3)\right]-\left[P(E_1 \cap E_2)+P(E_1 \cap E_3)+P(E_2 \cap E_3)\right]+\left[P(E_1 \cap E_2 \cap E_3)\right]
+				            \]
+				            \begin{enumerate}
+					            \item $P(E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{36}$
+					            \item $P(E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{4}{36}$
+					            \item $P(E_3)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{5}{36}$
+					            \item $P(E_1 \cap E_2)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_1 \cap E_3)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_2 \cap E_3)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_1 \cap E_2 \cap E_3)=0$ perchè $E_1,E_2,E_3$ sono due eventi incompatibili (non possono accadere insieme)
+				            \end{enumerate}
+				            Pertanto: $P(E_1 \cup E_2 \cup E_3)=\left[\frac{3}{36}+\frac{4}{36}+\frac{5}{36}\right]-\left[0+0+0\right]+0=\frac{12}{36}$
+			            }
+			      \item $P(X=4)$
+			            \[
+				            P(X=4)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{15}{36}=\frac{5}{12}
+			            \]
+			            Spiegazione\footnote{\tiny
+				            \textcolor{blue}{\textbf{Probabilità che la somma degli esiti sia 7, 8 o 9:}}
+				            \begin{itemize}
+					            \item $E_1=$somma degli esiti è 7
+					            \item $E_2=$somma degli esiti è 8
+					            \item $E_3=$somma degli esiti è 9
+				            \end{itemize}
+				            Quindi mi chiedo: $P(E_1 \cup E_2 \cup E_3)=?$ \\
+				            Ricordo la formula:
+				            \[
+					            P(E_1 \cup E_2 \cup E_3)=\left[P(E_1)+P(E_2)+P(E_3)\right]-\left[P(E_1 \cap E_2)+P(E_1 \cap E_3)+P(E_2 \cap E_3)\right]+\left[P(E_1 \cap E_2 \cap E_3)\right]
+				            \]
+				            \begin{enumerate}
+					            \item $P(E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{6}{36}$
+					            \item $P(E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{5}{36}$
+					            \item $P(E_3)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{4}{36}$
+					            \item $P(E_1 \cap E_2)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_1 \cap E_3)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_2 \cap E_3)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_1 \cap E_2 \cap E_3)=0$ perchè $E_1,E_2,E_3$ sono due eventi incompatibili (non possono accadere insieme)
+				            \end{enumerate}
+				            Pertanto: $P(E_1 \cup E_2 \cup E_3)=\left[\frac{6}{36}+\frac{5}{36}+\frac{4}{36}\right]-\left[0+0+0\right]+0=\frac{15}{36}$
+			            }
+			      \item $P(X=10)$
+			            \[
+				            P(X=10)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{6}{36}=\frac{1}{6}
+			            \]
+			            Spiegazione\footnote{\tiny
+				            \textcolor{blue}{\textbf{Probabilità che la somma degli esiti sia 10, 11 o 12:}}
+				            \begin{itemize}
+					            \item $E_1=$somma degli esiti è 10
+					            \item $E_2=$somma degli esiti è 11
+					            \item $E_3=$somma degli esiti è 12
+				            \end{itemize}
+				            Quindi mi chiedo: $P(E_1 \cup E_2 \cup E_3)=?$ \\
+				            Ricordo la formula:
+				            \[
+					            P(E_1 \cup E_2 \cup E_3)=\left[P(E_1)+P(E_2)+P(E_3)\right]-\left[P(E_1 \cap E_2)+P(E_1 \cap E_3)+P(E_2 \cap E_3)\right]+\left[P(E_1 \cap E_2 \cap E_3)\right]
+				            \]
+				            \begin{enumerate}
+					            \item $P(E_1)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{3}{36}$
+					            \item $P(E_2)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{2}{36}$
+					            \item $P(E_3)=\frac{\text{casi favorevoli}}{\text{casi possibili}}=\frac{1}{36}$
+					            \item $P(E_1 \cap E_2)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_1 \cap E_3)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_2 \cap E_3)=0$ perchè $E_1,E_2$ sono due eventi incompatibili
+					            \item $P(E_1 \cap E_2 \cap E_3)=0$ perchè $E_1,E_2,E_3$ sono due eventi incompatibili (non possono accadere insieme)
+				            \end{enumerate}
+				            Pertanto: $P(E_1 \cup E_2 \cup E_3)=\left[\frac{3}{36}+\frac{2}{36}+\frac{1}{36}\right]-\left[0+0+0\right]+0=\frac{6}{36}$
+			            }
+			      \item \textbf{Calcolo il valore atteso di $X$}
+			            \[
+				            \textcolor{red}{\mathbb{E}[X]=}(-10 \cdot \frac{1}{12})+(-4 \cdot \frac{1}{3})+(4 \cdot \frac{5}{12})+(10 \cdot \frac{1}{6})=1.17
+			            \]
+			            Vuol dire: "In media, per partita, il guadagno medio è di 1.17 euro".
+		      \end{itemize}
+	\end{enumerate}
+\end{esercizio}
+
+\subsubsection{Valore atteso di una variabile aleatoria continua}
+\begin{theorem}{Valore atteso di var continua}
+	Il valore atteso di una variabile aleatoria continua $X$ con funzione di densità di probabilità $f_X(x)$ è definito come:
+	\[
+		\mathbb{E}[X]=\int_{\mathscr{X}}x \cdot f_X(x)dx
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Sia $X$ variabile aleatoria con supporto $\mathscr{X}=(0,2)$ (intervallo) con funzione di densità di probabilità:
+	\[
+		f_X(x) =
+		\begin{cases}
+			\dfrac{1}{2} & \text{se } 0 < x < 2, \\[2mm]
+			0            & \text{altrimenti}
+		\end{cases}
+	\]
+	\textbf{Calcolo il valore atteso:}
+	\[
+		\textcolor{red}{\mathbb{E}[X]=}\int_{\mathscr{X}}x \cdot f_X(x)dx=\int_{0}^{2}x \cdot \frac{1}{2}dx=\frac{1}{2}\int_{0}^{2}(x)dx=\frac{1}{2}\cdot\left( \frac{x^2}{2}\Big|_{0}^{x} \right)=1
+	\]
+\end{esercizio}
+
+\subsection{Varianza di una variabile aleatoria}
+La varianza indica quanto i dati si discostano alla media / valore atteso:
+\begin{itemize}
+	\item Se i valori sono vicini alla media (valore atteso), allora il valore della varianza è piccolo
+	\item Se i valori sono distanti alla media (valore atteso), allora il valore della varianza è grande
+\end{itemize}
+\begin{theorem}{Formula varianza per var discrete}
+	SLa varianza è definita come:
+	\[
+		\mathbb{V}[X]=\mathbb{E}[X^2]-(\mathbb{E}[X])^2
+	\]
+	Dove:
+	\begin{itemize}
+		\item $\mathbb{E}[X^2]=\sum_{x \in \mathscr{X}}(x^2 \cdot p_X(x))=\sum_{x \in \mathscr{X}}(x^2 \cdot P(X=x))$
+		\item $(\mathbb{E}[X])^2=$calcolo valore atteso e lo elevo al quadrato
+	\end{itemize}
+	\begin{esercizio}[Esercizio]
+		Riprendo l'esperimento casuale del lancio di 3 monete e osservare la probabilità del numero di teste già svolto sopra:
+		\begin{itemize}
+			\item $P(X=0)=\frac{1}{8}$
+			\item $P(X=1)=\frac{3}{8}$
+			\item $P(X=2)=\frac{3}{8}$
+			\item $P(X=3)=\frac{1}{8}$
+		\end{itemize}
+		\[
+			\mathbb{E}[X]=\frac{3}{2}
+		\]
+		\textcolor{red}{Calcola la varianza della variabile aleatoria $X$:}
+		\begin{enumerate}
+			\item \textbf{Calcola $\mathbb{E}[X^2]$:}
+			      \begin{align*}
+				      \mathbb{E}[X^2]
+				       & = \sum_{x \in \mathscr{X}}(x^2 \cdot P(X=x))                                                        \\
+				       & = (0^2 \cdot \frac{1}{8})+(1^2 \cdot \frac{3}{8})+(2^2 \cdot \frac{3}{8})+(3^2 \cdot \frac{1}{8})=3
+			      \end{align*}
+			\item \textbf{Calcola ($\mathbb{E}[X])^2$:}
+			      \[
+				      (\mathbb{E}[X])^2=\left(\frac{3}{2}\right)^2=\frac{9}{4}
+			      \]
+		\end{enumerate}
+		Pertanto:
+		\[
+			\textcolor{red}{\mathbb{V}[X]=} \mathbb{E}[X^2]-(\mathbb{E}[X])^2=3-\frac{9}{4}=0.75 \quad \textcolor{green}{\text{Risposta corretta}}
+		\]
+	\end{esercizio}
+\end{theorem}
+\begin{theorem}{Formula varianza per var continue}
+	SLa varianza è definita come:
+	\[
+		\mathbb{V}[X]=\mathbb{E}[X^2]-(\mathbb{E}[X])^2
+	\]
+	Dove:
+	\begin{itemize}
+		\item $\mathbb{E}[X^2]=\int_{\mathscr{X}}(x^2 \cdot f_X(x))dx$
+		\item $(\mathbb{E}[X])^2=$calcolo valore atteso e lo elevo al quadrato
+	\end{itemize}
+	\begin{esercizio}[Esercizio]
+		Sia $X$ variabile aleatoria con supporto $\mathscr{X}=(0,2)$ (intervallo) con funzione di densità di probabilità:
+		\[
+			f_X(x) =
+			\begin{cases}
+				\dfrac{1}{2} & \text{se } 0 < x < 2, \\[2mm]
+				0            & \text{altrimenti}
+			\end{cases}
+		\]
+		\[
+			\textcolor{red}{\mathbb{E}[X]=}\int_{\mathscr{X}}x \cdot f_X(x)dx=\int_{0}^{2}x \cdot \frac{1}{2}dx=\frac{1}{2}\int_{0}^{2}(x)dx=\frac{1}{2}\cdot\left( \frac{x^2}{2}\Big|_{0}^{2} \right)=1
+		\]
+		\textcolor{red}{Calcola la varianza:}
+		\begin{enumerate}
+			\item \textbf{Calcola $\mathbb{E}[X^2]$:}
+			      \begin{align*}
+				      \mathbb{E}[X^2]
+				       & = \int_{0}^{2} (x^2 \cdot f_X(x))dx                                     \\
+				       & = \int_{0}^{2} (x^2 \cdot \frac{1}{2})dx                                \\
+				       & =  \frac{1}{2}\int_{0}^{2}(x^2)dx                                       \\
+				       & = \frac{1}{2}\cdot\left( \frac{x^3}{3}\Big|_{0}^{2} \right)=\frac{4}{3}
+			      \end{align*}
+			\item \textbf{Calcola ($\mathbb{E}[X])^2$:}
+			      \[
+				      (\mathbb{E}[X])^2=(1)^2=1
+			      \]
+		\end{enumerate}
+		Pertanto:
+		\[
+			\textcolor{red}{\mathbb{V}[X]=} \mathbb{E}[X^2]-(\mathbb{E}[X])^2=\frac{4}{3}-1=\frac{1}{3} \quad \textcolor{green}{\text{Risposta corretta}}
+		\]
+	\end{esercizio}
+\end{theorem}
+\subsection{Deviazione standard di una variabile aleatoria}
+La deviazione standard è la radice quadrata della varianza.
+\begin{theorem}{Formula deviazione standard}
+	SSia $\mathbb{V}[X]$ la varianzia di una variabile aleatoria. La deviazione standard è definita come:
+	\[
+		DS\left[X\right]=\sqrt{\mathbb{V}[X]}
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio 1]
+	Riprendendo l'esercizio sopra della variabile discreta $X$:
+	\[
+		DS\left[X\right]=\sqrt{\mathbb{V}[X]}=\sqrt{0.75}
+	\]
+\end{esercizio}
+\begin{esercizio}[Esercizio 2]
+	Riprendendo l'esercizio sopra della variabile continua $X$:
+	\[
+		DS\left[X\right]=\sqrt{\mathbb{V}[X]}=\sqrt{\frac{1}{3}}
+	\]
+\end{esercizio}
+\subsection{Distribuzione di probabilità congiunta}
+Normalmente indichiamo la probabilità congiunta di due eventi così:
+\[
+	P(E_1 \cap E_2)=P(E_2 \mid E_1) \cdot P(E_1)
+\]
+Adesso voglio studiare la probabilità congiunta di due variabili aleatorie, ovvero la probabilità che accadano insieme.
+
+\subsubsection{Distribuzione di probabilità congiunta di variabili aleatorie discrete}
+\begin{theorem}{Funzione di massa di probabilità congiunta di var discrete}
+	SSiano $X,Y$ due variabili aleatorie discrete con supporto $\mathscr{X},\mathscr{Y}$ rispettivamente. La \textcolor{red}{funzione di massa di probabilità congiunta di $X$ e $Y$} è definita come:
+	\[
+		p_{X,Y}(x,y)=P(X=x,Y=y) \quad \forall{x \in \mathscr{X}, y \in \mathscr{Y}}
+	\]
+\end{theorem}
+
+\begin{esercizio}[Esercizio]
+	Esperimento: Selezionare un passeggero in modo casuale. \\
+	\textbf{Quesito:} \textcolor{red}{Qual è la probabilità che il passeggero non fosse un membro
+		dell'equipaggio e sia sopravvissuto?} \\
+	Per rispondere a tale quesito abbiamo bisogno della distribuzione di
+	probabilità congiunta di due variabili aleatorie.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{titanic1.png}
+	\end{center}
+	\begin{enumerate}
+		\item \textbf{Definisco le variabili aleatorie:}
+		      \begin{itemize}
+			      \item La variabile aleatoria $X$ con supporto $\mathscr{X}=\{0,1\}$
+			            \begin{center}
+				            \includegraphics[width=0.5\linewidth]{titanic2.png}
+			            \end{center}
+			      \item La variabile aleatoria $Y$ con supporto $\mathscr{Y}=\{1,2,3,4\}$
+			            \begin{center}
+				            \includegraphics[width=0.5\linewidth]{titanic3.png}
+			            \end{center}
+		      \end{itemize}
+		\item \textbf{Definisco il quesito:} "Qual è la probabilità che il passeggero non fosse un membro
+		      dell'equipaggio e sia sopravvissuto?" \\
+		      Si traduce in \textcolor{red}{$P(X=0,Y \in \{1,2,3\})=?$}
+		\item \textbf{Soluzione dell'esercizio:}
+		      \begin{enumerate}
+			      \item Calcolo delle funzioni di massa di probabilità per ogni supporto:
+			            \begin{center}
+				            \includegraphics[width=0.5\linewidth]{titanic4.png}
+			            \end{center}
+			      \item Calcolo la funzione di massa di probabilità congiunta:
+			            \begin{align*}
+				            \textcolor{red}{P(X=0,\,Y \in \{1,2,3\})}
+				             & = P(X=0,Y=1)+P(X=0,Y=2)       \\
+				             & \quad +P(X=0,Y=3)             \\
+				             & = 0.0922+0.0536+0.0809=0.2267
+			            \end{align*}
+		      \end{enumerate}
+	\end{enumerate}
+\end{esercizio}
+
+\subsubsection{Distribuzione di probabilità congiunta di variabili aleatorie continue}
+\begin{theorem}{Funzione di densità di probabilità congiunta di var continue}
+	SSiano $X,Y$ due variabili aleatorie continue con supporto $\mathscr{X},\mathscr{Y}$ rispettivamente. La \textcolor{red}{funzione di densità di probabilità congiunta di $X$ e $Y$} è definita come:
+	\[
+		f_{X,Y}(x,y)=P(x_1 \leq X \leq x_2, y_1 \leq Y \leq y_2)=\int_{y_1}^{y_2}\left(\int_{x_1}^{x_2}f_{X,Y}(x,y) dx\right)dy
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Un processo produttivo di una certa industria chimica produce due
+	principali tipi di impurità:
+	\begin{itemize}
+		\item impurità di tipo I
+		\item impurità di tipo II
+	\end{itemize}
+	\textbf{Quesito: }
+	Sia la funzione di densità di probabilità congiunta di $X$ e $Y$ con supporto $\mathscr{X},\mathscr{Y} \in [0,1]$ definita come:
+	\[
+		f_{X,Y}(x,y)=
+		\begin{cases}
+			2(1-x), & 0 \le x \le 1,\; 0 \le y \le 1, \\
+			0,      & \text{altrimenti}.
+		\end{cases}
+	\]
+	\textcolor{red}{Qual è la probabilità che un prodotto abbia impurità di tipo I compresa tra 0 e 0.5 e impurità di tipo II compresa tra 0.4 e 0.7?}
+	\begin{enumerate}
+		\item \textbf{Definisco le variabili aleatorie:}
+		\item \textbf{Definisco il quesito:} Qual è la probabilità che un prodotto abbia impurità di tipo I compresa tra 0 e 0.5 e impurità di tipo II compresa tra 0.4 e 0.7? \\
+		      Si traduce in \textcolor{red}{$P(0 \leq X \leq 0.5, 0.4 \leq Y \leq 0.7)=?$}
+		\item \textbf{Soluzione dell'esercizio:}
+		      \begin{align*}
+			      \textcolor{red}{P(0 \leq X \leq 0.5, 0.4 \leq Y \leq 0.7)}
+			       & = \int_{y_1}^{y_2}\left(\int_{x_1}^{x_2}f_{X,Y}(x,y) dx\right)dy \\
+			       & = \int_{0.4}^{0.7}\left(\int_{0}^{0.5}f_{X,Y}(x,y) dx\right)dy   \\
+			       & = \int_{0.4}^{0.7}\left(\int_{0}^{0.5}2(1-x) dx\right)dy         \\
+			       & = \int_{0.4}^{0.7}\left(2x-x^2\Big|_{0}^{0.5}\right)dy           \\
+			       & = \int_{0.4}^{0.7}\left(0.75\right)dy                            \\
+			       & = 0.75y\Big|_{0.4}^{0.7} = 0.225
+		      \end{align*}
+	\end{enumerate}
+\end{esercizio}
+
+\subsubsection{Funzione di ripartizione congiunta di variabili aletorie}
+\subsection{Funzioni di massa / densità di probabilità condizionate}
+Ricordo che per due eventi, la probabilità condizionata è definita come:
+\[
+	P(E_1 \mid E_2)= \frac{P(E_1 \cap E_2)}{P(E_2)}
+\]
+\subsubsection{Funzione di massa di probabilità condizionate}
+\begin{theorem}{probabilità condizionata per var discrete}
+	SSiano $X,Y$ due variabili aleatorie discrete con funzione di massa di probabilità congiunta $p_{X,Y(x,y)}=P(X=x,Y=y)$, definisco la \textcolor{red}{funzione di massa di probabilità condizionata}
+	come il rapporto tra la funzione di massa di prob. congiunta di $X$ e $Y$ e la funzione di massa di prob. marginale di $Y$:
+	\[
+		\textcolor{red}{p_{X \mid Y}(x \mid y)=P(X=x \mid Y=y)=}\frac{p_{X,Y}(x,y)}{p_Y(y)}=\frac{P(X=x, Y=y)}{P(Y=y)}
+	\]
+	\textbf{Quindi per calcolare la funzione di massa di probabilità condizionata:}
+	\[
+		p_{X \mid Y}(x \mid y)=P(X=x \mid Y=y)
+	\]
+	serve prima sapere:
+	\begin{itemize}
+		\item funzione di massa di probabilità congiunta delle due variabili
+		      \[
+			      p_{X,Y}(x,y)=P(X=x,Y=x)
+		      \]
+		\item funzione di massa di probabilità marginale di $Y$, ovvero
+		      \[
+			      p_{Y}(y)=P(Y=x)
+		      \]
+	\end{itemize}
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Ritornando all'esercizio del Titanic, \textcolor{red}{Qual è la probabilità che un passeggero sia sopravvissuto dato
+		che viaggiava in prima classe?} $P(X=0 \mid Y=1)=?$
+	\[
+		P(X=0 \mid Y=1)=\frac{P(X=0,Y=1)}{P(Y=1)}
+	\]
+	\begin{enumerate}
+		\item \textbf{Calcolo la probabilità congiunta:}
+		      \begin{center}
+			      \includegraphics[width=0.5\linewidth]{titanic5.png}
+		      \end{center}
+		      \[
+			      P(X=0,Y=1)=0.0922
+		      \]
+		\item \textbf{Calcolo la probabilità marginale:}
+		      \begin{center}
+			      \includegraphics[width=0.5\linewidth]{titanic6.png}
+		      \end{center}
+		      \[
+			      P(Y=1)=0.0922+0.0554=0.1476
+		      \]
+		      Pertanto:
+		      \[
+			      \textcolor{red}{P(X=0 \mid Y=1)=}\frac{P(X=0,Y=1)}{P(Y=1)}=\frac{0.0922}{0.1476}=0.6247 \quad \textcolor{green}{\text{Risposta corretta}}
+		      \]
+	\end{enumerate}
+\end{esercizio}
+
+\subsubsection{Funzione di densità di probabilità condizionate}
+\begin{theorem}{probabilità condizionata per var continue}
+	SSiano $X,Y$ due variabili aleatorie continue con funzione di densità di probabilità congiunta $f_{X,Y(x,y)}=P(X=x,Y=y)$, definisco la \textcolor{red}{funzione di densità di probabilità condizionata}
+	come il rapporto tra la funzione di densità di prob. congiunta di $X$ e $Y$ e la funzione di densità di prob. marginale di $Y$:
+	\[
+		\textcolor{red}{f_{X \mid Y}(x \mid y)=P(x_1 \leq X \leq x_2 \mid y_1 \leq Y \leq y_2)}=\frac{f_{X,Y}(x,y)}{f_Y(y)}
+	\]
+	\textbf{Quindi per calcolare la funzione di densità di probabilità condizionata:}
+	\[
+		f_{X \mid Y}(x \mid y)=P(x_1 \leq X \leq x_2 \mid y_1 \leq Y \leq y_2)
+	\]
+	serve prima sapere:
+	\begin{itemize}
+		\item funzione di densità di probabilità congiunta delle due variabili
+		      \[
+			      f_{X,Y}(x,y)=P(x_1 \leq X \leq x_2 , y_1 \leq Y \leq y_2)=\int_{y_1}^{y_2}\left(\int_{x_1}^{x_2}f_{X,Y}(x,y) dx\right)dy
+		      \]
+		\item funzione di densità di probabilità marginale di $Y$, ovvero
+		      \[
+			      f_{Y}(y)=P(y_1 \leq Y \leq y_2)=\int_{x_1}^{x_2}(f_{X,Y}(x,y))dx
+		      \]
+	\end{itemize}
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Sia $X,Y$ due variabili aleatorie continue con probabilità congiunta:
+	\[
+		f_{X,Y}(x,y) =
+		\begin{cases}
+			e^{-y} & \text{se } 0 < x < y < +\infty \\
+			0      & \text{altrimenti}
+		\end{cases}
+	\]
+	\textcolor{red}{Calcola la densità condizionata:}
+	\begin{enumerate}
+		\item \textbf{Calcolo la probabilità congiunta:}
+		      \[
+			      f_{X,Y}(x,y)=e^{-y}
+		      \]
+		\item \textbf{Calcolo la probabilità marginale:}
+		      \[
+			      f_{Y}(y)=P(y_1 \leq Y \leq y_2)=\int_{x_1}^{x_2}(f_{X,Y}(x,y))dx=\int_{0}^{y}(e^{-y})dx=ye^{-y} \quad \text{con } y>0
+		      \]
+		      Pertanto:
+		      \[
+			      \textcolor{red}{f_{X \mid Y}(x \mid y)=}\frac{f_{X,Y}(x,y)}{f_{Y}(y)}=\frac{e^{-y}}{ye^{-y}}=\frac{1}{y} \quad \text{con } 0<x<y \quad \textcolor{green}{\text{Risposta corretta}}
+		      \]
+	\end{enumerate}
+\end{esercizio}
+\subsection{Variabili aleatorie indipendenti}
+Ricordo che $E_1,E_2$ sono due eventi indipendenti se vale:
+\[
+	P(E_1 \cap E_2)=P(E_1) \cdot P(E_2)
+\]
+La probabilità che si verifichi uno non modifica la probabilità dell'altro.
+\subsubsection{Variabili aleatorie discrete indipendenti}
+\begin{theorem}{var discrete indipendenti}
+	SSiano $X,Y$ due variabili aleatorie discrete con funzione di massa di probabilità congiunta $p_{X,Y}(x,y)$ e funzioni di massa di prob. marginali $p_X(x),p_Y(y)$.
+	Si dice che \textcolor{red}{$X,Y$ sono indipendenti se} la funzione di massa di prob. congiunta è uguale al prodotto delle funzioni di massa di prob. marginali:
+	\[
+		\textcolor{red}{p_{X,Y}(x,y)= } p_X(x) \cdot p_Y(y)
+	\]
+	scrivendolo esteso:
+	\[
+		\textcolor{red}{P(X=x,Y=y)=}P(X=x) \cdot P(Y=y)
+	\]
+\end{theorem}
+\subsubsection{Variabili aleatorie continue indipendenti}
+\begin{theorem}{var continue indipendenti}
+	SSiano $X,Y$ due variabili aleatorie continue con funzione di densità di probabilità congiunta $f_{X,Y}(x,y)$ e funzioni di densità di prob. marginali $f_X(x),f_Y(y)$.
+	Si dice che \textcolor{red}{$X,Y$ sono indipendenti se} la funzione di densità di prob. congiunta è uguale al prodotto delle funzioni di densità di prob. marginali:
+	\[
+		\textcolor{red}{f_{X,Y}(x,y)= } f_X(x) \cdot f_Y(y)
+	\]
+	scrivendolo esteso:
+	\[
+		\int_{y_1}^{y_2}\left(\int_{x_1}^{x_2}f_{X,Y}(x,y) dx\right)dy=\left(\int_{y_1}^{y_2}(f_{X,Y}(x,y))dy \right) \cdot \left(\int_{x_1}^{x_2}(f_{X,Y}(x,y))dx \right)
+	\]
+	Poichè:
+	\begin{itemize}
+		\item $f_{X,Y}(x,y)=P(x_1 \leq X \leq x_2 , y_1 \leq Y \leq y_2)=\int_{y_1}^{y_2}\left(\int_{x_1}^{x_2}f_{X,Y}(x,y) dx\right)dy$
+		\item $f_X(x)=P(x_1 \leq X \leq x_2)=\int_{y_1}^{y_2}(f_{X,Y}(x,y))dy$
+		\item $f_{Y}(y)=P(y_1 \leq Y \leq y_2)=\int_{x_1}^{x_2}(f_{X,Y}(x,y))dx$
+	\end{itemize}
+\end{theorem}
+\subsection{Variabili aleatorie identicamente distribuite (i.d)}
+Le variabili aleatorie si dicono \textcolor{red}{identicamente distribuite} se hanno \textbf{tutte} lo stesso valore di probabilità.
+Ovvero, per ogni valore possibile $X \in \mathscr{X}$, il valore di probabilità è il medesimo.
+\begin{esempio}[Esempio]
+	Lancio più volte lo stesso dado.
+	Sia $X_i$ la variabile aleatoria che rappresenta
+	il risultato dell'$i$-esimo lancio, con supporto
+	\[
+		\mathscr{X} = \{1,2,3,4,5,6\}.
+	\]
+	Per ogni $i$ vale:
+	\[
+		P(X_i = k) = \frac{1}{6}, \quad k=1,\dots,6.
+	\]
+	Poiché tutte le variabili aleatorie $X_i$ hanno la
+	stessa distribuzione di probabilità (Bernoulli, Binomiale, Normale, $\cdots$),
+	esse sono identicamente distribuite.
+\end{esempio}
+
+\subsection{Variabili aleatorie indipendenti identicamente distribuite (i.i.d)}
+Due variabili aleatorie si dicono \textcolor{red}{indipendenti e identicamente distribuite} se:
+\begin{itemize}
+	\item sono tutte indipendenti tra loro (la probabilità congiunta è uguale al prodotto delle prob. marginali)
+	\item hanno tutte lo stesso valore di probabilità (le funzioni di massa di prob. hanno la stessa probabilità, le funzioni di massa di prob. congiunta hanno la stessa probabilità, ...)
+\end{itemize}
+\begin{esempio}[Esempio]
+	Lancio di due monete. Siano $X,Y$ variabili aleatorie discrete che rappresentano l'esito dei due lanci:
+	\begin{itemize}
+		\item $X$ assume valore 1 se l'esito del primo lancio è testa, zero altrimenti.
+		\item $Y$ assume valore 1 se l'esito del primo lancio è testa, zero altrimenti.
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{moneta.png}
+	\end{center}
+\end{esempio}
+\break
+
+\section{Famiglie Parametriche}
+Sia $\theta$ indicata come la \textcolor{red}{probabilità di successo}.
+
+\subsection{Distribuzioni per variabili discrete}
+\subsubsection{Distribuzione di Bernoulli}
+Si usa quando gli esiti dell'esperimento possono essere solo due:
+\begin{itemize}
+	\item 1 - Successo
+	\item 0 - Insuccesso
+\end{itemize}
+su una singola prova / esperimento.
+\begin{theorem}{$X \sim$ Bernoulli($\theta$)}
+	SSia $X$ la variabile aleatoria che può assumere solo due valori:
+	\[
+		X =
+		\begin{cases}
+			1 & \text{se l'esito è un successo} \\
+			0 & \text{altrimenti}
+		\end{cases}
+	\]
+	e sia $\theta \in[0,1]$ la probabilità di successo dell'esperimento.
+	Essendo i due esiti complementari, posso scriverli come:
+	\[
+		\textcolor{red}{P(X=1)=}\theta \quad \quad \quad \textcolor{red}{P(X=0)=}1-\theta
+	\]
+	Formula generale:
+	\[
+		p_X(x;\theta)=\theta^x(1-\theta)^{1-x}
+	\]
+	che è un modo compatto di scrivere le due sopra. Difatti:
+	\begin{itemize}
+		\item Successo:
+		      \[
+			      p_X(x;\theta)=p_X(1;\theta)=\theta^x(1-\theta)^{1-x}=\theta^1(1-\theta)^{1-1}=\theta
+		      \]
+		\item Insuccesso:
+		      \[
+			      p_X(x;\theta)=p_X(0;\theta)=\theta^x(1-\theta)^{1-x}=\theta^0(1-\theta)^{1-0}=1-\theta
+		      \]
+	\end{itemize}
+\end{theorem}
+\begin{theorem}{Media e Varianza di $X \sim$ Bernoulli($\theta$)}
+	S\[
+		\textcolor{red}{\mathbb{E}_{\theta}[X]}=\theta
+	\]
+	e
+	\[
+		\textcolor{red}{\mathbb{V}_{\theta}[X]}=\theta \cdot (1-\theta)
+	\]
+\end{theorem}
+
+\begin{esercizio}[Esempio]
+	Lancio una moneta. \\
+	$X$ è l'esito del lancio, e possono essere sono solo due: T oppure C (o si verifica testa oppure si verficia croce), ecco perchè uso la Distribuzione Bernoulliana. \\ \\
+	Scommetto che esca Testa (quindi scelgo come successo "Testa"):
+	\begin{itemize}
+		\item Se esce Testa, sarà un Successo e quindi assocerò a $X$ il valore di 1:
+		      \[
+			      X=1
+		      \]
+		\item Se esce Croce, sarà un Insuccesso e quindi assocerò a $X$ il valore di 0:
+		      \[
+			      X=0
+		      \]
+	\end{itemize}
+	\textcolor{red}{Qual è la probabilità che esca Testa? $P(X=1)=?$}
+	\[
+		P(X=1)=\frac{1}{2}
+	\]
+	Quindi la probabilità di successo è uguale $\theta=\frac{1}{2}$.
+	In questo esperimento, si ha una variabile Bernoulliana $X$ di parametro $\theta=\frac{1}{2}$:
+	\[
+		X \sim \text{Bernoulli}\left(\frac{1}{2}\right)
+	\]
+\end{esercizio}
+
+\subsubsection{Distribuzione Binomiale}
+Si usa quando mi interessa la prob. di successi ottenuti e devo ripetere lo stesso esperimento bernoulliano $n$ volte ognuno con probabilità di successo pari a $\theta$.\\
+Ogni prova ha probabilità pari a $\theta$ ed è indipendente alle altre ("mi dimentico i valori di probabilità ottenuti nelle prove precedenti").
+
+\begin{theorem}{$X \sim$ Binomiale($n;\theta$) }
+	SSia $X$ il numero di successi di $n$ prove bernoulliane effettuate e sia $\theta$ la probabilità di successo di ogni prova.
+	\\
+	\textcolor{red}{Qual è la probabilità di ottenere $k$ successi in $n$ prove effetuate? $P(X=k)?$}
+	\[
+		p_X(k;\theta)=\binom{n}{k} \cdot \theta^k \cdot (1-\theta)^{n-k}
+	\]
+\end{theorem}
+\begin{osservazioni}[Osservazione]
+	\[
+		\binom{n}{k}=\frac{n!}{k! \cdot (n-k)!}
+	\]
+\end{osservazioni}
+\begin{theorem}{Media e Varianza di $X \sim$ Binomiale($n;\theta$) }
+	S\[
+		\textcolor{red}{\mathbb{E}_{\theta}[X]}=n \cdot \theta
+	\]
+	e
+	\[
+		\textcolor{red}{\mathbb{V}_{\theta}[X]}=n \cdot \theta \cdot (1-\theta)
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	La probabilità di fare canestro in un singolo tiro è del 60$\%$, Qual è la probabilità di fare esattamente 7 canestri in 10 lanci effettuati? $X \sim$ Binomiale($10;0.6$)
+	\begin{align*}
+		\textcolor{red}{P(X=7)}
+		 & = \binom{n}{k} \cdot \theta^k \cdot (1-\theta)^{n-k}                \\[2mm]
+		 & = \binom{10}{7} \cdot \theta^7 \cdot (1-\theta)^{10-7}              \\[2mm]
+		 & = \frac{10!}{7!(10-7)!} \cdot \theta^7 \cdot (1-\theta)^{3}         \\[2mm]
+		 & = 120 \cdot \theta^7 \cdot (1-\theta)^{3}                           \\
+		 & \text{probabilità di fare canestro in un singolo tiro è del 60$\%$} \\
+		 & = 120 \cdot (0.6)^7 \cdot (1-0.6)^{3} = 0.215
+	\end{align*}
+	Quindi la probabilità di fare esattamente 7 canestri su 10 lanci quando $\theta=0.6$ è del 21.5$\%$
+\end{esercizio}
+\begin{esercizio}[Esercizio]
+	Sia un'auto con un pneumatico di scorta. L'auto si ferma se 2 (o più) pneumatici si forano. Supponiamo che all'inzio del viaggio tutti e 5 gli pneumatici
+	siano usati e che si forino indipendentemente con probabilità $\theta=0.01$. \\
+	Sia $X$ la variabile aleatoria che rappresenta il numero di pneumatici che si forano durante il viaggio:
+	\[
+		X \sim \text{Binomiale}(n=5;\theta=0.01)
+	\]
+	\textcolor{red}{Qual è la probabilità che l'auto si fermi?} \\
+	È un esperimento bernoulliano poichè lo pneumatico ha due opzioni: si fora (successo) oppure no (insuccesso).
+	L'auto si fermerà se 2 o più pneumatici si foreranno, quindi il numero di successi (foratura) $k$ affinchè avvenga quanto richiesto deve essere:
+	\[
+		k \geq 2
+	\]
+	L'auto si fermerà se avremo $ k \geq 2$ successi, quindi il quesito diventa \textcolor{red}{$P(X \geq 2)=?$} \\ \\
+	\textbf{Risoluzione:}
+	\begin{align*}
+		P(X \geq 2)
+		 & = \sum_{k=2}^{5}\left(\binom{5}{k}\cdot \theta^k \cdot (1-\theta)^{5-k}\right) =                     \\
+		 & = \binom{5}{2} \cdot \theta^2 \cdot (1-\theta)^{5-2} +                                               \\
+		 & + \binom{5}{3} \cdot \theta^3 \cdot (1-\theta)^{5-3} +                                               \\
+		 & + \binom{5}{4} \cdot \theta^4 \cdot (1-\theta)^{5-4} +                                               \\
+		 & + \binom{5}{5} \cdot \theta^5 \cdot (1-\theta)^{5-5} =                                               \\
+		 & = 10 \cdot \theta^2 \cdot (1-\theta)^{3} +                                                           \\
+		 & + 10 \cdot \theta^3 \cdot (1-\theta)^{2} +                                                           \\
+		 & + 5 \cdot \theta^4 \cdot (1-\theta)^{1} +                                                            \\
+		 & + 1 \cdot \theta^5 \cdot 1 =                                                                         \\
+		 & = 10 \cdot 0.01^2 \cdot (1-0.01)^{3} + 10 \cdot 0.01^3 \cdot (1-0.01)^{2} +                          \\
+		 & + 5 \cdot 0.01^4 \cdot (1-0.01) + 0.01^5 = 0.00098 \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+	\textcolor{red}{Qual è la probabilità di terminare il viaggio?} \\
+	Abbiamo detto che l'auto si ferma se si forano 2 o più pneumatici, quindi basta che se ne forino 2 e siamo spacciati.
+	Quindi, l'auto non si ferma se:
+	\begin{itemize}
+		\item Non si fora nessun pneumatico
+		\item Se ne fora solo uno
+	\end{itemize}
+	Affinchè l'auto termini il viaggio se ne devono forare meno di 2. \\
+	Il quesito diventa \textcolor{red}{$P(X<2)=?$} \\ \\
+	\textbf{Soluzione:}
+	\begin{align*}
+		P(X < 2)
+		 & = P(X=0) + P(X=1)                                                                                                                        \\
+		 & = \left[\binom{5}{k}\cdot \theta^k \cdot (1-\theta)^{5-k}\right] + \left[\binom{5}{k}\cdot \theta^k \cdot (1-\theta)^{5-k}\right]        \\
+		 & = \left[\binom{5}{0}\cdot \theta^0 \cdot (1-\theta)^{5-0}\right] + \left[\binom{5}{1}\cdot \theta^1 \cdot (1-\theta)^{5-1}\right]        \\
+		 & = \left[(1-0.01)^{5}\right] + \left[5 \cdot 0.01^1 \cdot (1-0.01)^{4}\right]                                                             \\
+		 & = \left[(1-0.01)^{5}\right] + \left[5 \cdot 0.01^1 \cdot (1-0.01)^{4}\right] = 0.99902 \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+	\begin{osservazioni}[Osservazione su $P(X < 2)$]
+		Ricordo che $P(X < 2)$ corrisponde alla funzione di ripartizione che si calcola come:
+		\[
+			P(X \leq x_n) = \sum_{i=0}^{n} \left(P(X=x_i)\right)
+		\]
+		oppure:
+		\[
+			P(X < x_n) = \sum_{i=0}^{n-1} \left(P(X=x_i)\right)
+		\]
+		Ossia come somma cumulativa delle funzioni di massa di probabilità fino a $x_n$ (nel caso di $\leq$) oppure fino a $x_{n-1}$ (nel caso di $<$)
+	\end{osservazioni}
+\end{esercizio}
+
+\subsubsection{Distribuzione di Poisson}
+Si usa quando mi interessa la probabilità di eventi accaduti in un certo intervallo (di tempo, spazio o altro) e non vengono indicate le prove totali effettuate
+\footnote{Se invece vengono indicate le prove tot effettuate è Binomiale, non Poisson. Ovvero: \\
+	Se fosse "Probabilità che accada un incidente nei primi 15km di autostrada (intervallo [0-15]) quando passano 50000 auto" è Binomiale perchè specifico il tot di prove effettuate.}
+. Esempi:
+\begin{itemize}
+	\item Probabilità di ricevere 30 chiamate dalle 9:00 alle 11:00
+	\item Probabilità che tra le 8:00 e le 11:00 in Via Guidoni passino 1500 persone
+	\item Probabilità che sfogliando le prime 200 pagine (intervallo [1-200]) trovo almeno un errore di ortografia
+	\item Probabilità che accada un incidente nei primi 15km di autostrada (intervallo [0-15])
+\end{itemize}
+\begin{theorem}{$X \sim$ Poisson($\lambda$)}
+	SSia $X$ la variabile aleatoria e $\lambda$ il numero medio di eventi che si verificano in un certo intervallo. \textcolor{red}{Qual è la probabilità che
+		si verifichino $x$ eventi in un intervallo di tempo con un certo parametro $\lambda$? $P(X=x)=?$}
+	\[
+		p_X(x;\lambda)=\frac{\lambda^x}{x!}\cdot \mathrm{e}^{-\lambda}
+	\]
+\end{theorem}
+\begin{theorem}{Media e Varianza di $X \sim$ Poisson($\lambda$)}
+	S\[
+		\textcolor{red}{\mathbb{E}_{\lambda}[X]}=\lambda
+	\]
+	e
+	\[
+		\textcolor{red}{\mathbb{V}_{\lambda}[X]}=\lambda
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Si supponga che il numero di guasti che si verificano in un anno presso una centralina telefonica si possa rappresentare con una variabile aleatoria con distribuzione di Poisson di
+	parametro $\lambda=3$. \\ \textcolor{red}{Qual è la probabilità che in un anno si verifichino zero guasti?$P(X=0)=?$}
+	\[
+		P(X=0)=\frac{\lambda^x}{x!} \cdot \mathrm{e}^{-\lambda}=\frac{3^0}{0!} \cdot \mathrm{e}^{-3}=0.0498 \quad \textcolor{green}{\text{Risposta corretta}}
+	\]
+	\textcolor{red}{Qual è la probabilità di avere almeno due guasti in due anni?} \\
+	Ho definito che $\lambda=3$ vale solo per un certo intervallo di tempo: 1 anno; Ma se invece mi chiede 2 anni?
+	Allora avrò due variabili aleatorie:
+	\begin{itemize}
+		\item $X$: guasti verificati nel primo anno $X \sim$Poisson($\lambda$)
+		\item $Y$: guasti verificati nel secondo anno $Y \sim$Poisson($\lambda$)
+	\end{itemize}
+	$X + Y \sim$ Poisson($2\lambda$) \\
+	Quindi il quesito diventa \textcolor{red}{$P(X+Y \geq 2)=?$} \\
+	Sapendo che la funzione di ripartizione è $P(X < x)$ e che se ho $P(X \geq x_n)$ per la funzione di ripartizione ottengo: $P(X \geq x_n)=1-P(X \leq x_{n-1})$, dunque:
+	\begin{align*}
+		P(X+Y \geq 2)
+		 & = 1-\left[P(X + Y \leq 1)\right]                                                                                 \\
+		 & = 1-\left[P(X + Y = 0)+P(X + Y = 1)\right]                                                                       \\
+		 & = 1-\left[\frac{\lambda^x}{x!}\cdot \mathrm{e}^{-\lambda}+\frac{\lambda^x}{x!}\cdot \mathrm{e}^{-\lambda}\right] \\
+		 & = 1-\left[\frac{(6)^0}{0!}\cdot \mathrm{e}^{-6}+\frac{6^1}{1!}\cdot \mathrm{e}^{-6}\right]                       \\
+		 & = 1-\left[\mathrm{e}^{-6}+6\mathrm{e}^{-6}\right]                                                                \\
+		 & = 1-7\mathrm{e}^{-6}= 0.9827 \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+\end{esercizio}
+\begin{esercizio}[Esercizio]
+	Un tipografo, in media, commette un errore ogni 500 parole. Una pagina contiene 300 parole. \textcolor{red}{Qual è la probabilità che non ci siano più di 2 errori in 5 pagine?}
+	\\ \\
+	\textbf{Soluzione:} \\
+	5 pagine contengono in totale $300 \cdot 5=1500$ parole. Sapendo che il tipografo commette in media un errore ogni 500 parole, allora in 5 pagine commetterà in media 3 errori, quindi $\lambda=3$.
+	\\
+	Posso esprimere la variabile aleatoria $X$ come il numero di errori presenti nell'intervallo [0-1500] parole.
+	Il quesito richiede  \textcolor{red}{$P(X \leq 2)=?$} \\
+	\begin{align*}
+		\textcolor{red}{P(X \leq 2)}
+		 & = P(X =0)+P(X =1)+P(X =2)                                                                                                                         \\
+		 & = \frac{\lambda^0}{0!}\cdot \mathrm{e}^{-\lambda}+\frac{\lambda^1}{1!}\cdot \mathrm{e}^{-\lambda}+\frac{\lambda^2}{2!}\cdot \mathrm{e}^{-\lambda} \\
+		 & = \mathrm{e}^{-\lambda}+\lambda\mathrm{e}^{-\lambda}+\frac{\lambda^2}{2}\cdot \mathrm{e}^{-\lambda}                                               \\
+		 & = \mathrm{e}^{-3}+3\mathrm{e}^{-3}+\frac{3^2}{2}\cdot \mathrm{e}^{-3}                                                                             \\
+		 & = \mathrm{e}^{-3}+3\mathrm{e}^{-3}+\frac{9}{2}\mathrm{e}^{-3}                                                                                     \\
+		 & = \left(1+3+\frac{9}{2}\right)\mathrm{e}^{-3}                                                                                                     \\
+		 & =\frac{17}{2}\mathrm{e}^{-3} = 0.4232 \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+\end{esercizio}
+\subsection{Distribuzioni per variabili continue}
+\subsubsection{Distribuzione Uniforme}
+Si usa quando, avendo un intervallo $[a,b]$ voglio calcolare la probabilità che un evento accada in un suo sottointervallo quando tutti i valori sono equiprobabili.
+\begin{theorem}{$X \sim$ Uniforme $[a,b]$}
+	SSia $X$ la variabile aleatoria continua, sia $[a,b]$ l'intervallo e sia $[a',b']$ sottointervallo.
+	\[
+		f_X(x;[a',b'])=P(a' \leq x \leq b')= \int_{a'}^{b'}f_X(x;[a',b'])
+		\begin{cases}
+			\int_{a'}^{b'}\left(\frac{1}{b-a}\right)dx & \text{se } x \in[a,b] \\
+			0                                          & \text{altrimenti }
+		\end{cases}
+	\]
+	Oppure semplicemente si scrive:
+	\[
+		f_X(x;[a',b'])=P(a < a' \leq x \leq b' < b)=\int_{a'}^{b'}\left(\frac{1}{b-a}\right)dx=\textcolor{red}{\frac{b'-a'}{b-a}}
+	\]
+	Sia la funzione di ripartizione:
+	\[
+		F_X(x)=P(X \leq x)=\int_{-\infty}^{x}f_X(u)du=
+		\begin{cases}
+			0               & \text{se } x < a      \\
+			\frac{x-a}{b-a} & \text{se } x \in[a,b] \\
+			1               & \text{se } x >b
+		\end{cases}
+	\]
+\end{theorem}
+\begin{theorem}{Media e Varianza di $X \sim$ Uniforme $[a,b]$}
+	S\[
+		\textcolor{red}{\mathbb{E}_{a,b}[X]}=\frac{a+b}{2}
+	\]
+	e
+	\[
+		\textcolor{red}{\mathbb{V}_{a,b}[X]}=\frac{(b-a)^2}{12}
+	\]
+\end{theorem}
+\begin{esercizio}[Esercizio]
+	Ad una certa fermata passa un autobus ogni 15 minuti a partire dalle 7:00 (quindi alle 7:00, 7:15, 7:30, 7:45, $\cdots$).
+	\textcolor{red}{Arrivo alla fermata in un momento casuale tra le 7:00 e le 7:30, quale sarà la probabilità di dover attendere meno di 5 minuti per prendere il prossimo bus?} \\
+	\\ \textbf{Soluzione:} \\
+	Sia $X$ la variabile aleatoria che rappresenta l'istante in cui arrivo alla fermata e $[0,30]$ il sottointervallo in cui arrivo, allora: $X \sim$ Uniforme $[0,30]$. \\
+	Il bus passa ogni 15 minuti (7:00, 7:15, 7:30)e per far in modo che io aspetti meno di 5 minuti, dovrei arrivare dopo le 7:10 ma prima delle 7:15, oppure dopo le 7:25 ma prima delle 7:30.
+	\\
+	Il quesito diventa \textcolor{red}{$P(10<X<15)=?$} \textbf{oppure}\footnote{
+		Ricordo che $P(E_1 \cap E_2)=P(E_1)+P(E_2)-P(E_1 \cap E_2)$
+		ma se $E_1,E_2$ sono incompatibili, allora diventa: $P(E_1 \cap E_2)=P(E_1)+P(E_2)$
+
+	} \textcolor{red}{$P(25<X<30)=?$} Dato che sono due eventi incompatibili (non possono accadere insieme, o prendo il bus
+	tra le 7:10 e le 7:15 o prendo il bus delle 7:25 e le 7:30) e "oppure" rappresenta l'unione, quindi:
+	\[
+		P(10<X<15) \cup P(25<X<30)=P(10<X<15)+P(25<X<30)
+	\]
+	Quindi, il quesito diventa \textcolor{red}{$P(10<X<15)+P(25<X<30)=?$}
+	\begin{itemize}
+		\item $[a,b]$ intervallo
+		\item $[a',b']$ sottointervallo
+	\end{itemize}
+	\begin{align*}
+		\textcolor{red}{P(10<X<15)+P(25<X<30)}
+		 & = \left[\int_{a'}^{b'}f_X(x)dx\right]+\left[\int_{a'}^{b'}f_X(x)dx\right]                                                                               \\
+		 & = \left[\int_{10}^{15}f_X(x)dx\right]+\left[\int_{25}^{30}f_X(x)dx\right]                                                                               \\
+		 & = \left[\int_{10}^{15}(\frac{1}{b-a})dx\right]+\left[\int_{25}^{30}(\frac{1}{b-a})dx\right]                                                             \\
+		 & = \left[\int_{10}^{15}(\frac{1}{30-0})dx\right]+\left[\int_{25}^{30}(\frac{1}{30-0})dx\right]                                                           \\
+		 & = \left[\frac{1}{30}x \Big|_{10}^{15}\right]+\left[\frac{1}{30}x \Big|_{25}^{30}\right] = \frac{1}{3} \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+	Oppure semplicemente:
+	\begin{align*}
+		\textcolor{red}{P(10<X<15)+P(25<X<30)}
+		 & = \left[\frac{b'-a'}{b-a}\right]+\left[\frac{b'-a'}{b-a}\right]                                         \\
+		 & = \left[\frac{15-10}{30-0}\right]+\left[\frac{30-25}{30-0}\right]                                       \\
+		 & = \frac{5}{30}+\frac{5}{30}=\frac{10}{30}=\frac{1}{3} \quad \textcolor{green}{\text{Risposta corretta}}
+	\end{align*}
+\end{esercizio}
+\subsubsection{Distribuzione Normale}
+Molto usata in Statistica, la distribuzione normale rappresenta sul piano cartesiano una curva a campana, detta "curva gaussiana".
+La probabilità più elevata coincide con il valore medio centrale (che spezza la camapana a metà) e descresce spostandosi a destra o a sinistra.
+\begin{center}
+	\includegraphics[width=0.4\linewidth]{grafico_distribuzione_normale.png}
+\end{center}
+\begin{theorem}{$X \sim$ N($\mu, \sigma^2$)}
+	SSia $X$ una variabile aleatoria e sia $\mu$ la media (dove sta il centro della camapana) e $\sigma^2$ la varianza (quanto è larga la campana) definisco:
+	\[
+		f_X(x;\mu,\sigma^2)=\frac{1}{\sigma \sqrt{2 \pi}}\cdot \mathrm{e}^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}
+	\]
+	dove:
+	\begin{itemize}
+		\item $\mu=$ rappresenta il valore atteso $\mathbb{E}_{\mu,\sigma^2}[X]$ (dato che si sta parlando di var aleatorie)
+		\item $\sigma^2=$ rappresenta la varianza $\mathbb{V}_{\mu,\sigma^2}[X]$ (dato che si sta parlando di var aleatorie)
+	\end{itemize}
+	Per calcolare la probabilità di un certo valore $x$ sotto la curva uso la funzione di ripartizione:
+	\[
+		\textcolor{red}{P(X \leq x;\mu,\sigma^2)=}F_X(x; \mu,\sigma^2)=\int_{-\infty}^{x}\left(\frac{1}{\sigma \sqrt{2 \pi}}\cdot \mathrm{e}^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\right)dx
+	\]
+	Oppure:
+	\[
+		\textcolor{red}{P(X \geq x;\mu,\sigma^2)=}1 - F_X(x; \mu,\sigma^2)=1 - \left[\int_{-\infty}^{x}\left(\frac{1}{\sigma \sqrt{2 \pi}}\cdot \mathrm{e}^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\right)dx\right]
+	\]
+	Ma questi non sono pratici da calcolare! Quindi come calcolo la funzione di ripartizione? Vedi Distribuzione Normale Standard.
+\end{theorem}
+\begin{osservazioni}[Note:]
+	\textcolor{red}{Voglio calcolare la deviazione standard:} \\
+	Ottengo la deviazione standard $\sigma$ applicando la radice quadrata alla varianza:
+	\[
+		DS_{\mu, \sigma^2}[X]=\sqrt{\mathbb{V}_{\mu,\sigma^2}[X]}
+	\]
+	\textcolor{red}{Voglio calcolare la varianza:} \\
+	Elevo al quadrato la deviazione standard per ottenere la varianza $\sigma^2$:
+	\[
+		\mathbb{V}_{\mu,\sigma^2}[X]=\left(DS_{\mu, \sigma^2}[X]\right)^2
+	\]
+\end{osservazioni}
+\begin{esempio}[Attenzione!]
+	La distribuzione Normale è individuata indifferentemente usando $(\mu, \sigma^2)$ oppure $(\mu, \sigma)$: \\
+	Ad esempio:
+	\begin{itemize}
+		\item $X$ ha distribuzione Normale di media 0 e varianza 9, $X \sim$ N ($\mu,\sigma^2$)
+		      \[
+			      X \sim \text{N} (0,9)
+		      \]
+		\item $X$ ha distribuzione Normale di media 0 e deviazione standard 3, $X \sim$ N ($\mu,\sigma$)
+		      \[
+			      X \sim \text{N} (0,3)
+		      \]
+	\end{itemize}
+\end{esempio}
+
+\subsubsection{Distribuzione Normale Standard}
+La Distribuzione Normale Standard è un caso particolare della Distribuzione Normale. In quest'ultima, posso associare a $\mu,\sigma^2$ i valori che desidero, mentre
+la Distribuzione Normale Standard ha valori specifici per questi due parametri:
+\[
+	\mu=0 \quad \quad \quad \sigma^2=1
+\]
+Abbiamo detto che calcolare la funzione di ripartizione con la Distribuzione Normale non è pratico poichè richiede di svolgere un integrale un pò ostico:
+\[
+	\textcolor{red}{P(X \leq x;\mu,\sigma^2)=}F_X(x; \mu,\sigma^2)=\int_{-\infty}^{x}\left(\frac{1}{\sigma \sqrt{2 \pi}}\cdot \mathrm{e}^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\right)dx=????
+\]
+\begin{theorem}{Formula di Standardizzazione}
+	SSia $X$ una variabile aleatoria e standardizzo $X$ applicando la seguente formula:
+	\[
+		\textcolor{red}{Z} = \frac{x-\mu}{\sigma}
+	\]
+	Trasformo $X$ in $Z$ per poter calcolare $P(X \leq x;\mu,\sigma^2)$.
+	\begin{esempio}[Esempio:]
+		La colazione degli italiani.
+		Le analisi dichiarano che in media la popolazione mangia 10 biscotti con il caffè latte la mattina e varianza pari a 4 (nella pratica molte persone ne mangiano 8 o 12, con scostamenti tipici di circa 2 biscotti). La variabile aleatoria $X$ rappresenta il numero
+		di biscotti mangiati da un individuo.
+		Ho distribuzione normale $X \sim$ N($10,4$) con media $\mu=10$ e varianza $\sigma^2=4$.
+		\textcolor{red}{Data $X \sim$ N($10,4$) qual è la probabilità che il numero di biscotti mangiati sia minore-uguale a 12? $P(X \leq 12)$=?} \\
+		Dato che non posso usare quell'integrale enorme, standardizzo la variabile.
+		\begin{enumerate}
+			\item Applico la formula:
+			      \[
+				      Z = \frac{x-\mu}{\sigma}=\frac{12-10}{\sqrt{4}}=1
+			      \]
+			\item Associo il valore a $P(Z \leq z)=\phi(z)$:
+			      \[
+				      P(Z \leq 1)=\phi(1)
+			      \]
+			\item Guardo le tavola di $\phi(\cdot)$ per trovare il valore: $\phi(1)=0.8413$
+			      \begin{center}
+				      \includegraphics[width=0.5\linewidth]{tavolaz.png}
+			      \end{center}
+			      Pertanto:
+			      \[
+				      \textcolor{red}{P(X \leq 12)}=0.8413 \quad \textcolor{green}{\text{Risposta corretta}}
+			      \]
+			      La probabilità che il numero di biscotti sia minore-uguale a 12 è del 84.13$\%$ e rappresenta l'area in blu sottostante della campana da $\phi(1)$ fino a $-\infty$
+			      \begin{center}
+				      \includegraphics[width=0.7\linewidth]{esercizioz.png}
+			      \end{center}
+		\end{enumerate}
+	\end{esempio}
+\end{theorem}
+\subsubsection{Proprietà di $\phi(\cdot)$}
+\begin{enumerate}
+	\item \[
+		      0 \leq \phi(z) \leq 1 \quad z \in \mathbb{R}
+	      \]
+	\item \[
+		      \textcolor{red}{\phi(-z)}=1-\phi(z)
+	      \]
+	      Segue che:
+	      \[
+		      \textcolor{red}{P(X \geq x)}=P(X \geq z)=P(X \leq -z)=\phi(-z)=1-\phi(z)
+	      \]
+	\item Se $X$ una variabile aleatoria continua con Distribuzione Normale di media $\mu$ e varianza $\sigma^2$: $X \sim$ N($\mu,\sigma^2$), allora
+	      \[
+		      \textcolor{red}{P(X \leq x)}=\phi\left(\frac{x-\mu}{\sigma}\right)=\phi\left(z\right)
+	      \]
+	\item Per ogni $x_1,x_2 \in \mathbb{R}$
+	      \[
+		      \textcolor{red}{P(x_1 \leq X \leq x_1)}=\phi\left(\frac{x_2-\mu}{\sigma}\right)-\phi\left(\frac{x_1-\mu}{\sigma}\right)=\phi\left(z_2\right)-\phi\left(z_1\right)
+	      \]
+	\item \[
+		      \textcolor{red}{P(x_1 \leq X \leq x_1)}=\phi\left(\frac{x_2-\mu}{\sigma}\right)-\phi\left(\frac{x_1-\mu}{\sigma}\right)=\phi\left(z_2\right)-\phi\left(-z_1\right)=\phi\left(z_2\right)-\left[1-\phi\left(z_1\right)\right]
+	      \]
+\end{enumerate}
+\begin{esercizio}[Esercizio:]
+	Il tempo di installazione di un dato software $X$ ha distribuzione normale con una media $\mu=20$ minuti e varianza $\sigma^2=16$ minuti.
+	\[
+		X \sim \text{N}(20,16)
+	\]
+	\textcolor{red}{Qual è la probabilità che il software venga installato in meno di 15 minuti?$P(X \leq 15)=?$}
+	\begin{enumerate}
+		\item Standardizzo la variabile:
+		      \[
+			      Z = \frac{x-\mu}{\sigma}=\frac{15-20}{\sqrt{16}}=-\frac{5}{4}=-1.25
+		      \]
+		\item Trovo il valore di $\phi(z)$ nella tavola:
+		      \begin{align*}
+			      \phi(z)
+			       & = \phi(-1.25)  \\
+			       & = 1-\phi(1.25) \\
+			       & = 1-(0.8944)   \\
+			       & = 0.1056
+		      \end{align*}
+	\end{enumerate}
+	La probabilità che il software $X$ venga installato in meno di 15 minuti è del 10.56$\%$.
+\end{esercizio}
+\begin{esempio}[Problema indiretto:]
+	Normalmente il quesito richiede di trovare la probabilità $p$ dati i valori $x, \mu, \sigma^2$ della Distribuzione Normale $X \sim$N($\mu, \sigma^2$), ovvero trova $p$:
+	\[
+		P(X \leq x; \mu, \sigma^2)=p
+	\]
+	\textcolor{red}{Il problema inverso} invece richiede che, dato $p, \mu, \sigma^2$ della Distribuzione Normale $X \sim$N($\mu, \sigma^2$) trovare $x$:
+	\[
+		P(X \leq x; \mu, \sigma^2)=p
+	\]
+	Per trovare $x$ conoscendo $p, \mu, \sigma^2$ basta applicare la formula:
+	\[
+		x=z \cdot \sigma+\mu
+	\]
+	\begin{esercizio}[Problema indiretto:]
+		Sia $X=$tempo istallazione software con $X \sim$ N($\mu=20, \sigma^2=16$).
+		\begin{itemize}
+			\item \textcolor{red}{Tempo di installazione del software per cui il 90$\%$ dei tempi sono inferiori a tale tempo}
+			      Trova il valore di $x$ dato p=0.9; ovvero,trova il tempo di installazione (in minuti) tale che il 90$\%$ dei tempi osservati risulta inferiore a questo valore.
+
+			      \begin{enumerate}
+				      \item \textbf{Trova $z$:} \\
+				            Per quale valore di $z$ ho che $\phi(z)=0.9$? Guardo la tavola:
+				            \[
+					            z=1.28
+				            \]
+				      \item \textbf{Trova $x$:}
+				            \begin{align*}
+					            x
+					             & = z\cdot \sigma + \mu                                     \\
+					             & = 1.28 \cdot \sqrt{16}+20                                 \\
+					             & = 25.12 \quad \textcolor{green}{\text{Risposta corretta}}
+				            \end{align*}
+			      \end{enumerate}
+			      Pertanto, il 90$\%$ dei tempi di istallazione sono inferiori a 25.12 minuti
+			\item \textcolor{red}{Tempo di installazione del software per cui il 20$\%$ dei tempi sono inferiori a tale tempo}
+			      Trova il valore di $x$ dato p=0.2; ovvero,trova il tempo di installazione (in minuti) tale che il 20$\%$ dei tempi osservati risulta inferiore a questo valore.
+
+			      \begin{enumerate}
+				      \item \textbf{Trova $z$:} \\
+				            Per quale valore di $z$ ho che $\phi(z)=0.2$? Guardo la tavola: \\
+							Ma nella tavola i valori partono da 0.5, quindi faccio:
+				            \[
+					            1-z=1-0.2=0.8
+				            \]
+							Per quale valore di $z$ ho che $\phi(z)=0.8$? Guardo la tavola: \\
+							\[
+							z=0.84
+							\]
+							Impostalo negativo $\phi(-z)$:
+							\[
+							-z=-0.84
+							\]
+				      \item \textbf{Trova $x$:}
+				            \begin{align*}
+					            x
+					             & = -z\cdot \sigma + \mu                                     \\
+					             & = -0.84 \cdot \sqrt{16}+20                                 \\
+					             & = 16.64 \quad \textcolor{green}{\text{Risposta corretta}}
+				            \end{align*}
+			      \end{enumerate}
+			      Pertanto, il 20$\%$ dei tempi di istallazione sono inferiori a 16.64 minuti
+		\end{itemize}
+
+	\end{esercizio}
+\end{esempio}
+\section{Inferenza Statistica}
+\subsection{Stima Puntuale}
+\subsection{Stima Intervallare}
+\subsection{Verifica delle Ipotesi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
