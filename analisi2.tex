@@ -31,8 +31,13 @@ fonttitle=\bfseries,
     enhanced,
     break at=0pt}{}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definizione}[section]
+\newtcbtheorem[no counter]{definition}{Definizione}%
+{colback=magenta!5, 
+colframe=magenta, 
+fonttitle=\bfseries,
+    breakable,            % permette di spezzare il box su più pagine
+    enhanced,
+    break at=0pt}{}
 
 % Imposto colore delle subsection
 \titleformat{\subsection}
@@ -97,44 +102,86 @@ fonttitle=\bfseries,
 \section{Equazioni differenziali}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo infintesimale per le curve}
-\subsection{Norma di un vettore e proprietà associate}
-\begin{theorem}{Formula di Carnot p.55}
-    SSia
+\subsection{Calcolo vettoriale}
+\begin{definition}{Vettore}
+    Il vettore $\vec{x} \in \mathbb{R}^n$ è una n-upla:
+    \[
+    \vec{x}=\left(x_1,x_2,\cdots,x_n\right)
+    \]
+\end{definition}
+\subsubsection{Norma di un vettore e proprietà associate}
+\begin{definition}{Norma di un vettore}
+    SSia $\vec{x} \in \mathbb{R}^n$ un vettore. Indico la \textcolor{red}{norma/lunghezza} di un vettore come la radice quadrata del prodotto scalare del vettore $\vec{x}$ per se stesso
+    o equivalentemente, la radice quadrata della somma dei suoi componenti al quadrato, il numero reale non negativo:
+    \[
+    \textcolor{red}{\|\vec{x}\|}=\sqrt{\langle \vec{x}, \vec{x} \rangle}=\sqrt{x_1^2+x_2^2+ \cdots + x_n^2}=\sqrt{\sum_{i=1}^{n}(x_i)^2}
+    \]
+\end{definition}
+\begin{theorem}{Formula di Carnot}
+    SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori. La norma al quadrato della somma dei due vettori equivale alle loro norme al quadrato più due volte il loro prodotto scalare
+    \footnote{Un pò come $(a+b)^2=a^2+b^2+2ab$}:
+    \[
+    \textcolor{red}{\left\|\vec{x}+\vec{y}\right\|^2}=\left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle
+    \]
+    \begin{proof}
+        Sapendo che $\|\vec{x}\|=\sqrt{\langle \vec{x}, \vec{x} \rangle}$, allora:
+        \begin{align*}
+            \textcolor{red}{\left\|\vec{x}+\vec{y}\right\|^2}
+            & = \left(\sqrt{\langle \vec{x} + \vec{y}, \vec{x} + \vec{y} \rangle}\right)^2\\
+            & = {\langle \vec{x} + \vec{y}, \vec{x} + \vec{y} \rangle}\\
+            & \textcolor{cyan}{\text{per bilinearità del prodotto scalare,}}\\
+            & \textcolor{cyan}{\text{come se facessi }(a+b)(a+b)=a^2+ab+ba+b^2}\\
+            & = \langle \vec{x}, \vec{x} \rangle + \langle \vec{x}, \vec{y} \rangle + \langle \vec{y}, \vec{x} \rangle + \langle \vec{y}, \vec{y} \rangle \\
+            & = \|\vec{x}\|^2+ 2\langle \vec{x}, \vec{y} \rangle + \|\vec{y}\|^2 \\
+            & = \|\vec{x}\|^2 + \|\vec{y}\|^2 + 2\langle \vec{x}, \vec{y} \rangle 
+        \end{align*}
+    \end{proof}
 \end{theorem}
 \begin{theorem}{Disuguaglianza di Cauchy-Schwartz p.56}
     SSia
 \end{theorem}
+\subsubsection{Funzione "lunghezza" di un vettore}
 \begin{theorem}{Disuguaglianza triangolare p.58}
-    SSia
+    QQuesto teorema usa chauchy Schwartz e formula di carnot per la dimostrazione
 \end{theorem}
-\subsubsection{Spazio metrico}
-\begin{theorem}{Distanza euclidea p.59}
+\subsection{Spazio metrico}
+\begin{definition}{Distanza euclidea}
+    SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori. La \textcolor{red}{distanza euclidea} tra $\vec{x}$ e $\vec{y}$ è il numero reale non negativo definito dalla norma della loro differenza:
+    \[
+    d(\vec{x},\vec{y})=\left\|\vec{x}-\vec{y}\right\|=\sqrt{\langle \vec{x}-\vec{y}, \vec{x}-\vec{y} \rangle}=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}
+    \]
+\end{definition}
+\begin{definition}{Palla aperta}
+    S\begin{itemize}
+        \item Sia $\vec{x_0} \in \mathbb{R}^n$ fissato
+        \item Sia il raggio $r>0$ dove $r \in \mathbb{R}$
+    \end{itemize}
+    Si definisce \textcolor{red}{palla aperta} o intorno sferico di centro $\vec{x_0}$ e raggio $r$, come l'insieme:
+    \[
+    B(\vec{x_0},r)=\left\{\vec{x} \in \mathbb{R}^n \mid d(\vec{x}, \vec{x_0})<r\right\} \subseteq \mathbb{R}^n
+    \]
+\end{definition}
+\begin{definition}{Insieme limitato p.64}
     SSia
-\end{theorem}
-\begin{theorem}{Palla aperta p.61}
+\end{definition}
+\begin{definition}{Punto interno p.64}
     SSia
-\end{theorem}
-\begin{theorem}{Insieme limitato p.64}
+\end{definition}
+\begin{definition}{Punto esterno p.64}
     SSia
-\end{theorem}
-\begin{theorem}{Punto interno p.64}
+\end{definition}
+\begin{definition}{Punti di frontiera p.64}
     SSia
-\end{theorem}
-\begin{theorem}{Punto esterno p.64}
+\end{definition}
+\begin{definition}{Punto di accumulazione p.65}
     SSia
-\end{theorem}
-\begin{theorem}{Punti di frontiera p.64}
+\end{definition}
+\begin{definition}{Insieme aperto p.65}
     SSia
-\end{theorem}
-\begin{theorem}{Punto di accumulazione p.65}
+\end{definition}
+\begin{definition}{Insieme chiuso p.65}
     SSia
-\end{theorem}
-\begin{theorem}{Insieme aperto p.65}
-    SSia
-\end{theorem}
-\begin{theorem}{Insieme chiuso p.65}
-    SSia
-\end{theorem}
+\end{definition}
 \begin{theorem}{Continuità p.74}
     SSia
 \end{theorem}
