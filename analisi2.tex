@@ -100,6 +100,56 @@ fonttitle=\bfseries,
 \footnotesize
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Equazioni differenziali}
+\subsection{EDO di I ordine}
+\[
+y'=3e^{x}
+\]
+\subsection{EDO di II ordine}
+\[
+2y''+5y=e^x
+\]
+\subsubsection{EDO di II ordine omogenee}
+\subsubsection{EDO di II ordine non omogenee}
+\subsubsection{Metodo di somiglianza per EDO II ordine non omogenee}
+Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omogenee.
+\[
+ay''+by'+cy=f(x)
+\]
+\textcolor{red}{$f(x)$ è un polinomio di grado $n$}:
+\begin{esercizio}[Esercizio]
+\[
+y''+2y'-8y=x^2+3x+1
+\]
+Qui $f(x)=x^2+3x+1$ che è un polinomio con 
+\begin{itemize}
+    \item $a=1$
+    \item $b=2$
+    \item $c=-8$
+\end{itemize}
+$c \neq 0$ quindi devo cercare polinomio di grado $n$ (che corrisponde al grado del polinomio a destra dell'uguale), quindi $n=2$: 
+\begin{enumerate}
+    \item Scrivo polinomio di grado $n=2$ generico:
+    \[
+    \alpha x^2+\beta x + \gamma
+    \]
+    Questa sarà la forma della soluzione particolare $y_p$
+    \item Devo trovare chi sono $\alpha,\beta,\gamma$, come faccio?
+    Calcolo derivata prima e seconda della soluzione particolare: $y_p=\alpha x^2+\beta x + \gamma$ \\
+    \begin{itemize}
+        \item Calcolo derivata prima:
+        \[
+        2 \alpha x+\beta
+        \]
+        \item Calcolo derivata seconda:
+        \[
+        2 \alpha
+        \]
+    \end{itemize}
+    
+\end{enumerate}
+\end{esercizio}
+\textcolor{red}{$f(x)$ è un esponenziale} \\
+\textcolor{red}{$f(x)$ è $\sin(x)$ o $\cos(x)$} \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo infintesimale per le curve}
 \subsection{Calcolo vettoriale}
