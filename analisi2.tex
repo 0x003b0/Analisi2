@@ -110,7 +110,7 @@ fonttitle=\bfseries,
 \]
 \subsubsection{EDO di II ordine omogenee}
 \subsubsection{EDO di II ordine non omogenee}
-\subsubsection{Metodo di somiglianza per EDO II ordine non omogenee}
+\subsubsection{Metodo di somiglianza: $f(x)$ polinomio}
 Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omogenee.
 \[
 	ay''+by'+cy=f(x)
@@ -232,18 +232,268 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 			      \end{cases}
 		      \]
 		\item Ottengo la soluzione particolare: \\
-		La soluzione particolare $y_p=\alpha x^2+\beta x + \gamma$ dopo aver trovato $\alpha, \beta, \gamma$ sarà:
+		      La soluzione particolare $y_p=\alpha x^2+\beta x + \gamma$ dopo aver trovato $\alpha, \beta, \gamma$ sarà:
 		      \begin{align*}
 			      y_p
-			       & = \alpha x^2+\beta x + \gamma                        \\
+			       & = \alpha x^2+\beta x + \gamma            \\
 			       & = \frac{1}{14} x^2 + \frac{20}{49} x - 0 \\
-				   & = \frac{1}{14} x^2 + \frac{20}{49} x
+			       & = \frac{1}{14} x^2 + \frac{20}{49} x
 		      \end{align*}
 	\end{enumerate}
 \end{esercizio}
 
+\begin{esercizio}[Caso 3]
+	\textcolor{red}{$c,b = 0$}
+	\[
+		y''=x^2+4x-7
+	\]
+	$c,b=0$ quindi devo cercare un polinomio di grado $n+2$, poichè il grado di $x^2+4x-7$ è 2, allora $n+2=2+2=4$. \\ \\
+	\textcolor{red}{Ho due metodi}:
+	\begin{itemize}
+		\item Integrare due volte, oppure
+		\item Trovare il polinomio generico di grado $n=4$:
+		      \[
+			      \alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon
+		      \]
+	\end{itemize}
+	\textcolor{blue}{\textbf{Primo metodo: Integrare due volte}} \\
+	Qui non trovo la soluzione particolare ma trovo la soluzione generale della EDO:
+	\begin{align*}
+		\int(x^2+4x-7)dx
+		 & = \int x^2dx + \int 4x dx - \int 7 dx \\
+		 & = \frac{x^3}{3} + 2x^2 - 7x + c_1
+	\end{align*}
+	Integro di nuovo:
+	\begin{align*}
+		\int\left(\frac{x^3}{3} + 2x^2 - 7x + c_1\right)dx
+		 & = \int \frac{x^3}{3}dx + \int 2x^2 dx - \int 7x dx + \int c_1 dx \\
+		 & = \frac{x^4}{12} + \frac{2x^3}{3} - \frac{7x^2}{2} + c_1x + c_2
+	\end{align*}
+	Soluzione generale della EDO:
+	\[
+		\frac{x^4}{12} + \frac{2x^3}{3} - \frac{7x^2}{2} + c_1x + c_2
+	\]
+	\textcolor{blue}{\textbf{Secondo metodo: metodo di somiglianza}} \\
+	Qui trovo solo la soluzione particolare:
+	\begin{enumerate}
+		\item Scrivo polinomio di grado $n=4$ generico:
+		      \[
+			      y_p=\alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon
+		      \]
+		\item Calcolo derivata seconda del polinomio generico:
+		      \begin{itemize}
+			      \item $y'_p=4\alpha x^3+3\beta x^2+2 \gamma x + \delta$
+			      \item $y''_p=12\alpha x^2+6\beta x+2 \gamma$
+		      \end{itemize}
+		\item Sostituisco la derivata seconda trovata nella EDO e trovo $\alpha, \beta, \gamma, \delta, \epsilon$:
+		      \[
+			      y''=x^2+4x-7
+		      \]
+		      diventa:
+		      \[
+			      (12\alpha x^2+6\beta x+2 \gamma)=x^2+4x-7
+		      \]
+		      \[
+			      x^2(12 \alpha)+x(6 \beta)+2 \gamma=x^2+4x-7
+		      \]
+		      Metto a sistema:
+		      \[
+			      \begin{cases}
+				      12 \alpha = 1 \\
+				      6 \beta =4    \\
+				      2 \gamma =-7  \\
+			      \end{cases}
+		      \]
+		      Risolvo il sistema e ottengo:
+		      \[
+			      \begin{cases}
+				      \alpha = \frac{1}{12} \\
+				      \beta = \frac{2}{3}   \\
+				      \gamma = - \frac{7}{2}
+			      \end{cases}
+		      \]
+		\item Ottengo la soluzione particolare:
+		      La soluzione particolare $y_p=\alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon$ dopo aver trovato $\alpha, \beta, \gamma, \delta, \epsilon$ sarà:
+		      \begin{align*}
+			      y_p
+			       & = \alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon           \\
+			       & = \frac{1}{12} x^4 + \frac{2}{3} x^3 - \frac{7}{2} x^2 + 0x + 0 \\
+			       & = \frac{1}{12} x^4 + \frac{2}{3} x^3 - \frac{7}{2} x^2
+		      \end{align*}
+	\end{enumerate}
+\end{esercizio}
 
+\subsubsection{Metodo di somiglianza: $f(x)$ esponenziale}
+Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omogenee.
+\[
+	ay''+by'+cy=f(x)
+\]
 \textcolor{red}{$f(x)$ è un esponenziale} \\
+\begin{esercizio}[Caso 1: $\alpha$ non è soluzione dell'eq. caratteristica]
+	\textcolor{red}{$f(x)=c \cdot e^{\alpha x}$ e $\alpha$ \textcolor{black}{non} è soluzione dell'equazione caratteristica.}
+	\[
+		y''+7y'+12y=5e^{2x}
+	\]
+	In questo caso abbiamo che $c=5$ e $\alpha=2$. \\
+	\begin{enumerate}
+		\item Trovo soluzioni dell'omogenea associata (ponendo $f(x)=0$):
+		      \[
+			      y''+7y'+12y=0
+		      \]
+		      Quindi:
+		      \[
+			      \lambda^2 + 7 \lambda + 12 = 0
+		      \]
+		      \[
+			      \Delta=b^2-4ac=49-4(12)=49-48=1
+		      \]
+		      \[
+			      x_1,x_2=\frac{-b \pm \sqrt{\Delta}}{2a}=\frac{-7 \pm 1}{2}=
+		      \]
+		      \\
+		      \[
+			      x_1=-3
+		      \]
+		      \[
+			      x_2=-4
+		      \]
+		\item $\alpha$ fa parte delle soluzioni dell'equazione caratteristica? \\
+		      No, perchè ho ottenuto $x_1=-3,x_2=-4$. Quindi adesso cerco soluzione particolare nella forma:
+		      \[
+			      y_p=k\cdot e^{\alpha x}
+		      \]
+		      \begin{enumerate}
+			      \item Calcolo derivata prima e seconda di $y_p=k\cdot e^{2x}$:
+			            \begin{itemize}
+				            \item $y'_p=2ke^{2x}$
+				            \item $y''_p=4ke^{2x}$
+			            \end{itemize}
+			      \item Sostituisco le derivate nella EDO:
+			            \[
+				            y''+7y'+12y=5e^{2x}
+			            \]
+			            diventa:
+			            \[
+				            (4ke^{2x})+7(2ke^{2x})+12(k\cdot e^{2x})=5e^{2x}
+			            \]
+			            \[
+				            ke^{2x}\left(4+ (7 \cdot 2) + 12\right)=5e^{2x}
+			            \]
+			            \[
+				            30ke^{2x}=5e^{2x}
+			            \]
+			            Ricavo $k$:
+			            \[
+				            k=\frac{5e^{2x}}{30e^{2x}}=\frac{5}{30}\cdot \frac{e^{2x}}{e^{2x}}=\frac{1}{6} \cdot (e^{2x-2x})= \frac{1}{6} \cdot e^0= \frac{1}{6}
+			            \]
+			      \item La soluzione particolare $y_p=k\cdot e^{\alpha x}$ diventa:
+			            \[
+				            y_p=\frac{1}{6}e^{2x}
+			            \]
+		      \end{enumerate}
+	\end{enumerate}
+	Quindi la soluzione della EDO sarà $y=y_O+y_p$, ovvero:
+	\[
+		y=\left(c_1 e^{-3x}+c_2 e^{-4x}\right)+ \frac{1}{6}e^{2x}
+	\]
+\end{esercizio}
+
+\begin{esercizio}[Caso 2: $\alpha$ è soluzione dell'eq. caratteristica]
+	\textcolor{red}{$f(x)=c \cdot e^{\alpha x}$ e $\alpha$ è soluzione dell'equazione caratteristica.}
+	\[
+		3y''-20y'-7y=4e^{7x}
+	\]
+	In questo caso abbiamo che $c=4$ e $\alpha=7$. \\
+	\begin{enumerate}
+		\item Trovo soluzioni dell'omogenea associata (ponendo $f(x)=0$):
+		      \[
+			      3y''-20y'-7y=0
+		      \]
+		      Quindi:
+		      \[
+			      3\lambda^2 - 20 \lambda -7 = 0
+		      \]
+		      \[
+			      \Delta=b^2-4ac=400-4(3)(-7)=400+84=484
+		      \]
+		      \[
+			      x_1,x_2=\frac{-b \pm \sqrt{\Delta}}{2a}=\frac{20 \pm \sqrt{484}}{6}=\frac{-20 \pm 22}{6}=
+		      \]
+		      \\
+		      \[
+			      x_1=-\frac{1}{3}
+		      \]
+		      \[
+			      x_2=7
+		      \]
+		\item $\alpha$ fa parte delle soluzioni dell'equazione caratteristica? \\
+		      Sì, perchè ho ottenuto $x_1=-\frac{1}{3},x_2=7$. Quindi adesso cerco soluzione particolare nella forma:
+		      \[
+			      y_p=kx \cdot e^{\alpha x}
+		      \]
+		      \begin{enumerate}
+			      \item Calcolo derivata prima e seconda di $y_p=kx \cdot e^{7x}$:
+			            \begin{itemize}
+				            \item \begin{align*}
+					                  y'_p
+					                   & = \bigl( f' \cdot g + f \cdot g' \bigr) \\[4pt]
+					                   & = \bigl( (k x)' \cdot e^{7x}
+					                  + k x \cdot (e^{7x})' \bigr)               \\[4pt]
+					                   & = k e^{7x} + 7k x e^{7x}                
+				                  \end{align*}
+
+				            \item \begin{align*}
+					                  y''_p
+					                   & = \textcolor{red}{(k e^{7x})'} + (7k x e^{7x})' \\[4pt]
+					                   & = \textcolor{red}{7k e^{7x}}
+					                  + \bigl( (7k x)' \cdot e^{7x}
+					                  + 7k x \cdot (e^{7x})' \bigr)                      \\[4pt]
+					                   & = 7k e^{7x} + \left(7k e^{7x} + 49k x e^{7x}\right)          \\[4pt]
+					                   & = 14k e^{7x}+49k x e^{7x}
+				                  \end{align*}
+			            \end{itemize}
+			      \item Sostituisco le derivate nella EDO e trovo $k$:
+			            \[
+				            3y''-20y'-7y=4e^{7x}
+			            \]
+			            diventa:
+			            \[
+				            3(14k e^{7x}+49k x e^{7x})-20(k e^{7x} + 7k x e^{7x} )-7(kx \cdot e^{7x})=4e^{7x}
+			            \]
+			            \[
+				            42k e^{7x}+147k x e^{7x}-20k e^{7x}-140k x e^{7x}-7kxe^{7x}=4e^{7x}
+			            \]
+			            \[
+				            ke^{7x}(42+147x-20-140x-7x)=4e^{7x}
+			            \]
+						\[
+				            ke^{7x}(22)=4e^{7x}
+			            \]
+			            Ricavo $k$:
+			            \[
+				            22ke^{7x}=4e^{7x}
+			            \]
+						\[
+				            k=\frac{4e^{7x}}{22e^{7x}}=\frac{4}{22}=\frac{2}{11}
+			            \]
+			      \item La soluzione particolare $y_p=kx\cdot e^{\alpha x}$ diventa:
+			            \[
+				            y_p=\frac{2}{11}xe^{7x}
+			            \]
+		      \end{enumerate}
+	\end{enumerate}
+	Quindi la soluzione della EDO sarà $y=y_O+y_p$, ovvero:
+	\[
+		y=\left(c_1 e^{-\frac{1}{3}x}+c_2 e^{7x}\right)+ \frac{2}{11}xe^{7x}
+	\]
+\end{esercizio}
+
+
+\subsubsection{Metodo di somiglianza: $f(x)$ è $\sin$ o $\cos$}
+Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omogenee.
+\[
+	ay''+by'+cy=f(x)
+\]
 \textcolor{red}{$f(x)$ è $\sin(x)$ o $\cos(x)$} \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo infintesimale per le curve}
