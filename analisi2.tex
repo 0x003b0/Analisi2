@@ -439,16 +439,16 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 					                   & = \bigl( f' \cdot g + f \cdot g' \bigr) \\[4pt]
 					                   & = \bigl( (k x)' \cdot e^{7x}
 					                  + k x \cdot (e^{7x})' \bigr)               \\[4pt]
-					                   & = k e^{7x} + 7k x e^{7x}                
+					                   & = k e^{7x} + 7k x e^{7x}
 				                  \end{align*}
 
 				            \item \begin{align*}
 					                  y''_p
-					                   & = \textcolor{red}{(k e^{7x})'} + (7k x e^{7x})' \\[4pt]
+					                   & = \textcolor{red}{(k e^{7x})'} + (7k x e^{7x})'     \\[4pt]
 					                   & = \textcolor{red}{7k e^{7x}}
 					                  + \bigl( (7k x)' \cdot e^{7x}
-					                  + 7k x \cdot (e^{7x})' \bigr)                      \\[4pt]
-					                   & = 7k e^{7x} + \left(7k e^{7x} + 49k x e^{7x}\right)          \\[4pt]
+					                  + 7k x \cdot (e^{7x})' \bigr)                          \\[4pt]
+					                   & = 7k e^{7x} + \left(7k e^{7x} + 49k x e^{7x}\right) \\[4pt]
 					                   & = 14k e^{7x}+49k x e^{7x}
 				                  \end{align*}
 			            \end{itemize}
@@ -466,14 +466,14 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 			            \[
 				            ke^{7x}(42+147x-20-140x-7x)=4e^{7x}
 			            \]
-						\[
+			            \[
 				            ke^{7x}(22)=4e^{7x}
 			            \]
 			            Ricavo $k$:
 			            \[
 				            22ke^{7x}=4e^{7x}
 			            \]
-						\[
+			            \[
 				            k=\frac{4e^{7x}}{22e^{7x}}=\frac{4}{22}=\frac{2}{11}
 			            \]
 			      \item La soluzione particolare $y_p=kx\cdot e^{\alpha x}$ diventa:
@@ -485,6 +485,78 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 	Quindi la soluzione della EDO sarà $y=y_O+y_p$, ovvero:
 	\[
 		y=\left(c_1 e^{-\frac{1}{3}x}+c_2 e^{7x}\right)+ \frac{2}{11}xe^{7x}
+	\]
+\end{esercizio}
+
+\begin{esercizio}[Caso 3]
+	\textcolor{red}{$f(x)=c \cdot e^{\alpha x}$ e \\ $\alpha= \lambda_1= \lambda_2$ è uguale ad entrambe le soluzioni dell'equazione caratteristica.}
+	\[
+		y''-12y'+36y=3e^{6x}
+	\]
+	In questo caso abbiamo che $c=3$ e $\alpha=6$. \\
+	\begin{enumerate}
+		\item Trovo soluzioni dell'omogenea associata (ponendo $f(x)=0$):
+		      \[
+			      y''-12y'+36y=0
+		      \]
+		      Quindi:
+		      \[
+			      \lambda^2-12\lambda+36=0
+		      \]
+		      \[
+			      \Delta=b^2-4ac=144-144=0
+		      \]
+		      \[
+			      \lambda_1,\lambda_2=\frac{-b \pm 0}{2a}=\frac{12}{2}=6
+		      \]
+		      Quindi ho due soluzioni coincidenti.
+		\item Quando le soluzioni dell'equazione caratteristica coincidono e sono uguali ad $\alpha$, allora cerco soluzione particolare nella forma:
+		      \[
+			      y_p=kx^2 \cdot e^{\alpha x}
+		      \]
+		      \begin{enumerate}
+			      \item Calcolo derivata prima e seconda di $y_p=kx^2 \cdot e^{6 x}$:
+			            \begin{itemize}
+				            \item \begin{align*}
+					                  y'_p
+					                   & = \bigl( f' \cdot g + f \cdot g' \bigr)                \\[4pt]
+					                   & = \bigl((kx^2)' \cdot e^{6 x} + kx^2 \cdot (e^{6 x})') \\[4pt]
+					                   & = 2kxe^{6 x} + 6kx^2e^{6 x}
+				                  \end{align*}
+				            \item \begin{align*}
+					                  y''_p
+					                   & = \bigl( f' \cdot g + f \cdot g' \bigr)                                                                       \\[4pt]
+					                   & = \bigl((2kx)' \cdot e^{6 x} + 2kx \cdot (e^{6 x})') + \bigl((6kx^2)' \cdot e^{6 x} + 6kx^2 \cdot (e^{6 x})') \\[4pt]
+					                   & = \left(2ke^{6 x} + 12kxe^{6 x}\right)+ \left(12kxe^{6 x} + 36kx^2e^{6 x}\right)                              \\
+					                   & = 36kx^2e^{6 x} + 24kxe^{6 x} + 2ke^{6 x}
+				                  \end{align*}
+			            \end{itemize}
+			      \item Sostiuisco le derivate nella EDO iniziale e ricavo $k$:
+			            \[
+				            y''-12y'+36y=3e^{6x}
+			            \]
+						diventa:
+						\[
+						(36kx^2e^{6 x} + 24kxe^{6 x} + 2ke^{6 x})-12(2kxe^{6 x} + 6kx^2e^{6 x})+36(kx^2 e^{6 x})=3e^{6x}
+						\]
+						\[
+						36kx^2e^{6 x} + 24kxe^{6 x} + 2ke^{6 x}-24kxe^{6 x}-72kx^2e^{6 x}+ 36kx^2 e^{6 x}=3e^{6x}
+						\]
+						\[
+						2ke^{6 x}=3e^{6x}
+						\]
+						\[
+						k = \frac{3e^{6x}}{2e^{6x}}=\frac{3}{2}
+						\]
+			      \item La soluzione particolare $y_p=kx^2e^{\alpha x}$ diventa:
+			      \[
+				  y_p=\frac{3}{2}x^2e^{6 x}
+				  \]
+		      \end{enumerate}
+	\end{enumerate}
+	La soluzione della EDO $y=y_O+y_p$ è:
+	\[
+	y=\left(c_1e^{6x}+c_2xe^{6x}\right) + \frac{3}{2}x^2e^{6 x}
 	\]
 \end{esercizio}
 
@@ -557,16 +629,34 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 	\]
 \end{definition}
 \begin{definition}{Insieme limitato p.64}
-	SSia
+	DDefinisco l'insieme $A \subseteq \mathbb{R}^n$ \textcolor{red}{limitato} se $\exists$ una palla aperta di centro $\vec{x_0} \in \mathbb{R}^n$ e raggio $r>0$ in cui $A$ ne risulta interamente contenuto:
+	\[
+	A \subset B(\vec{x_0},r)
+	\]
 \end{definition}
-\begin{definition}{Punto interno p.64}
-	SSia
+\begin{definition}{Punto interno}
+	UUn \textcolor{red}{punto interno} di un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nell'insieme. \\
+	Sia $x_0 \in A \subseteq \mathbb{R}$ (punto appartenente all'insieme $A$), si dice che $x_0$ è un punto interno ad $A$ se esiste un intorno di centro $x_0$ e raggio $r$
+	completamente contenuto in A:
+	\[
+	\exists r>0 \mid B(x_0,r) \subset A
+	\]
 \end{definition}
-\begin{definition}{Punto esterno p.64}
-	SSia
+\begin{definition}{Punto esterno}
+	UUn \textcolor{red}{punto esterno} ad un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nel complementare dell'insieme. \\
+	Sia $x_0 \in \mathbb{R}$, si dice che $x_0$ è un punto esterno ad $A \subseteq \mathbb{R}$ se esiste un intorno di centro $x_0$ e raggio $r$
+	completamente contenuto nel complementare di A:
+	\[
+	\exists r>0 \mid B(x_0,r) \subset \overline{A}
+	\]
 \end{definition}
-\begin{definition}{Punti di frontiera p.64}
-	SSia
+\begin{definition}{Punti di frontiera}
+	UUn \textcolor{red}{punto di frontiera} (bordo) di un insieme è un punto il cui ogni intorno contiene almeno un punto dell'insieme e del suo complementare. \\
+	Sia $x_0 \in \mathbb{R}$, si dice che $x_0$ è un punto di frontiera di $A \subseteq \mathbb{R}$ se ogni intorno di centro $x_0$ e raggio $r$
+	contiene almeno un punto di $A$ e allo stesso tempo, almeno un punto di $\overline{A}$:
+	\[
+	\forall{r}>0, \quad \exists y_1 \in A, \quad \exists y_2 \in \overline{A} \quad \text{t.c.} \quad  y_1,y_2 \in B(x_0,r)
+	\]
 \end{definition}
 \begin{definition}{Punto di accumulazione p.65}
 	SSia
