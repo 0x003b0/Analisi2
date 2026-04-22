@@ -574,7 +574,10 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 \textcolor{red}{$f(x)$ è $\sin(x)$ o $\cos(x)$} \\
 
 \section{Equazioni differenziali non lineari}
-\subsection{A variabili separabili}
+\subsection{EDO di I ordine}
+\subsubsection{A variabili separabili}
+\subsection{EDO di II ordine}
+\subsubsection{A variabili separabili}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo infintesimale per le curve}
 \subsection{Calcolo vettoriale}
@@ -584,6 +587,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\vec{x}=\left(x_1,x_2,\cdots,x_n\right)
 	\]
 \end{definition}
+
 \subsubsection{Norma di un vettore e proprietà associate}
 \begin{definition}{Norma di un vettore}
 	SSia $\vec{x} \in \mathbb{R}^n$ un vettore. Indico la \textcolor{red}{norma/lunghezza} di un vettore come la radice quadrata del prodotto scalare del vettore $\vec{x}$ per se stesso
@@ -603,17 +607,22 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\begin{align*}
 			\textcolor{red}{\left\|\vec{x}+\vec{y}\right\|^2}
 			 & = \left(\sqrt{\langle \vec{x} + \vec{y}, \vec{x} + \vec{y} \rangle}\right)^2                                                                \\
-			 & = {\langle \vec{x} + \vec{y}, \vec{x} + \vec{y} \rangle}                                                                                    \\
-			 & \textcolor{cyan}{\text{per bilinearità del prodotto scalare,}}                                                                              \\
-			 & \textcolor{cyan}{\text{come se facessi }(a+b)(a+b)=a^2+ab+ba+b^2}                                                                           \\
+			 & = {\langle \vec{x} + \vec{y}, \vec{x} + \vec{y} \rangle}                                                                                    \\  
+			 & \textcolor{cyan}{\text{sviluppo prodotto scalare } \langle \text{arg1} ,  \text{arg2} \rangle}   \\                                                                      
 			 & = \langle \vec{x}, \vec{x} \rangle + \langle \vec{x}, \vec{y} \rangle + \langle \vec{y}, \vec{x} \rangle + \langle \vec{y}, \vec{y} \rangle \\
+			 & \textcolor{cyan}{\text{dato che } \langle x,y \rangle = \langle y,x \rangle \text{ (simmetria) allora,}}                                                                              \\
 			 & = \|\vec{x}\|^2+ 2\langle \vec{x}, \vec{y} \rangle + \|\vec{y}\|^2                                                                          \\
 			 & = \|\vec{x}\|^2 + \|\vec{y}\|^2 + 2\langle \vec{x}, \vec{y} \rangle
 		\end{align*}
 	\end{proof}
 \end{theorem}
 \begin{theorem}{Disuguaglianza di Cauchy-Schwartz p.56}
-	SSia
+	SSiano due vettori $\vec{x}, \vec{y} \in \mathbb{R}^n$
+	\[
+	|\langle \vec{x}, \vec{y} \rangle| \leq \|\vec{x}\| \cdot \|\vec{y}\| 
+	\]
+	Il valore assoluto del prodotto scalare è minore uguale $\leq$ al prodotto tra le norme dei due vettori.
+	Spiega cos'è $\mathbb{R}^n$, spazio vettoriale o spazio euclideo a n-dimensioni?
 \end{theorem}
 \subsubsection{Funzione "lunghezza" di un vettore}
 \begin{theorem}{Disuguaglianza triangolare p.58}
