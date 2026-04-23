@@ -27,9 +27,13 @@
 {colback=blue!5, 
 colframe=blue!50!black, 
 fonttitle=\bfseries,
-    breakable,            % permette di spezzare il box su più pagine
+    breakable,
     enhanced,
-    break at=0pt}{}
+    break at=0pt,
+    before=\par\noindent,
+    enlarge left by=-\leftmargin,
+    enlarge right by=2cm,
+    width=\linewidth+\leftmargin+2cm}{}
 
 \newtcbtheorem[no counter]{definition}{Definizione}%
 {colback=magenta!5, 
@@ -636,16 +640,95 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\|\vec{x}+\vec{y}\| = \|\vec{x}\| + \|\vec{y}\| \text{ vuol dire che } \vec{y}=0 \lor \vec{x}=\lambda \cdot \vec{y} \text{ con } \lambda \geq 0
 	\]
 	\begin{proof}
-		Questo teorema usa Chauchy-Schwartz e la formula di Carnot per la dimostrazione. \\
+		Questo teorema usa la formula di Carnot e Chauchy-Schwartz per la dimostrazione. \\
 		\begin{align*}
-			\|\vec{x}+\vec{y}\| \leq \|\vec{x}\| + \|\vec{y}\|                                             \\
-			\textcolor{cyan}{\text{elevo al quadrato}} \\
-			\left(\|\vec{x}+\vec{y}\| \right)^2 \leq \left(\|\vec{x}\| + \|\vec{y}\| \right)^2                      \\
-			{\langle \vec{x} + \vec{y}, \vec{x} + \vec{y} \rangle}                                         \\
+			 & \textcolor{cyan}{\text{considero}}                                                                                                                                                                                                                                                                                                                                                 \\
+			 & \|\vec{x}+\vec{y}\|                                                                                                                                                                                                                                                                                                                                                                \\
+			 & \textcolor{cyan}{\text{elevo al quadrato}}                                                                                                                                                                                                                                                                                                                                         \\
+			 & \left(\|\vec{x}+\vec{y}\| \right)^2                                                                                                                                                                                                                                                                                                                                                \\
+			 & \|\vec{x}+\vec{y}\|^2                                                                                                                                                                                                                                                                                                                                                              \\
+			 & \textcolor{cyan}{\text{so che }\left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle}
+			\textcolor{cyan}{\text{ quindi: }}                                                                                                                                                                                                                                                                                                                                                    \\
+			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle                                                                                                                                                                                                                                    \\
+			 & \textcolor{cyan}{\text{so che: } \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle|}                                                                                                                                                                  \\
+			 & \textcolor{cyan}{\text{perchè ovviamente } \forall{z} \in \mathbb{R} \text{ vale sempre che } z \leq |z| \text{, quindi:}}                                                                                                                                                                                                                                                         \\
+			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle|                                                                                                                                        \\
+			 & \textcolor{cyan}{\text{so che per Cauchy-Schwarz vale che: } |\langle \vec{x}, \vec{y} \rangle| \leq \left\|\vec{x}\right\| \left\|\vec{y}\right\| \text{ quindi:}}                                                                                                                                                                                                                \\
+			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle| \overset{\text{Cauchy-Schwarz}}{\leq} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 \|\vec{x}\|\|\vec{y}\|                                                        \\
+			\\&\textcolor{cyan}{\text{dato che:}} \\
+			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle| \leq \underbrace{\left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 \|\vec{x}\|\|\vec{y}\|}_{=\left(\|\vec{x}\|+\|\vec{y}\|\right)^2} \\
+			 & \textcolor{cyan}{\text{quindi:}}                                                                                                                                                                                                                                                                                                                                                   \\
+			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle| \leq {\left(\|\vec{x}\|+\|\vec{y}\|\right)^2}                                                                                          \\
+			 & \textcolor{red}{\left\|\vec{x}+\vec{y}\right\|^2} \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle| \textcolor{red}{\leq {\left(\|\vec{x}\|+\|\vec{y}\|\right)^2}}                                                        \\
+			 & \textcolor{cyan}{\text{prendo ora le parti in rosso: }}                                                                                                                                                                                                                                                                                                                            \\
+			 & \left\|\vec{x}+\vec{y}\right\|^2 \leq \left(\|\vec{x}\|+\|\vec{y}\|\right)^2                                                                                                                                                                                                                                                                                                       \\
+			 & \textcolor{cyan}{\text{imposto radici per rimuovere le potenze di 2: }}                                                                                                                                                                                                                                                                                                            \\
+			 & \sqrt{\left\|\vec{x}+\vec{y}\right\|^2} \leq \sqrt{\left(\|\vec{x}\|+\|\vec{y}\|\right)^2}                                                                                                                                                                                                                                                                                         \\
+			 & \left\|\vec{x}+\vec{y}\right\| \leq \left(\|\vec{x}\|+\|\vec{y}\|\right)                                                                                                                                                                                                                                                                                                           \\
+			 & \left\|\vec{x}+\vec{y}\right\| \leq \|\vec{x}\|+\|\vec{y}\|
 		\end{align*}
+		\footnotetext{Vale sempre:
+			\[
+				x \leq |x|  \quad \forall{x} \in \mathbb{R}
+			\]ovvio che qualunque sia il valore di $x$, il suo valore assoluto sarà sempre uguale o maggiore. Per esempio: se $x=-3$, allora $-3<|-3|$ perchè diventa $-3<3$ ed è vero. Oppure, se $x=3$, allora $3=|3|$ perchè $3=3$ ed è comunque vero.}
 	\end{proof}
-
 \end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsection{Spazio metrico}
 \begin{definition}{Distanza euclidea}
 	SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori. La \textcolor{red}{distanza euclidea} tra $\vec{x}$ e $\vec{y}$ è il numero reale non negativo definito dalla norma della loro differenza:
