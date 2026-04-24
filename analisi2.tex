@@ -711,34 +711,34 @@ d(A,B)=d(\vec{OA},\vec{OB})=\|\vec{OB}-\vec{OA}\|=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2
 		\item $X$ è un insieme
 		\item $d$ è una funzione distanza che associa a ogni coppia di punti di $X$ un numero reale non negativo che rappresenta la distanza tra i punti
 	\end{itemize}
-	 
+	 Un esempio può essere lo \textbf{spazio euclideo} definito come:
+	 \[
+	 (\mathbb{R}^n, d) \quad \text{ con $d=$ distanza euclidea}
+	 \]
+
 \end{definition} 
-Lo spazio metrico è un insieme nel quale viene definita una distanza, anche detta metrica.
+Lo spazio metrico è un qualunque insieme nel quale viene definita una distanza, anche detta metrica.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{definition}{Palla aperta}
+\begin{definition}{Palla aperta / Intorno Sferico}
 	S\begin{itemize}
 		\item Sia $\vec{x_0} \in \mathbb{R}^n$ fissato
 		\item Sia il raggio $r>0$ dove $r \in \mathbb{R}$
 	\end{itemize}
-	Si definisce \textcolor{red}{palla aperta} o intorno sferico di centro $\vec{x_0}$ e raggio $r$, come l'insieme:
+	Si definisce \textcolor{red}{palla aperta} o intorno sferico di centro $\vec{x_0}$ e raggio $r$, l'insieme:
 	\[
-		B(\vec{x_0},r)=\left\{\vec{x} \in \mathbb{R}^n \mid d(\vec{x}, \vec{x_0})<r\right\} \subseteq \mathbb{R}^n
+		B(\vec{x_0},r)=\left\{\vec{x} \in \mathbb{R}^n \mid d(\vec{x}, \vec{x_0})<r\right\}
 	\]
 \end{definition}
+Esempi sugli intorni sferici:
+\begin{itemize}
+	\item In $\mathbb{R}$ gli intorni sferici di $x_0$ non sono altro che intervalli aperti $(x_0-r, x_0+r)$
+	\item In $\mathbb{R}^2$ gli intorni sferici di $(x_0,y_0)$ sono dischi (non "cerchi"\footnote{perchè con "cerchi" si intende la circonferenza (il bordo), mentre disco è l'interno.}) centrati in $(x_0,y_0)$, privi di circonferenza
+	\item In $\mathbb{R}^3$ gli intorni sferici di $(x_0,y_0,z_0)$ sono sfere piene \footnote{Sfera piena = interno senza il bordo (come il disco per $\mathbb{R}^2$); Sfera = solo il bordo (come il cerchio per $\mathbb{R}^2$).} 
+	centrate in $(x_0,y_0,z_0)$ prive di bordo
+\end{itemize}
+\begin{center}
+	\includegraphics[width=0.5\linewidth]{intorno-sferico.png}
+\end{center}
 \begin{definition}{Insieme limitato p.64}
 	DDefinisco l'insieme $A \subseteq \mathbb{R}^n$ \textcolor{red}{limitato} se $\exists$ una palla aperta di centro $\vec{x_0} \in \mathbb{R}^n$ e raggio $r>0$ in cui $A$ ne risulta interamente contenuto:
 	\[
@@ -746,7 +746,7 @@ Lo spazio metrico è un insieme nel quale viene definita una distanza, anche det
 	\]
 \end{definition}
 \begin{definition}{Punto interno}
-	UUn \textcolor{red}{punto interno} di un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nell'insieme. \\
+	UUn \textcolor{red}{punto interno} di un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nell'insieme. \\ \\
 	Sia $x_0 \in A \subseteq \mathbb{R}$ (punto appartenente all'insieme $A$), si dice che $x_0$ è un punto interno ad $A$ se esiste un intorno di centro $x_0$ e raggio $r$
 	completamente contenuto in A:
 	\[
@@ -754,7 +754,7 @@ Lo spazio metrico è un insieme nel quale viene definita una distanza, anche det
 	\]
 \end{definition}
 \begin{definition}{Punto esterno}
-	UUn \textcolor{red}{punto esterno} ad un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nel complementare dell'insieme. \\
+	UUn \textcolor{red}{punto esterno} ad un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nel complementare dell'insieme. \\ \\
 	Sia $x_0 \in \mathbb{R}$, si dice che $x_0$ è un punto esterno ad $A \subseteq \mathbb{R}$ se esiste un intorno di centro $x_0$ e raggio $r$
 	completamente contenuto nel complementare di A:
 	\[
@@ -762,22 +762,66 @@ Lo spazio metrico è un insieme nel quale viene definita una distanza, anche det
 	\]
 \end{definition}
 \begin{definition}{Punti di frontiera}
-	UUn \textcolor{red}{punto di frontiera} (bordo) di un insieme è un punto il cui ogni intorno contiene almeno un punto dell'insieme e del suo complementare. \\
+	UUn \textcolor{red}{punto di frontiera} (bordo) di un insieme è un punto il cui ogni intorno contiene almeno un punto dell'insieme e del suo complementare. \\ \\
 	Sia $x_0 \in \mathbb{R}$, si dice che $x_0$ è un punto di frontiera di $A \subseteq \mathbb{R}$ se ogni intorno di centro $x_0$ e raggio $r$
 	contiene almeno un punto di $A$ e allo stesso tempo, almeno un punto di $\overline{A}$:
 	\[
 		\forall{r}>0, \quad \exists y_1 \in A, \quad \exists y_2 \in \overline{A} \quad \text{t.c.} \quad  y_1,y_2 \in B(x_0,r)
 	\]
 \end{definition}
-\begin{definition}{Punto di accumulazione p.65}
-	SSia
+\begin{center}
+	\includegraphics[width=0.7\linewidth]{punti.png}
+\end{center}
+\begin{definition}{Punto di accumulazione}
+	UUn punto $\vec{x_0}$ si dice di \textcolor{red}{accumulazione} per $A \subseteq \mathbb{R}^n$ se in ogni intorno di $\vec{x_0}$ esiste un punto di $A$ diverso da $\vec{x_0}$:
+	\[
+	\forall{r} >0 \quad B(\vec{x_0},r) \cap (A \setminus \left\{\vec{x_0}\right\}) \neq \emptyset
+	\]
 \end{definition}
-\begin{definition}{Insieme aperto p.65}
-	SSia
+Un punto di accumulazione per $A$ può appartenere o non appartenere ad $A$.
+\begin{center}
+	\includegraphics[width=0.7\linewidth]{punto-accumulazione.png}
+\end{center}
+\begin{definition}{Insieme aperto}
+	UUn insieme $A \subseteq \mathbb{R}$ si dice \textcolor{red}{aperto} se ogni $x \in A$ è un punto interno\footnote{per ogni punto appartenente ad $A$ esiste un intorno completamente 
+	contenuto nell'insieme (ne basta trovare uno per ogni punto).}:
+	\[
+	\forall{x} \in A, \quad \exists r>0 \mid B(x_0, r) \subset A
+	\]
 \end{definition}
-\begin{definition}{Insieme chiuso p.65}
-	SSia
+
+\begin{definition}{Insieme chiuso}
+	UUn insieme $A \subseteq \mathbb{R}$ si dice \textcolor{red}{chiuso} se $\overline{A}$ è aperto:
+	\[
+	A \text{ chiuso se } \quad \forall{x} \in \overline{A}, \quad \exists r>0 \mid B(x_0, r) \subset \overline{A}
+	\]
 \end{definition}
+Esempi di insiemi aperti e chiusi in $\mathbb{R}$:
+\begin{itemize}
+	\item Aperto:
+	\[(0,1)\]
+	\item Chiuso:
+	\[\left[0,1\right]\]
+\end{itemize}
+Esempi di insiemi aperti e chiusi in $\mathbb{R}^2$:
+\begin{itemize}
+	\item Aperto:
+	\[\left\{(x,y) \mid x^2+y^2 < 1 \right\}\]
+	\[\left\{(x,y) \mid x^2+y^2 > 1 \right\}\]
+	\[\left\{(x,y) \mid x \neq 1 \land y \neq 0 \right\}\]
+	\item Chiuso:
+	\[\left\{(x,y) \mid x^2+y^2 \leq 1 \right\}\]
+	\[\left\{(x,y) \mid x^2+y^2 \geq 1 \right\}\]
+	\[\left\{(x,y) \mid x^2+y^2 = 1 \right\}\]
+\end{itemize}
+Unici insiemi sia aperti che chiusi in $\mathbb{R}^n$:
+\begin{itemize}
+	\item Aperto $\land$ Chiuso:
+	\[\mathbb{R}^n\]
+	\[\emptyset\]
+
+\end{itemize}
+\newpage
 \begin{theorem}{Continuità p.74}
 	SSia
 \end{theorem}
