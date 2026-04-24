@@ -582,7 +582,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 \subsubsection{A variabili separabili}
 \subsection{EDO di II ordine}
 \subsubsection{A variabili separabili}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo infintesimale per le curve}
 \subsection{Calcolo vettoriale}
 \begin{definition}{Vettore}
@@ -673,69 +673,62 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 			\]ovvio che qualunque sia il valore di $x$, il suo valore assoluto sarà sempre uguale o maggiore. Per esempio: se $x=-3$, allora $-3<|-3|$ perchè diventa $-3<3$ ed è vero. Oppure, se $x=3$, allora $3=|3|$ perchè $3=3$ ed è comunque vero.}
 	\end{proof}
 \end{theorem}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Spazio metrico}
 \begin{definition}{Distanza euclidea}
 	SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori. La \textcolor{red}{distanza euclidea} tra $\vec{x}$ e $\vec{y}$ è il numero reale non negativo definito dalla norma della loro differenza:
 	\[
 		d(\vec{x},\vec{y})=\left\|\vec{x}-\vec{y}\right\|=\sqrt{\langle \vec{x}-\vec{y}, \vec{x}-\vec{y} \rangle}=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}
 	\]
+	Proprietà:
+	\begin{enumerate}
+		\item $d(\vec{x},\vec{y}) \geq 0, \quad d(\vec{x},\vec{y}) \in \mathbb{R}$
+		\item $d(\vec{x},\vec{y}) = 0 \iff \vec{x}=\vec{y}$
+		\item $d(\vec{x},\vec{y}) = d(\vec{y},\vec{x})$ \hfill (simmetria)
+		\item $d(\vec{x},\vec{y}) \leq d(\vec{x},\vec{z}) + d(\vec{z},\vec{y})$ \hfill (disugualianza triangolare)\\ \\
+		La distanza diretta tra $\vec{x},\vec{y}$ è minore o uguale al percorso che passa per un punto intermedio $\vec{z}$.
+	\end{enumerate}
 \end{definition}
+La distanza euclidea è semplicemente un numero reale positivo che indica quanto sono distanti due punti nello spazio.
+Per esempio, siano due punti $A,B$ in $\mathbb{R}^3$ con le seguenti coordinate cartesiane:
+\[
+A(x_A, y_A, z_A), \quad B(x_B, y_B, z_B)
+\] 
+\begin{center}
+	\includegraphics[width=0.5\linewidth]{dist-euclidea.png}
+\end{center}
+Allora la distanza tra i due punti $A,B$ è la seguente
+\[
+d(A,B)=d(\vec{OA},\vec{OB})=\|\vec{OB}-\vec{OA}\|=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}
+\]
+
+
+
+\begin{definition}{Spazio Metrico}
+	SSia $X$ un insieme qualsiasi. $X$ viene definito \textcolor{red}{spazio metrico} quando in esso viene introdotta una funzione distanza. \\ \\
+	Uno spazio metrico è una coppia $\left(X, d\right)$ dove:
+	\begin{itemize}
+		\item $X$ è un insieme
+		\item $d$ è una funzione distanza che associa a ogni coppia di punti di $X$ un numero reale non negativo che rappresenta la distanza tra i punti
+	\end{itemize}
+	 
+\end{definition} 
+Lo spazio metrico è un insieme nel quale viene definita una distanza, anche detta metrica.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{definition}{Palla aperta}
 	S\begin{itemize}
 		\item Sia $\vec{x_0} \in \mathbb{R}^n$ fissato
