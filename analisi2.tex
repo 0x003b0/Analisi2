@@ -582,9 +582,10 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 \subsubsection{A variabili separabili}
 \subsection{EDO di II ordine}
 \subsubsection{A variabili separabili}
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Calcolo infintesimale per le curve}
-\subsection{Calcolo vettoriale}
+\section{Proprietà Vettoriali \& Topologia in $\mathbb{R}^n$}
+\subsection{Vettori \& Proprietà}
 \begin{definition}{Vettore}
 	Il vettore $\vec{x} \in \mathbb{R}^n$ è una n-upla:
 	\[
@@ -592,7 +593,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 	\]
 \end{definition}
 
-\subsubsection{Norma di un vettore e proprietà associate}
+\subsubsection{Norma di un vettore}
 \begin{definition}{Norma di un vettore}
 	SSia $\vec{x} \in \mathbb{R}^n$ un vettore. Indico la \textcolor{red}{norma/lunghezza} di un vettore come la radice quadrata del prodotto scalare del vettore $\vec{x}$ per se stesso
 	o equivalentemente, la radice quadrata della somma dei suoi componenti al quadrato, il numero reale non negativo:
@@ -600,6 +601,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\textcolor{red}{\|\vec{x}\|}=\sqrt{\langle \vec{x}, \vec{x} \rangle}=\sqrt{x_1^2+x_2^2+ \cdots + x_n^2}=\sqrt{\sum_{i=1}^{n}(x_i)^2}
 	\]
 \end{definition}
+\subsubsection{Formula di Carnot}
 \begin{theorem}{Formula di Carnot}
 	SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori. La norma al quadrato della somma dei due vettori equivale alle loro norme al quadrato più due volte il loro prodotto scalare
 	\footnote{Un pò come $(a+b)^2=a^2+b^2+2ab$}:
@@ -620,6 +622,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\end{align*}
 	\end{proof}
 \end{theorem}
+\subsubsection{Disuguaglianza di Cauchy-Schwartz}
 \begin{theorem}{Disuguaglianza di Cauchy-Schwartz p.56}
 	SSiano $\vec{x}, \vec{y} \in \mathbb{R}^n$ due vettori. Il valore assoluto del prodotto scalare è minore o uguale $\leq$ al prodotto delle norme dei due vettori:
 	\[
@@ -629,7 +632,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		pagina 112 del libro in prestito
 	\end{proof}
 \end{theorem}
-\subsubsection{Funzione "lunghezza" di un vettore}
+\subsubsection{Disuguaglianza triangolare}
 \begin{theorem}{Disuguaglianza triangolare p.58}
 	SSiano $\vec{x}, \vec{y} \in \mathbb{R}^n$ due vettori. La norma della somma dei due vettori è minore o uguale $\leq$ alla somma delle loro norme:
 	\[
@@ -673,8 +676,10 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 			\]ovvio che qualunque sia il valore di $x$, il suo valore assoluto sarà sempre uguale o maggiore. Per esempio: se $x=-3$, allora $-3<|-3|$ perchè diventa $-3<3$ ed è vero. Oppure, se $x=3$, allora $3=|3|$ perchè $3=3$ ed è comunque vero.}
 	\end{proof}
 \end{theorem}
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Spazio metrico}
+\subsection{Elementi di Topologia in $\mathbb{R}^n$}
+\subsubsection{Distanza Euclidea}
 \begin{definition}{Distanza euclidea}
 	SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori. La \textcolor{red}{distanza euclidea} tra $\vec{x}$ e $\vec{y}$ è il numero reale non negativo definito dalla norma della loro differenza:
 	\[
@@ -703,7 +708,7 @@ d(A,B)=d(\vec{OA},\vec{OB})=\|\vec{OB}-\vec{OA}\|=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2
 \]
 
 
-
+\subsubsection{Spazio Metrico}
 \begin{definition}{Spazio Metrico}
 	SSia $X$ un insieme qualsiasi. $X$ viene definito \textcolor{red}{spazio metrico} quando in esso viene introdotta una funzione distanza. \\ \\
 	Uno spazio metrico è una coppia $\left(X, d\right)$ dove:
@@ -719,6 +724,7 @@ d(A,B)=d(\vec{OA},\vec{OB})=\|\vec{OB}-\vec{OA}\|=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2
 \end{definition} 
 Lo spazio metrico è un qualunque insieme nel quale viene definita una distanza, anche detta metrica.
 
+\subsubsection{Palla Aperta / Intorno Sferico}
 \begin{definition}{Palla aperta / Intorno Sferico}
 	S\begin{itemize}
 		\item Sia $\vec{x_0} \in \mathbb{R}^n$ fissato
@@ -739,12 +745,8 @@ Esempi sugli intorni sferici:
 \begin{center}
 	\includegraphics[width=0.5\linewidth]{intorno-sferico.png}
 \end{center}
-\begin{definition}{Insieme limitato p.64}
-	DDefinisco l'insieme $A \subseteq \mathbb{R}^n$ \textcolor{red}{limitato} se $\exists$ una palla aperta di centro $\vec{x_0} \in \mathbb{R}^n$ e raggio $r>0$ in cui $A$ ne risulta interamente contenuto:
-	\[
-		A \subset B(\vec{x_0},r)
-	\]
-\end{definition}
+
+\subsubsection{Punto interno, esterno, di frontiera, di accumulazione}
 \begin{definition}{Punto interno}
 	UUn \textcolor{red}{punto interno} di un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nell'insieme. \\ \\
 	Sia $x_0 \in A \subseteq \mathbb{R}$ (punto appartenente all'insieme $A$), si dice che $x_0$ è un punto interno ad $A$ se esiste un intorno di centro $x_0$ e raggio $r$
@@ -782,6 +784,15 @@ Un punto di accumulazione per $A$ può appartenere o non appartenere ad $A$.
 \begin{center}
 	\includegraphics[width=0.7\linewidth]{punto-accumulazione.png}
 \end{center}
+
+\subsubsection{Insieme limitato, aperto, chiuso}
+\begin{definition}{Insieme limitato}
+	DDefinisco l'insieme $A \subseteq \mathbb{R}^n$ \textcolor{red}{limitato} se $\exists$ una palla aperta di centro $\vec{x_0} \in \mathbb{R}^n$ e raggio $r>0$ in cui $A$ ne risulta interamente contenuto:
+	\[
+		A \subset B(\vec{x_0},r)
+	\]
+\end{definition}
+
 \begin{definition}{Insieme aperto}
 	UUn insieme $A \subseteq \mathbb{R}$ si dice \textcolor{red}{aperto} se ogni $x \in A$ è un punto interno\footnote{per ogni punto appartenente ad $A$ esiste un intorno completamente 
 	contenuto nell'insieme (ne basta trovare uno per ogni punto).}:
