@@ -584,7 +584,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 \subsubsection{A variabili separabili}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Proprietà Vettoriali \& Topologia in $\mathbb{R}^n$}
+\section{Proprietà Vettoriali}
 \subsection{Vettori \& Proprietà}
 \begin{definition}{Vettore}
 	Il vettore $\vec{x} \in \mathbb{R}^n$ è una n-upla:
@@ -678,7 +678,8 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 \end{theorem}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Elementi di Topologia in $\mathbb{R}^n$}
+\section{Elementi di Topologia in $\mathbb{R}^n$}
+\subsection{Concetti Fondamentali}
 \subsubsection{Distanza Euclidea}
 \begin{definition}{Distanza euclidea}
 	SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori. La \textcolor{red}{distanza euclidea} tra $\vec{x}$ e $\vec{y}$ è il numero reale non negativo definito dalla norma della loro differenza:
@@ -747,7 +748,7 @@ Esempi sugli intorni sferici:
 \end{center}
 
 \subsubsection{Punto interno, esterno, di frontiera, di accumulazione}
-\begin{definition}{Punto interno}
+\begin{definition}{Punto interno in $\mathbb{R}$}
 	UUn \textcolor{red}{punto interno} di un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nell'insieme. \\ \\
 	Sia $x_0 \in A \subseteq \mathbb{R}$ (punto appartenente all'insieme $A$), si dice che $x_0$ è un punto interno ad $A$ se esiste un intorno di centro $x_0$ e raggio $r$
 	completamente contenuto in A:
@@ -755,7 +756,15 @@ Esempi sugli intorni sferici:
 		\exists r>0 \mid B(x_0,r) \subset A
 	\]
 \end{definition}
-\begin{definition}{Punto esterno}
+\begin{definition}{Punto interno in $\mathbb{R}^n$}
+	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{interno ad A} se $\exists$ un intorno sferico di centro $\vec{x_0}$ e 
+	raggio\footnote{$r \in \mathbb{R}, r > 0$. Il raggio è numero reale positivo, non un vettore come $\vec{x_0}$} $r \in \mathbb{R}^+$ completamente contenuto in $A$:
+	\[
+		\exists r>0 \mid B(\vec{x_0},r) \subset A
+	\]
+\end{definition}
+Un punto interno ad $A$ deve necessariamente appartenere all'insieme. 
+\begin{definition}{Punto esterno in $\mathbb{R}$}
 	UUn \textcolor{red}{punto esterno} ad un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nel complementare dell'insieme. \\ \\
 	Sia $x_0 \in \mathbb{R}$, si dice che $x_0$ è un punto esterno ad $A \subseteq \mathbb{R}$ se esiste un intorno di centro $x_0$ e raggio $r$
 	completamente contenuto nel complementare di A:
@@ -763,7 +772,15 @@ Esempi sugli intorni sferici:
 		\exists r>0 \mid B(x_0,r) \subset \overline{A}
 	\]
 \end{definition}
-\begin{definition}{Punti di frontiera}
+\begin{definition}{Punto esterno in $\mathbb{R}^n$}
+	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{esterno ad A} se $\exists$ un intorno sferico di centro $\vec{x_0}$ e 
+	raggio\footnote{$r \in \mathbb{R}, r > 0$. Il raggio è numero reale positivo, non un vettore come $\vec{x_0}$} $r \in \mathbb{R}^+$ completamente contenuto in $\overline{A}$\footnote{complementare di $A$}:
+	\[
+		\exists r>0 \mid B(\vec{x_0},r) \subset \overline{A}
+	\]
+\end{definition}
+Un punto esterno ad $A$ non appartenere all'insieme.
+\begin{definition}{Punti di frontiera in $\mathbb{R}$}
 	UUn \textcolor{red}{punto di frontiera} (bordo) di un insieme è un punto il cui ogni intorno contiene almeno un punto dell'insieme e del suo complementare. \\ \\
 	Sia $x_0 \in \mathbb{R}$, si dice che $x_0$ è un punto di frontiera di $A \subseteq \mathbb{R}$ se ogni intorno di centro $x_0$ e raggio $r$
 	contiene almeno un punto di $A$ e allo stesso tempo, almeno un punto di $\overline{A}$:
@@ -771,6 +788,18 @@ Esempi sugli intorni sferici:
 		\forall{r}>0, \quad \exists y_1 \in A, \quad \exists y_2 \in \overline{A} \quad \text{t.c.} \quad  y_1,y_2 \in B(x_0,r)
 	\]
 \end{definition}
+
+\begin{definition}{Punti di frontiera in $\mathbb{R}^n$}
+	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{di frontiera per $A$} 
+	se ogni intorno sferico di centro $\vec{x_0}$ e 
+	raggio\footnote{$r \in \mathbb{R}, r > 0$. Il raggio è numero reale positivo, non un vettore 
+	come $\vec{x_0}$} $r \in \mathbb{R}^+$ contiene almeno un punto di $A$ e un punto di $\overline{A}$:
+	\[
+		\forall{r}>0, \quad \exists \vec{y_1} \in A, \quad \exists \vec{y_2} \in \overline{A} \quad \text{t.c.} \quad  \vec{y_1},\vec{y_2} \in B(\vec{x_0},r)
+	\]
+\end{definition}
+Un punto di frontiera per $A$ può appartenere o non appartenere all'insieme.
+
 \begin{center}
 	\includegraphics[width=0.7\linewidth]{punti.png}
 \end{center}
@@ -807,64 +836,150 @@ Un punto di accumulazione per $A$ può appartenere o non appartenere ad $A$.
 	A \text{ chiuso se } \quad \forall{x} \in \overline{A}, \quad \exists r>0 \mid B(x_0, r) \subset \overline{A}
 	\]
 \end{definition}
-Esempi di insiemi aperti e chiusi in $\mathbb{R}$:
-\begin{itemize}
-	\item Aperto:
-	\[(0,1)\]
-	\item Chiuso:
-	\[\left[0,1\right]\]
-\end{itemize}
-Esempi di insiemi aperti e chiusi in $\mathbb{R}^2$:
-\begin{itemize}
-	\item Aperto:
-	\[\left\{(x,y) \mid x^2+y^2 < 1 \right\}\]
-	\[\left\{(x,y) \mid x^2+y^2 > 1 \right\}\]
-	\[\left\{(x,y) \mid x \neq 1 \land y \neq 0 \right\}\]
-	\item Chiuso:
-	\[\left\{(x,y) \mid x^2+y^2 \leq 1 \right\}\]
-	\[\left\{(x,y) \mid x^2+y^2 \geq 1 \right\}\]
-	\[\left\{(x,y) \mid x^2+y^2 = 1 \right\}\]
-\end{itemize}
-Unici insiemi sia aperti che chiusi in $\mathbb{R}^n$:
-\begin{itemize}
-	\item Aperto $\land$ Chiuso:
-	\[\mathbb{R}^n\]
-	\[\emptyset\]
 
+Esempi di insiemi aperti e chiusi:
+
+\begin{itemize}
+    \item \textbf{In $\mathbb{R}$:}
+    \begin{itemize}
+        \item Aperto: $(0,1)$
+        \item Chiuso: $[0,1]$
+    \end{itemize}
+
+    \item \textbf{In $\mathbb{R}^2$:}
+    \begin{itemize}
+        \item Aperti:
+        \[\left\{(x,y) \mid x^2+y^2 < 1 \right\}, \quad
+          \left\{(x,y) \mid x^2+y^2 > 1 \right\}, \quad
+          \left\{(x,y) \mid x \neq 1 \land y \neq 0 \right\}\]
+        \item Chiusi:
+        \[\left\{(x,y) \mid x^2+y^2 \leq 1 \right\}, \quad
+          \left\{(x,y) \mid x^2+y^2 \geq 1 \right\}, \quad
+          \left\{(x,y) \mid x^2+y^2 = 1 \right\}\]
+        \item Né aperto né chiuso:
+        \[\left\{(x,y) \mid x^2+y^2 \leq 1 \land x > 0 \right\}\]
+    \end{itemize}
 \end{itemize}
+
+\textbf{Complementare:} se un insieme è aperto, il suo complementare è chiuso e viceversa:
+\[\mathbb{R}^n \text{ aperto} \implies \emptyset \text{ chiuso}, \qquad \mathbb{R}^n \text{ chiuso} \implies \emptyset \text{ aperto}\]
 \newpage
-\begin{theorem}{Continuità p.74}
-	SSia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Limiti di funzioni in più variabili}
+\subsection{Definizioni e proprietà}
+\subsubsection{Definizione di Limite}
+\begin{definition}{Limite}
+	Sp.100 analisi 2 libro in prestito
+\end{definition}
+\subsubsection{Importanza del punto di accumulazione nei limiti}
+\subsubsection{Properietà dei Limiti}
+\begin{theorem}{Esistenza ed Unicità p.69}
+	Sp.144 analisi 1 libro in prestito
 \end{theorem}
-\begin{theorem}{Criterio del confronto p.77}
-	SSia
+\begin{definition}{Forme Indeterminate}
+	Sp.156 analisi 1 libro in prestito
+\end{definition}
+\begin{theorem}{Teorema del confronto p.77}
+	Sp.147 analisi 1 libro in prestito
 \end{theorem}
+\subsubsection{Limiti in $\mathbb{R}^2$ - Coordinate Polari}
+p.189 analisi 1 libro in prestito
+\begin{definition}{Uniformemente rispetto a $\theta$ p.76}
+	SSia
+\end{definition}
+\subsubsection{Continuità per funzioni in più variabili}
+\begin{definition}{Continuità in $\mathbb{R}$}
+	Sp.199 analisi 1 libro in prestito
+\end{definition}
+\begin{definition}{Continuità p.74}
+	SSia
+\end{definition}
+\begin{definition}{Discontinuità in $\mathbb{R}$}
+	Sp.202 analisi 1 libro in prestito
+\end{definition}
+\begin{definition}{Come dire se è una funzione continua o no?}
+	Sp.204 -osservazione 1.1 analisi 1 libro in prestito
+\end{definition}
+
 \break
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ripasso Funzioni}
+\subsection{Funzioni Classiche}
+\subsection{Funzioni Trigonometriche}
+\subsubsection{Funzioni Trigonometriche Classiche}
+p.224 analisi 1 libro in prestito
+\subsubsection{Funzioni Goniometriche Inverse}
+\subsection{Funzioni Iperboliche}
+\subsubsection{Funzioni Iperboliche Classiche}
+p.227 analisi 1 libro in prestito
+\subsubsection{Funzioni Iperboliche Inverse}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo differenziale per funzioni in più variabili}
-\begin{theorem}{Curva regolare p.103}
-	SSia
-\end{theorem}
-\begin{theorem}{Definizione di Derivabilità con il vettore gradiente p.111}
-	SSia
-\end{theorem}
+\subsection{Teoremi Fondamentali del Calcolo Differenziale in $\mathbb{R}$}
+p.261 analisi 1 libro in prestito
+
+\subsection{Derivate Direzioniali e Parziali}
+p.313 del libro analisi 1 in prestito
+\subsubsection{Derivata Direzionale}
 \begin{theorem}{Derivata Direzionale p.112}
 	SSia
 \end{theorem}
+
+\subsubsection{Derivata Parziale}
+\subsubsection{Vettore Gradiente}
+p.315 del libro analisi 1 in prestito
+\begin{theorem}{Definizione di Derivabilità con il vettore gradiente p.111}
+	SSia
+\end{theorem}
+
+
 \subsection{Differenziabilità}
-\subsubsection{Derivabilità vs Differenziabilità}
-\begin{theorem}{Definizione Differenziabilità p.115}
+\subsubsection{Definizione Differenziale}
+p.317 del libro analisi 1 in prestito
+\begin{theorem}{Definizione di Differenzibilità p.115}
 	SSia
 \end{theorem}
-\begin{theorem}{Definizione Differenziale p.115}
-	SSia
+\subsubsection{Teoremi Differenziabilità}
+p.318 del libro analisi 1 in prestito \\
+teorema 1.1, teorema 1.2
+
+\begin{theorem}{Differenziabilità $\implies$ Continuità p.121}
+	Steorema 1.1 pagina 318 libro analisi 1 in prestito
 \end{theorem}
-\begin{theorem}{Definizione Differenziabilità e Continuità p.121}
-	SSia
-\end{theorem}
+
 \begin{theorem}{Teorema del differenziale totale p.122}
+	Steorema 1.2 pagina 320 libro analisi 1 in prestito
+\end{theorem}
+
+\subsubsection{Derivabilità vs Differenziabilità}
+
+\subsubsection{Teorema di Schwarz}
+Steorema 1.3 pagina 323 libro analisi 1 in prestito
+\begin{theorem}{Teorema di Schwartz p.132}
 	SSia
 \end{theorem}
+
+\subsection{Formula di Taylor}
+p.328 libro analisi 1 in prestito
+\begin{theorem}{Formula di Taylor con resto di Lagrange p.140}
+	SSia
+\end{theorem}
+
+
+
+
+
+
+
+
+
+\subsection{Altro}
+\subsubsection{Curva Regolare}
+\begin{theorem}{Curva regolare p.103}
+	SSia
+\end{theorem}
+\subsubsection{Regola della catena}
 \begin{theorem}{Regola della catena p.124}
 	SSia
 \end{theorem}
@@ -874,12 +989,8 @@ Unici insiemi sia aperti che chiusi in $\mathbb{R}^n$:
 \begin{theorem}{Derivazione della funzione composta p.128}
 	SSia
 \end{theorem}
-\begin{theorem}{Teorema di Schwartz p.132}
-	SSia
-\end{theorem}
-\begin{theorem}{Formula di Taylor con resto di Lagrange p.140}
-	SSia
-\end{theorem}
+
+
 \subsubsection{Massimo e Minimo}
 \begin{theorem}{Massimo e minimo locale p.143}
 	SSia
@@ -906,6 +1017,15 @@ Unici insiemi sia aperti che chiusi in $\mathbb{R}^n$:
 	SSia
 \end{theorem}
 \break
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rappresentazione di Funzioni in $\mathbb{R}^2$}
+\subsection{Dominio}
+\subsection{Grafico}
+\subsection{Curve di Livello}
+p.365 libro analisi 1 in prestito
+\subsection{Insiemi di Livello}
+p.95 libro analisi 2 in prestito
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo integrale per funzioni in più variabili}
 \begin{theorem}{Funzione integrabile secondo Riemann p.165}
