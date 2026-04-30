@@ -657,7 +657,7 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 			 & \textcolor{cyan}{\text{perchè ovviamente } \forall{z} \in \mathbb{R} \text{ vale sempre che } z \leq |z| \text{, quindi:}}                                                                                                                                                                                                                                                         \\
 			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle|                                                                                                                                        \\
 			 & \textcolor{cyan}{\text{so che per Cauchy-Schwarz vale che: } |\langle \vec{x}, \vec{y} \rangle| \leq \left\|\vec{x}\right\| \left\|\vec{y}\right\| \text{ quindi:}}                                                                                                                                                                                                                \\
-			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle| \overset{\text{Cauchy-Schwarz}}{\leq} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 \|\vec{x}\|\|\vec{y}\|                                                        \\
+			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle| \overset{\text{Cauchy-Schwarz}}{\leq} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 \|\vec{x}\|\|\vec{y}\|                       \\
 			\\&\textcolor{cyan}{\text{dato che:}} \\
 			 & \left\|\vec{x}+\vec{y}\right\|^2 \overset{\text{Carnot}}{=} \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2\langle \vec{x}, \vec{y} \rangle \leq \left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 |\langle \vec{x}, \vec{y} \rangle| \leq \underbrace{\left\|\vec{x}\right\|^2+\left\|\vec{y}\right\|^2+2 \|\vec{x}\|\|\vec{y}\|}_{=\left(\|\vec{x}\|+\|\vec{y}\|\right)^2} \\
 			 & \textcolor{cyan}{\text{quindi:}}                                                                                                                                                                                                                                                                                                                                                   \\
@@ -692,20 +692,20 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\item $d(\vec{x},\vec{y}) = 0 \iff \vec{x}=\vec{y}$
 		\item $d(\vec{x},\vec{y}) = d(\vec{y},\vec{x})$ \hfill (simmetria)
 		\item $d(\vec{x},\vec{y}) \leq d(\vec{x},\vec{z}) + d(\vec{z},\vec{y})$ \hfill (disugualianza triangolare)\\ \\
-		La distanza diretta tra $\vec{x},\vec{y}$ è minore o uguale al percorso che passa per un punto intermedio $\vec{z}$.
+		      La distanza diretta tra $\vec{x},\vec{y}$ è minore o uguale al percorso che passa per un punto intermedio $\vec{z}$.
 	\end{enumerate}
 \end{definition}
 La distanza euclidea è semplicemente un numero reale positivo che indica quanto sono distanti due punti nello spazio.
 Per esempio, siano due punti $A,B$ in $\mathbb{R}^3$ con le seguenti coordinate cartesiane:
 \[
-A(x_A, y_A, z_A), \quad B(x_B, y_B, z_B)
-\] 
+	A(x_A, y_A, z_A), \quad B(x_B, y_B, z_B)
+\]
 \begin{center}
 	\includegraphics[width=0.5\linewidth]{dist-euclidea.png}
 \end{center}
 Allora la distanza tra i due punti $A,B$ è la seguente
 \[
-d(A,B)=d(\vec{OA},\vec{OB})=\|\vec{OB}-\vec{OA}\|=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}
+	d(A,B)=d(\vec{OA},\vec{OB})=\|\vec{OB}-\vec{OA}\|=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}
 \]
 
 
@@ -717,12 +717,12 @@ d(A,B)=d(\vec{OA},\vec{OB})=\|\vec{OB}-\vec{OA}\|=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2
 		\item $X$ è un insieme
 		\item $d$ è una funzione distanza che associa a ogni coppia di punti di $X$ un numero reale non negativo che rappresenta la distanza tra i punti
 	\end{itemize}
-	 Un esempio può essere lo \textbf{spazio euclideo} definito come:
-	 \[
-	 (\mathbb{R}^n, d) \quad \text{ con $d=$ distanza euclidea}
-	 \]
+	Un esempio può essere lo \textbf{spazio euclideo} definito come:
+	\[
+		(\mathbb{R}^n, d) \quad \text{ con $d=$ distanza euclidea}
+	\]
 
-\end{definition} 
+\end{definition}
 Lo spazio metrico è un qualunque insieme nel quale viene definita una distanza, anche detta metrica.
 
 \subsubsection{Palla Aperta / Intorno Sferico}
@@ -740,8 +740,8 @@ Esempi sugli intorni sferici:
 \begin{itemize}
 	\item In $\mathbb{R}$ gli intorni sferici di $x_0$ non sono altro che intervalli aperti $(x_0-r, x_0+r)$
 	\item In $\mathbb{R}^2$ gli intorni sferici di $(x_0,y_0)$ sono dischi (non "cerchi"\footnote{perchè con "cerchi" si intende la circonferenza (il bordo), mentre disco è l'interno.}) centrati in $(x_0,y_0)$, privi di circonferenza
-	\item In $\mathbb{R}^3$ gli intorni sferici di $(x_0,y_0,z_0)$ sono sfere piene \footnote{Sfera piena = interno senza il bordo (come il disco per $\mathbb{R}^2$); Sfera = solo il bordo (come il cerchio per $\mathbb{R}^2$).} 
-	centrate in $(x_0,y_0,z_0)$ prive di bordo
+	\item In $\mathbb{R}^3$ gli intorni sferici di $(x_0,y_0,z_0)$ sono sfere piene \footnote{Sfera piena = interno senza il bordo (come il disco per $\mathbb{R}^2$); Sfera = solo il bordo (come il cerchio per $\mathbb{R}^2$).}
+	      centrate in $(x_0,y_0,z_0)$ prive di bordo
 \end{itemize}
 \begin{center}
 	\includegraphics[width=0.5\linewidth]{intorno-sferico.png}
@@ -757,13 +757,13 @@ Esempi sugli intorni sferici:
 	\]
 \end{definition}
 \begin{definition}{Punto interno in $\mathbb{R}^n$}
-	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{interno ad A} se $\exists$ un intorno sferico di centro $\vec{x_0}$ e 
+	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{interno ad A} se $\exists$ un intorno sferico di centro $\vec{x_0}$ e
 	raggio\footnote{$r \in \mathbb{R}, r > 0$. Il raggio è numero reale positivo, non un vettore come $\vec{x_0}$} $r \in \mathbb{R}^+$ completamente contenuto in $A$:
 	\[
 		\exists r>0 \mid B(\vec{x_0},r) \subset A
 	\]
 \end{definition}
-Un punto interno ad $A$ deve necessariamente appartenere all'insieme. 
+Un punto interno ad $A$ deve necessariamente appartenere all'insieme.
 \begin{definition}{Punto esterno in $\mathbb{R}$}
 	UUn \textcolor{red}{punto esterno} ad un insieme è un punto per il quale esiste almeno un intorno interamente contenuto nel complementare dell'insieme. \\ \\
 	Sia $x_0 \in \mathbb{R}$, si dice che $x_0$ è un punto esterno ad $A \subseteq \mathbb{R}$ se esiste un intorno di centro $x_0$ e raggio $r$
@@ -773,7 +773,7 @@ Un punto interno ad $A$ deve necessariamente appartenere all'insieme.
 	\]
 \end{definition}
 \begin{definition}{Punto esterno in $\mathbb{R}^n$}
-	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{esterno ad A} se $\exists$ un intorno sferico di centro $\vec{x_0}$ e 
+	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{esterno ad A} se $\exists$ un intorno sferico di centro $\vec{x_0}$ e
 	raggio\footnote{$r \in \mathbb{R}, r > 0$. Il raggio è numero reale positivo, non un vettore come $\vec{x_0}$} $r \in \mathbb{R}^+$ completamente contenuto in $\overline{A}$\footnote{complementare di $A$}:
 	\[
 		\exists r>0 \mid B(\vec{x_0},r) \subset \overline{A}
@@ -790,10 +790,10 @@ Un punto esterno ad $A$ non appartenere all'insieme.
 \end{definition}
 
 \begin{definition}{Punti di frontiera in $\mathbb{R}^n$}
-	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{di frontiera per $A$} 
-	se ogni intorno sferico di centro $\vec{x_0}$ e 
-	raggio\footnote{$r \in \mathbb{R}, r > 0$. Il raggio è numero reale positivo, non un vettore 
-	come $\vec{x_0}$} $r \in \mathbb{R}^+$ contiene almeno un punto di $A$ e un punto di $\overline{A}$:
+	SSia $A \subseteq \mathbb{R}^n$. Un punto $\vec{x_0} \in \mathbb{R}^n$ si dice \textcolor{red}{di frontiera per $A$}
+	se ogni intorno sferico di centro $\vec{x_0}$ e
+	raggio\footnote{$r \in \mathbb{R}, r > 0$. Il raggio è numero reale positivo, non un vettore
+		come $\vec{x_0}$} $r \in \mathbb{R}^+$ contiene almeno un punto di $A$ e un punto di $\overline{A}$:
 	\[
 		\forall{r}>0, \quad \exists \vec{y_1} \in A, \quad \exists \vec{y_2} \in \overline{A} \quad \text{t.c.} \quad  \vec{y_1},\vec{y_2} \in B(\vec{x_0},r)
 	\]
@@ -806,7 +806,7 @@ Un punto di frontiera per $A$ può appartenere o non appartenere all'insieme.
 \begin{definition}{Punto di accumulazione}
 	UUn punto $\vec{x_0}$ si dice di \textcolor{red}{accumulazione} per $A \subseteq \mathbb{R}^n$ se in ogni intorno di $\vec{x_0}$ esiste un punto di $A$ diverso da $\vec{x_0}$:
 	\[
-	\forall{r} >0 \quad B(\vec{x_0},r) \cap (A \setminus \left\{\vec{x_0}\right\}) \neq \emptyset
+		\forall{r} >0 \quad B(\vec{x_0},r) \cap (A \setminus \left\{\vec{x_0}\right\}) \neq \emptyset
 	\]
 \end{definition}
 Un punto di accumulazione per $A$ può appartenere o non appartenere ad $A$.
@@ -823,42 +823,42 @@ Un punto di accumulazione per $A$ può appartenere o non appartenere ad $A$.
 \end{definition}
 
 \begin{definition}{Insieme aperto}
-	UUn insieme $A \subseteq \mathbb{R}$ si dice \textcolor{red}{aperto} se ogni $x \in A$ è un punto interno\footnote{per ogni punto appartenente ad $A$ esiste un intorno completamente 
-	contenuto nell'insieme (ne basta trovare uno per ogni punto).}:
+	UUn insieme $A \subseteq \mathbb{R}$ si dice \textcolor{red}{aperto} se ogni $x \in A$ è un punto interno\footnote{per ogni punto appartenente ad $A$ esiste un intorno completamente
+		contenuto nell'insieme (ne basta trovare uno per ogni punto).}:
 	\[
-	\forall{x} \in A, \quad \exists r>0 \mid B(x_0, r) \subset A
+		\forall{x} \in A, \quad \exists r>0 \mid B(x_0, r) \subset A
 	\]
 \end{definition}
 
 \begin{definition}{Insieme chiuso}
 	UUn insieme $A \subseteq \mathbb{R}$ si dice \textcolor{red}{chiuso} se $\overline{A}$ è aperto:
 	\[
-	A \text{ chiuso se } \quad \forall{x} \in \overline{A}, \quad \exists r>0 \mid B(x_0, r) \subset \overline{A}
+		A \text{ chiuso se } \quad \forall{x} \in \overline{A}, \quad \exists r>0 \mid B(x_0, r) \subset \overline{A}
 	\]
 \end{definition}
 
 Esempi di insiemi aperti e chiusi:
 
 \begin{itemize}
-    \item \textbf{In $\mathbb{R}$:}
-    \begin{itemize}
-        \item Aperto: $(0,1)$
-        \item Chiuso: $[0,1]$
-    \end{itemize}
+	\item \textbf{In $\mathbb{R}$:}
+	      \begin{itemize}
+		      \item Aperto: $(0,1)$
+		      \item Chiuso: $[0,1]$
+	      \end{itemize}
 
-    \item \textbf{In $\mathbb{R}^2$:}
-    \begin{itemize}
-        \item Aperti:
-        \[\left\{(x,y) \mid x^2+y^2 < 1 \right\}, \quad
-          \left\{(x,y) \mid x^2+y^2 > 1 \right\}, \quad
-          \left\{(x,y) \mid x \neq 1 \land y \neq 0 \right\}\]
-        \item Chiusi:
-        \[\left\{(x,y) \mid x^2+y^2 \leq 1 \right\}, \quad
-          \left\{(x,y) \mid x^2+y^2 \geq 1 \right\}, \quad
-          \left\{(x,y) \mid x^2+y^2 = 1 \right\}\]
-        \item Né aperto né chiuso:
-        \[\left\{(x,y) \mid x^2+y^2 \leq 1 \land x > 0 \right\}\]
-    \end{itemize}
+	\item \textbf{In $\mathbb{R}^2$:}
+	      \begin{itemize}
+		      \item Aperti:
+		            \[\left\{(x,y) \mid x^2+y^2 < 1 \right\}, \quad
+			            \left\{(x,y) \mid x^2+y^2 > 1 \right\}, \quad
+			            \left\{(x,y) \mid x \neq 1 \land y \neq 0 \right\}\]
+		      \item Chiusi:
+		            \[\left\{(x,y) \mid x^2+y^2 \leq 1 \right\}, \quad
+			            \left\{(x,y) \mid x^2+y^2 \geq 1 \right\}, \quad
+			            \left\{(x,y) \mid x^2+y^2 = 1 \right\}\]
+		      \item Né aperto né chiuso:
+		            \[\left\{(x,y) \mid x^2+y^2 \leq 1 \land x > 0 \right\}\]
+	      \end{itemize}
 \end{itemize}
 
 \textbf{Complementare:} se un insieme è aperto, il suo complementare è chiuso e viceversa:
@@ -882,9 +882,27 @@ Esempi di insiemi aperti e chiusi:
 \begin{theorem}{Esistenza ed Unicità p.69}
 	Sp.144 analisi 1 libro in prestito
 \end{theorem}
-\begin{definition}{Forme Indeterminate}
-	Sp.156 analisi 1 libro in prestito
-\end{definition}
+\begin{osservazioni}[Ripasso: Confronto tra infinitesimi]
+	Siano $f,g$ due infinitesimi per $x \to x_0$ e $g \neq 0$ per $x \to x_0$ allora:
+	\[
+\lim_{x \to x_0} \frac{f(x)}{g(x)} = 
+\begin{cases}
+    0 & \text{se $f$ infinitesimo di ordine superiore rispetto a $g$} \\[0.5em]
+    \ell \text{ finito e } \neq 0  & \text{se $f,g$ dello stesso ordine} \\[0.5em]
+    \infty & \text{se $f$ infinitesimo di ordine inferiore rispetto a $g$} \\[0.5em]
+    \nexists & \text{se $f,g$ non confrontabili}
+\end{cases}
+\]
+\end{osservazioni}
+\begin{osservazioni}[Ripasso: Forme Indeterminate]
+	\[
+		\begin{array}{cccc}
+			\boxed{\infty - \infty} & \boxed{\dfrac{0}{0}} & \boxed{\dfrac{\infty}{\infty}} & \boxed{0 \cdot \infty} \\[2em]
+			\boxed{0^0}             & \boxed{1^{\infty}}   & \boxed{\infty^{0}}             &
+		\end{array}
+	\]
+\end{osservazioni}
+
 \begin{theorem}{Teorema del confronto p.77}
 	Sp.147 analisi 1 libro in prestito
 \end{theorem}
@@ -955,7 +973,7 @@ p.122 del libro analisi 2 in prestito
 \subsubsection{Derivata Direzionale}
 \begin{theorem}{Derivata Direzionale p.112}
 	Sp.313 del libro analisi 1 in prestito \\
-p.130 del libro analisi 2 in prestito
+	p.130 del libro analisi 2 in prestito
 \end{theorem}
 
 
@@ -1049,7 +1067,7 @@ p.328 libro analisi 1 in prestito
 	Sp.167 libro analisi 2 in prestito
 \end{theorem}
 \subsubsection{Moltiplicatori di Lagrange}
-È un metodo per trovare min/max 
+È un metodo per trovare min/max
 \begin{theorem}{Moltiplicatori di Lagrange p.158}
 	Sp.235 libro analisi 2 in prestito
 \end{theorem}
@@ -1063,36 +1081,47 @@ p.328 libro analisi 1 in prestito
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo integrale per funzioni in più variabili}
 \subsection{Integrale di Riemann}
+\subsubsection{Suddivisione $\mathcal{D}$}
+\subsubsection{Rettangolo}
 \subsubsection{Definizione Integrale in $\mathbb{R}$}
 p.293 libro analisi 1 in prestito
 \subsubsection{Definizione Integrale Doppio}
 p.251 libro analisi 2 in prestito
 \subsection{Funzione Integrabile}
-\subsubsection{Suddivisione $\mathcal{D}$}
-\subsubsection{Rettangolo}
-
 \begin{theorem}{Funzione integrabile secondo Riemann p.165}
 	SSia
 \end{theorem}
 \subsubsection{Funzione limitata+continua $\implies$ integrabile}
-\begin{theorem}{Funzioni continue p.165}
-	SSia
+\begin{theorem}{Funzione limitata+continua $\implies$ integrabile}
+	LTeorema 5.1 p. 252 libro analisi 2 in prestito
 \end{theorem}
-\begin{theorem}{Funzioni continue p.165}
-	SSia
+\subsection{Funzioni integrabili su domini rettangolari}
+\begin{theorem}{integrali su domini rettangolari come fare - T. di riduzione p.168}
+	LTeorema 5.2 p. 253 libro analisi 2 in prestito
 \end{theorem}
-\begin{theorem}{Regione y-semplice p.172}
-	SSia
-\end{theorem}
-\begin{theorem}{Regione x-semplice p.172}
-	SSia
-\end{theorem}
+
 \begin{theorem}{Formula di Riduzione p.173}
 	SSia
+\end{theorem}
+
+\subsection{Funzioni integrabili su domini non rettangolari}
+\subsubsection{Insieme y-semplice}
+\begin{theorem}{Insieme y-semplice p.172}
+	SP.258 libro analisi 2 in prestito
+\end{theorem}
+
+\subsubsection{Insieme x-semplice}
+\begin{theorem}{Regione x-semplice p.172}
+	SP.258 libro analisi 2 in prestito
+\end{theorem}
+\begin{theorem}{Formule di riduzione p.173}
+	SP.263 libro analisi 2 in prestito
 \end{theorem}
 \begin{theorem}{Proprietà additività domini di integrazione p.173}
 	SSia
 \end{theorem}
+\subsection{Integrali doppi in coordinate polari}
+p.273 libro analisi 2 in prestito
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
