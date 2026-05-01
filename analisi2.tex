@@ -931,11 +931,11 @@ Esempi di insiemi aperti e chiusi:
 \end{align*}
 \textbf{Dimostro che il limite esiste e fa zero:} \\
 \textcolor{red}{Trovo $g(\rho)$} \\ \\
-Per prima cosa imposto valore assoluto:
+\textcolor{cyan}{Per prima cosa imposto valore assoluto:}
 \[
 |\cos ^2 \theta \sin \theta|
 \]
-e sapendo che $\forall x$ vale che $0 \leq |x|$, allora:
+\textcolor{cyan}{e sapendo che $\forall x$ vale che $0 \leq |x|$, allora:}
 \[
 0 \leq |\cos ^2 \theta \sin \theta|
 \]
@@ -947,23 +947,23 @@ e sapendo che $\forall x$ vale che $0 \leq |x|$, allora:
 \[
 0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta| \leq 1 \cdot 1 
 \]
-e quindi:
+\textcolor{cyan}{e quindi:}
 \[
 0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta| \leq 1 
 \]
-quindi:
+\textcolor{cyan}{quindi:}
 \[
 0 \leq |\cos ^2 \theta \sin \theta|  \leq 1 
 \]
-introduco $\rho$:
+\textcolor{cyan}{introduco $\rho$:}
 \[
 0 \leq |\textcolor{red}{\rho} \cos ^2 \theta \sin \theta|  \leq \textcolor{red}{\rho} \cdot 1 
 \]
-ho trovato $g(\rho)$:
+\textcolor{cyan}{ho trovato $g(\rho)$:}
 \[
 0 \leq |\rho \cos ^2 \theta \sin \theta|  \leq \underbrace{\rho}_{g(\rho)}
 \]
-e sapendo che la $g(\rho)=\rho$ trovata dipende solo da $\rho$ e che $\lim_{\rho \to 0^+} g(\rho) = 0$ dimostro che il limite 
+e sapendo che la $g(\rho)=\rho$ trovata dipende solo da $\rho$ e che $\lim_{\rho \to 0^+} g(\rho) = 0$, dimostro che il limite 
 esiste ed è quello trovato (zero):
 \[
 0 \leq |\rho \cos ^2 \theta \sin \theta - \ell |  \leq \rho \cdot 1 
@@ -973,9 +973,23 @@ esiste ed è quello trovato (zero):
 \]
 \end{esempio}
 \subsubsection{Limiti in $\mathbb{R}^2$ - Coordinate Polari}
-p.189 analisi 1 libro in prestito
-\begin{definition}{Uniformemente rispetto a $\theta$ p.76}
-	SSia
+\[
+\begin{cases}
+    x = x_0 + \rho \cos \theta \\[0.5em]
+    y = y_0 + \rho \sin \theta 
+\end{cases}
+\quad \rho \geq 0, \quad \theta \in [0, 2\pi)
+\]
+\begin{definition}{Uniformemente rispetto a $\theta$}
+	SSia $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ e sia $(x_0, y_0) \in \mathbb{R}^2$ punto di accumulazione per $A$, allora:
+	\[
+	\lim_{(x,y) \to (x_0,y_0)}f(x,y) = \ell \quad \iff \quad \lim_{\rho \to 0^+}f(x_0 + \rho \cos \theta, y_0 + \rho \sin \theta) = \ell
+	\]
+	questo vale solo se 
+	\[
+	f(\rho, \theta) \to \ell \text{ per } \rho \to 0
+	\]
+	risulta \textcolor{red}{uniforme} ripetto a $\theta$ (ovvero $\ell$ non dipende da $\theta$)
 \end{definition}
 \subsubsection{Continuità per funzioni in più variabili}
 \begin{definition}{Continuità in $\mathbb{R}$}
