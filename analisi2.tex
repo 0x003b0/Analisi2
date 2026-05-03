@@ -885,14 +885,14 @@ Esempi di insiemi aperti e chiusi:
 \begin{osservazioni}[Ripasso: Confronto tra infinitesimi]
 	Siano $f,g$ due infinitesimi per $x \to x_0$ e $g \neq 0$ per $x \to x_0$ allora:
 	\[
-\lim_{x \to x_0} \frac{f(x)}{g(x)} = 
-\begin{cases}
-    0 & \text{se $f$ infinitesimo di ordine superiore rispetto a $g$} \\[0.5em]
-    \ell \text{ finito e } \neq 0  & \text{se $f,g$ dello stesso ordine} \\[0.5em]
-    \infty & \text{se $f$ infinitesimo di ordine inferiore rispetto a $g$} \\[0.5em]
-    \nexists & \text{se $f,g$ non confrontabili}
-\end{cases}
-\]
+		\lim_{x \to x_0} \frac{f(x)}{g(x)} =
+		\begin{cases}
+			0                             & \text{se $f$ infinitesimo di ordine superiore rispetto a $g$} \\[0.5em]
+			\ell \text{ finito e } \neq 0 & \text{se $f,g$ dello stesso ordine}                           \\[0.5em]
+			\infty                        & \text{se $f$ infinitesimo di ordine inferiore rispetto a $g$} \\[0.5em]
+			\nexists                      & \text{se $f,g$ non confrontabili}
+		\end{cases}
+	\]
 \end{osservazioni}
 \begin{osservazioni}[Ripasso: Forme Indeterminate]
 	\[
@@ -906,113 +906,293 @@ Esempi di insiemi aperti e chiusi:
 \begin{theorem}{Criterio del confronto}
 	HHo trovato il limite:
 	\[
-	\lim_{\rho \to 0^+} f(x_0 + \rho \cos \theta, y_0 + \rho \sin \theta) = \ell
+		\lim_{\rho \to 0^+} f(x_0 + \rho \cos \theta, y_0 + \rho \sin \theta) = \ell
 	\]
 	per dimostrarlo, è sufficiente trovare una $g(\rho) \geq 0$ tale che valga quanto segue:
 	\[
-	0 \leq |f(x_0 + \rho \cos \theta, y_0 + \rho \sin \theta) - \ell | \leq g(\rho)
+		0 \leq |f(x_0 + \rho \cos \theta, y_0 + \rho \sin \theta) - \ell | \leq g(\rho)
 	\]
 	dove:
 	\[
-	\lim_{\rho \to 0^+} g(\rho) = 0
+		\lim_{\rho \to 0^+} g(\rho) = 0
 	\]
 \end{theorem}
 \begin{esempio}[Esempio: come usare il criterio del confronto]
 	\[
-	\lim_{(x,y) \to (0,0)} \frac{x^2y}{x^2+y^2}
+		\lim_{(x,y) \to (0,0)} \frac{x^2y}{x^2+y^2}
 	\]
 	Trasformo in coordinate polari e trovo il limite:
 	\begin{align*}
-\lim_{\rho \to 0^+} \frac{(\rho \cos \theta)^2 \rho \sin \theta}{(\rho \cos \theta)^2+(\rho \sin \theta)^2}
-&= \lim_{\rho \to 0^+} \frac{\rho^3 \cos^2\theta \sin\theta}{\rho^2(\cos^2\theta + \sin^2\theta)} \\
-&= \lim_{\rho \to 0^+} \frac{\rho^3 \cos^2\theta \sin\theta}{\rho^2} \\
-&= \lim_{\rho \to 0^+} \rho \cos^2\theta \sin\theta \\
-&= 0
-\end{align*}
-\textbf{Dimostro che il limite esiste e fa zero:} \\
-\textcolor{red}{Trovo $g(\rho)$} \\ \\
-\textcolor{cyan}{Per prima cosa imposto valore assoluto:}
-\[
-|\cos ^2 \theta \sin \theta|
-\]
-\textcolor{cyan}{e sapendo che $\forall x$ vale che $0 \leq |x|$, allora:}
-\[
-0 \leq |\cos ^2 \theta \sin \theta|
-\]
-\textcolor{cyan}{per la proprietà del valore assoluto\footnote{$|x \cdot y| = |x| \cdot |y| \quad \forall x,y \in \mathbb{R}$} ho quindi che:}
-\[
-0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta|
-\]
-\textcolor{cyan}{vale sempre che\footnote{$-1 \leq |\cos\theta|\leq 1$ e $-1 \leq |\sin\theta|\leq 1$} $|\cos\theta|\leq 1$ e $|\sin\theta|\leq 1 \quad \forall \theta$,  quindi:}
-\[
-0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta| \leq 1 \cdot 1 
-\]
-\textcolor{cyan}{e quindi:}
-\[
-0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta| \leq 1 
-\]
-\textcolor{cyan}{quindi:}
-\[
-0 \leq |\cos ^2 \theta \sin \theta|  \leq 1 
-\]
-\textcolor{cyan}{introduco $\rho$:}
-\[
-0 \leq |\textcolor{red}{\rho} \cos ^2 \theta \sin \theta|  \leq \textcolor{red}{\rho} \cdot 1 
-\]
-\textcolor{cyan}{ho trovato $g(\rho)$:}
-\[
-0 \leq |\rho \cos ^2 \theta \sin \theta|  \leq \underbrace{\rho}_{g(\rho)}
-\]
-e sapendo che la $g(\rho)=\rho$ trovata dipende solo da $\rho$ e che $\lim_{\rho \to 0^+} g(\rho) = 0$, dimostro che il limite 
-esiste ed è quello trovato (zero):
-\[
-0 \leq |\rho \cos ^2 \theta \sin \theta - \ell |  \leq \rho \cdot 1 
-\]
-\[
-0 \leq |\rho \cos ^2 \theta \sin \theta - 0 |  \leq \rho
-\]
+		\lim_{\rho \to 0^+} \frac{(\rho \cos \theta)^2 \rho \sin \theta}{(\rho \cos \theta)^2+(\rho \sin \theta)^2}
+		 & = \lim_{\rho \to 0^+} \frac{\rho^3 \cos^2\theta \sin\theta}{\rho^2(\cos^2\theta + \sin^2\theta)} \\
+		 & = \lim_{\rho \to 0^+} \frac{\rho^3 \cos^2\theta \sin\theta}{\rho^2}                              \\
+		 & = \lim_{\rho \to 0^+} \rho \cos^2\theta \sin\theta                                               \\
+		 & = 0
+	\end{align*}
+	\textbf{Dimostro che il limite esiste e fa zero:} \\
+	\textcolor{red}{Trovo $g(\rho)$} \\ \\
+	\textcolor{cyan}{Per prima cosa imposto valore assoluto:}
+	\[
+		|\cos ^2 \theta \sin \theta|
+	\]
+	\textcolor{cyan}{e sapendo che $\forall x$ vale che $0 \leq |x|$, allora:}
+	\[
+		0 \leq |\cos ^2 \theta \sin \theta|
+	\]
+	\textcolor{cyan}{per la proprietà del valore assoluto\footnote{$|x \cdot y| = |x| \cdot |y| \quad \forall x,y \in \mathbb{R}$} ho quindi che:}
+	\[
+		0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta|
+	\]
+	\textcolor{cyan}{vale sempre che\footnote{$-1 \leq |\cos\theta|\leq 1$ e $-1 \leq |\sin\theta|\leq 1$} $|\cos\theta|\leq 1$ e $|\sin\theta|\leq 1 \quad \forall \theta$,  quindi:}
+	\[
+		0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta| \leq 1 \cdot 1
+	\]
+	\textcolor{cyan}{e quindi:}
+	\[
+		0 \leq |\cos ^2 \theta \sin \theta| = |\cos^2 \theta| \cdot |\sin \theta| \leq 1
+	\]
+	\textcolor{cyan}{quindi:}
+	\[
+		0 \leq |\cos ^2 \theta \sin \theta|  \leq 1
+	\]
+	\textcolor{cyan}{introduco $\rho$:}
+	\[
+		0 \leq |\textcolor{red}{\rho} \cos ^2 \theta \sin \theta|  \leq \textcolor{red}{\rho} \cdot 1
+	\]
+	\textcolor{cyan}{ho trovato $g(\rho)$:}
+	\[
+		0 \leq |\rho \cos ^2 \theta \sin \theta|  \leq \underbrace{\rho}_{g(\rho)}
+	\]
+	e sapendo che la $g(\rho)=\rho$ trovata dipende solo da $\rho$ e che $\lim_{\rho \to 0^+} g(\rho) = 0$, dimostro che il limite
+	esiste ed è quello trovato (zero):
+	\[
+		0 \leq |\rho \cos ^2 \theta \sin \theta - \ell |  \leq \rho \cdot 1
+	\]
+	\[
+		0 \leq |\rho \cos ^2 \theta \sin \theta - 0 |  \leq \rho
+	\]
 \end{esempio}
 \subsubsection{Limiti in $\mathbb{R}^2$ - Coordinate Polari}
 \[
-\begin{cases}
-    x = x_0 + \rho \cos \theta \\[0.5em]
-    y = y_0 + \rho \sin \theta 
-\end{cases}
-\quad \rho \geq 0, \quad \theta \in [0, 2\pi)
+	\begin{cases}
+		x = x_0 + \rho \cos \theta \\[0.5em]
+		y = y_0 + \rho \sin \theta
+	\end{cases}
+	\quad \rho \geq 0, \quad \theta \in [0, 2\pi)
 \]
 \begin{definition}{Uniformemente rispetto a $\theta$}
 	SSia $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ e sia $(x_0, y_0) \in \mathbb{R}^2$ punto di accumulazione per $A$, allora:
 	\[
-	\lim_{(x,y) \to (x_0,y_0)}f(x,y) = \ell \quad \iff \quad \lim_{\rho \to 0^+}f(x_0 + \rho \cos \theta, y_0 + \rho \sin \theta) = \ell
+		\lim_{(x,y) \to (x_0,y_0)}f(x,y) = \ell \quad \iff \quad \lim_{\rho \to 0^+}f(x_0 + \rho \cos \theta, y_0 + \rho \sin \theta) = \ell
 	\]
-	questo vale solo se 
+	questo vale solo se
 	\[
-	f(\rho, \theta) \to \ell \text{ per } \rho \to 0
+		f(\rho, \theta) \to \ell \text{ per } \rho \to 0
 	\]
 	risulta \textcolor{red}{uniforme} ripetto a $\theta$ (ovvero $\ell$ non dipende da $\theta$)
 \end{definition}
 \subsubsection{Continuità per funzioni in più variabili}
-\begin{definition}{Continuità in $\mathbb{R}$}
-	Sp.199 analisi 1 libro in prestito
+\begin{definition}{Continuità in $\mathbb{R}^2$}
+	SSia $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ e sia $P_0=(x_0,y_0) \in A$ e punto di accumulazione per $A$. \\
+	Si dice che la funzione \textcolor{red}{$f$ è continua in $P_0$} se:
+	\[
+		\lim_{(x,y) \to (x_0,y_0)} f(x,y) = f(x_0,y_0)
+	\]
 \end{definition}
-\begin{definition}{Continuità p.74}
-	SSia
-\end{definition}
-\begin{definition}{Discontinuità in $\mathbb{R}$}
-	Sp.202 analisi 1 libro in prestito
-\end{definition}
-\begin{definition}{Come dire se è una funzione continua o no?}
-	Sp.204 -osservazione 1.1 analisi 1 libro in prestito
-\end{definition}
+La funzione è continua in un punto $P_0$ (tale punto deve appartenere all'insieme $\land$ deve essere un punto di accumulazione per l'insieme) quando il limite della funzione per $(x,y)$ tendente a $P_0$ coincide col valore di $f$ valutata nel punto $P_0$.
 
+\begin{osservazioni}[Ripasso: Tipi di funzioni continue e non continue]
+	\begin{minipage}[t]{0.5\linewidth}
+		\textbf{Continue}
+		\begin{itemize}
+			\item Funzioni costanti
+			\item Polinomi
+			\item Funzioni razionali $\frac{p(x)}{q(x)}$ con \\ $q(x) \neq 0$
+			\item Radice quadrata $\sqrt{f(x)}$ con \\ $f(x) \geq 0$
+			\item $\sin, \cos, \tan, \arcsin, \arccos, \arctan$, ecc.. \\ continue nel loro dominio
+			\item Esponenziali $a^x$ con $a > 0$
+			\item Logaritmi $\log_a(f(x))$ con $f(x) > 0$
+		\end{itemize}
+	\end{minipage}%
+	\begin{minipage}[t]{0.5\linewidth}
+		\textbf{Non continue}
+		\begin{itemize}
+			\item Funzioni razionali $\frac{p(x)}{q(x)}$ dove $q(x) = 0$
+			\item Funzioni definite a pezzi \\
+			      \[
+				      f(x,y) =
+				      \begin{cases}
+					      a & \text{per...} \\
+					      b & \text{per...}
+				      \end{cases}
+			      \]
+		\end{itemize}
+	\end{minipage}
+\end{osservazioni}
 \break
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ripasso Funzioni}
 \subsection{Funzioni Classiche}
+\subsubsection{Lineare}
+
+\noindent
+\begin{tabular}{|c|c|}
+	\hline
+	$y=mx$                                           & $y=-mx$                \\[4pt]
+	\includegraphics[width=0.4\linewidth]{ymc.png}   &
+	\includegraphics[width=0.4\linewidth]{y-mx.png}                           \\[2pt]
+	\small Esempio: $y=3x$                           &
+	\small Esempio: $y=-3x$                                                   \\[4pt]
+	\hline
+	$y=mx+k$                                         & $y=-mx+k$              \\[4pt]
+	\includegraphics[width=0.4\linewidth]{ymx+k.png} &
+	\includegraphics[width=0.4\linewidth]{y-mx+k.png}                         \\[2pt]
+	\small Esempio: $y=3x+4$                         &
+	\small Esempio: $y=-3x+4$                                                 \\[4pt]
+	\hline
+	dominio = $\mathbb{R}$                           & dominio = $\mathbb{R}$ \\
+	\hline
+\end{tabular}
+
+\subsubsection{Potenze a esponente pari}
+\noindent
+\begin{tabular}{|c|c|}
+	\hline
+	$y=x^n \text{ con } n>0 \text{ pari}$          & $y=x^n \text{ con } n<0 \text{ pari}$ \\[5pt]
+	\includegraphics[width=0.4\linewidth]{x^2.png} &
+	\includegraphics[width=0.4\linewidth]{x^-2.png}                                        \\[4pt]
+	\small Esempio: $y=x^2$                        &
+	\small Esempio: $y=x^{-2}$ oppure $y=\frac{1}{x^2}$                                    \\[4pt]
+	\hline
+	dominio = $\mathbb{R}$                         & dominio = $\mathbb{R}$                \\
+	\hline
+\end{tabular}
+
+\subsubsection{Potenze a esponente dispari}
+\noindent
+\begin{tabular}{|c|c|}
+	\hline
+	$y=x^n \text{ con } n>0 \text{ dispari}$       & $y=x^n \text{ con } n<0 \text{ dispari}$ \\[5pt]
+	\includegraphics[width=0.4\linewidth]{x^3.png} &
+	\includegraphics[width=0.4\linewidth]{x^-3.png}                                           \\[4pt]
+	\small Esempio: $y=x^3$                        &
+	\small Esempio: $y=x^{-3}$ oppure $y=\frac{1}{x^3}$                                       \\[4pt]
+	\hline
+	dominio = $\mathbb{R}$                         & dominio = $\mathbb{R}$                   \\
+	\hline
+\end{tabular}
+
+\subsubsection{Radici di indice pari}
+\noindent
+\begin{tabular}{|c|c|}
+	\hline
+	$y=\sqrt[n]{x} \text{ con } n>0 \text{ pari}$                & $y=\sqrt[n]{-x} \text{ con } n>0 \text{ pari}$ \\[5pt]
+	\includegraphics[width=0.4\linewidth]{2sqrtx.png}            &
+	\includegraphics[width=0.4\linewidth]{4sqrtx.png}                                                             \\[4pt]
+	\small Esempio: $y=\sqrt[2]{x}$ oppure $y=(x)^{\frac{1}{2}}$ &
+	\small Esempio: $y=\sqrt[2]{-x}$ oppure $y=(-x)^{\frac{1}{2}}$                                                \\[4pt]
+	\hline
+	dominio = $\left[0, + \infty \right)$                        & dominio = $\left(- \infty, 0 \right]$          \\
+	\hline
+	impongo $x \geq 0$                                           & impongo $-x \geq 0 \implies x \leq 0$          \\
+	\hline
+\end{tabular}
+
+\subsubsection{Radici di indice dispari}
+\noindent
+\begin{tabular}{|c|c|}
+	\hline
+	$y=\sqrt[n]{x} \text{ con } n>0 \text{ dispari}$             & $y=\sqrt[n]{-x} \text{ con } n>0 \text{ dispari}$ \\[5pt]
+	\includegraphics[width=0.4\linewidth]{3sqrtx.png}            &
+	\includegraphics[width=0.4\linewidth]{3sqrt-x.png}                                                               \\[4pt]
+	\small Esempio: $y=\sqrt[3]{x}$ oppure $y=(x)^{\frac{1}{3}}$ &
+	\small Esempio: $y=\sqrt[3]{-x}$ oppure $y=(-x)^{\frac{1}{3}}$                                                   \\[4pt]
+	\hline
+	dominio = $\mathbb{R}$                                       & dominio = $\mathbb{R}$                            \\
+	\hline
+\end{tabular}
+\subsubsection{Esponenziale}
+\noindent
+\begin{tabular}{|c|c|}
+	\hline
+	$y=a^x \text{ con } a>1$                        & $y=a^{-x} \text{ con } a>1$   \\[5pt]
+	\includegraphics[width=0.4\linewidth]{2^x.png}  &
+	\includegraphics[width=0.4\linewidth]{2^-x.png}                                 \\[4pt]
+	\small Esempio: $y=2^x$                         &
+	\small Esempio: $y=2^{-x}$ oppure $y=\frac{1}{2^x}$                             \\[4pt]
+	\hline
+	$y=-a^x \text{ con } a<-1$                      & $y=-a^{-x} \text{ con } a<-1$ \\[5pt]
+	\includegraphics[width=0.4\linewidth]{-2^x.png} &
+	\includegraphics[width=0.4\linewidth]{-2^-x.png}                                \\[4pt]
+	\small Esempio: $y=-2^x$                        &
+	\small Esempio: $y=-2^{-x}$ oppure $y=- \frac{1}{2^x}$                          \\[4pt]
+	\hline
+	dominio = $\mathbb{R}$                          & dominio = $\mathbb{R}$        \\
+	\hline
+\end{tabular}
+
+\subsubsection{Logaritmo}
+\begin{osservazioni}[Logaritmo $\to$ esponenziale e viceversa]
+	\[
+		\log_a (b) = x \iff a^x = b \quad \text{con } a,b > 0, a \neq 1
+	\]
+\end{osservazioni}
+\begin{osservazioni}[Logaritmo naturale $\to$ esponenziale e viceversa]
+	\[
+		\ln(x) = y \iff e^y = x
+	\]
+\end{osservazioni}
+\noindent
+\begin{tabular}{|c|c|}
+	\hline
+	$y=\log_a(x)$                                     & $y=\log_a(-x)$         \\[5pt]
+	\includegraphics[width=0.4\linewidth]{logx.png}   &
+	\includegraphics[width=0.4\linewidth]{log-x.png}                           \\[4pt]
+	Esempio: $y=\log_{10}(x)$ oppure $10^y=x$                                  \\
+	Esempio: $y=\ln(x)$ oppure $e^y=x$                &
+	Esempio: $y=\log_{10}(-x)$ oppure $10^y=-x$                                \\[4pt]
+	\hline
+	$y=k \log(x)$                                     & $y=k \log(-x)$         \\[5pt]
+	\includegraphics[width=0.4\linewidth]{2logx.png}  &
+	\includegraphics[width=0.4\linewidth]{2log-x.png}                          \\[4pt]
+	\small Esempio: $y=2\ln(x)$                       &
+	\small Esempio: $y=2\ln(-x)$                                               \\[4pt]
+	\hline
+	$y=-k \log(x)$                                    & $y=-k \log(-x)$        \\[5pt]
+	\includegraphics[width=0.4\linewidth]{-2logx.png} &
+	\includegraphics[width=0.4\linewidth]{-2log-x.png}                         \\[4pt]
+	\small Esempio: $y=-2\ln(x)$                      &
+	\small Esempio: $y=-2\ln(-x)$                                              \\[4pt]
+	\hline
+\end{tabular}
+\[
+	\text{dominio} = \log_{f(x)\left[g(x)\right]} \to
+	\begin{cases}
+		f(x) > 1                      & \\[0.5em]
+		g(x) > 0 & 
+	\end{cases}
+\]
+Quindi col logaritmo naturale:
+\[
+	\text{dominio} = \ln(x) \to
+	\begin{cases}
+		f(x)=e > 1                      & \text{} \\[0.5em]
+		g(x)=x > 0 & 
+	\end{cases}
+\]
+
+\subsubsection{Valore Assoluto}
+\subsubsection{Cerchio e/o Semicirconferenza}
+\subsubsection{Ellisse e/o Semiellisse}
+
 \subsection{Funzioni Trigonometriche}
-\subsubsection{Funzioni Trigonometriche Classiche}
 p.224 analisi 1 libro in prestito
-\subsubsection{Funzioni Goniometriche Inverse}
+\subsubsection{Seno}
+\subsubsection{Coseno}
+\subsubsection{Tangente}
+\subsubsection{Cotangente}
+\subsubsection{Formule Trigonometriche Utili}
+https://www.youmath.it/formulari/65-formulari-di-trigonometria-logaritmi-esponenziali/159-identita-trigonometriche-formule-di-prostaferesi-formule-di-werner.html
 \subsection{Funzioni Iperboliche}
 \subsubsection{Funzioni Iperboliche Classiche}
 p.227 analisi 1 libro in prestito
