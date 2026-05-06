@@ -1494,10 +1494,42 @@ Posso avere:
 	\end{center}
 \end{esempio}
 \subsection{Curva Regolare}
-\begin{theorem}{Curva regolare p.103}
-	SSia
-\end{theorem}
-\subsection{Curva Semplice}
+Una curva si dice \textcolor{red}{regolare} quando la norma del vettore derivato non si annulla per nessun valore di $t$.
+\begin{esempio}[Esempio di curva regolare]
+	Sia la curva $\gamma: [0, \pi] \to \mathbb{R}^3$ e la sua rappresentazione parametrica:
+	\[
+	\gamma(t) = \begin{cases}
+		x = \sin(t) \\
+		y = \cos(t) \\
+		z = e^t
+	\end{cases} \quad t \in [0, \pi]
+	\]
+	\begin{enumerate}
+		\item Calcolo il vettore derivato:
+		\[
+		\gamma'(t) = \begin{cases}
+		x = \cos(t) \\
+		y = -\sin(t) \\
+		z = e^t
+	\end{cases} \quad t \in [0, \pi]
+		\]
+		\item Calcolo la norma:
+		\begin{align*}
+			      \|\gamma'(t)\| 
+			       & = \sqrt{(\cos(t))^2+(-\sin(t))^2+(e^t)^2}                        \\
+			       & = \sqrt{\cos^2(t)+\sin^2(t)+e^{2t}} \\
+				   & = \sqrt{1+e^{2t}} 
+		      \end{align*}
+		\item Impongo uguale a zero: 
+		\begin{align*}
+			       \sqrt{1+e^{2t}} & = 0                        \\
+			       \left(\sqrt{1+e^{2t}}\right)^2 & = 0^2 \\
+				   1+e^{2t} & = 0 \\
+				   e^{2t} & = -1 \\
+		      \end{align*}
+			  \text{nessun valore di } t \text{ soddisfa l'equazione, quindi la curva è regolare.} \textcolor{green}{\checkmark}
+	\end{enumerate}
+\end{esempio}
 \subsection{Curve di Livello}
 p.365 libro analisi 1 in prestito
 \subsection{Insiemi di Livello}
