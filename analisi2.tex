@@ -1414,23 +1414,97 @@ p.227 analisi 1 libro in prestito
 \subsubsection{Funzioni Iperboliche Inverse}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Rappresentazione di Funzioni in $\mathbb{R}^2$}
-\subsection{Dominio}
-\subsection{Grafico}
+\section{Curve}
+\subsection{Curva in Analisi Matematica}
+Una curva è un funzione continua su un intervallo cosi definita:
+\[
+\gamma: [a,b] \subseteq \mathbb{R} \to \mathbb{R}^n
+\]
+La parametrizzazione è  un modo di descrivere la curva attraverso un gruppo di funzioni\footnote{
+\begin{itemize}
+	\item $x(t),y(t)$ in $\mathbb{R}^2$
+	\item $x(t),y(t),z(t)$ in $\mathbb{R}^3$
+	\item $x_1(t),x_2(t), .., x_n(t)$ in $\mathbb{R}^n$
+\end{itemize}}  che variano in base al parametro $t$:
+\[
+	\textcolor{red}{\gamma(t)}= \left(x_1(t),x_2(t), \cdots, x_n(t) \right) = 
+	\begin{cases}
+	x_1 = x_1(t) \\
+	x_2 = x_2(t) \\
+	\vdots \\
+	x_n= x_n(t) 	
+	\end{cases}
+	\]
+\begin{definition}{Sostegno di una curva}
+	LL'immagine di una curva è chiamata \textcolor{red}{sostegno} della curva.
+\end{definition}
+\begin{osservazioni}[Curva vs Sostegno]
+	Per "curva" non si intende il sostegno (e quindi la sua immagine) ma la funzione.
+	È importante non confondere le due definizioni. Per esempio, prendiamo la circonferenza:
+	\begin{center}
+		\includegraphics[width=0.6\linewidth]{curvavssostegno.png} 
+	\end{center}
+
+\end{osservazioni}
+
+Posso avere:
+\begin{itemize}
+	\item Curvatura $=0$: come una retta 
+	\item Curvatura $\neq 0$ come una semicirconferenza, un semiellisse, ecc..
+\end{itemize}
+\begin{definition}{Equazioni Parametriche $\mathbb{R}^2$}
+	SSia $\gamma$ la curva dipendente dal parametro $t$ e la sua rappresentazione parametrica:
+	\[
+	\gamma: [a,b] \subseteq \mathbb{R} \to \mathbb{R}^2
+	\]
+	\[
+	\textcolor{red}{\gamma(t)}= \left(x(t),y(t)\right) = 
+	\begin{cases}
+	x = x(t) \\
+	y = y(t) 	
+	\end{cases}
+	\]
+\end{definition}
+\begin{definition}{Equazioni Parametriche $\mathbb{R}^3$}
+	SSia $\gamma$ la curva dipendente dal parametro $t$ e la sua rappresentazione parametrica:
+	\[
+	\gamma: [a,b] \subseteq \mathbb{R} \to \mathbb{R}^3
+	\]
+	\[
+	\textcolor{red}{\gamma(t)}= \left(x(t),y(t),z(t)\right) = 
+	\begin{cases}
+	x = x(t) \\
+	y = y(t) \\
+	z = z(t)	
+	\end{cases}
+	\]
+\end{definition}
+\begin{esempio}[Esempio curva e sostegno]
+	Sia $\gamma: \left[0, \frac{3\pi}{2}\right] \to \mathbb{R}^2$ la curva e le sue equazioni parametriche:
+	\[
+	\gamma(t) = 
+	\begin{cases}
+		x = \cos(t) \\
+		y = \sin(t)
+	\end{cases} \quad t \in \left[0, \frac{3\pi}{2}\right]
+	\] 
+	allora il suo sostegno sarà:
+	\begin{center}
+		\includegraphics[width=0.4\linewidth]{esempiocurva.png} 
+	\end{center}
+\end{esempio}
+\subsection{Curva Regolare}
+\begin{theorem}{Curva regolare p.103}
+	SSia
+\end{theorem}
+\subsection{Curva Semplice}
 \subsection{Curve di Livello}
 p.365 libro analisi 1 in prestito
 \subsection{Insiemi di Livello}
 p.95 libro analisi 2 in prestito
-\newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Curve}
-\subsection{Curva in Analisi Matematica}
-curve e parametrizzazione
-\subsection{Curva Regolare}
 
-\begin{theorem}{Curva regolare p.103}
-	SSia
-\end{theorem}
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calcolo differenziale per funzioni in più variabili}
 \subsection{Teoremi Fondamentali del Calcolo Differenziale in $\mathbb{R}$}
