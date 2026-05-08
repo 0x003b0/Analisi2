@@ -1753,9 +1753,52 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 \subsection{Differenziabilità}
 \subsubsection{Definizione Differenziale}
 p.317 del libro analisi 1 in prestito
-\begin{theorem}{Definizione di Differenzibilità p.115}
-	SSia
+\begin{theorem}{Differenzibilità in $\mathbb{R}^2$}
+	SSiano:
+	\begin{itemize}
+		\item $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto
+		\item $(x_0,y_0) \in A$
+		\item $(h,k) \in \mathbb{R}^2$
+	\end{itemize}
+	Si dice che $f$ è \textcolor{red}{differenziabile in $(x_0,y_0)$} se:
+	\[
+	\lim_{(h,k) \to (0,0)} \frac{f(x_0+h, y_0+k)-f(x_0,y_0)- \frac{\partial f}{\partial x}(x_0,y_0)h - \frac{\partial f}{\partial y}(x_0,y_0)k}{\sqrt{h^2+k^2}} = 0
+	\]
+	o meglio in notazione compatta:
+	\[
+	\lim_{(h,k) \to (0,0)} \frac{f(x_0+h, y_0+k)-f(x_0,y_0)- \langle \nabla f(x_0,y_0), (h,k) \rangle}{\|(h,k)\|} = 0
+	\]
+	\\
+	Quindi se il limite di $(h,k) \to (0,0)$ del rapporto tra:
+	\begin{itemize}
+		\item numeratore: funzione valutata nel punto più uno spostamento $f(x_0+h, y_0+k)$ - funzione valutata nel punto $(x_0,y_0)$ - il prodotto scalare tra il gradiente della funzione in $(x_0,y_0)$ e il vettore $(h,k)$
+		\item denominatore: norma del vettore $(h,k)$
+	\end{itemize}
+	è uguale a zero $\implies f$ è differenziabile in $(x_0,y_0)$.
 \end{theorem}
+
+\begin{theorem}{Differenzibilità in $\mathbb{R}^n$}
+	SSiano
+	\begin{itemize}
+		\item $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ con $A$ aperto
+		\item $\vec{x}=(x_1,\dots,x_n) \in A$
+		\item $\vec{h}=(h_1,\dots,h_n) \in \mathbb{R}^n$
+	\end{itemize}
+	Si dice che $f$ è \textcolor{red}{differenziabile in $\vec{x}$} se:
+	\[
+	\lim_{\vec{h} \to \vec{0}} \frac{f(\vec{x}+\vec{h})-f(\vec{x})- \left(\sum_{i=1}^{n}\frac{\partial f}{\partial x_i}(\vec{x})\cdot h_i\right)}{\sqrt{\left(\sum_{i=1}^{n}h_i ^2\right)}} = 0
+	\]
+	in notazione compatta:
+	\[
+	\lim_{\vec{h} \to \vec{0}} \frac{f(\vec{x}+\vec{h})-f(\vec{x})- \langle \nabla f(\vec{x}), \vec{h} \rangle}{\|\vec{h}\|} = 0
+	\]
+\end{theorem}
+\begin{definition}{Differenziale}
+	LLa funzione lineare da $\mathbb{R}^n \to \mathbb{R}$ data da:
+	\[
+	\langle \nabla f(x_0,y_0), (h,k) \rangle
+	\]
+\end{definition}
 \subsubsection{Teoremi Differenziabilità}
 p.318 del libro analisi 1 in prestito \\
 teorema 1.1, teorema 1.2
