@@ -592,7 +592,17 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\vec{x}=\left(x_1,x_2,\cdots,x_n\right)
 	\]
 \end{definition}
-
+\begin{definition}{Prodotto scalare}
+SSiano $\vec{x},\vec{y} \in \mathbb{R}^n$ due vettori
+\begin{align*}
+	\langle \vec{x},\vec{y} \rangle = \vec{x} \cdot \vec{y} = (x_1, \dots, x_n) \cdot (y_1, \cdots, y_n) = \sum_{i=1}^{n} \left(x_i \cdot y_i \right)
+\end{align*}
+Il \textcolor{red}{prodotto scalare} è un'operazione binaria che associa ad ogni coppia di vettori un numero reale, dato dalla somma dei prodotti delle componenti dei due vettori. \\ \\
+Esempio in $\mathbb{R}^2$:
+\begin{align*}
+	\langle \vec{x},\vec{y} \rangle = \vec{x} \cdot \vec{y} = (x_1, x_2) \cdot (y_1, y_2) = x_1 y_1 + x_2 y_2
+\end{align*}
+\end{definition}
 \subsubsection{Norma di un vettore}
 \begin{definition}{Norma di un vettore}
 	SSia $\vec{x} \in \mathbb{R}^n$ un vettore. Indico la \textcolor{red}{norma/lunghezza} di un vettore come la radice quadrata del prodotto scalare del vettore $\vec{x}$ per se stesso
@@ -679,14 +689,27 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\end{align*}
 		\fbox{\textcolor{red}{Caso 2: $x,y \neq 0$}} \\
 		L'uguaglianza $|\langle \vec{x}, \vec{y} \rangle| = \|\vec{x}\| \cdot \|\vec{y}\|$ si verifica quando $\Delta = 0$ quindi considero $\vec{x}=\lambda \vec{y}$ 
-		con $\lambda \in \mathbb{R}, \lambda \neq 0$:
-		\begin{align*}
-			|\langle \vec{x}, \vec{y} \rangle| &= \|\vec{x}\| \cdot \|\vec{y}\| \\
+		con $\lambda \in \mathbb{R}, \lambda \neq 0$: \\
+		\begin{enumerate}
+			\item Sviluppo lato sinistro dell'uguaglianza
+			\begin{align*}
+			|\langle \vec{x}, \vec{y} \rangle| &= \\
 			\textcolor{cyan}{\text{sostituisco } \vec{x} = \lambda \vec{y}}\\
-			|\langle \lambda \vec{y}, \vec{y} \rangle| &= \|\lambda \vec{y}\| \cdot \|\vec{y}\| \\
-			|\lambda| \cdot |\langle \vec{y}, \vec{y} \rangle| &= \|\lambda \vec{y}\| \cdot \|\vec{y}\| \\
-			\textcolor{cyan}{\text{dato che } \langle \vec{x}, \vec{x} \rangle = \|\vec{x}\|, \text{ allora}}\\
-			|\lambda| \cdot \|\vec{y}\|^2 &= \|\lambda \vec{y}\| \cdot \|\vec{y}\| \\
+			&= |\langle \lambda \vec{y}, \vec{y} \rangle|\\
+			&= |\lambda| \cdot |\langle \vec{y}, \vec{y} \rangle|\\
+			\textcolor{cyan}{\text{dato che } \langle \vec{x}, \vec{x} \rangle = \|\vec{x}\|^2, \text{ allora}}\\
+			&= |\lambda| \cdot \|\vec{y}\|^2
+		\end{align*}
+			\item Sviluppo lato destro dell'uguaglianza
+						\begin{align*}
+			\|\vec{x}\| \cdot \|\vec{y}\| &= \\
+			\textcolor{cyan}{\text{sostituisco } \vec{x} = \lambda \vec{y}}\\
+			&= \|\lambda \vec{y}\| \cdot \|\vec{y}\| \\
+			&= |\lambda| \cdot \|\vec{y}\|^2
+		\end{align*}
+			\item Unisco i due lati ottenuti nel passo 1 e nel passo 2 dimostrando che è vera l'uguaglianza 
+		\end{enumerate}
+		\begin{align*}
 			|\lambda| \cdot \|\vec{y}\|^2 &= |\lambda| \cdot \|\vec{y}\|^2
 		\end{align*}
 	\end{proof}
@@ -1609,13 +1632,13 @@ p.95 libro analisi 2 in prestito
 \begin{osservazioni}[Derivabilità vs Differenziabilità]
 	\begin{itemize}
 		\item Per funzioni da $\mathbb{R} \to \mathbb{R}$, derivabilità $=$ differenziabilità
-		\item Per funzioni da $\mathbb{R}^n \to \mathbb{R}^m$,  derivabilità $\neq$ differenziabilità
+		\item Per funzioni da $\mathbb{R}^n \to \mathbb{R}$,  derivabilità $\neq$ differenziabilità
 	\end{itemize}
 \end{osservazioni}
 \begin{osservazioni}
 	\begin{itemize}
 		\item Per $\mathbb{R} \to \mathbb{R}$, derivabile $\implies$ continua (non il contrario)
-		\item Per $\mathbb{R}^n \to \mathbb{R}^m$, derivabile $\centernot{\implies}$ continua, differenziabile $\implies$ continua $\land$ derivabile
+		\item Per $\mathbb{R}^n \to \mathbb{R}$, derivabile $\centernot{\implies}$ continua, differenziabile $\implies$ continua $\land$ derivabile
 	\end{itemize}
 \end{osservazioni}
 Il concetto di differenziabilità è più forte in $\mathbb{R}^n$ perchè implica che, se la funzione è differenziabile in un punto, allora è anche continua e derivabile in quel punto.
@@ -1822,12 +1845,12 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	
 \subsubsection{Definizione Differenziale}
 
-\begin{theorem}{Differenzibilità in $\mathbb{R}^2$}
+\begin{theorem}{Differenziabilità in $\mathbb{R}^2$}
 	SSiano:
 	\begin{itemize}
 		\item $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto
 		\item $(x_0,y_0) \in A$
-		\item $(h,k) \in \mathbb{R}^2$
+		\item $(h,k) \in \mathbb{R}^2$ il vettore incremento
 	\end{itemize}
 	Si dice che $f$ è \textcolor{red}{differenziabile in $(x_0,y_0)$} se:
 	\[
@@ -1854,12 +1877,12 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	è chiamata \textcolor{red}{differenziale di $f$ in $(x_0,y_0)$}.
 \end{definition}
 
-\begin{theorem}{Differenzibilità in $\mathbb{R}^n$}
+\begin{theorem}{Differenziabilità in $\mathbb{R}^n$}
 	SSiano
 	\begin{itemize}
 		\item $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ con $A$ aperto
 		\item $\vec{x}=(x_1,\dots,x_n) \in A$
-		\item $\vec{h}=(h_1,\dots,h_n) \in \mathbb{R}^n$
+		\item $\vec{h}=(h_1,\dots,h_n) \in \mathbb{R}^n$ il vettore incremento
 	\end{itemize}
 	Si dice che $f$ è \textcolor{red}{differenziabile in $\vec{x}$} se:
 	\[
