@@ -622,15 +622,82 @@ Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omog
 		\end{align*}
 	\end{proof}
 \end{theorem}
-\subsubsection{Disuguaglianza di Cauchy-Schwartz}
-\begin{theorem}{Disuguaglianza di Cauchy-Schwartz p.56}
+\subsubsection{Disuguaglianza di Cauchy-Schwarz}
+\begin{theorem}{Disuguaglianza di Cauchy-Schwarz p.56}
 	SSiano $\vec{x}, \vec{y} \in \mathbb{R}^n$ due vettori. Il valore assoluto del prodotto scalare è minore o uguale $\leq$ al prodotto delle norme dei due vettori:
 	\[
 		|\langle \vec{x}, \vec{y} \rangle| \leq \|\vec{x}\| \cdot \|\vec{y}\|
 	\]
 	\begin{proof}
-		pagina 112 del libro in prestito
+		Vogliamo dimostrare che $|\langle \vec{x}, \vec{y} \rangle| \leq \|\vec{x}\| \cdot \|\vec{y}\|$ \\
+		\fbox{\textcolor{red}{Caso 1: $x \lor y = 0$}} 
+		Supponiamo $\vec{y}=\vec{0}$
+		\begin{align*}
+			|\langle \vec{x}, \vec{y} \rangle| &\leq \|\vec{x}\| \cdot \|\vec{y}\| \\
+			|\langle \vec{x}, \vec{0} \rangle| &\leq \|\vec{x}\| \cdot \|\vec{0}\| \\
+			|\vec{x} \cdot \vec{0}| &\leq \sqrt{\sum_{i=1}^{n}(x_i)^2} \cdot \sqrt{\sum_{i=1}^{n}(0)^2} \\
+			|(x_1 \cdot 0)+ \dots + (x_n \cdot 0)| &\leq 0 \\
+			0 &\leq 0 \\
+		\end{align*}
+		\fbox{\textcolor{red}{Caso 2: $x,y \neq 0$}}
+		Supponiamo $\vec{y} \neq 0$ e considero $\forall{t \in \mathbb{R}}$, il vettore:
+		\begin{align*}
+			\vec{z}(t)=\vec{x}+t\vec{y}
+		\end{align*}
+		e per la positività della norma ho che $\|\vec{z}(t)\|^2 \geq 0$\footnote{
+		si scrive $\|\vec{z}(t)\|^2$ e non $\|\vec{z}(t)\|$ perchè elevando al quadrato si elimina la radice (serve per la dimostrazione).
+		} per ogni $t$, quindi:
+		\begin{align*}
+			\|\vec{z}(t)\|^2 = \|\vec{x}+t\vec{y}\|^2 \overset{\text{Carnot}}{=} \|\vec{x}\|^2 + t^2\|\vec{y}\|^2 + 2t \langle \vec{x}, \vec{y} \rangle \geq 0
+		\end{align*}
+		questa $\|\vec{x}\|^2 + \textcolor{cyan}{t^2}\|\vec{y}\|^2 + 2 \textcolor{cyan}{t} \langle \vec{x}, \vec{y} \rangle$ è una funzione quadratica in $t$ della forma $at^2+bt+c$ con:
+		\begin{itemize}
+			\item $a = \|\vec{y}\|^2 > 0$ (ipotesi $\vec{y} \neq 0$)
+			\item $b = 2\langle \vec{x}, \vec{y} \rangle$
+			\item $c = \|\vec{x}\|^2$
+		\end{itemize}
+		essendo questa una parabola sempre non negativa ($\geq 0$) con $a > 0$, il discriminante deve soddisfare: 
+		\begin{align*}
+			\Delta = b^2-4ac &\leq 0 \\
+			&\textcolor{cyan}{\text{sostituendo i valori}} \\
+			(2 \langle \vec{x}, \vec{y} \rangle)^2-4(\|\vec{y}\|^2)(\|\vec{x}\|^2) &\leq 0 \\
+			4 \langle \vec{x}, \vec{y} \rangle^2-4\|\vec{y}\|^2\|\vec{x}\|^2 &\leq 0 \\
+			4 \langle \vec{x}, \vec{y} \rangle^2 &\leq 4\|\vec{y}\|^2\|\vec{x}\|^2 \\
+			\langle \vec{x}, \vec{y} \rangle^2 &\leq \|\vec{y}\|^2\|\vec{x}\|^2 \\
+			&\textcolor{cyan}{\text{applico radice e ottengo}} \\
+			\langle \vec{x}, \vec{y} \rangle &\leq \|\vec{y}\| \cdot \|\vec{x}\|
+		\end{align*}
 	\end{proof}
+	\begin{proof}
+		Vogliamo dimostrare che $|\langle \vec{x}, \vec{y} \rangle| = \|\vec{x}\| \cdot \|\vec{y}\|$ \\
+		\fbox{\textcolor{red}{Caso 1: $x \lor y = 0$}} 
+		Supponiamo $\vec{y}=\vec{0}$
+		\begin{align*}
+			|\langle \vec{x}, \vec{y} \rangle| &= \|\vec{x}\| \cdot \|\vec{y}\| \\
+			|\langle \vec{x}, \vec{0} \rangle| &= \|\vec{x}\| \cdot \|\vec{0}\| \\
+			0 = 0
+		\end{align*}
+		\fbox{\textcolor{red}{Caso 2: $x,y \neq 0$}} \\
+		L'uguaglianza $|\langle \vec{x}, \vec{y} \rangle| = \|\vec{x}\| \cdot \|\vec{y}\|$ si verifica quando $\Delta = 0$ quindi considero $\vec{x}=\lambda \vec{y}$ 
+		con $\lambda \in \mathbb{R}, \lambda \neq 0$:
+		\begin{align*}
+			|\langle \vec{x}, \vec{y} \rangle| &= \|\vec{x}\| \cdot \|\vec{y}\| \\
+			\textcolor{cyan}{\text{sostituisco } \vec{x} = \lambda \vec{y}}\\
+			|\langle \lambda \vec{y}, \vec{y} \rangle| &= \|\lambda \vec{y}\| \cdot \|\vec{y}\| \\
+			|\lambda| \cdot |\langle \vec{y}, \vec{y} \rangle| &= \|\lambda \vec{y}\| \cdot \|\vec{y}\| \\
+			\textcolor{cyan}{\text{dato che } \langle \vec{x}, \vec{x} \rangle = \|\vec{x}\|, \text{ allora}}\\
+			|\lambda| \cdot \|\vec{y}\|^2 &= \|\lambda \vec{y}\| \cdot \|\vec{y}\| \\
+			|\lambda| \cdot \|\vec{y}\|^2 &= |\lambda| \cdot \|\vec{y}\|^2
+		\end{align*}
+	\end{proof}
+	Come ho ottenuto $\lambda\vec{y}$? \\
+	Quando $\Delta = 0$ vuol dire che $\exists t \in \mathbb{R}$ per cui la funzione si annulla, quindi impongo $f(t) = 0$:
+		\begin{align*}
+			\vec{x}+t\vec{y} = 0 \\
+			\vec{x} = -t\vec{y} \\
+			\textcolor{cyan}{\text{impongo } -t = \lambda} \\
+			\vec{x} = \lambda\vec{y}
+		\end{align*}
 \end{theorem}
 \subsubsection{Disuguaglianza triangolare}
 \begin{theorem}{Disuguaglianza triangolare p.58}
