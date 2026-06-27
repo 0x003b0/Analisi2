@@ -1850,7 +1850,7 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	\begin{itemize}
 		\item $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto
 		\item $(x_0,y_0) \in A$
-		\item $(h,k) \in \mathbb{R}^2$ il vettore incremento
+		\item $(h,k) \in \mathbb{R}^2$ il vettore incremento (che vuol dire?)
 	\end{itemize}
 	Si dice che $f$ è \textcolor{red}{differenziabile in $(x_0,y_0)$} se:
 	\[
@@ -1874,7 +1874,8 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	\[
 		df(x_0,y_0)(h,k) = \langle \nabla f(x_0,y_0), (h,k) \rangle
 	\]
-	è chiamata \textcolor{red}{differenziale di $f$ in $(x_0,y_0)$}.
+	è chiamata \textcolor{red}{differenziale\footnote{è semplicemente il prodotto scalare tra il gradiente e il vettore $(h,k)$} di $f$ in $(x_0,y_0)$}.
+
 \end{definition}
 
 \begin{theorem}{Differenziabilità in $\mathbb{R}^n$}
@@ -1900,14 +1901,96 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	\]
 	è chiamata \textcolor{red}{differenziale di $f$ in $(\vec{x})$}.
 \end{definition}
-\subsubsection{Teoremi Differenziabilità (da fare dim)}
-p.318 del libro analisi 1 in prestito \\
-
-\begin{theorem}{Differenziabilità implica Continuità p.121}
-	SSia $f: \mathbb{R}^n \supseteq A \to \mathbb{R}$ con $A$ aperto e sia $\vec{x_0} \in A$. \\
-	\textcolor{red}{Se $f$ è differenziabile in $\vec{x_0} \implies f$ è continua in $\vec{x_0}$.}
+\subsubsection{Teoremi Differenziabilità con dim}
+\begin{theorem}{Differenziabilità implica Continuità}
+	SSia $f: \mathbb{R}^n \supseteq A \to \mathbb{R}$ con $A$ aperto e sia $\vec{x}_0 \in A$. \\
+	\textcolor{red}{Se $f$ è differenziabile in $\vec{x}_0 \implies f$ è continua in $\vec{x}_0$.}
 	\begin{proof}
-		hhhh
+		Supponiamo che $f$ sia differenziabile in $\vec{x}_0$. \hfill(ipotesi) \\
+		Per dimostrare che $f$ è continua in $\vec{x}_0$, devo verificare che:
+		\begin{align*}
+			\lim_{\vec{h} \to \vec{0}} f(\vec{x}_0 + \vec{h}) = f(\vec{x}_0) \tag*{(\text{tesi})}
+		\end{align*}
+		quindi:
+		\begin{align*}
+    &\textcolor{cyan}{\text{per definizione di differenziabilità, posso scrivere } f(\vec{x}_0 + \vec{h}) \text{ come:}} \footnotemark \\
+    f(\vec{x}_0 + \vec{h}) &= f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \quad \text{ per } \vec{h} \to \vec{0} \\
+    &\textcolor{cyan}{\text{passando al limite per } \vec{h} \to \vec{0} \text{ in entrambi i membri, ottengo:}} \\
+    \lim_{\vec{h} \to \vec{0}} f(\vec{x}_0 + \vec{h}) &= \lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right]
+\end{align*}
+\footnotetext{posso usare la definizione perchè per ipotesi, $f$ è differenziabile in $\vec{x}_0$}
+		ora devo far vedere che questo limite $\lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right] = f(\vec{x}_0)$ quindi lo analizzo
+		sfruttando la linearità del limite (il limite della somma è la somma dei limiti):
+		\begin{itemize}
+			\item Il primo è una costante rispetto a $\vec{h}$ (non dipende da $\vec{h}$):
+			\begin{align*}
+				\lim_{\vec{h} \to \vec{0}} f(\vec{x}_0) = f(\vec{x}_0)
+			\end{align*}
+			\item Il secondo tende a zero:
+			\begin{align*}
+				\lim_{\vec{h} \to \vec{0}} \langle \nabla f(\vec{x}_0), \vec{h} \rangle = 0
+			\end{align*}
+			possiamo dimostrarlo applicando la disuguaglianza di Cauchy-Schwarz:
+			\begin{align*}
+				|\langle \nabla f(\vec{x}_0), \vec{h} \rangle| \leq \| \nabla f(\vec{x}_0) \| \cdot \| \vec{h} \|
+			\end{align*}
+			poichè $\| \nabla f(\vec{x}_0) \|$ è una costante che non dipende da $\vec{h}$ e $\|\vec{h}\| \to 0$, allora $\| \nabla f(\vec{x}_0) \| \cdot \| \vec{h} \| = 0$
+			\item Il terzo tende a zero per definizione di $o$-piccolo:
+			\begin{align*}
+				\lim_{\vec{h} \to \vec{0}} o \left( \| \vec{h} \|\right) = 0
+			\end{align*}
+		\end{itemize}
+		Mettendo tutto insieme ottengo:
+		\begin{align*}
+			\lim_{\vec{h} \to \vec{0}} f(\vec{x}_0 + \vec{h}) &= \lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right]  = f(\vec{x}_0) + 0 + 0 = f(\vec{x}_0)
+		\end{align*}
+		evidenzio quindi ciò che volevo dimostrare:
+		\begin{align*}
+			\textcolor{magenta}{\lim_{\vec{h} \to \vec{0}} f(\vec{x}_0 + \vec{h})} &= \lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right]  = f(\vec{x}_0) + 0 + 0 \textcolor{magenta}{\;= f(\vec{x}_0)}
+		\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	\end{proof}
 \end{theorem}
 
