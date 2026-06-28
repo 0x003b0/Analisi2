@@ -1998,8 +1998,85 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 				&= f(x_0+h, y_0+k)-f(x_0,y_0) \textcolor{red}{+f(x_0, y_0+k)-f(x_0, y_0+k)} \\
 				&= \underbrace{f(x_0+h, y_0+k)\textcolor{red}{-f(x_0, y_0+k)}}_{\text{variazione solo lungo } x} + \underbrace{\textcolor{red}{f(x_0, y_0+k)} -f(x_0,y_0)}_{\text{variazione solo lungo } y}
 			\end{align*}
-			\item Applico il teorema di Lagrange per trasformare le differenze ottenute nel punto 2 in derivate prime parziali:
-			
+			\item Applico il teorema di Lagrange per trasformare le differenze ottenute nel punto 2 in derivate prime parziali: \\
+			(perchè per ipotesi, abbiamo detto che $f$ è derivabile (esistono le derivate prime parziali) quindi posso applicare il teorema di Lagrange)
+			\begin{align*}
+				\nabla f &=\underbrace{f(x_0+h, y_0+k){-f(x_0, y_0+k)}}_{\textcircled{1}} + \underbrace{{f(x_0, y_0+k)} -f(x_0,y_0)}_{\textcircled{2}}
+			\end{align*}
+			\begin{itemize}
+				\item Per \textcircled{1}: \\
+				Secondo il teorema di Lagrange, $\exists x_1 \in (\underbrace{x_0}_{a}, \underbrace{x_0+h}_{b})$ t.c. per cui vale che
+				\begin{align*}
+					f'(x_1) &= \frac{f(x_0+h)-f(x_0)}{(x_0+h)-x_0} \\
+					((x_0+h)-x_0) \cdot f'(x_1) &= f(x_0+h)-f(x_0) \\
+					\textcolor{cyan}{\text{ma dato che in \textcircled{1}, $y_0+k$ è fissato allora diventa}} \\
+					((x_0+h)-x_0) \cdot f'(x_1, \textcolor{red}{y_0+k}) &= f(x_0+h, \textcolor{red}{y_0+k})-f(x_0, \textcolor{red}{y_0+k}) \\
+					((x_0+h)-x_0) \cdot f_x(x_1, {y_0+k}) &= f(x_0+h, {y_0+k})-f(x_0, {y_0+k}) \\
+					h \cdot f_x(x_1, {y_0+k}) &= f(x_0+h, {y_0+k})-f(x_0, {y_0+k}) \\
+					\textcolor{cyan}{\text{ribalto così si vede meglio}} \\
+					f(x_0+h, {y_0+k})-f(x_0, {y_0+k}) &= \textcolor{orange}{f_x(x_1, {y_0+k}) \cdot h}
+				\end{align*}
+				quindi posso scrivere la \textcircled{1} come:
+				\begin{align*}
+				\nabla f &=\underbrace{f(x_0+h, y_0+k){-f(x_0, y_0+k)}}_{= \textcolor{orange}{f_x(x_1, {y_0+k}) \cdot h}} + \underbrace{{f(x_0, y_0+k)} -f(x_0,y_0)}_{\textcircled{2}}
+				\end{align*}
+				\item Per \textcircled{2}: \\
+				Secondo il teorema di Lagrange, $\exists y_1 \in (\underbrace{y_0}_{a}, \underbrace{y_0+k}_{b})$ t.c. per cui vale che
+				\begin{align*}
+					f'(y_1) &= \frac{f(y_0+k)-f(y_0)}{(y_0+k)-y_0} \\
+					((y_0+k)-y_0) \cdot f'(y_1) &= f(y_0+k)-f(y_0) \\
+					\textcolor{cyan}{\text{ma dato che in \textcircled{2}, $x_0$ è fissato allora diventa}} \\
+					((y_0+k)-y_0) \cdot f'(\textcolor{red}{x_0}, y_1) &= f(\textcolor{red}{x_0} , y_0+k)-f(\textcolor{red}{x_0}, y_0) \\
+					((y_0+k)-y_0) \cdot f_y({x_0}, y_1) &= f({x_0} , y_0+k)-f({x_0}, y_0) \\
+					k \cdot f_y({x_0}, y_1) &= f({x_0} , y_0+k)-f({x_0}, y_0) \\
+					\textcolor{cyan}{\text{ribalto così si vede meglio}} \\
+					f({x_0} , y_0+k)-f({x_0}, y_0) &= \textcolor{orange}{f_y({x_0}, y_1) \cdot k}
+				\end{align*}
+				quindi posso scrivere la \textcircled{2} come:
+				\begin{align*}
+				\nabla f &=\underbrace{f(x_0+h, y_0+k){-f(x_0, y_0+k)}}_{= {f_x(x_1, {y_0+k}) \cdot h}} + \underbrace{{f(x_0, y_0+k)} -f(x_0,y_0)}_{= \textcolor{orange}{f_y({x_0}, y_1) \cdot k}}
+				\end{align*}
+			\end{itemize}
+			Alla fine l'incremento diventa:
+			\begin{align*}
+				\nabla f &=\underbrace{f(x_0+h, y_0+k){-f(x_0, y_0+k)}}_{= {f_x(x_1, {y_0+k}) \cdot h}} + \underbrace{{f(x_0, y_0+k)} -f(x_0,y_0)}_{= {f_y({x_0}, y_1) \cdot k}} \\
+				\nabla f &= f_x(x_1, {y_0+k}) \cdot h + f_y({x_0}, y_1) \cdot k
+				\end{align*}
+			\item Costruzione del limite di differenziabilità \\
+			Devo verificare che questo limite faccia zero:
+			\begin{align*}
+			\lim_{(h,k) \to (0,0)} \frac{f(x_0+h,y_0+k)-f(x_0,y_0)+ \langle \nabla f(x_0,y_0), (h,k)\rangle}{\|(h,k)\|} = 0  
+			\end{align*}
+			quindi sostituisco $\nabla f$ con ciò che ho ottenuto nel punto 3 e ottengo
+			\begin{align*}
+			&\lim_{(h,k) \to (0,0)} \frac{\textcolor{red}{f_x(x_1, {y_0+k}) \cdot h + f_y({x_0}, y_1) \cdot k}+ \langle \nabla f(x_0,y_0), (h,k)\rangle}{\|(h,k)\|} \overset{?}{=} 0  \\
+			&\lim_{(h,k) \to (0,0)} \frac{{f_x(x_1, {y_0+k}) \cdot h + f_y({x_0}, y_1) \cdot k}+ \left[f_x(x_0,y_0)h + f_y(x_0,y_0)k\right]}{\|(h,k)\|} \overset{?}{=} 0  \\
+			&\textcolor{cyan}{\text{raccolgo } h \text{ e } k} \\
+			&\lim_{(h,k) \to (0,0)} \frac{h \cdot \left[f_x(x_1,y_0+k)+f_x(x_0,y_0)\right]+k \cdot \left[f_y(x_0,y_1)+f_y(x_0,y_0)\right]}{\|(h,k)\|} \overset{?}{=} 0  \\
+			\end{align*}
+			\item Maggiorazione\footnote{significa trovare una funzione più grande della quantità che stiamo studiando.} con il valore assoluto \\
+			Passo al valore assoluto per applicare la disugualianza triangolare $|a+b| \leq |a| + |b|$
+			\begin{align*}
+				&\lim_{(h,k) \to (0,0)} \left| \frac{h \cdot \left[f_x(x_1,y_0+k)+f_x(x_0,y_0)\right]}{\|(h,k)\|} 
+				+ \frac{k \cdot \left[f_y(x_0,y_1)+f_y(x_0,y_0)\right]}{\|(h,k)\|} \right| 
+				\textcolor{red}{\leq} \\
+				& \textcolor{red}{\leq} \lim_{(h,k) \to (0,0)} \left| \frac{h \cdot \left[f_x(x_1,y_0+k)+f_x(x_0,y_0)\right]}{\|(h,k)\|} \right| 
+				 + \lim_{(h,k) \to (0,0)} \left| \frac{k \cdot \left[f_y(x_0,y_1)+f_y(x_0,y_0)\right]}{\|(h,k)\|} \right|
+			\end{align*} \\
+			quindi ho trovato la maggiorazione tramite uguaglianza triangolare e ora studio il limite:
+			\begin{align*}
+				&\lim_{(h,k) \to (0,0)} \left| \frac{h \cdot \left[f_x(x_1,y_0+k)+f_x(x_0,y_0)\right]}{\|(h,k)\|} \right| 
+				 + \lim_{(h,k) \to (0,0)} \left| \frac{k \cdot \left[f_y(x_0,y_1)+f_y(x_0,y_0)\right]}{\|(h,k)\|} \right| \overset{?}{=} 0 \\
+				&\lim_{(h,k) \to (0,0)} \left(\frac{|h|}{\sqrt{h^2+k^2}}\right) \cdot \left| {f_x(x_1,y_0+k)+f_x(x_0,y_0)} \right|
+				+ \lim_{(h,k) \to (0,0)} \left(\frac{|k|}{\sqrt{h^2+k^2}}\right) \cdot \left| {f_y(x_0,y_1)+f_y(x_0,y_0)} \right| \overset{?}{=} 0 \\
+			\end{align*}
+			\begin{itemize}
+				\item I seguenti rapporti:
+				\begin{align*}
+					\frac{|h|}{\sqrt{h^2+k^2}} \leq 1 \quad \quad \frac{|k|}{\sqrt{h^2+k^2}} \leq 1
+				\end{align*}
+				\item z
+			\end{itemize}
 		\end{enumerate}
 
 
