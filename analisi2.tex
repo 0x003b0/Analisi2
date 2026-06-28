@@ -1679,6 +1679,25 @@ allora esiste almeno un punto interno all'intervallo dove il valore della deriva
 		f'(c)=0
 	\]
 \end{theorem}
+\subsubsection{Teorema di Lagrange}
+Il teorema afferma che quando una funzione è continua e derivabile in un intervallo limitato,
+allora esiste almeno un punto interno all'intervallo dove la derivata è uguale al rapporto incrementale tra gli estremi. In poche parole, esiste un punto $c$ nell'intervallo 
+dove la retta tangente al grafico è parallela alla retta secante passante per gli estremi $a,b$. \\
+\begin{theorem}{Teorema di Lagrange}
+	SSia $f:[a,b] \to \mathbb{R}$ che soddisfa le seguenti condizioni:
+	\begin{enumerate}
+		\item $f$ continua in $[a,b]$
+		\item $f$ derivabile in $(a,b)$
+	\end{enumerate}
+	allora $\exists$ almeno un punto $c \in (a,b)$ tale che:
+	\[
+		f'(c)=\frac{f(b)-f(a)}{b-a}
+	\]
+\end{theorem}
+\begin{center}
+	\includegraphics[width=0.8\linewidth]{teorema-lagrange.png}
+\end{center}
+
 \subsection{Derivate Direzionali e Parziali}
 \begin{osservazioni}[Ripasso: definizione derivata in $\mathbb{R}$]
 	La derivata di una funzione in un punto del suo dominio è il limite del rapporto incrementale di $h \to 0$:
@@ -1918,7 +1937,7 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
     &\textcolor{cyan}{\text{passando al limite per } \vec{h} \to \vec{0} \text{ in entrambi i membri, ottengo:}} \\
     \lim_{\vec{h} \to \vec{0}} f(\vec{x}_0 + \vec{h}) &= \lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right]
 \end{align*}
-\footnotetext{posso usare la definizione perchè per ipotesi, $f$ è differenziabile in $\vec{x}_0$}
+\footnotetext{posso usare la definizione perchè per ipotesi, ho detto che $f$ è differenziabile in $\vec{x}_0$}
 		ora devo far vedere che questo limite $\lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right] = f(\vec{x}_0)$ quindi lo analizzo
 		sfruttando la linearità del limite (il limite della somma è la somma dei limiti):
 		\begin{itemize}
@@ -1944,63 +1963,79 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 		\begin{align*}
 			\lim_{\vec{h} \to \vec{0}} f(\vec{x}_0 + \vec{h}) &= \lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right]  = f(\vec{x}_0) + 0 + 0 = f(\vec{x}_0)
 		\end{align*}
-		evidenzio quindi ciò che volevo dimostrare:
+		evidenzio quindi ciò che volevamo dimostrare:
 		\begin{align*}
 			\textcolor{magenta}{\lim_{\vec{h} \to \vec{0}} f(\vec{x}_0 + \vec{h})} &= \lim_{\vec{h} \to \vec{0}} \left[f(\vec{x}_0)+ \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left( \| \vec{h} \|\right) \right]  = f(\vec{x}_0) + 0 + 0 \textcolor{magenta}{\;= f(\vec{x}_0)}
 		\end{align*}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	\end{proof}
 \end{theorem}
 
-
-\begin{theorem}{Teorema del differenziale totale p.122}
+\begin{theorem}{Teorema del differenziale totale in $\mathbb{R}^n$}
 	SSia $f: \mathbb{R}^n \supseteq A \to \mathbb{R}$ con $A$ aperto. Se in un intorno di $\vec{x_0} \in A$: \\
 	\textcolor{red}{esistono tutte le derivate
-		parziali di $f \; \land$  sono continue in $\vec{x_0} \implies f$ è differenziabile in $\vec{x_0}$.}
-	\begin{proof}
-		hhh
+		prime parziali di $f \; \land$  sono continue in $\vec{x_0} \implies f$ è differenziabile in $\vec{x_0}$.}
+\end{theorem}
+
+\begin{theorem}{Teorema del differenziale totale in $\mathbb{R}^2$}
+	SSia $f: \mathbb{R}^2 \supseteq A \to \mathbb{R}$ con $A$ aperto. Se in un intorno di $(x_0,y_0) \in A$: \\
+	\textcolor{red}{esistono tutte le derivate
+		prime parziali di $f \; \land$  sono continue in $(x_0,y_0) \implies f$ è differenziabile in $(x_0,y_0)$.}
+	\begin{proof} \fbox{Per $n=2$, quindi per $\mathbb{R}^2$ e non $\mathbb{R}^n$} \\ \\
+		Supponiamo che $f$ ammetta derivate prime parziali e che siano continue nel punto \\  $(x_0, y_0) \in A$. \hfill(ipotesi) \\ \\
+		 Per dimostrare che $f$ è differenziabile in $(x_0, y_0)$, devo verificare che:
+		\begin{align*}
+			\lim_{(h,k) \to (0,0)} \frac{f(x_0+h,y_0+k)-f(x_0,y_0)+ \langle \nabla f(x_0,y_0), (h,k)\rangle}{\|(h,k)\|} = 0  \tag*{(\text{tesi})}
+		\end{align*}
+		Quindi,
+		\begin{enumerate}
+			\item Considero l'incremento della funzione:
+			\begin{align*}
+				\nabla f = f(x_0+h, y_0+k)-f(x_0,y_0)
+			\end{align*}
+			\item Aggiungo e sottraggo il termine misto $f(x_0, y_0+k)$:
+			\begin{align*}
+				\nabla f &= f(x_0+h, y_0+k)-f(x_0,y_0) \\
+				&= f(x_0+h, y_0+k)-f(x_0,y_0) \textcolor{red}{+f(x_0, y_0+k)-f(x_0, y_0+k)} \\
+				&= \underbrace{f(x_0+h, y_0+k)\textcolor{red}{-f(x_0, y_0+k)}}_{\text{variazione solo lungo } x} + \underbrace{\textcolor{red}{f(x_0, y_0+k)} -f(x_0,y_0)}_{\text{variazione solo lungo } y}
+			\end{align*}
+			\item Applico il teorema di Lagrange per trasformare le differenze ottenute nel punto 2 in derivate prime parziali:
+			
+		\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	\end{proof}
 \end{theorem}
 
