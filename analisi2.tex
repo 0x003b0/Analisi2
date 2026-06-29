@@ -1920,7 +1920,7 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	\]
 	è chiamata \textcolor{red}{differenziale di $f$ in $(\vec{x})$}.
 \end{definition}
-\subsubsection{Teoremi Differenziabilità con dim}
+\subsubsection{Teoremi Differenziabilità + dimostrazione}
 \begin{theorem}{Differenziabilità implica Continuità}
 	SSia $f: \mathbb{R}^n \supseteq A \to \mathbb{R}$ con $A$ aperto e sia $\vec{x}_0 \in A$. \\
 	\textcolor{red}{Se $f$ è differenziabile in $\vec{x}_0 \implies f$ è continua in $\vec{x}_0$.}
@@ -2169,7 +2169,7 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 		f_{x_ix_j} = \frac{\partial}{\partial x_j}\left(\frac{\partial f}{\partial x_i}\right)
 	\]
 \end{osservazioni}
-\begin{theorem}{Teorema di Schwartz p.132}
+\begin{theorem}{Teorema di Schwarz in $\mathbb{R}^n$}
 	SSiano:
 	\begin{itemize}
 		\item $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ con $A$ aperto
@@ -2182,10 +2182,87 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	\[
 		\textcolor{red}{\text{se } \exists \, f_{x_ix_j}, f_{x_jx_i} (i \neq j) \text{ in un intorno di } \vec{x_0} \; \land \text{ sono continue in } \vec{x_0}} \implies  \textcolor{red}{f_{x_ix_j}(\vec{x_0}) =  f_{x_jx_i}(\vec{x_0})}
 	\]
+\end{theorem}
+
+\begin{theorem}{Teorema di Schwarz in $\mathbb{R}^2$}
+	SSiano:
+	\begin{itemize}
+		\item $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto
+		\item $(x_0,y_0) \in A$
+	\end{itemize}
+	Supponiamo che esistano le derivate seconde miste in un intorno di $(x_0,y_0)$ e che siano entrambe continue in $(x_0,y_0)$, allora esse coincidono in $(x_0,y_0)$. In modo compatto:
+	\[
+		\textcolor{red}{\text{se } \exists \, f_{xy}, f_{yx} \text{ in un intorno di } (x_0,y_0) \; \land \text{ sono continue in } (x_0,y_0) \implies  \textcolor{red}{f_{xy}(x_0,y_0) =  f_{yx}(x_0,y_0)}}
+	\]
 	\begin{proof}
-		Sp.144 libro analisi 2 in prestito
+		Supponiamo $\exists f_{xy},f_{yx}$ in un intorno di $(x_0,y_0)$ che siano continue in tale punto. \\
+		Oppure in modo compatto: Supponiamo che $f \in C^2(A)$. \hfill(ipotesi) \\ \\
+		Vogliamo dimostrare che:
+		\begin{align*}
+			f_{xy}(x_0,y_0) = f_{yx}(x_0,y_0)  \tag*{(\text{tesi})}
+		\end{align*}
+		\textit{Come lo dimostro? Costruisco due funzioni ad una variabile a cui applico il teorema di Lagrange due volte.} \\ \\
+		\begin{enumerate}
+			\item Considero i punti $P_0, P$:
+			      \begin{itemize}
+				      \item Sia $P=(x,y) \in A$
+				      \item Sia $P_0=(x_0,y_0) \in A$
+			      \end{itemize}
+			      dove $P \neq P_0$.
+			      \begin{center}
+				      \includegraphics[width=0.5\linewidth]{schwarz-1.png}
+			      \end{center}
+			      ora considero anche i punti $(x_0,y),(x,y_0) \in A$ e considero il rettangolo
+			      \begin{center}
+				      \includegraphics[width=0.5\linewidth]{schwarz-2.png}
+			      \end{center}
+			\item Costruisco due funzioni $F(x),G(y)$ partendo da $f(x,y)$:
+			      \begin{itemize}
+				      \item $F(x): [x_0,x] \to \mathbb{R}$ quindi $F(x)$ definita nell'intervallo $[x_0,x]$
+					  \begin{align*}
+						F(x)=f(x,y)-f(x,y_0) \quad \text{ con } y,y_0 \text{ fissati}
+					  \end{align*}
+				      \item $G(y): [y_0,y] \to \mathbb{R}$ quindi $G(y)$ definita nell'intervallo $[y_0,y]$
+					  \begin{align*}
+						G(y)=f(x,y)-f(x_0,y) \quad \text{ con } x,x_0 \text{ fissati}
+					  \end{align*}
+			      \end{itemize}
+			      \begin{center}
+				      \includegraphics[width=0.5\linewidth]{schwarz-3.png}
+			      \end{center}
+				  $F(x)$ è la variazione della funzione sull'asse $x$ quando $y$ varia tra $y$ e $y_0$, mentre $G(y)$ è la variazione della funzione sull'asse $y$ quando
+				  $x$ varia tra $x$ e $x_0$.
+			\item Applico il teorema di Lagrange a $F(x),G(y)$ per ottenere le derivate seconde miste
+		\end{enumerate}
 	\end{proof}
 \end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsubsection{Regola della catena}
 \textcolor{red}{da chiarire}
