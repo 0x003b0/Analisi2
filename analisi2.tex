@@ -2188,6 +2188,7 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	SSiano:
 	\begin{itemize}
 		\item $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto
+		\item $f$ derivabile due volte in $A$
 		\item $(x_0,y_0) \in A$
 	\end{itemize}
 	Supponiamo che esistano le derivate seconde miste in un intorno di $(x_0,y_0)$ e che siano entrambe continue in $(x_0,y_0)$, allora esse coincidono in $(x_0,y_0)$. In modo compatto:
@@ -2195,8 +2196,7 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 		\textcolor{red}{\text{se } \exists \, f_{xy}, f_{yx} \text{ in un intorno di } (x_0,y_0) \; \land \text{ sono continue in } (x_0,y_0) \implies  \textcolor{red}{f_{xy}(x_0,y_0) =  f_{yx}(x_0,y_0)}}
 	\]
 	\begin{proof}
-		Supponiamo $\exists f_{xy},f_{yx}$ in un intorno di $(x_0,y_0)$ che siano continue in tale punto. \\
-		Oppure in modo compatto: Supponiamo che $f \in C^2(A)$. \hfill(ipotesi) \\ \\
+		Supponiamo $\exists f_{xy},f_{yx}$ in un intorno di $(x_0,y_0)$ che siano continue \\ in tale punto. \hfill(ipotesi) \\ \\
 		Vogliamo dimostrare che:
 		\begin{align*}
 			f_{xy}(x_0,y_0) = f_{yx}(x_0,y_0)  \tag*{(\text{tesi})}
@@ -2219,21 +2219,104 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 			\item Costruisco due funzioni $F(x),G(y)$ partendo da $f(x,y)$:
 			      \begin{itemize}
 				      \item $F(x): [x_0,x] \to \mathbb{R}$ quindi $F(x)$ definita nell'intervallo $[x_0,x]$
-					  \begin{align*}
-						F(x)=f(x,y)-f(x,y_0) \quad \text{ con } y,y_0 \text{ fissati}
-					  \end{align*}
+				            \begin{align*}
+					            F(x)=f(x,y)-f(x,y_0) \quad \text{ con } y,y_0 \text{ fissati}
+				            \end{align*}
 				      \item $G(y): [y_0,y] \to \mathbb{R}$ quindi $G(y)$ definita nell'intervallo $[y_0,y]$
-					  \begin{align*}
-						G(y)=f(x,y)-f(x_0,y) \quad \text{ con } x,x_0 \text{ fissati}
-					  \end{align*}
+				            \begin{align*}
+					            G(y)=f(x,y)-f(x_0,y) \quad \text{ con } x,x_0 \text{ fissati}
+				            \end{align*}
 			      \end{itemize}
 			      \begin{center}
 				      \includegraphics[width=0.5\linewidth]{schwarz-3.png}
 			      \end{center}
-				  $F(x)$ è la variazione della funzione sull'asse $x$ quando $y$ varia tra $y$ e $y_0$, mentre $G(y)$ è la variazione della funzione sull'asse $y$ quando
-				  $x$ varia tra $x$ e $x_0$.
-			\item Applico il teorema di Lagrange a $F(x),G(y)$ per ottenere le derivate seconde miste
+			      $F(x)$ è la variazione della funzione sull'asse $x$ con $y$ e $y_0$ fissati, mentre $G(y)$ è la variazione della funzione sull'asse $y$ con
+			      $x$ e $x_0$ fissati.
+			\item Applico il teorema di Lagrange a $F(x),G(y)$ per ottenere le derivate seconde miste: \\ \\
+			      Dato che $F(x)$ e $G(y)$ sono definite in un intervallo chiuso, sono derivabili in quell'intervallo (perchè sono definite come differenze
+			      di funzioni derivabili; questo grazie al fatto che $f$ è derivabile due volte in $A$) e sono continue nell'intervallo (perchè essendo $F(x),G(y)$ derivabili, la derivabilità implica la continuità nelle funzioni ad 1 sola variabile), allora posso applicare il teorema di Lagrange.
+			      \begin{itemize}
+				      \item \textcolor{red}{applico Lagrange a $F(x)$} \\
+				            $\exists x_1 \in (x_0,x)$ t.c. $F'(x_1)=\frac{F(x)-F(x_0)}{x-x_0}$ quindi:
+				            \begin{align*}
+					            (x-x_0)F'(x_1)=F(x)-F(x_0)                                                                                                  \\
+					            \textcolor{cyan}{\text{dato che }F(x)=f(x,y)-f(x,y_0)}                                                                      \\
+					            \textcolor{cyan}{\text{e che }F'(x)=\frac{\partial f}{\partial x}(x,y)-\frac{\partial f}{\partial x}(x,y_0) \text{ allora}} \\
+					            (x-x_0)\underbrace{\left[\textcolor{red}{\frac{\partial f}{\partial x}(x_1,y)-\frac{\partial f}{\partial x}(x_1,y_0)}\right]}_{\textcircled{a}}=F(x)-F(x_0)
+				            \end{align*}
+				            Applico di nuovo Lagrange\footnote{ricordo che la $f$ è derivabile due volte} a $\frac{\partial f}{\partial x}(x_1,y)-\frac{\partial f}{\partial x}(x_1,y_0)$ rispetto a $y$: \\
+				            quindi se è rispetto a $y$ lo applico solo a $\frac{\partial f}{\partial x}(x_1,y)\cancel{-\frac{\partial f}{\partial x}(x_1,y_0)}$ \\
+				            $\exists y_1 \in (y_0,y)$ t.c. $F''(y_1)=\frac{F'(y)-F'(y_0)}{y-y_0}$ quindi:
+				            \begin{align*}
+					            (y-y_0)F'(y_1)=F(y)-F(y_0)                                                                                                                                              \\
+					            \textcolor{cyan}{F(y)=\frac{\partial f}{\partial x}(x_1,y)}                                                                                                             \\
+					            \textcolor{cyan}{F(y_0)=\frac{\partial f}{\partial x}(x_1,y_0)}                                                                                                         \\
+					            \textcolor{cyan}{F'(y)= \frac{\partial}{\partial y} \left(\frac{\partial f}{\partial x}(x_1,y)\right) \text{ quindi }
+					            F'(y_1)= \frac{\partial}{\partial y} \left(\frac{\partial f}{\partial x}(x_1,y_1)\right) = \frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)}                         \\
+					            (y-y_0)\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)=\frac{\partial f}{\partial x}(x_1,y)-\frac{\partial f}{\partial x}(x_1,y_0)                                  \\
+					            \textcolor{cyan}{\text{scambio i termini così si legge meglio}}                                                                                                         \\
+					            \frac{\partial f}{\partial x}(x_1,y)-\frac{\partial f}{\partial x}(x_1,y_0) = \underbrace{(y-y_0)\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)}_{\textcircled{b}} \\
+				            \end{align*}
+				            Adesso sostituisco \textcircled{b} in \textcircled{a}, ottenendo:
+				            \begin{align*}
+					            (x-x_0)\left[\textcolor{red}{(y-y_0)\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)}\right]=F(x)-F(x_0) \\
+					            F(x)-F(x_0)=\left[\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)\right](x-x_0)(y-y_0)
+				            \end{align*}
+				      \item \textcolor{red}{applico Lagrange a $G(y)$} \\
+				            Ragionamento analogo con $G(y)$, dove, applicando due volte Lagrange ottengo:
+				            \begin{align*}
+					            G(y)-G(y_0)=\left[ \frac{\partial^2f}{\partial x \partial y}(x_2,y_2) \right](x-x_0)(y-y_0)
+				            \end{align*}
+			      \end{itemize}
+			\item Uguaglianza \\
+			      Nel passo precedente ho quindi ottenuto
+			      \begin{align*}
+				      F(x)-F(x_0)=\left[\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)\right](x-x_0)(y-y_0) \quad \textcircled{c} \\
+				      G(y)-G(y_0)=\left[ \frac{\partial^2f}{\partial x \partial y}(x_2,y_2) \right](x-x_0)(y-y_0) \quad \textcircled{d}
+			      \end{align*}
+			      e inoltre so che:
+			      \begin{align*}
+				      F(x)-F(x_0) = G(y)-G(y_0)                                                                       \\
+				      \textcolor{cyan}{\text{perchè }}                                                                \\
+				      \textcolor{cyan}{F(x)-F(x_0) = \left[f(x,y)-f(x,y_0)\right] - \left[f(x_0,y)-f(x_0,y_0)\right]} \\
+				      \textcolor{cyan}{G(y)-G(y_0) = \left[f(x,y)-f(x_0,y)\right] - \left[f(x,y_0)-f(x_0,y_0)\right]} \\
+				      \underbrace{\left[f(x,y)-f(x,y_0)\right] - \left[f(x_0,y)-f(x_0,y_0)\right]}_{F(x)-F(x_0)} = \underbrace{\left[f(x,y)-f(x_0,y)\right] - \left[f(x,y_0)-f(x_0,y_0)\right]}_{G(y)-G(y_0)}
+			      \end{align*}
+			      pertanto, se sostituisco con \textcircled{c}, \textcircled{d} ottengo:
+			      \begin{align*}
+				      \left[\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)\right](x-x_0)(y-y_0) = \left[ \frac{\partial^2f}{\partial x \partial y}(x_2,y_2) \right](x-x_0)(y-y_0)
+			      \end{align*} \\
+			      dividendo entrambi per $(x-x_0)(y-y_0) \neq 0$ ottengo:
+			      \begin{align*}
+				      \boxed{\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1) = \frac{\partial^2f}{\partial x \partial y}(x_2,y_2)} \quad \textcolor{red}{\textcircled{e}}
+			      \end{align*}
+			\item Ipotesi di continuità \\
+			      Per ipotesi di continuità\footnote{
+				      per ipotesi, abbiamo detto che le derivate miste sono continue quindi vale la definizione di continuità:
+				  		\begin{align*}
+							\lim_{(x,y) \to (x_0,y_0)}f(x,y) = f(x_0,y_0)
+						\end{align*}
+			      } delle derivate miste in $P_0$, passando al limite di $(x,y) \to (x_0,y_0)$, i punti intermedi $(x_1,y_1),(x_2,y_2)$ tendono entrambi a $(x_0,y_0)$:
+			      \begin{itemize}
+				      \item
+				            \begin{align*}
+					            \lim_{(x,y) \to (x_0,y_0)} \frac{\partial^2 f}{\partial y \partial x}(x_1,y_1) = \frac{\partial^2 f}{\partial y \partial x}(x_0,y_0)
+				            \end{align*}
+				      \item
+				            \begin{align*}
+					            \lim_{(x,y) \to (x_0,y_0)} \frac{\partial^2f}{\partial x \partial y}(x_2,y_2) = \frac{\partial^2 f}{\partial y \partial x}(x_0,y_0)
+				            \end{align*}
+			      \end{itemize}
 		\end{enumerate}
+		Quindi:
+		\begin{align*}
+			\frac{\partial^2 f}{\partial y \partial x}(x_1,y_1)                            & \overset{?}{=} \frac{\partial^2f}{\partial x \partial y}(x_2,y_2) \quad \textcolor{red}{\textcircled{e}} \\
+			\textcolor{cyan}{\text{per ipotesi di continuità}}                                                                                                                                        \\
+			\lim_{(x,y) \to (x_0,y_0)} \frac{\partial^2 f}{\partial y \partial x}(x_1,y_1) & \overset{?}{=} \lim_{(x,y) \to (x_0,y_0)} \frac{\partial^2f}{\partial x \partial y}(x_2,y_2)             \\
+			\frac{\partial^2 f}{\partial y \partial x}(x_0,y_0)                            & \overset{\checkmark}{=} \frac{\partial^2 f}{\partial y \partial x}(x_0,y_0)
+		\end{align*}
+		La continuità è fondamentale affinchè le derivate miste siano uguali, la sola esistenza non ne garantisce l'uguaglianza. Infatti esistono controesempi dove le derivate
+		esistono in un punto ma sono diverse perchè non sono continue in tal punto.
 	\end{proof}
 \end{theorem}
 
