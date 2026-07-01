@@ -2150,8 +2150,7 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	\end{cases}
 \]
 
-\subsubsection{Teorema di Schwarz (da fare dim:)}
-
+\subsubsection{Teorema di Schwarz}
 \begin{osservazioni}[Derivate Parziali Seconde]
 	Siano le derivate prime parziali:
 	\[
@@ -2293,9 +2292,9 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 			\item Ipotesi di continuità \\
 			      Per ipotesi di continuità\footnote{
 				      per ipotesi, abbiamo detto che le derivate miste sono continue quindi vale la definizione di continuità:
-				  		\begin{align*}
-							\lim_{(x,y) \to (x_0,y_0)}f(x,y) = f(x_0,y_0)
-						\end{align*}
+				      \begin{align*}
+					      \lim_{(x,y) \to (x_0,y_0)}f(x,y) = f(x_0,y_0)
+				      \end{align*}
 			      } delle derivate miste in $P_0$, passando al limite di $(x,y) \to (x_0,y_0)$, i punti intermedi $(x_1,y_1),(x_2,y_2)$ tendono entrambi a $(x_0,y_0)$:
 			      \begin{itemize}
 				      \item
@@ -2432,7 +2431,7 @@ Attenzione: è necessario distinguere tra "punto di massimo/minimo" e "massimo/m
 	\]
 \end{theorem}
 
-\subsubsection{Teorema di Fermat (da fare dim)}
+\subsubsection{Teorema di Fermat}
 \begin{osservazioni}[Teorema di Fermat in $\mathbb{R}$]
 	Sia $f:\left(a,b\right) \to \mathbb{R}$ e sia $x_0 \in \left(a,b\right)$. \\
 	Se nel punto $x_0$ la funzione è derivabile $\land \; x_0$ è un punto di minimo o massimo locale, allora:
@@ -2442,13 +2441,105 @@ Attenzione: è necessario distinguere tra "punto di massimo/minimo" e "massimo/m
 \end{osservazioni}
 
 \begin{theorem}{Teorema di Fermat in $\mathbb{R}^n$}
-	SSia $f:F \subseteq \mathbb{R}^n \to \mathbb{R}$ con $F$ aperto e $\vec{x_0} \in F$ un punto di massimo o minimo locale per $f$. \\
-	\textcolor{red}{Se $f$ è derivabile in $\vec{x_0} \implies \nabla f(\vec{x_0})=0$}.
+	SSia $f:F \subseteq \mathbb{R}^n \to \mathbb{R}$ con $F$ aperto. \\
+	\textcolor{red}{Se $f$ è differenziabile in $\vec{x}_0 \, \land \, \vec{x}_0 \in F$ un punto di massimo o minimo locale per $f \implies \nabla f(\vec{x}_0)=0$}.
 	\begin{proof}
-		TODO
+		Supponiamo che $f$ sia differenziabile in $\vec{x}_0$ e  \\ che $\vec{x}_0$ sia un punto di massimo locale. \hfill(ipotesi) \\
+		Vogliamo dimostrare che:
+		\begin{align*}
+			\nabla f(\vec{x}_0) = 0 \tag*{(\text{tesi})}
+		\end{align*}
+		\begin{enumerate}
+			\item \textbf{Restrinzione da multidimensionale a unidimensionale (una variabile, 1-dimensione):} \\
+			      Sapendo che $\vec{x}_0$ è un punto di massimo relativo per $f$, è anche un punto di massimo relativo se restringo $f$ ad una qualsiasi retta passante per $\vec{x}_0$\footnote{
+				      quindi restringo $f$ ad una dimensione sola, perchè la retta è unidimensionale.
+			      }. Analizzo quindi cosa succede alla funzione se cammino lungo la retta passante per $\vec{x}_0$ lungo una certa direzione $\vec{\upsilon}$.
+			\item \textbf{Versore $\vec{\upsilon}$:} \\
+			      Considero il versore\footnote{norma uguale a 1: $\|\vec{\upsilon}\| = 1$} $\vec{\upsilon} \in \mathbb{R}^n$ che indica la direzione di tale retta passante per $\vec{x}_0$.
+			      I punti di tale retta che passa per $\vec{x}_0$ nella direzione $\vec{\upsilon}$ sono:
+			      \begin{align*}
+				      \vec{x}(t)=\vec{x}_0+t \vec{\upsilon} \quad \quad \text{con } t \in \mathbb{R}
+			      \end{align*}
+			\item \textbf{Definisco la funzione composta $F$ a 1 variabile:}
+			\begin{align*}
+				F(t)=f(\vec{x}(t)) = f(\vec{x}_0+t \vec{\upsilon})
+			\end{align*}
+			\item \textbf{Osservazione sul massimo:} \\
+			Dato che $\vec{x}_0$ è un punto di massimo locale per $f$, allora per definizione, esiste un intorno $U$ di $\vec{x}_0$ dove:
+			\begin{align*}
+				f(\vec{x}_0) \geq f(\vec{x}) \quad \quad \forall{\vec{x}_0} \in U
+			\end{align*}
+			e $t=0$ è un massimo locale per $f$, infatti
+			\begin{align*}
+				F(t)= f(\vec{x}_0+t \vec{\upsilon}) \quad \text{ con } t=0 \\ \implies F(0)= f(\vec{x}_0+0 \cdot \vec{\upsilon})= f(\vec{x}_0)
+			\end{align*}
+			Sapendo che 
+			\begin{align*}
+				f(\vec{x}_0) &\geq f(\vec{x}) \\
+				\textcolor{cyan}{\text{e che } F(0)=f(\vec{x}_0) \text{ allora}} \\
+				F(0)=f(\vec{x}_0) &\geq f(\vec{x})=F(t) \\
+				\textcolor{cyan}{\text{ e sapendo che } \vec{x}(t)=f(\vec{x}_0+t\vec{\upsilon}) \text{ allora}} \\
+				F(0)=f(\vec{x}_0) &\geq f(\vec{x}_0+t\vec{\upsilon})=F(t)
+			\end{align*}
+			da qui si vede chiaramente perchè $t=0$ è un massimo locale per $F(t)$
+			\item \textbf{Applico teorema di Fermat (analisi I):} \\
+				Applicando Fermat, sapendo che $t=0$ è un punto di massimo locale, allora la derivata nel punto di massimo locale deve annullarsi:
+				\begin{align*}
+					F'(0) = 0 \quad \quad \textcircled{a}
+				\end{align*}
+			usando la regola della catena ottengo:
+			\begin{align*}
+				F'(t) &= \langle \nabla f(\vec{x}_0+t \vec{\upsilon}), \vec{x}'(t) \rangle \\
+				&\textcolor{cyan}{\text{derivo rispetto a }t, \text{ quindi } \vec{x}'(t) = (\vec{x}_0+t \vec{\upsilon})' = \vec{\upsilon}} \\
+				&=  \langle \nabla f(\vec{x}_0+t \vec{\upsilon}), \vec{\upsilon} \rangle
+			\end{align*}
+			Pertanto, la \textcircled{a} diventa:
+			\begin{align*}
+				F'(0) &= 0 \\
+				\langle \nabla f(\vec{x}_0+0 \cdot \vec{\upsilon}), \vec{\upsilon} \rangle &= 0 \\
+				\langle \nabla f(\vec{x}_0), \vec{\upsilon} \rangle &= 0 \iff \nabla f(\vec{x}_0) = 0 \quad \forall{\vec{\upsilon}} \in \mathbb{R}^n
+			\end{align*}
+			In conclusione:
+			\begin{align*}
+				F'(0)=0 \text{ quando } \nabla f(\vec{x}_0) = 0
+			\end{align*}
+ 		\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	\end{proof}
 \end{theorem}
-
+Se il gradiente è nullo, vuol dire che le sue derivate parziali sono nulle e che il piano tangente è orizzontale.
+Ricordo che il gradiente è un vettore che punta verso la massima crescita (massima variazione) della funzione in quel punto; quindi
+se è nullo vuol dire che non c'è nessuna crescita/variazione in quel punto e quindi il piano tangente è orizzontale!
 
 \begin{definition}{Punti critici}
 	SSia $f:A \subseteq \mathbb{R}^n \to \mathbb{R}$ con $A$ aperto. \\
