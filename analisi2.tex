@@ -1831,12 +1831,35 @@ Se $f$ non è differenziabile, il piano esiste come oggetto geometrico ma non è
 	\]
 \end{theorem}
 
-\subsubsection{Derivazione delle Funzioni Composte (da fare dim)}
-\begin{theorem}{Derivazione della funzione composta}
+\subsubsection{Regola della catena}
+
+\begin{theorem}{Regola della catena in $\mathbb{R}^2$}
 	SSiano:
 	\begin{itemize}
-		\item $\vec{r}: I \subseteq \mathbb{R} \to \mathbb{R}^n$
-		\item $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$
+		\item $\vec{r}: I \subseteq \mathbb{R} \to \mathbb{R}^2$ (funzione vettoriale\footnote{prende in input $t$ e restituisce un vettore a $2$ componenti})
+		\item $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto
+		\item suppongo che la funzione composta $g(t)=f(\vec{r}(t))$ sia definita almeno in un intorno di $t_0 \in I$
+	\end{itemize}
+	Se $\vec{r}$ è derivabile in $t_0 \land f$ è differenziabile in $\vec{r}(t_0)$, allora la funzione composta è derivabile in $t_0$ e la derivata è data da:
+	\begin{align*}
+				\textcolor{red}{g'(t_0) \;} & = \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle                       \\                                                                                                       
+		                        & = \left(\frac{\partial f}{\partial x}(\vec{r}(t_0)) \cdot r_1'(t_0)\right) + \left(\frac{\partial f}{\partial y}(\vec{r}(t_0)) \cdot r_2'(t_0)\right)
+	\end{align*}
+	In modo esteso:
+		\begin{align*}
+		\textcolor{red}{g'(t_0) \;} & = \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle \quad \quad \quad \textcolor{cyan}{\text{con }\vec{r}(t_0)=\left(x(t_0),y(t_0) \right) \text{ allora,}}                                                                                    \\
+		                        & = \langle \nabla f(x(t_0),y(t_0)), (x'(t_0),y'(t_0))\rangle                                                                                                          \\
+		                        & = \left[\frac{\partial f}{\partial x}(x(t_0),y(t_0)) \cdot x'(t_0)\right] + \left[\frac{\partial f}{\partial y}(x(t_0),y(t_0)) \cdot y'(t_0)\right]
+	\end{align*}
+\end{theorem}
+
+
+libro analisi2 in prestito p.135
+\begin{theorem}{Regola della catena in $\mathbb{R}^n$}
+	SSiano:
+	\begin{itemize}
+		\item $\vec{r}: I \subseteq \mathbb{R} \to \mathbb{R}^n$ (funzione vettoriale\footnote{prende in input $t$ e restituisce un vettore a $n$ componenti})
+		\item $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ con $A$ aperto
 		\item suppongo che la funzione composta $g(t)=f(\vec{r}(t))$ sia definita almeno in un intorno $J$ di $t_0 \in I$
 	\end{itemize}
 	Se $\vec{r}$ è derivabile in $t_0 \land f$ è differenziabile in $\vec{r}(t_0)$, allora la funzione composta:
@@ -1854,10 +1877,10 @@ Se $f$ non è differenziabile, il piano esiste come oggetto geometrico ma non è
 Questo teorema indica le condizioni necessarie affinchè possa esistere la derivata di una funzione composta $f(\vec{r}(t_0))$ in $t_0$:
 \begin{enumerate}
 	\item la funzione interna ($\vec{r}$) deve essere derivabile in $t_0$
-	\item la funzione esterna ($f$) deve essere differenziabile in $t_0$
+	\item la funzione esterna ($f$) deve essere differenziabile in $\vec{r}(t_0)$
 \end{enumerate}
 Se queste vengono rispettate, la derivata viene data dal
-prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la derivata della funzione interna in $t_0$.
+prodotto scalare tra il gradiente della funzione composta e la derivata della funzione interna valutata in $t_0$.
 
 
 \subsection{Differenziabilità}
@@ -2319,59 +2342,6 @@ prodotto scalare tra il gradiente della funzione composta valutata in $t_0$ e la
 	\end{proof}
 \end{theorem}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsubsection{Regola della catena}
-\textcolor{red}{da chiarire}
-
-Sp.135 libro analisi 2 ; è il punto 1 del teorema 3.12 (solo il punto 1 dov dice "la funzione composta è differenziabile")
-\begin{theorem}{Regola della catena p.124}
-	SSiano:
-	\begin{itemize}
-		\item $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$
-		\item $g: I \subseteq \mathbb{R} \to \mathbb{R}$
-	\end{itemize}
-	Suppongo che la funzione composta $h(\vec{x})= g(f(\vec{x}))$ sia definita almeno in un intorno $U$ di $\vec{x_0} \in A$. \\
-	Se:
-	\begin{itemize}
-		\item $f$ è differenziabile in $\vec{x_0}$
-		\item $g$ è derivabile in $f(\vec{x_0})$
-	\end{itemize}
-	allora la funzione composta
-	\[
-		h = g \circ f : \mathbb{R}^n \to \mathbb{R}
-	\]
-	è differenziabile in $\vec{x_0}$ e vale anche che:
-	\[
-		\nabla h(\vec{x_0}) = \nabla (g \circ f)(\vec{x_0}) = g'(f(\vec{x_0})) \cdot \nabla f(\vec{x_0})
-	\]
-\end{theorem}
-
 \subsection{Formula di Taylor}
 p.293 analisi 1 in prestito
 p.328 libro analisi 1 in prestito
@@ -2461,49 +2431,49 @@ Attenzione: è necessario distinguere tra "punto di massimo/minimo" e "massimo/m
 				      \vec{x}(t)=\vec{x}_0+t \vec{\upsilon} \quad \quad \text{con } t \in \mathbb{R}
 			      \end{align*}
 			\item \textbf{Definisco la funzione composta $F$ a 1 variabile:}
-			\begin{align*}
-				F(t)=f(\vec{x}(t)) = f(\vec{x}_0+t \vec{\upsilon})
-			\end{align*}
+			      \begin{align*}
+				      F(t)=f(\vec{x}(t)) = f(\vec{x}_0+t \vec{\upsilon})
+			      \end{align*}
 			\item \textbf{Osservazione sul massimo:} \\
-			Dato che $\vec{x}_0$ è un punto di massimo locale per $f$, allora per definizione, esiste un intorno $U$ di $\vec{x}_0$ dove:
-			\begin{align*}
-				f(\vec{x}_0) \geq f(\vec{x}) \quad \quad \forall{\vec{x}_0} \in U
-			\end{align*}
-			e $t=0$ è un massimo locale per $f$, infatti
-			\begin{align*}
-				F(t)= f(\vec{x}_0+t \vec{\upsilon}) \quad \text{ con } t=0 \\ \implies F(0)= f(\vec{x}_0+0 \cdot \vec{\upsilon})= f(\vec{x}_0)
-			\end{align*}
-			Sapendo che 
-			\begin{align*}
-				f(\vec{x}_0) &\geq f(\vec{x}) \\
-				\textcolor{cyan}{\text{e che } F(0)=f(\vec{x}_0) \text{ allora}} \\
-				F(0)=f(\vec{x}_0) &\geq f(\vec{x})=F(t) \\
-				\textcolor{cyan}{\text{ e sapendo che } \vec{x}(t)=f(\vec{x}_0+t\vec{\upsilon}) \text{ allora}} \\
-				F(0)=f(\vec{x}_0) &\geq f(\vec{x}_0+t\vec{\upsilon})=F(t)
-			\end{align*}
-			da qui si vede chiaramente perchè $t=0$ è un massimo locale per $F(t)$
+			      Dato che $\vec{x}_0$ è un punto di massimo locale per $f$, allora per definizione, esiste un intorno $U$ di $\vec{x}_0$ dove:
+			      \begin{align*}
+				      f(\vec{x}_0) \geq f(\vec{x}) \quad \quad \forall{\vec{x}_0} \in U
+			      \end{align*}
+			      e $t=0$ è un massimo locale per $f$, infatti
+			      \begin{align*}
+				      F(t)= f(\vec{x}_0+t \vec{\upsilon}) \quad \text{ con } t=0 \\ \implies F(0)= f(\vec{x}_0+0 \cdot \vec{\upsilon})= f(\vec{x}_0)
+			      \end{align*}
+			      Sapendo che
+			      \begin{align*}
+				      f(\vec{x}_0)      & \geq f(\vec{x})                                                             \\
+				      \textcolor{cyan}{\text{e che } F(0)=f(\vec{x}_0) \text{ allora}}                                \\
+				      F(0)=f(\vec{x}_0) & \geq f(\vec{x})=F(t)                                                        \\
+				      \textcolor{cyan}{\text{ e sapendo che } \vec{x}(t)=f(\vec{x}_0+t\vec{\upsilon}) \text{ allora}} \\
+				      F(0)=f(\vec{x}_0) & \geq f(\vec{x}_0+t\vec{\upsilon})=F(t)
+			      \end{align*}
+			      da qui si vede chiaramente perchè $t=0$ è un massimo locale per $F(t)$
 			\item \textbf{Applico teorema di Fermat (analisi I):} \\
-				Applicando Fermat, sapendo che $t=0$ è un punto di massimo locale, allora la derivata nel punto di massimo locale deve annullarsi:
-				\begin{align*}
-					F'(0) = 0 \quad \quad \textcircled{a}
-				\end{align*}
-			usando la regola della catena ottengo:
-			\begin{align*}
-				F'(t) &= \langle \nabla f(\vec{x}_0+t \vec{\upsilon}), \vec{x}'(t) \rangle \\
-				&\textcolor{cyan}{\text{derivo rispetto a }t, \text{ quindi } \vec{x}'(t) = (\vec{x}_0+t \vec{\upsilon})' = \vec{\upsilon}} \\
-				&=  \langle \nabla f(\vec{x}_0+t \vec{\upsilon}), \vec{\upsilon} \rangle
-			\end{align*}
-			Pertanto, la \textcircled{a} diventa:
-			\begin{align*}
-				F'(0) &= 0 \\
-				\langle \nabla f(\vec{x}_0+0 \cdot \vec{\upsilon}), \vec{\upsilon} \rangle &= 0 \\
-				\langle \nabla f(\vec{x}_0), \vec{\upsilon} \rangle &= 0 \iff \nabla f(\vec{x}_0) = 0 \quad \forall{\vec{\upsilon}} \in \mathbb{R}^n
-			\end{align*}
-			In conclusione:
-			\begin{align*}
-				F'(0)=0 \text{ quando } \nabla f(\vec{x}_0) = 0
-			\end{align*}
- 		\end{enumerate}
+			      Applicando Fermat, sapendo che $t=0$ è un punto di massimo locale, allora la derivata nel punto di massimo locale deve annullarsi:
+			      \begin{align*}
+				      F'(0) = 0 \quad \quad \textcircled{a}
+			      \end{align*}
+			      usando la regola della catena ottengo:
+			      \begin{align*}
+				      F'(t) & = \langle \nabla f(\vec{x}_0+t \vec{\upsilon}), \vec{x}'(t) \rangle                                                        \\
+				            & \textcolor{cyan}{\text{derivo rispetto a }t, \text{ quindi } \vec{x}'(t) = (\vec{x}_0+t \vec{\upsilon})' = \vec{\upsilon}} \\
+				            & =  \langle \nabla f(\vec{x}_0+t \vec{\upsilon}), \vec{\upsilon} \rangle
+			      \end{align*}
+			      Pertanto, la \textcircled{a} diventa:
+			      \begin{align*}
+				      F'(0)                                                                      & = 0                                                                             \\
+				      \langle \nabla f(\vec{x}_0+0 \cdot \vec{\upsilon}), \vec{\upsilon} \rangle & = 0                                                                             \\
+				      \langle \nabla f(\vec{x}_0), \vec{\upsilon} \rangle                        & = 0 \iff \nabla f(\vec{x}_0) = 0 \quad \forall{\vec{\upsilon}} \in \mathbb{R}^n
+			      \end{align*}
+			      In conclusione:
+			      \begin{align*}
+				      F'(0)=0 \text{ quando } \nabla f(\vec{x}_0) = 0
+			      \end{align*}
+		\end{enumerate}
 	\end{proof}
 \end{theorem}
 Se il gradiente è nullo, vuol dire che le sue derivate parziali sono nulle e che il piano tangente è orizzontale.
