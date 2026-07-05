@@ -103,485 +103,83 @@ fonttitle=\bfseries,
 \newpage
 \footnotesize
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Equazioni differenziali lineari}
-\subsection{EDO di I ordine}
-\[
-	y'=3e^{x}
-\]
-\subsubsection{EDO di I ordine omogenee}
-osservazione:
-EDO lineare del I ordine omogenea è una equazione a variabili separabili (quella a var separabili è una tecnica per risolvere le EDO non lineari)
-\subsubsection{EDO di I ordine non omogenee}
-
-\subsection{EDO di II ordine}
-\[
-	2y''+5y=e^x
-\]
-\subsubsection{EDO di II ordine omogenee}
-\subsubsection{EDO di II ordine non omogenee}
-\subsubsection{Metodo di somiglianza: $f(x)$ polinomio}
-Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omogenee.
-\[
-	ay''+by'+cy=f(x)
-\]
-\textcolor{red}{$f(x)$ è un polinomio di grado $n$}:
-\begin{esercizio}[Caso 1: $c \neq 0$]
-	\textcolor{red}{$c \neq 0$}
-	\[
-		y''+2y'-8y=x^2+3x+1
-	\]
-	Qui $f(x)=x^2+3x+1$ che è un polinomio con
-	\begin{itemize}
-		\item $a=1$
-		\item $b=2$
-		\item $c=-8$
-	\end{itemize}
-	$c \neq 0$ quindi devo cercare polinomio di grado $n$ (che corrisponde al grado del polinomio a destra dell'uguale), quindi $n=2$:
-	\begin{enumerate}
-		\item Scrivo polinomio di grado $n=2$ generico:
-		      \[
-			      \alpha x^2+\beta x + \gamma
-		      \]
-		      Questa sarà la forma della soluzione particolare $y_p$
-		\item Devo trovare chi sono $\alpha,\beta,\gamma$, come faccio?
-		      Calcolo derivata prima e seconda della soluzione particolare: $y_p=\alpha x^2+\beta x + \gamma$ \\
-		      \begin{itemize}
-			      \item Calcolo derivata prima:
-			            \[
-				            y'_p=2 \alpha x+\beta
-			            \]
-			      \item Calcolo derivata seconda:
-			            \[
-				            y''_p=2 \alpha
-			            \]
-		      \end{itemize}
-		\item Sostituisco $y_p,y'_p, y''_p$ trovati in $y''+2y'-8y$: \\
-		      Ho:
-		      \[
-			      y''+2y'-8y=x^2+3x+1
-		      \]
-		      Sostituisco $y_p=y,y'_p=y', y''_p=y''$
-		      \[
-			      (2 \alpha)+2(2 \alpha x+\beta)-8(\alpha x^2+\beta x + \gamma)=x^2+3x+1
-		      \]
-		      Ora sviluppo i calcoli per trovare $\alpha,\beta,\gamma$:
-		      \begin{align*}
-			      (2 \alpha)+2(2 \alpha x+\beta)-8(\alpha x^2+\beta x + \gamma)      & = x^2+3x+1 \\
-			      2 \alpha+4 \alpha x+2\beta-8 \alpha x^2 -8 \beta x -8 \gamma       & = x^2+3x+1 \\
-			      x^2(-8 \alpha)+x(4 \alpha -8 \beta) + 2 \alpha + 2\beta - 8 \gamma & = x^2+3x+1
-		      \end{align*}
-		      Metto a sistema: \\
-		      \textcolor{red}{$x^2(-8 \alpha)$}$+$\textcolor{blue}{$x(4 \alpha -8 \beta)$} $+$ \textcolor{orange}{$2 \alpha + 2\beta - 8 \gamma$} $=$ \textcolor{red}{$x^2$} $+$ \textcolor{blue}{$3x$} $+$ \textcolor{orange}{$1$}
-		      \[
-			      \begin{cases}
-				      -8 \alpha = 1          \\
-				      4 \alpha - 8 \beta = 3 \\
-				      2 \alpha + 2 \beta - 8 \gamma = 1
-			      \end{cases}
-		      \]
-		      Risolvo il sistema e ottengo:
-		      \[
-			      \begin{cases}
-				      \alpha = - \frac{1}{8} \\
-				      \beta = - \frac{7}{16} \\
-				      \gamma = - \frac{17}{64}
-			      \end{cases}
-		      \]
-		\item La soluzione particolare $y_p=\alpha x^2+\beta x + \gamma$ dopo aver trovato $\alpha, \beta, \gamma$ sarà:
-		      \begin{align*}
-			      y_p
-			       & = \alpha x^2+\beta x + \gamma                        \\
-			       & = - \frac{1}{8} x^2 - \frac{7}{16} x - \frac{17}{64}
-		      \end{align*}
-	\end{enumerate}
-\end{esercizio}
-
-\begin{esercizio}[Caso 2: $c$ uguale a zero]
-	\textcolor{red}{$c = 0, \quad b \neq 0$}
-	\[
-		y''+7y'=x+3
-	\]
-	$c=0$ quindi devo cercare polinomio di grado $n+1$, poichè il grado di $x+3$ è 1, allora $n+1=1+1=2$, quindi $n=2$:
-	\begin{enumerate}
-		\item Scrivo polinomio di grado $n=2$ generico:
-		      \[
-			      y_p=\alpha x^2+\beta x + \gamma
-		      \]
-		\item Calcolo derivata prima e seconda
-		      \begin{itemize}
-			      \item $y'_p=2\alpha x+\beta$
-			      \item $y''_p=2\alpha$
-		      \end{itemize}
-		\item Sostituisco nella EDO originale e trovo $\alpha, \beta, \gamma$: \\
-		      Sostituisco $y_p,y'_p, y''_p$ trovati in $y''+7y'$:
-		      \[
-			      y''+7y'=x+3
-		      \]
-		      \[
-			      (2 \alpha)+7(2\alpha x+\beta)=x+3
-		      \]
-		      \[
-			      2 \alpha+14\alpha x+7\beta=x+3
-		      \]
-		      \[
-			      \textcolor{red}{x(14\alpha)}+\textcolor{blue}{2\alpha+7\beta}=\textcolor{red}{x}+\textcolor{blue}{3}
-		      \]
-		      Metto a sistema:
-		      \[
-			      \begin{cases}
-				      14 \alpha = 1 \\
-				      2 \alpha + 7 \beta =3
-			      \end{cases}
-		      \]
-		      Risolvo il sistema e ottengo:
-		      \[
-			      \begin{cases}
-				      \alpha = \frac{1}{14} \\
-				      \beta = \frac{20}{49}
-			      \end{cases}
-		      \]
-		\item Ottengo la soluzione particolare: \\
-		      La soluzione particolare $y_p=\alpha x^2+\beta x + \gamma$ dopo aver trovato $\alpha, \beta, \gamma$ sarà:
-		      \begin{align*}
-			      y_p
-			       & = \alpha x^2+\beta x + \gamma            \\
-			       & = \frac{1}{14} x^2 + \frac{20}{49} x - 0 \\
-			       & = \frac{1}{14} x^2 + \frac{20}{49} x
-		      \end{align*}
-	\end{enumerate}
-\end{esercizio}
-
-\begin{esercizio}[Caso 3]
-	\textcolor{red}{$c,b = 0$}
-	\[
-		y''=x^2+4x-7
-	\]
-	$c,b=0$ quindi devo cercare un polinomio di grado $n+2$, poichè il grado di $x^2+4x-7$ è 2, allora $n+2=2+2=4$. \\ \\
-	\textcolor{red}{Ho due metodi}:
-	\begin{itemize}
-		\item Integrare due volte, oppure
-		\item Trovare il polinomio generico di grado $n=4$:
-		      \[
-			      \alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon
-		      \]
-	\end{itemize}
-	\textcolor{blue}{\textbf{Primo metodo: Integrare due volte}} \\
-	Qui non trovo la soluzione particolare ma trovo la soluzione generale della EDO:
+\section{Equazioni differenziali}
+\subsection{Introduzione}
+\subsubsection{EDO significato}
+In fisica, chimica, ingegneria, biologia ed economia le equazioni differenziali sono uno strumento matematico indispensabile.
+Il motivo? Sono il linguaggio con cui descriviamo il cambiamento. Ci permettono di capire esattamente come le cose si trasformano o si muovono rispetto al tempo che passa, allo spazio che occupano o a un mix di queste variabili.
+\begin{esempio}[Esempio: La tazza di caffè]
+	Immagina di avere una tazza di caffè bollente appoggiata sul tavolo. Sai per certo che si raffredderà, ma con quale velocità lo farà?
+	Un'equazione differenziale (nota come Legge di Newton sul raffreddamento) ci dice che la velocità con cui la temperatura del caffè cambia rispetto al tempo è proporzionale alla differenza tra la temperatura del caffè e quella della stanza.
+	
 	\begin{align*}
-		\int(x^2+4x-7)dx
-		 & = \int x^2dx + \int 4x dx - \int 7 dx \\
-		 & = \frac{x^3}{3} + 2x^2 - 7x + c_1
+		\frac{dT}{dt}=-k(T- T_{ambiente})
 	\end{align*}
-	Integro di nuovo:
+	dove:
+	
+	% Inizio la prima colonna (larga il 65% dello spazio totale) per l'elenco
+	\begin{minipage}{0.65\textwidth}
+		\begin{itemize}
+			\item $T$ è la temperatura del caffè (quella che cambia)
+			\item $t$ è il tempo che passa
+			\item $\frac{dT}{dt}$ è la derivata della temperatura rispetto al tempo; in poche parole, rappresenta la velocità di variazione della temperatura rispetto al tempo.
+		\end{itemize}
+	\end{minipage}% <-- Questo simbolo % è importante per non creare spazi extra!
+	\hfill % Crea uno spazio vuoto flessibile tra le due minipage
+	% Inizio la seconda colonna (larga il 30% dello spazio totale) per l'immagine
+	\begin{minipage}{0.2\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{coffee.png}
+	\end{minipage}
+\end{esempio}
+
+\subsubsection{Integrale generale significato}
+L'integrale generale è l'insieme delle soluzioni dell'equazione differenziale.
+\begin{esempio}[Esempio: La tazza di caffè]
+	Riprendendo questo esempio, si trova l'integrale generale risolvendo a variabili separabili (ometto passaggi):
 	\begin{align*}
-		\int\left(\frac{x^3}{3} + 2x^2 - 7x + c_1\right)dx
-		 & = \int \frac{x^3}{3}dx + \int 2x^2 dx - \int 7x dx + \int c_1 dx \\
-		 & = \frac{x^4}{12} + \frac{2x^3}{3} - \frac{7x^2}{2} + c_1x + c_2
+		T(t)=T_{ambiente}+c \cdot e^{-kt}
 	\end{align*}
-	Soluzione generale della EDO:
-	\[
-		\frac{x^4}{12} + \frac{2x^3}{3} - \frac{7x^2}{2} + c_1x + c_2
-	\]
-	\textcolor{blue}{\textbf{Secondo metodo: metodo di somiglianza}} \\
-	Qui trovo solo la soluzione particolare:
-	\begin{enumerate}
-		\item Scrivo polinomio di grado $n=4$ generico:
-		      \[
-			      y_p=\alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon
-		      \]
-		\item Calcolo derivata seconda del polinomio generico:
-		      \begin{itemize}
-			      \item $y'_p=4\alpha x^3+3\beta x^2+2 \gamma x + \delta$
-			      \item $y''_p=12\alpha x^2+6\beta x+2 \gamma$
-		      \end{itemize}
-		\item Sostituisco la derivata seconda trovata nella EDO e trovo $\alpha, \beta, \gamma, \delta, \epsilon$:
-		      \[
-			      y''=x^2+4x-7
-		      \]
-		      diventa:
-		      \[
-			      (12\alpha x^2+6\beta x+2 \gamma)=x^2+4x-7
-		      \]
-		      \[
-			      x^2(12 \alpha)+x(6 \beta)+2 \gamma=x^2+4x-7
-		      \]
-		      Metto a sistema:
-		      \[
-			      \begin{cases}
-				      12 \alpha = 1 \\
-				      6 \beta =4    \\
-				      2 \gamma =-7  \\
-			      \end{cases}
-		      \]
-		      Risolvo il sistema e ottengo:
-		      \[
-			      \begin{cases}
-				      \alpha = \frac{1}{12} \\
-				      \beta = \frac{2}{3}   \\
-				      \gamma = - \frac{7}{2}
-			      \end{cases}
-		      \]
-		\item Ottengo la soluzione particolare:
-		      La soluzione particolare $y_p=\alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon$ dopo aver trovato $\alpha, \beta, \gamma, \delta, \epsilon$ sarà:
-		      \begin{align*}
-			      y_p
-			       & = \alpha x^4+\beta x^3+\gamma x^2+\delta x + \epsilon           \\
-			       & = \frac{1}{12} x^4 + \frac{2}{3} x^3 - \frac{7}{2} x^2 + 0x + 0 \\
-			       & = \frac{1}{12} x^4 + \frac{2}{3} x^3 - \frac{7}{2} x^2
-		      \end{align*}
-	\end{enumerate}
-\end{esercizio}
+\end{esempio}
 
-\subsubsection{Metodo di somiglianza: $f(x)$ esponenziale}
-Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omogenee.
-\[
-	ay''+by'+cy=f(x)
-\]
-\textcolor{red}{$f(x)$ è un esponenziale} \\
-\begin{esercizio}[Caso 1: $\alpha$ non è soluzione dell'eq. caratteristica]
-	\textcolor{red}{$f(x)=c \cdot e^{\alpha x}$ e $\alpha$ \textcolor{black}{non} è soluzione dell'equazione caratteristica.}
-	\[
-		y''+7y'+12y=5e^{2x}
-	\]
-	In questo caso abbiamo che $c=5$ e $\alpha=2$. \\
-	\begin{enumerate}
-		\item Trovo soluzioni dell'omogenea associata (ponendo $f(x)=0$):
-		      \[
-			      y''+7y'+12y=0
-		      \]
-		      Quindi:
-		      \[
-			      \lambda^2 + 7 \lambda + 12 = 0
-		      \]
-		      \[
-			      \Delta=b^2-4ac=49-4(12)=49-48=1
-		      \]
-		      \[
-			      x_1,x_2=\frac{-b \pm \sqrt{\Delta}}{2a}=\frac{-7 \pm 1}{2}=
-		      \]
-		      \\
-		      \[
-			      x_1=-3
-		      \]
-		      \[
-			      x_2=-4
-		      \]
-		\item $\alpha$ fa parte delle soluzioni dell'equazione caratteristica? \\
-		      No, perchè ho ottenuto $x_1=-3,x_2=-4$. Quindi adesso cerco soluzione particolare nella forma:
-		      \[
-			      y_p=k\cdot e^{\alpha x}
-		      \]
-		      \begin{enumerate}
-			      \item Calcolo derivata prima e seconda di $y_p=k\cdot e^{2x}$:
-			            \begin{itemize}
-				            \item $y'_p=2ke^{2x}$
-				            \item $y''_p=4ke^{2x}$
-			            \end{itemize}
-			      \item Sostituisco le derivate nella EDO:
-			            \[
-				            y''+7y'+12y=5e^{2x}
-			            \]
-			            diventa:
-			            \[
-				            (4ke^{2x})+7(2ke^{2x})+12(k\cdot e^{2x})=5e^{2x}
-			            \]
-			            \[
-				            ke^{2x}\left(4+ (7 \cdot 2) + 12\right)=5e^{2x}
-			            \]
-			            \[
-				            30ke^{2x}=5e^{2x}
-			            \]
-			            Ricavo $k$:
-			            \[
-				            k=\frac{5e^{2x}}{30e^{2x}}=\frac{5}{30}\cdot \frac{e^{2x}}{e^{2x}}=\frac{1}{6} \cdot (e^{2x-2x})= \frac{1}{6} \cdot e^0= \frac{1}{6}
-			            \]
-			      \item La soluzione particolare $y_p=k\cdot e^{\alpha x}$ diventa:
-			            \[
-				            y_p=\frac{1}{6}e^{2x}
-			            \]
-		      \end{enumerate}
-	\end{enumerate}
-	Quindi la soluzione della EDO sarà $y=y_O+y_p$, ovvero:
-	\[
-		y=\left(c_1 e^{-3x}+c_2 e^{-4x}\right)+ \frac{1}{6}e^{2x}
-	\]
-\end{esercizio}
+\subsubsection{Problema di Cauchy significato}
+Il problema di Cauchy consiste nel trovare la soluzione della EDO imponendo le condizioni iniziali.
+\begin{esempio}[Esempio: La tazza di caffè]
+	Sempre con lo stesso esempio, consideriamo il problema di Cauchy per calcolare quanto vale $c$ con le condizioni iniziali. \\
+	La temperatura della stanza è di $20^{\circ}$; hai appena versato il caffè nella tazza all'istante zero $(t=0)$, ed è bollente: $90^{\circ}$, quindi la condizione iniziale:
+	\begin{align*}
+		\begin{cases}
+			T(0)=90
+		\end{cases}
+	\end{align*}
+	Impongo le condizioni iniziali nell'integrale generale e ottengo:
+	\begin{align*}
+		T(t) &= T_{ambiente}+c \cdot e^{-kt} \\
+		90 &= 20 + c \cdot e^{-k \cdot 0} \\
+		c &= 70
+	\end{align*}
+	quindi, la soluzione al problema di Cauchy sarà:
+	\begin{align*}
+		T(t) &= 20 + (70 \cdot e^{-kt})
+	\end{align*}
+	Adesso se vuoi sapere quanti gradi avrà il caffè tra esattamente 15 minuti ($15 \cdot 60 = 900 s$), ti basterà impostare $t=900$ e calcolare:
+	\begin{align*}
+		T(900) &= 20 + (70 \cdot e^{-k \cdot 900})
+	\end{align*}
+	con $k$ costante di raffreddamento.
+\end{esempio}
+\subsection{EDO lineare di I ordine}
 
-\begin{esercizio}[Caso 2: $\alpha$ è soluzione dell'eq. caratteristica]
-	\textcolor{red}{$f(x)=c \cdot e^{\alpha x}$ e $\alpha$ è soluzione dell'equazione caratteristica.}
-	\[
-		3y''-20y'-7y=4e^{7x}
-	\]
-	In questo caso abbiamo che $c=4$ e $\alpha=7$. \\
-	\begin{enumerate}
-		\item Trovo soluzioni dell'omogenea associata (ponendo $f(x)=0$):
-		      \[
-			      3y''-20y'-7y=0
-		      \]
-		      Quindi:
-		      \[
-			      3\lambda^2 - 20 \lambda -7 = 0
-		      \]
-		      \[
-			      \Delta=b^2-4ac=400-4(3)(-7)=400+84=484
-		      \]
-		      \[
-			      x_1,x_2=\frac{-b \pm \sqrt{\Delta}}{2a}=\frac{20 \pm \sqrt{484}}{6}=\frac{-20 \pm 22}{6}=
-		      \]
-		      \\
-		      \[
-			      x_1=-\frac{1}{3}
-		      \]
-		      \[
-			      x_2=7
-		      \]
-		\item $\alpha$ fa parte delle soluzioni dell'equazione caratteristica? \\
-		      Sì, perchè ho ottenuto $x_1=-\frac{1}{3},x_2=7$. Quindi adesso cerco soluzione particolare nella forma:
-		      \[
-			      y_p=kx \cdot e^{\alpha x}
-		      \]
-		      \begin{enumerate}
-			      \item Calcolo derivata prima e seconda di $y_p=kx \cdot e^{7x}$:
-			            \begin{itemize}
-				            \item \begin{align*}
-					                  y'_p
-					                   & = \bigl( f' \cdot g + f \cdot g' \bigr) \\[4pt]
-					                   & = \bigl( (k x)' \cdot e^{7x}
-					                  + k x \cdot (e^{7x})' \bigr)               \\[4pt]
-					                   & = k e^{7x} + 7k x e^{7x}
-				                  \end{align*}
-
-				            \item \begin{align*}
-					                  y''_p
-					                   & = \textcolor{red}{(k e^{7x})'} + (7k x e^{7x})'     \\[4pt]
-					                   & = \textcolor{red}{7k e^{7x}}
-					                  + \bigl( (7k x)' \cdot e^{7x}
-					                  + 7k x \cdot (e^{7x})' \bigr)                          \\[4pt]
-					                   & = 7k e^{7x} + \left(7k e^{7x} + 49k x e^{7x}\right) \\[4pt]
-					                   & = 14k e^{7x}+49k x e^{7x}
-				                  \end{align*}
-			            \end{itemize}
-			      \item Sostituisco le derivate nella EDO e trovo $k$:
-			            \[
-				            3y''-20y'-7y=4e^{7x}
-			            \]
-			            diventa:
-			            \[
-				            3(14k e^{7x}+49k x e^{7x})-20(k e^{7x} + 7k x e^{7x} )-7(kx \cdot e^{7x})=4e^{7x}
-			            \]
-			            \[
-				            42k e^{7x}+147k x e^{7x}-20k e^{7x}-140k x e^{7x}-7kxe^{7x}=4e^{7x}
-			            \]
-			            \[
-				            ke^{7x}(42+147x-20-140x-7x)=4e^{7x}
-			            \]
-			            \[
-				            ke^{7x}(22)=4e^{7x}
-			            \]
-			            Ricavo $k$:
-			            \[
-				            22ke^{7x}=4e^{7x}
-			            \]
-			            \[
-				            k=\frac{4e^{7x}}{22e^{7x}}=\frac{4}{22}=\frac{2}{11}
-			            \]
-			      \item La soluzione particolare $y_p=kx\cdot e^{\alpha x}$ diventa:
-			            \[
-				            y_p=\frac{2}{11}xe^{7x}
-			            \]
-		      \end{enumerate}
-	\end{enumerate}
-	Quindi la soluzione della EDO sarà $y=y_O+y_p$, ovvero:
-	\[
-		y=\left(c_1 e^{-\frac{1}{3}x}+c_2 e^{7x}\right)+ \frac{2}{11}xe^{7x}
-	\]
-\end{esercizio}
-
-\begin{esercizio}[Caso 3]
-	\textcolor{red}{$f(x)=c \cdot e^{\alpha x}$ e \\ $\alpha= \lambda_1= \lambda_2$ è uguale ad entrambe le soluzioni dell'equazione caratteristica.}
-	\[
-		y''-12y'+36y=3e^{6x}
-	\]
-	In questo caso abbiamo che $c=3$ e $\alpha=6$. \\
-	\begin{enumerate}
-		\item Trovo soluzioni dell'omogenea associata (ponendo $f(x)=0$):
-		      \[
-			      y''-12y'+36y=0
-		      \]
-		      Quindi:
-		      \[
-			      \lambda^2-12\lambda+36=0
-		      \]
-		      \[
-			      \Delta=b^2-4ac=144-144=0
-		      \]
-		      \[
-			      \lambda_1,\lambda_2=\frac{-b \pm 0}{2a}=\frac{12}{2}=6
-		      \]
-		      Quindi ho due soluzioni coincidenti.
-		\item Quando le soluzioni dell'equazione caratteristica coincidono e sono uguali ad $\alpha$, allora cerco soluzione particolare nella forma:
-		      \[
-			      y_p=kx^2 \cdot e^{\alpha x}
-		      \]
-		      \begin{enumerate}
-			      \item Calcolo derivata prima e seconda di $y_p=kx^2 \cdot e^{6 x}$:
-			            \begin{itemize}
-				            \item \begin{align*}
-					                  y'_p
-					                   & = \bigl( f' \cdot g + f \cdot g' \bigr)                \\[4pt]
-					                   & = \bigl((kx^2)' \cdot e^{6 x} + kx^2 \cdot (e^{6 x})') \\[4pt]
-					                   & = 2kxe^{6 x} + 6kx^2e^{6 x}
-				                  \end{align*}
-				            \item \begin{align*}
-					                  y''_p
-					                   & = \bigl( f' \cdot g + f \cdot g' \bigr)                                                                       \\[4pt]
-					                   & = \bigl((2kx)' \cdot e^{6 x} + 2kx \cdot (e^{6 x})') + \bigl((6kx^2)' \cdot e^{6 x} + 6kx^2 \cdot (e^{6 x})') \\[4pt]
-					                   & = \left(2ke^{6 x} + 12kxe^{6 x}\right)+ \left(12kxe^{6 x} + 36kx^2e^{6 x}\right)                              \\
-					                   & = 36kx^2e^{6 x} + 24kxe^{6 x} + 2ke^{6 x}
-				                  \end{align*}
-			            \end{itemize}
-			      \item Sostiuisco le derivate nella EDO iniziale e ricavo $k$:
-			            \[
-				            y''-12y'+36y=3e^{6x}
-			            \]
-			            diventa:
-			            \[
-				            (36kx^2e^{6 x} + 24kxe^{6 x} + 2ke^{6 x})-12(2kxe^{6 x} + 6kx^2e^{6 x})+36(kx^2 e^{6 x})=3e^{6x}
-			            \]
-			            \[
-				            36kx^2e^{6 x} + 24kxe^{6 x} + 2ke^{6 x}-24kxe^{6 x}-72kx^2e^{6 x}+ 36kx^2 e^{6 x}=3e^{6x}
-			            \]
-			            \[
-				            2ke^{6 x}=3e^{6x}
-			            \]
-			            \[
-				            k = \frac{3e^{6x}}{2e^{6x}}=\frac{3}{2}
-			            \]
-			      \item La soluzione particolare $y_p=kx^2e^{\alpha x}$ diventa:
-			            \[
-				            y_p=\frac{3}{2}x^2e^{6 x}
-			            \]
-		      \end{enumerate}
-	\end{enumerate}
-	La soluzione della EDO $y=y_O+y_p$ è:
-	\[
-		y=\left(c_1e^{6x}+c_2xe^{6x}\right) + \frac{3}{2}x^2e^{6 x}
-	\]
-\end{esercizio}
+\subsection{EDO a variabili separabili}
+\subsection{EDO lineare di II ordine}
 
 
-\subsubsection{Metodo di somiglianza: $f(x)$ è $\sin$ o $\cos$}
-Utile per trovare la soluzione particolare $y_p$ delle EDO di II ordine non omogenee.
-\[
-	ay''+by'+cy=f(x)
-\]
-\textcolor{red}{$f(x)$ è $\sin(x)$ o $\cos(x)$} \\
+\newpage
 
-\section{Equazioni differenziali non lineari}
+\section{Teoremi EDO}
 \subsection{EDO di I ordine}
-\subsubsection{A variabili separabili}
 \subsection{EDO di II ordine}
-\subsubsection{A variabili separabili}
+
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Proprietà Vettoriali}
@@ -1842,14 +1440,14 @@ Se $f$ non è differenziabile, il piano esiste come oggetto geometrico ma non è
 	\end{itemize}
 	Se $\vec{r}$ è derivabile in $t_0 \land f$ è differenziabile in $\vec{r}(t_0)$, allora la funzione composta è derivabile in $t_0$ e la derivata è data da:
 	\begin{align*}
-				\textcolor{red}{g'(t_0) \;} & = \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle                       \\                                                                                                       
-		                        & = \left(\frac{\partial f}{\partial x}(\vec{r}(t_0)) \cdot r_1'(t_0)\right) + \left(\frac{\partial f}{\partial y}(\vec{r}(t_0)) \cdot r_2'(t_0)\right)
+		\textcolor{red}{g'(t_0) \;} & = \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle                                                                                           \\
+		                            & = \left(\frac{\partial f}{\partial x}(\vec{r}(t_0)) \cdot r_1'(t_0)\right) + \left(\frac{\partial f}{\partial y}(\vec{r}(t_0)) \cdot r_2'(t_0)\right)
 	\end{align*}
 	In modo esteso:
-		\begin{align*}
-		\textcolor{red}{g'(t_0) \;} & = \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle \quad \quad \quad \textcolor{cyan}{\text{con }\vec{r}(t_0)=\left(x(t_0),y(t_0) \right) \text{ allora,}}                                                                                    \\
-		                        & = \langle \nabla f(x(t_0),y(t_0)), (x'(t_0),y'(t_0))\rangle                                                                                                          \\
-		                        & = \left[\frac{\partial f}{\partial x}(x(t_0),y(t_0)) \cdot x'(t_0)\right] + \left[\frac{\partial f}{\partial y}(x(t_0),y(t_0)) \cdot y'(t_0)\right]
+	\begin{align*}
+		\textcolor{red}{g'(t_0) \;} & = \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle \quad \quad \quad \textcolor{cyan}{\text{con }\vec{r}(t_0)=\left(x(t_0),y(t_0) \right) \text{ allora,}} \\
+		                            & = \langle \nabla f(x(t_0),y(t_0)), (x'(t_0),y'(t_0))\rangle                                                                                                         \\
+		                            & = \left[\frac{\partial f}{\partial x}(x(t_0),y(t_0)) \cdot x'(t_0)\right] + \left[\frac{\partial f}{\partial y}(x(t_0),y(t_0)) \cdot y'(t_0)\right]
 	\end{align*}
 \end{theorem}
 
@@ -1876,68 +1474,68 @@ Se $f$ non è differenziabile, il piano esiste come oggetto geometrico ma non è
 		\end{align*}
 		\begin{enumerate}
 			\item \textbf{Definizione di derivata con il rapporto incrementale:} \\
-			Per definizione di derivata
-			\begin{align*}
-				g'(t_0) = \lim_{h \to 0} \frac{g(t_0+h)-g(t_0)}{h} \\
-				\textcolor{cyan}{\text{sapendo che } g(t_0)=f(\vec{r}(t_0)) \text{ allora}} \\
-				g'(t_0) = \lim_{h \to 0} \frac{f(\vec{r}(t_0+h))-f(\vec{r}(t_0))}{h} \\
-			\end{align*}
+			      Per definizione di derivata
+			      \begin{align*}
+				      g'(t_0) = \lim_{h \to 0} \frac{g(t_0+h)-g(t_0)}{h}                          \\
+				      \textcolor{cyan}{\text{sapendo che } g(t_0)=f(\vec{r}(t_0)) \text{ allora}} \\
+				      g'(t_0) = \lim_{h \to 0} \frac{f(\vec{r}(t_0+h))-f(\vec{r}(t_0))}{h}        \\
+			      \end{align*}
 			\item \textbf{Sfrutto ipotesi di differenziabilità:} \\
-			Sapendo che, per ipotesi, $f$ è differenziabile in $\vec{r}(t_0)$, e la definizione di differenziabilità\footnote{
-			notare che la def. di differenziabilità sarebbe:
-			\begin{align*}
-				f(\vec{x}_0+\vec{h}) = f(\vec{x}_0) + \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left(\|h\|\right) \quad \text{ per } \vec{h} \to \vec{0} 
-			\end{align*}
-			ma per comodità di questa dimostrazione, abbiamo semplicemente impostato $\vec{h}=\vec{x}-\vec{x}_0$
-			} è:
-			\begin{align*}
-				f(\vec{x}) - f(\vec{x}_0) = \langle \nabla f(\vec{x}_0), \vec{x}-\vec{x}_0 \rangle + o\left( \| \vec{x}-\vec{x}_0 \| \right)  \quad \textcolor{red}{\textcircled{a}}
-			\end{align*}
-			dato che:
-			\begin{align*}
-			\begin{cases}
-				\vec{x}_0 = \vec{r}(t_0)\\
-				\vec{x} = \vec{r}(t_0 +h)
-			\end{cases}
-			\end{align*}
-			quindi sostituisco nella \textcolor{red}{\textcircled{a}} e ottengo:
-			\begin{align*}
-				f(\vec{r}(t_0 +h)) - f(\vec{r}(t_0)) = \langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right) \quad \textcolor{red}{\textcircled{b}}
-			\end{align*}
-			e notare che:
-			\begin{align*}
-				\underbrace{f(\vec{r}(t_0 +h))}_{=g(t_0+h)} - \underbrace{f(\vec{r}(t_0))}_{=g(t_0)} = \langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)
-			\end{align*}
+			      Sapendo che, per ipotesi, $f$ è differenziabile in $\vec{r}(t_0)$, e la definizione di differenziabilità\footnote{
+				      notare che la def. di differenziabilità sarebbe:
+				      \begin{align*}
+					      f(\vec{x}_0+\vec{h}) = f(\vec{x}_0) + \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left(\|h\|\right) \quad \text{ per } \vec{h} \to \vec{0}
+				      \end{align*}
+				      ma per comodità di questa dimostrazione, abbiamo semplicemente impostato $\vec{h}=\vec{x}-\vec{x}_0$
+			      } è:
+			      \begin{align*}
+				      f(\vec{x}) - f(\vec{x}_0) = \langle \nabla f(\vec{x}_0), \vec{x}-\vec{x}_0 \rangle + o\left( \| \vec{x}-\vec{x}_0 \| \right)  \quad \textcolor{red}{\textcircled{a}}
+			      \end{align*}
+			      dato che:
+			      \begin{align*}
+				      \begin{cases}
+					      \vec{x}_0 = \vec{r}(t_0) \\
+					      \vec{x} = \vec{r}(t_0 +h)
+				      \end{cases}
+			      \end{align*}
+			      quindi sostituisco nella \textcolor{red}{\textcircled{a}} e ottengo:
+			      \begin{align*}
+				      f(\vec{r}(t_0 +h)) - f(\vec{r}(t_0)) = \langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right) \quad \textcolor{red}{\textcircled{b}}
+			      \end{align*}
+			      e notare che:
+			      \begin{align*}
+				      \underbrace{f(\vec{r}(t_0 +h))}_{=g(t_0+h)} - \underbrace{f(\vec{r}(t_0))}_{=g(t_0)} = \langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)
+			      \end{align*}
 			\item \textbf{Sostituisco quanto ottenuto nel limite:} \\
-			Ricordo la definizione di derivata nel punto 1
-			\begin{align*}
-				g'(t_0) = \lim_{h \to 0} \frac{f(\vec{r}(t_0+h))-f(\vec{r}(t_0))}{h}
-			\end{align*}
-			ora sostituisco la \textcolor{red}{\textcircled{b}} nel limite ottenendo
-			\begin{align*}
-				g'(t_0) = \lim_{h \to 0} \frac{\langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h}
-			\end{align*}
+			      Ricordo la definizione di derivata nel punto 1
+			      \begin{align*}
+				      g'(t_0) = \lim_{h \to 0} \frac{f(\vec{r}(t_0+h))-f(\vec{r}(t_0))}{h}
+			      \end{align*}
+			      ora sostituisco la \textcolor{red}{\textcircled{b}} nel limite ottenendo
+			      \begin{align*}
+				      g'(t_0) = \lim_{h \to 0} \frac{\langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h}
+			      \end{align*}
 			\item \textbf{Analizzo il limite spezzandolo:} \\
-			Voglio capire questo:
-			\begin{align*}
-				g'(t_0) = \lim_{h \to 0} \frac{\langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h} = \text{ ?}
-			\end{align*}
-			lo spezzo:
-			\begin{align*}
-				g'(t_0) = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \frac{(\vec{r}(t_0 +h)-\vec{r}(t_0))}{h} \right\rangle + \lim_{h \to 0} \frac{o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h} = \text{ ?}
-			\end{align*}
-			adesso analizzo il limite:
-			\begin{align*}
-				g'(t_0) = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \underbrace{\frac{(\vec{r}(t_0 +h)-\vec{r}(t_0))}{h}}_{=\vec{r}'(t_0)} \right\rangle + \lim_{h \to 0} \underbrace{\frac{o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h}}_{=\frac{0}{h} \text{ quindi } \to 0} = \text{ ?}
-			\end{align*}
-			quindi
-			\begin{align*}
-				{g'(t_0)} = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}'(t_0) \right\rangle + 0 = \text{ ?}
-			\end{align*}
-			in conclusione:
-			\begin{align*}
-				\textcolor{magenta}{g'(t_0)} = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}'(t_0) \right\rangle + 0 \textcolor{magenta}{\; = \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}\,'(t_0) \right\rangle}
-			\end{align*}
+			      Voglio capire questo:
+			      \begin{align*}
+				      g'(t_0) = \lim_{h \to 0} \frac{\langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h} = \text{ ?}
+			      \end{align*}
+			      lo spezzo:
+			      \begin{align*}
+				      g'(t_0) = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \frac{(\vec{r}(t_0 +h)-\vec{r}(t_0))}{h} \right\rangle + \lim_{h \to 0} \frac{o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h} = \text{ ?}
+			      \end{align*}
+			      adesso analizzo il limite:
+			      \begin{align*}
+				      g'(t_0) = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \underbrace{\frac{(\vec{r}(t_0 +h)-\vec{r}(t_0))}{h}}_{=\vec{r}'(t_0)} \right\rangle + \lim_{h \to 0} \underbrace{\frac{o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h}}_{=\frac{0}{h} \text{ quindi } \to 0} = \text{ ?}
+			      \end{align*}
+			      quindi
+			      \begin{align*}
+				      {g'(t_0)} = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}'(t_0) \right\rangle + 0 = \text{ ?}
+			      \end{align*}
+			      in conclusione:
+			      \begin{align*}
+				      \textcolor{magenta}{g'(t_0)} = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}'(t_0) \right\rangle + 0 \textcolor{magenta}{\; = \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}\,'(t_0) \right\rangle}
+			      \end{align*}
 		\end{enumerate}
 		che è proprio quello che volevamo dimostrare.
 	\end{proof}
