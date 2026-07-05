@@ -1836,7 +1836,7 @@ Se $f$ non è differenziabile, il piano esiste come oggetto geometrico ma non è
 \begin{theorem}{Regola della catena in $\mathbb{R}^2$}
 	SSiano:
 	\begin{itemize}
-		\item $\vec{r}: I \subseteq \mathbb{R} \to \mathbb{R}^2$ (funzione vettoriale\footnote{prende in input $t$ e restituisce un vettore a $2$ componenti})
+		\item $\vec{r}: I \subseteq \mathbb{R} \to \mathbb{R}^2$ (funzione vettoriale\footnote{prende in input $t_0$ e restituisce un vettore a $2$ componenti})
 		\item $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto
 		\item suppongo che la funzione composta $g(t)=f(\vec{r}(t))$ sia definita almeno in un intorno di $t_0 \in I$
 	\end{itemize}
@@ -1854,11 +1854,10 @@ Se $f$ non è differenziabile, il piano esiste come oggetto geometrico ma non è
 \end{theorem}
 
 
-libro analisi2 in prestito p.135
 \begin{theorem}{Regola della catena in $\mathbb{R}^n$}
 	SSiano:
 	\begin{itemize}
-		\item $\vec{r}: I \subseteq \mathbb{R} \to \mathbb{R}^n$ (funzione vettoriale\footnote{prende in input $t$ e restituisce un vettore a $n$ componenti})
+		\item $\vec{r}: I \subseteq \mathbb{R} \to \mathbb{R}^n$ (funzione vettoriale\footnote{prende in input $t_0$ e restituisce un vettore a $n$ componenti})
 		\item $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ con $A$ aperto
 		\item suppongo che la funzione composta $g(t)=f(\vec{r}(t))$ sia definita almeno in un intorno $J$ di $t_0 \in I$
 	\end{itemize}
@@ -1871,7 +1870,76 @@ libro analisi2 in prestito p.135
 		\textcolor{red}{g'(t_0) = \,} \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle = \sum_{i=1}^{n}\left(\frac{\partial f}{\partial x_i}(\vec{r}(t_0)) \cdot r_i'(t_0)\right)
 	\]
 	\begin{proof}
-		vedi quaderno
+		Voglio dimostrare che la derivata della funzione composta in $t_0$ è uguale al prodotto scalare tra il gradiente della funzione composta e la derivata della funzione interna valutata in $t_0$:
+		\begin{align*}
+			{g'(t_0) = \,} \langle \nabla f(\vec{r}(t_0)), \vec{r} \, '(t_0) \rangle \tag*{(\text{tesi})}
+		\end{align*}
+		\begin{enumerate}
+			\item \textbf{Definizione di derivata con il rapporto incrementale:} \\
+			Per definizione di derivata
+			\begin{align*}
+				g'(t_0) = \lim_{h \to 0} \frac{g(t_0+h)-g(t_0)}{h} \\
+				\textcolor{cyan}{\text{sapendo che } g(t_0)=f(\vec{r}(t_0)) \text{ allora}} \\
+				g'(t_0) = \lim_{h \to 0} \frac{f(\vec{r}(t_0+h))-f(\vec{r}(t_0))}{h} \\
+			\end{align*}
+			\item \textbf{Sfrutto ipotesi di differenziabilità:} \\
+			Sapendo che, per ipotesi, $f$ è differenziabile in $\vec{r}(t_0)$, e la definizione di differenziabilità\footnote{
+			notare che la def. di differenziabilità sarebbe:
+			\begin{align*}
+				f(\vec{x}_0+\vec{h}) = f(\vec{x}_0) + \langle \nabla f(\vec{x}_0), \vec{h} \rangle + o \left(\|h\|\right) \quad \text{ per } \vec{h} \to \vec{0} 
+			\end{align*}
+			ma per comodità di questa dimostrazione, abbiamo semplicemente impostato $\vec{h}=\vec{x}-\vec{x}_0$
+			} è:
+			\begin{align*}
+				f(\vec{x}) - f(\vec{x}_0) = \langle \nabla f(\vec{x}_0), \vec{x}-\vec{x}_0 \rangle + o\left( \| \vec{x}-\vec{x}_0 \| \right)  \quad \textcolor{red}{\textcircled{a}}
+			\end{align*}
+			dato che:
+			\begin{align*}
+			\begin{cases}
+				\vec{x}_0 = \vec{r}(t_0)\\
+				\vec{x} = \vec{r}(t_0 +h)
+			\end{cases}
+			\end{align*}
+			quindi sostituisco nella \textcolor{red}{\textcircled{a}} e ottengo:
+			\begin{align*}
+				f(\vec{r}(t_0 +h)) - f(\vec{r}(t_0)) = \langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right) \quad \textcolor{red}{\textcircled{b}}
+			\end{align*}
+			e notare che:
+			\begin{align*}
+				\underbrace{f(\vec{r}(t_0 +h))}_{=g(t_0+h)} - \underbrace{f(\vec{r}(t_0))}_{=g(t_0)} = \langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)
+			\end{align*}
+			\item \textbf{Sostituisco quanto ottenuto nel limite:} \\
+			Ricordo la definizione di derivata nel punto 1
+			\begin{align*}
+				g'(t_0) = \lim_{h \to 0} \frac{f(\vec{r}(t_0+h))-f(\vec{r}(t_0))}{h}
+			\end{align*}
+			ora sostituisco la \textcolor{red}{\textcircled{b}} nel limite ottenendo
+			\begin{align*}
+				g'(t_0) = \lim_{h \to 0} \frac{\langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h}
+			\end{align*}
+			\item \textbf{Analizzo il limite spezzandolo:} \\
+			Voglio capire questo:
+			\begin{align*}
+				g'(t_0) = \lim_{h \to 0} \frac{\langle \nabla f(\vec{r}(t_0)), (\vec{r}(t_0 +h)-\vec{r}(t_0)) \rangle + o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h} = \text{ ?}
+			\end{align*}
+			lo spezzo:
+			\begin{align*}
+				g'(t_0) = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \frac{(\vec{r}(t_0 +h)-\vec{r}(t_0))}{h} \right\rangle + \lim_{h \to 0} \frac{o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h} = \text{ ?}
+			\end{align*}
+			adesso analizzo il limite:
+			\begin{align*}
+				g'(t_0) = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \underbrace{\frac{(\vec{r}(t_0 +h)-\vec{r}(t_0))}{h}}_{=\vec{r}'(t_0)} \right\rangle + \lim_{h \to 0} \underbrace{\frac{o\left( \| \vec{r}(t_0 +h)-\vec{r}(t_0) \| \right)}{h}}_{=\frac{0}{h} \text{ quindi } \to 0} = \text{ ?}
+			\end{align*}
+			quindi
+			\begin{align*}
+				{g'(t_0)} = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}'(t_0) \right\rangle + 0 = \text{ ?}
+			\end{align*}
+			in conclusione:
+			\begin{align*}
+				\textcolor{magenta}{g'(t_0)} = \lim_{h \to 0} \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}'(t_0) \right\rangle + 0 \textcolor{magenta}{\; = \left\langle \nabla f(\vec{r}(t_0)) , \vec{r}\,'(t_0) \right\rangle}
+			\end{align*}
+		\end{enumerate}
+		che è proprio quello che volevamo dimostrare.
 	\end{proof}
 \end{theorem}
 Questo teorema indica le condizioni necessarie affinchè possa esistere la derivata di una funzione composta $f(\vec{r}(t_0))$ in $t_0$:
