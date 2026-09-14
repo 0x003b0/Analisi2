@@ -310,8 +310,49 @@ SSiano $a,f$ funzioni continue in un intervallo $I$ dove $x_0 \in I$. Allora, $\
 \end{align*}
 ammette una soluzione unica $y \in C^1(I)$ ed è data da
 \begin{align*}
-	y(x)=\textcolor{red}{y_0}e^{-A(x)}+e^{-A(x)}\int_{x_0}^{x} f(s) e^{A(s)}ds
+	y(x)=\textcolor{red}{y_0}e^{-A(t)}+e^{-A(t)}\int_{x_0}^{x} f(s) e^{A(s)}ds
 \end{align*}
+dove: 
+\begin{itemize}
+	\item $A(t) = \int_{x_0}^{x} a(t)dt$
+	\item $A(s) = \int_{x_0}^{x} a(t)ds$
+\end{itemize}
+\begin{proof}
+	Voglio dimostrare che la soluzione unica si ottiene dalla formula:
+	\begin{align*}
+	y(x)={y_0}e^{-A(t)}+e^{-A(t)}\int_{x_0}^{x} f(s) e^{A(s)}ds
+\end{align*}
+Definisco:
+\begin{align*}
+	A(x) = \int_{x_0}^{x} a(t) dt
+\end{align*}
+per il Teorema Fondamentale del Calcolo Integrale, avrò che:
+\begin{align*}
+	A(x_0) = \int_{x_0}^{x_0} a(t) dt = 0 \quad \footnote{ovvero, l'integrale definito con estremi uguali fa zero $\int_{a}^{a} f(x)dx = F(a) - F(a) = 0$}
+\end{align*}
+Sostituisco $A(x_0)$ nell'integrale generale:
+\begin{align*}
+	y(x_0) &= {c}e^{-A(x_0)} + e^{-A(x_0)}\int_{x_0}^{x_0} f(s)e^{A(s)} ds \\
+	y(x_0) &= {c}e^{-0} + e^{-0} \underbrace{\int_{x_0}^{x_0} f(s)e^{A(s)} ds}_{=0} \\
+	y(x_0) &= c
+\end{align*}
+Moltiplico ambo i membri della EDO (4) per $e^{A(x)}$:
+\begin{align*}
+	e^{A(x)} \left(y'(x)+a(x)y(x) \right) &= e^{A(x)}f(x) \\
+	\text{\textcolor{cyan}{mi accorgo che $e^{A(x)} \left(y'(x)+a(x)y(x) \right) = \left(y(x)e^{A(x)} \right)'$}} & \\
+	\left(y(x)e^{A(x)} \right)' &= e^{A(x)}f(x) \\
+	\text{\textcolor{cyan}{integro ambo i membri rispetto a $s$}} & \\
+	\int_{x_0}^{x} \left(y(s)e^{A(s)} \right)' ds &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
+	\left[y(s)e^{A(s)} \right]_{x_0}^{x} &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
+	y(x)e^{A(x)} - y(x_0)e^{A(x_0)} &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
+	\text{\textcolor{cyan}{dato che $A(x_0)=0$ allora}} & \\
+	y(x)e^{A(x)} - y(x_0)e^{0} &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
+	y(x)e^{A(x)} - y(x_0) &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
+	\text{\textcolor{cyan}{isolo $y(x)$ e ottengo}} & \\
+	y(x)  &= y(x_0)e^{-A(x)} + e^{-A(x)}\int_{x_0}^{x} e^{A(s)}f(s) ds
+\end{align*}
+che è proprio ciò che volevo dimostrare.
+\end{proof}
 \end{theorem}
 \subsection{EDO a variabili separabili}
 \subsection{EDO lineare di II ordine}
