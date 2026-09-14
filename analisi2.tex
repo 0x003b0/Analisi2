@@ -170,23 +170,148 @@ Il problema di Cauchy consiste nel trovare la soluzione della EDO imponendo le c
 \end{esempio}
 \subsection{EDO lineare di I ordine}
 \begin{definition}{EDO lineare di I ordine}
-	SSia
+	SSi dice \textcolor{red}{equazione differenziale di primo ordine} un'equazione del tipo: 
+	\begin{align}
+		F\left(x,y,y'\right) = 0
+	\end{align}
+	dove:
+	\begin{itemize}
+		\item $y(x)$ è la funzione incognita che dipende appunto da $x$
+		\item $F$ è la funzione assegnata delle $3$ variabili $x,y,y'$, a valori reali
+	\end{itemize}
+	L'\textcolor{red}{ordine} dell'equazione rappresenta l'ordine massimo di derivazione che vi compare. \\
+	Si dirà \textcolor{red}{soluzione/curva integrale} della (1) nell'intervallo $I \subset \mathbb{R}$, una funzione $\varphi(x)$, definita almeno in $I$ e a valori reali, per cui risulti:
+	\begin{align*}
+		F \left(x, \varphi(x), \varphi'(x)\right) = 0 \quad \forall{x} \in I
+	\end{align*}
+	Infine, si dirà \textcolor{red}{integrale generale} dell'equazione (1) l'insieme di tutte le soluzioni di (1).
 \end{definition}
 
-\begin{theorem}{Struttura dell'integrale generale per EDO lineare di I ordine (completa, non omogenea?)}
-	SSia (qui parla solo di dim che è la somma di $y_O+y_p$)
+\begin{theorem}{Struttura dell'integrale generale per EDO lineare di I ordine}
+	SSia la EDO lineare di I ordine
+	\begin{align}
+    y'(x)+a(x)y(x) &= f(x) && \text{(forma normale)} \\
+    y'(x)+a(x)y(x) &= 0    && \text{(omogenea associata)}
+\end{align}
+	con $a(x),f(x)$ continue sull'intervallo $I \subseteq \mathbb{R}$. \\ \\
+	L' \textcolor{red}{integrale generale} è dato dalla somma dell'integrale generale dell'omogenea associata (2) e una soluzione particolare della EDO lineare di I ordine in forma normale (3). \footnote{
+		\itemize{
+			\item $y_o$: integrale generale dell'omogenea associata
+			\item $y_p$: soluzione particolare della EDO lineare di I ordine in forma normale
+		}
+	}:
+	\begin{align*}
+		\textcolor{red}{y(x) =} \; y_o(x)+y_p(x)
+	\end{align*}
+	\begin{proof}
+		Voglio dimostrare che l'integrale generale è dato dalla somma di $y_o$ e $y_p$. Per farlo, mostro che $y_o(x)=y(x)-y_p(x)$: \\
+		Sia $y(x)$ una qualunque soluzione della (2) e $y_p(x)$ una soluzione della particolare della (2):
+		\begin{align*}
+			y'(x)+a(x)y(x) = f(x) \\
+			y_p'(x)+a(x)y_p(x) = f(x)
+		\end{align*}
+		sottraendo membro a membro si ha:
+		\begin{align*}
+			\left[y'(x)+a(x)y(x)\right] - \left[y_p'(x)+a(x)y_p(x)\right] &= f(x)-f(x) \\
+			\left[y'(x)+a(x)y(x)\right] - y_p'(x)-a(x)y_p(x) &= 0 \\
+			\text{\textcolor{cyan}{ordino e raccolgo}} \\
+			y'(x)- y_p'(x)+a(x)\left(y'(x)-y_p(x)\right) &= 0
+		\end{align*}
+		usando la linearità della derivata $(y'-y_p')=(y-y_p)'$:
+		\begin{align*}
+			y\textcolor{red}{'}(x)- y_p\textcolor{red}{'}(x)+a(x)\left(y'(x)-y_p(x)\right) &= 0 \\
+			\textcolor{red}{(}y(x)- y_p(x)\textcolor{red}{)'}+a(x)\left(y'(x)-y_p(x)\right) &= 0
+		\end{align*}
+		ponendo $y_o(x)=y(x)-y_p(x)$ ottengo:
+		\begin{align*}
+			(\textcolor{red}{y(x)- y_p(x)})'+a(x)\left(\textcolor{red}{y(x)- y_p(x)}\right) &= 0 \\
+			(\textcolor{red}{y_o})'+a(x)\left(\textcolor{red}{y_o}\right) &= 0
+		\end{align*}
+		quindi $y_o(x)$ è soluzione dell'omogenea e si dimostra che la differenza $y_o(x)=y(x)-y_p(x)$ è sempre una soluzione omogenea. Pertanto, basta 
+		spostare alcuni componenti di $y_o(x)=y(x)-y_p(x)$ per ottenere $y(x)=y_o+y_p(x)$, ovvero l'integrale generale.
+	\end{proof}
 \end{theorem}
 
 \begin{theorem}{Struttura dell'integrale generale per EDO lineare di I ordine dell'omogena associata}
-	SSia (qui si dimostra che la soluz. dell'omogenea associata è di una certa maniera. quindi solo $y_0$ quando $f(x)=0?$)
+		SSia l'equazione omogenea associata
+	\begin{align*}
+    y'(x)+a(x)y(x) &= 0   
+\end{align*}
+L'\textcolor{red}{integrale generale dell'omogenea associata}\footnote{soluzione dell'omogenea associata} è dato da:
+\begin{align*}
+	\textcolor{red}{y(x)=} \; ce^{-A(x)} \quad \quad c \in \mathbb{R}
+\end{align*}
+dove $A(x)=\int a(x)dx$
+\begin{proof}
+	Sia
+	\begin{align*}
+		y'(x)+a(x)y(x) &= 0 \\
+		\text{\textcolor{cyan}{moltiplico ambo i membri per $e^{A(x)}$}} \\
+		y'(x) \cdot e^{A(x)}+a(x)y(x) \cdot e^{A(x)} &= 0 \\
+		\left[y(x)e^{A(x)}\right]'=0 \\
+		\text{\textcolor{cyan}{integro ambo i membri}} \\
+		\int\left[y(x)e^{A(x)}\right]'dx = \int 0 dx \\
+		y(x)e^{A(x)} = c \\
+		y(x) = \frac{c}{e^{A(x)}} \\
+		y(x) = ce^{-A(x)}
+	\end{align*}
+\end{proof}
 \end{theorem}
 
-\begin{theorem}{Struttura dell'integrale generale per EDO lineare di I ordine completa $(y_O+y_p)$}
-	SSia SSia (quindi ripeti dimostrazione precedente per $y_0$ ma poi aggiungi qui dim per $y_p$ quando $f(x) \neq 0$)
+\begin{theorem}{Struttura della soluzione particolare per EDO lineare di I ordine in forma normale}
+	SSia l'equazione in forma normale
+	\begin{align}
+    y'(x)+a(x)y(x) &= f(x)   
+\end{align}
+La \textcolor{red}{struttura della soluzione particolare} della EDO lineare di I ordine in forma normale è data dal metodo di variazione di una costante nella forma:
+\begin{align*}
+	\textcolor{red}{y_p(x) = } \; e^{-A(x)}\int f(x)e^{A(x)}dx
+\end{align*}
+\begin{proof}
+	La soluzione particolare viene cercata nella forma:
+	\begin{align}
+		y_p(x)=c(x)e^{-A(x)}
+	\end{align}
+	dove $c(x)$ non è più una costante arbitraria e deve essere trovata in modo che $y_p$ sia soluzione della (4). Sostituisco (5) nella (4) e trovo:
+	\begin{align*}
+		(c(x)e^{-A(x)})'+a(x)\left(c(x)e^{-A(x)}\right)=f(x) \\
+		\text{\textcolor{cyan}{derivo $(c(x)e^{-A(x)})'$  e ottengo}} \\
+		\left(c(x)'e^{-A(x)} - c(x)a(x)e^{-A(x)} \right)+a(x)\left(c(x)e^{A(x)}\right)=f(x) \\
+		e^{-A(x)}\left[c(x)' \cancel{- c(x)a(x)} + \cancel{c(x)a(x)}\right]=f(x) \\
+		e^{-A(x)}c'(x) = f(x) \\
+		c'(x) = f(x)e^{A(x)} \\
+		\text{\textcolor{cyan}{integro ambo i membri}} \\
+		\int c'(x) dx = \int f(x)e^{A(x)} dx \\
+		c(x) = \int f(x)e^{A(x)} dx \\
+		\text{\textcolor{cyan}{ora che conosco $c(x)$} lo sostituisco in (5) e ottengo} \\
+		y_p(x)=e^{-A(x)}\textcolor{red}{\int f(x)e^{A(x)} dx}
+	\end{align*}
+	che è ciò che volevo dimostrare, ovvero la struttura della soluzione particolare.
+\end{proof}
 \end{theorem}
-
+	L'integrale generale della (2) è dato quindi dalla formula:
+\begin{align}
+	y(x) = \textcolor{red}{c}e^{-A(x)} + e^{-A(x)}\int f(x)e^{A(x)} dx
+\end{align}
+trovate dal teorema sopra e quello precedente. \\
+La \textcolor{red}{costante $c$} della (6) sarà determinata da una condizione iniziale:
+\begin{align*}
+	\begin{cases}
+	y(x_0) = y_0
+\end{cases}
+\end{align*}
 \begin{theorem}{Problema di Cauchy per EDO lineare di I ordine}
-	SSia
+SSiano $a,f$ funzioni continue in un intervallo $I$ dove $x_0 \in I$. Allora, $\forall{y_0} \in \mathbb{R}$ il problema di Cauchy:
+\begin{align*}
+	\begin{cases}
+		y'(x)+a(x)y(x) = f(x) \\
+		y(x_0) = y_0
+	\end{cases}
+\end{align*}
+ammette una soluzione unica $y \in C^1(I)$ ed è data da
+\begin{align*}
+	y(x)=\textcolor{red}{y_0}e^{-A(x)}+e^{-A(x)}\int_{x_0}^{x} f(s) e^{A(s)}ds
+\end{align*}
 \end{theorem}
 \subsection{EDO a variabili separabili}
 \subsection{EDO lineare di II ordine}
