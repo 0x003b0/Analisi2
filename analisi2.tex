@@ -111,12 +111,12 @@ Il motivo? Sono il linguaggio con cui descriviamo il cambiamento. Ci permettono 
 \begin{esempio}[Esempio: La tazza di caffè]
 	Immagina di avere una tazza di caffè bollente appoggiata sul tavolo. Sai per certo che si raffredderà, ma con quale velocità lo farà?
 	Un'equazione differenziale (nota come Legge di Newton sul raffreddamento) ci dice che la velocità con cui la temperatura del caffè cambia rispetto al tempo è proporzionale alla differenza tra la temperatura del caffè e quella della stanza.
-	
+
 	\begin{align*}
 		\frac{dT}{dt}=-k(T- T_{ambiente})
 	\end{align*}
 	dove:
-	
+
 	% Inizio la prima colonna (larga il 65% dello spazio totale) per l'elenco
 	\begin{minipage}{0.65\textwidth}
 		\begin{itemize}
@@ -154,23 +154,23 @@ Il problema di Cauchy consiste nel trovare la soluzione della EDO imponendo le c
 	\end{align*}
 	Impongo le condizioni iniziali nell'integrale generale e ottengo:
 	\begin{align*}
-		T(t) &= T_{ambiente}+c \cdot e^{-kt} \\
-		90 &= 20 + c \cdot e^{-k \cdot 0} \\
-		c &= 70
+		T(t) & = T_{ambiente}+c \cdot e^{-kt} \\
+		90   & = 20 + c \cdot e^{-k \cdot 0}  \\
+		c    & = 70
 	\end{align*}
 	quindi, la soluzione al problema di Cauchy sarà:
 	\begin{align*}
-		T(t) &= 20 + (70 \cdot e^{-kt})
+		T(t) & = 20 + (70 \cdot e^{-kt})
 	\end{align*}
 	Adesso se vuoi sapere quanti gradi avrà il caffè tra esattamente 15 minuti ($15 \cdot 60 = 900 s$), ti basterà impostare $t=900$ e calcolare:
 	\begin{align*}
-		T(900) &= 20 + (70 \cdot e^{-k \cdot 900})
+		T(900) & = 20 + (70 \cdot e^{-k \cdot 900})
 	\end{align*}
 	con $k$ costante di raffreddamento.
 \end{esempio}
 \subsection{EDO lineare di I ordine}
 \begin{definition}{EDO lineare di I ordine}
-	SSi dice \textcolor{red}{equazione differenziale di primo ordine} un'equazione del tipo: 
+	SSi dice \textcolor{red}{equazione differenziale di primo ordine} un'equazione del tipo:
 	\begin{align}
 		F\left(x,y,y'\right) = 0
 	\end{align}
@@ -190,9 +190,9 @@ Il problema di Cauchy consiste nel trovare la soluzione della EDO imponendo le c
 \begin{theorem}{Struttura dell'integrale generale per EDO lineare di I ordine}
 	SSia la EDO lineare di I ordine
 	\begin{align}
-    y'(x)+a(x)y(x) &= f(x) && \text{(forma normale)} \\
-    y'(x)+a(x)y(x) &= 0    && \text{(omogenea associata)}
-\end{align}
+		y'(x)+a(x)y(x) & = f(x) &  & \text{(forma normale)}      \\
+		y'(x)+a(x)y(x) & = 0    &  & \text{(omogenea associata)}
+	\end{align}
 	con $a(x),f(x)$ continue sull'intervallo $I \subseteq \mathbb{R}$. \\ \\
 	L' \textcolor{red}{integrale generale} è dato dalla somma dell'integrale generale dell'omogenea associata (2) e una soluzione particolare della EDO lineare di I ordine in forma normale (3). \footnote{
 		\itemize{
@@ -212,84 +212,84 @@ Il problema di Cauchy consiste nel trovare la soluzione della EDO imponendo le c
 		\end{align*}
 		sottraendo membro a membro si ha:
 		\begin{align*}
-			\left[y'(x)+a(x)y(x)\right] - \left[y_p'(x)+a(x)y_p(x)\right] &= f(x)-f(x) \\
-			\left[y'(x)+a(x)y(x)\right] - y_p'(x)-a(x)y_p(x) &= 0 \\
-			\text{\textcolor{cyan}{ordino e raccolgo}} \\
-			y'(x)- y_p'(x)+a(x)\left(y'(x)-y_p(x)\right) &= 0
+			\left[y'(x)+a(x)y(x)\right] - \left[y_p'(x)+a(x)y_p(x)\right] & = f(x)-f(x) \\
+			\left[y'(x)+a(x)y(x)\right] - y_p'(x)-a(x)y_p(x)              & = 0         \\
+			\text{\textcolor{cyan}{ordino e raccolgo}}                                  \\
+			y'(x)- y_p'(x)+a(x)\left(y'(x)-y_p(x)\right)                  & = 0
 		\end{align*}
 		usando la linearità della derivata $(y'-y_p')=(y-y_p)'$:
 		\begin{align*}
-			y\textcolor{red}{'}(x)- y_p\textcolor{red}{'}(x)+a(x)\left(y'(x)-y_p(x)\right) &= 0 \\
-			\textcolor{red}{(}y(x)- y_p(x)\textcolor{red}{)'}+a(x)\left(y'(x)-y_p(x)\right) &= 0
+			y\textcolor{red}{'}(x)- y_p\textcolor{red}{'}(x)+a(x)\left(y'(x)-y_p(x)\right)  & = 0 \\
+			\textcolor{red}{(}y(x)- y_p(x)\textcolor{red}{)'}+a(x)\left(y'(x)-y_p(x)\right) & = 0
 		\end{align*}
 		ponendo $y_o(x)=y(x)-y_p(x)$ ottengo:
 		\begin{align*}
-			(\textcolor{red}{y(x)- y_p(x)})'+a(x)\left(\textcolor{red}{y(x)- y_p(x)}\right) &= 0 \\
-			(\textcolor{red}{y_o})'+a(x)\left(\textcolor{red}{y_o}\right) &= 0
+			(\textcolor{red}{y(x)- y_p(x)})'+a(x)\left(\textcolor{red}{y(x)- y_p(x)}\right) & = 0 \\
+			(\textcolor{red}{y_o})'+a(x)\left(\textcolor{red}{y_o}\right)                   & = 0
 		\end{align*}
-		quindi $y_o(x)$ è soluzione dell'omogenea e si dimostra che la differenza $y_o(x)=y(x)-y_p(x)$ è sempre una soluzione omogenea. Pertanto, basta 
+		quindi $y_o(x)$ è soluzione dell'omogenea e si dimostra che la differenza $y_o(x)=y(x)-y_p(x)$ è sempre una soluzione omogenea. Pertanto, basta
 		spostare alcuni componenti di $y_o(x)=y(x)-y_p(x)$ per ottenere $y(x)=y_o+y_p(x)$, ovvero l'integrale generale.
 	\end{proof}
 \end{theorem}
 
 \begin{theorem}{Struttura dell'integrale generale per EDO lineare di I ordine dell'omogena associata}
-		SSia l'equazione omogenea associata
+	SSia l'equazione omogenea associata
 	\begin{align*}
-    y'(x)+a(x)y(x) &= 0   
-\end{align*}
-L'\textcolor{red}{integrale generale dell'omogenea associata}\footnote{soluzione dell'omogenea associata} è dato da:
-\begin{align*}
-	\textcolor{red}{y(x)=} \; ce^{-A(x)} \quad \quad c \in \mathbb{R}
-\end{align*}
-dove $A(x)=\int a(x)dx$
-\begin{proof}
-	Sia
-	\begin{align*}
-		y'(x)+a(x)y(x) &= 0 \\
-		\text{\textcolor{cyan}{moltiplico ambo i membri per $e^{A(x)}$}} \\
-		y'(x) \cdot e^{A(x)}+a(x)y(x) \cdot e^{A(x)} &= 0 \\
-		\left[y(x)e^{A(x)}\right]'=0 \\
-		\text{\textcolor{cyan}{integro ambo i membri}} \\
-		\int\left[y(x)e^{A(x)}\right]'dx = \int 0 dx \\
-		y(x)e^{A(x)} = c \\
-		y(x) = \frac{c}{e^{A(x)}} \\
-		y(x) = ce^{-A(x)}
+		y'(x)+a(x)y(x) & = 0
 	\end{align*}
-\end{proof}
+	L'\textcolor{red}{integrale generale dell'omogenea associata}\footnote{soluzione dell'omogenea associata} è dato da:
+	\begin{align*}
+		\textcolor{red}{y(x)=} \; ce^{-A(x)} \quad \quad c \in \mathbb{R}
+	\end{align*}
+	dove $A(x)=\int a(x)dx$
+	\begin{proof}
+		Sia
+		\begin{align*}
+			y'(x)+a(x)y(x)                               & = 0               \\
+			\text{\textcolor{cyan}{moltiplico ambo i membri per $e^{A(x)}$}} \\
+			y'(x) \cdot e^{A(x)}+a(x)y(x) \cdot e^{A(x)} & = 0               \\
+			\left[y(x)e^{A(x)}\right]'=0                                     \\
+			\text{\textcolor{cyan}{integro ambo i membri}}                   \\
+			\int\left[y(x)e^{A(x)}\right]'dx = \int 0 dx                     \\
+			y(x)e^{A(x)} = c                                                 \\
+			y(x) = \frac{c}{e^{A(x)}}                                        \\
+			y(x) = ce^{-A(x)}
+		\end{align*}
+	\end{proof}
 \end{theorem}
 
 \begin{theorem}{Struttura della soluzione particolare per EDO lineare di I ordine in forma normale}
 	SSia l'equazione in forma normale
 	\begin{align}
-    y'(x)+a(x)y(x) &= f(x)   
-\end{align}
-La \textcolor{red}{struttura della soluzione particolare} della EDO lineare di I ordine in forma normale è data dal metodo di variazione di una costante nella forma:
-\begin{align*}
-	\textcolor{red}{y_p(x) = } \; e^{-A(x)}\int f(x)e^{A(x)}dx
-\end{align*}
-\begin{proof}
-	La soluzione particolare viene cercata nella forma:
-	\begin{align}
-		y_p(x)=c(x)e^{-A(x)}
+		y'(x)+a(x)y(x) & = f(x)
 	\end{align}
-	dove $c(x)$ non è più una costante arbitraria e deve essere trovata in modo che $y_p$ sia soluzione della (4). Sostituisco (5) nella (4) e trovo:
+	La \textcolor{red}{struttura della soluzione particolare} della EDO lineare di I ordine in forma normale è data dal metodo di variazione di una costante nella forma:
 	\begin{align*}
-		(c(x)e^{-A(x)})'+a(x)\left(c(x)e^{-A(x)}\right)=f(x) \\
-		\text{\textcolor{cyan}{derivo $(c(x)e^{-A(x)})'$  e ottengo}} \\
-		\left(c(x)'e^{-A(x)} - c(x)a(x)e^{-A(x)} \right)+a(x)\left(c(x)e^{A(x)}\right)=f(x) \\
-		e^{-A(x)}\left[c(x)' \cancel{- c(x)a(x)} + \cancel{c(x)a(x)}\right]=f(x) \\
-		e^{-A(x)}c'(x) = f(x) \\
-		c'(x) = f(x)e^{A(x)} \\
-		\text{\textcolor{cyan}{integro ambo i membri}} \\
-		\int c'(x) dx = \int f(x)e^{A(x)} dx \\
-		c(x) = \int f(x)e^{A(x)} dx \\
-		\text{\textcolor{cyan}{ora che conosco $c(x)$} lo sostituisco in (5) e ottengo} \\
-		y_p(x)=e^{-A(x)}\textcolor{red}{\int f(x)e^{A(x)} dx}
+		\textcolor{red}{y_p(x) = } \; e^{-A(x)}\int f(x)e^{A(x)}dx
 	\end{align*}
-	che è ciò che volevo dimostrare, ovvero la struttura della soluzione particolare.
-\end{proof}
+	\begin{proof}
+		La soluzione particolare viene cercata nella forma:
+		\begin{align}
+			y_p(x)=c(x)e^{-A(x)}
+		\end{align}
+		dove $c(x)$ non è più una costante arbitraria e deve essere trovata in modo che $y_p$ sia soluzione della (4). Sostituisco (5) nella (4) e trovo:
+		\begin{align*}
+			(c(x)e^{-A(x)})'+a(x)\left(c(x)e^{-A(x)}\right)=f(x)                                \\
+			\text{\textcolor{cyan}{derivo $(c(x)e^{-A(x)})'$  e ottengo}}                       \\
+			\left(c(x)'e^{-A(x)} - c(x)a(x)e^{-A(x)} \right)+a(x)\left(c(x)e^{A(x)}\right)=f(x) \\
+			e^{-A(x)}\left[c(x)' \cancel{- c(x)a(x)} + \cancel{c(x)a(x)}\right]=f(x)            \\
+			e^{-A(x)}c'(x) = f(x)                                                               \\
+			c'(x) = f(x)e^{A(x)}                                                                \\
+			\text{\textcolor{cyan}{integro ambo i membri}}                                      \\
+			\int c'(x) dx = \int f(x)e^{A(x)} dx                                                \\
+			c(x) = \int f(x)e^{A(x)} dx                                                         \\
+			\text{\textcolor{cyan}{ora che conosco $c(x)$} lo sostituisco in (5) e ottengo}     \\
+			y_p(x)=e^{-A(x)}\textcolor{red}{\int f(x)e^{A(x)} dx}
+		\end{align*}
+		che è ciò che volevo dimostrare, ovvero la struttura della soluzione particolare.
+	\end{proof}
 \end{theorem}
-	L'integrale generale della (2) è dato quindi dalla formula:
+L'integrale generale della (2) è dato quindi dalla formula:
 \begin{align}
 	y(x) = \textcolor{red}{c}e^{-A(x)} + e^{-A(x)}\int f(x)e^{A(x)} dx
 \end{align}
@@ -297,72 +297,163 @@ trovate dal teorema sopra e quello precedente. \\
 La \textcolor{red}{costante $c$} della (6) sarà determinata da una condizione iniziale:
 \begin{align*}
 	\begin{cases}
-	y(x_0) = y_0
-\end{cases}
-\end{align*}
-\begin{theorem}{Problema di Cauchy per EDO lineare di I ordine}
-SSiano $a,f$ funzioni continue in un intervallo $I$ dove $x_0 \in I$. Allora, $\forall{y_0} \in \mathbb{R}$ il problema di Cauchy:
-\begin{align*}
-	\begin{cases}
-		y'(x)+a(x)y(x) = f(x) \\
 		y(x_0) = y_0
 	\end{cases}
 \end{align*}
-ammette una soluzione unica $y \in C^1(I)$ ed è data da
-\begin{align*}
-	y(x)=\textcolor{red}{y_0}e^{-A(t)}+e^{-A(t)}\int_{x_0}^{x} f(s) e^{A(s)}ds
-\end{align*}
-dove: 
-\begin{itemize}
-	\item $A(t) = \int_{x_0}^{x} a(t)dt$
-	\item $A(s) = \int_{x_0}^{x} a(t)ds$
-\end{itemize}
-\begin{proof}
-	Voglio dimostrare che la soluzione unica si ottiene dalla formula:
+\begin{theorem}{Problema di Cauchy per EDO lineare di I ordine}
+	SSiano $a,f$ funzioni continue in un intervallo $I$ dove $x_0 \in I$. Allora, $\forall{y_0} \in \mathbb{R}$ il problema di Cauchy:
 	\begin{align*}
-	y(x)={y_0}e^{-A(t)}+e^{-A(t)}\int_{x_0}^{x} f(s) e^{A(s)}ds
-\end{align*}
-Definisco:
-\begin{align*}
-	A(x) = \int_{x_0}^{x} a(t) dt
-\end{align*}
-per il Teorema Fondamentale del Calcolo Integrale, avrò che:
-\begin{align*}
-	A(x_0) = \int_{x_0}^{x_0} a(t) dt = 0 \quad \footnote{ovvero, l'integrale definito con estremi uguali fa zero $\int_{a}^{a} f(x)dx = F(a) - F(a) = 0$}
-\end{align*}
-Sostituisco $A(x_0)$ nell'integrale generale:
-\begin{align*}
-	y(x_0) &= {c}e^{-A(x_0)} + e^{-A(x_0)}\int_{x_0}^{x_0} f(s)e^{A(s)} ds \\
-	y(x_0) &= {c}e^{-0} + e^{-0} \underbrace{\int_{x_0}^{x_0} f(s)e^{A(s)} ds}_{=0} \\
-	y(x_0) &= c
-\end{align*}
-Moltiplico ambo i membri della EDO (4) per $e^{A(x)}$:
-\begin{align*}
-	e^{A(x)} \left(y'(x)+a(x)y(x) \right) &= e^{A(x)}f(x) \\
-	\text{\textcolor{cyan}{mi accorgo che $e^{A(x)} \left(y'(x)+a(x)y(x) \right) = \left(y(x)e^{A(x)} \right)'$}} & \\
-	\left(y(x)e^{A(x)} \right)' &= e^{A(x)}f(x) \\
-	\text{\textcolor{cyan}{integro ambo i membri rispetto a $s$}} & \\
-	\int_{x_0}^{x} \left(y(s)e^{A(s)} \right)' ds &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
-	\left[y(s)e^{A(s)} \right]_{x_0}^{x} &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
-	y(x)e^{A(x)} - y(x_0)e^{A(x_0)} &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
-	\text{\textcolor{cyan}{dato che $A(x_0)=0$ allora}} & \\
-	y(x)e^{A(x)} - y(x_0)e^{0} &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
-	y(x)e^{A(x)} - y(x_0) &= \int_{x_0}^{x} e^{A(s)}f(s) ds \\
-	\text{\textcolor{cyan}{isolo $y(x)$ e ottengo}} & \\
-	y(x)  &= y(x_0)e^{-A(x)} + e^{-A(x)}\int_{x_0}^{x} e^{A(s)}f(s) ds
-\end{align*}
-che è proprio ciò che volevo dimostrare.
-\end{proof}
+		\begin{cases}
+			y'(x)+a(x)y(x) = f(x) \\
+			y(x_0) = y_0
+		\end{cases}
+	\end{align*}
+	ammette una soluzione unica $y \in C^1(I)$ ed è data da
+	\begin{align*}
+		y(x)=\textcolor{red}{y_0}e^{-A(t)}+e^{-A(t)}\int_{x_0}^{x} f(s) e^{A(s)}ds
+	\end{align*}
+	dove:
+	\begin{itemize}
+		\item $A(t) = \int_{x_0}^{x} a(t)dt$
+		\item $A(s) = \int_{x_0}^{x} a(t)ds$
+	\end{itemize}
+	\begin{proof}
+		Voglio dimostrare che la soluzione unica si ottiene dalla formula:
+		\begin{align*}
+			y(x)={y_0}e^{-A(t)}+e^{-A(t)}\int_{x_0}^{x} f(s) e^{A(s)}ds
+		\end{align*}
+		Definisco:
+		\begin{align*}
+			A(x) = \int_{x_0}^{x} a(t) dt
+		\end{align*}
+		per il Teorema Fondamentale del Calcolo Integrale, avrò che:
+		\begin{align*}
+			A(x_0) = \int_{x_0}^{x_0} a(t) dt = 0 \quad \footnote{ovvero, l'integrale definito con estremi uguali fa zero $\int_{a}^{a} f(x)dx = F(a) - F(a) = 0$}
+		\end{align*}
+		Sostituisco $A(x_0)$ nell'integrale generale:
+		\begin{align*}
+			y(x_0) & = {c}e^{-A(x_0)} + e^{-A(x_0)}\int_{x_0}^{x_0} f(s)e^{A(s)} ds          \\
+			y(x_0) & = {c}e^{-0} + e^{-0} \underbrace{\int_{x_0}^{x_0} f(s)e^{A(s)} ds}_{=0} \\
+			y(x_0) & = c
+		\end{align*}
+		Moltiplico ambo i membri della EDO (4) per $e^{A(x)}$:
+		\begin{align*}
+			e^{A(x)} \left(y'(x)+a(x)y(x) \right)                                                                         & = e^{A(x)}f(x)                                              \\
+			\text{\textcolor{cyan}{mi accorgo che $e^{A(x)} \left(y'(x)+a(x)y(x) \right) = \left(y(x)e^{A(x)} \right)'$}} &                                                             \\
+			\left(y(x)e^{A(x)} \right)'                                                                                   & = e^{A(x)}f(x)                                              \\
+			\text{\textcolor{cyan}{integro ambo i membri rispetto a $s$}}                                                 &                                                             \\
+			\int_{x_0}^{x} \left(y(s)e^{A(s)} \right)' ds                                                                 & = \int_{x_0}^{x} e^{A(s)}f(s) ds                            \\
+			\left[y(s)e^{A(s)} \right]_{x_0}^{x}                                                                          & = \int_{x_0}^{x} e^{A(s)}f(s) ds                            \\
+			y(x)e^{A(x)} - y(x_0)e^{A(x_0)}                                                                               & = \int_{x_0}^{x} e^{A(s)}f(s) ds                            \\
+			\text{\textcolor{cyan}{dato che $A(x_0)=0$ allora}}                                                           &                                                             \\
+			y(x)e^{A(x)} - y(x_0)e^{0}                                                                                    & = \int_{x_0}^{x} e^{A(s)}f(s) ds                            \\
+			y(x)e^{A(x)} - y(x_0)                                                                                         & = \int_{x_0}^{x} e^{A(s)}f(s) ds                            \\
+			\text{\textcolor{cyan}{isolo $y(x)$ e ottengo}}                                                               &                                                             \\
+			y(x)                                                                                                          & = y(x_0)e^{-A(x)} + e^{-A(x)}\int_{x_0}^{x} e^{A(s)}f(s) ds
+		\end{align*}
+		che è proprio ciò che volevo dimostrare.
+	\end{proof}
 \end{theorem}
-\subsection{EDO a variabili separabili}
+\subsection{EDO a variabili separabili (non lineari)}
 \subsection{EDO lineare di II ordine}
+\begin{definition}{EDO lineare di II ordine}
+	SSi dice \textcolor{red}{equazione differenziale di secondo ordine} un'equazione del tipo:
+	\begin{align*}
+		a_2(x)y''(x)+a_1(x)y'(x)+a_0(x)y(x) & = f(x)
+	\end{align*}
+	dove $a_i(x), f(x)$ continue sull'\textbf{intervallo} $I \subseteq \mathbb{R}$.
+	\begin{align}
+		y''(x)+a_1(x)y'(x)+a_0(x)y(x) & = f(x) &  & \text{(forma normale con $a_2(x)=1$)} \\
+		y''(x)+a_1(x)y'(x)+a_0(x)y(x) & = 0    &  & \text{(omogenea associata)}
+	\end{align}
+	L' \textcolor{red}{integrale generale} della EDO (7) è dato dalla somma dell'integrale generale dell'omogenea associata e da una soluzione particolare della EDO in forma normale:
+	\begin{align*}
+		\int generale & = \int \text{omogenea} + \int \text{particolare} \\
+		\text{ovvero,}                                                   \\
+		y(x)          & = y_o(x) + y_p(x)
+	\end{align*}
+	\textcolor{blue}{Nota:} \\
+	L'integrale generale dell'omogenea ($y_o$) richiede esattamente 2 soluzioni linearmente indipendenti
+	\footnote{soluzioni lineamente indipendenti: se nessuna di essere può essere scritta come combinazone lineare
+		delle altre (l'unica combinazione lineare che dà la soluzione nulla è quella con tutti i coefficienti a zero)}.
+	\begin{align*}
+		y_o(x)=c_1 y_1(x)+c_2 y_2(x)
+	\end{align*}
+\end{definition}
+La matrice Wroskiana permette di verificare se due soluzioni sono linearmente indipendenti o no.
+\begin{definition}{Matrice Wroskiana}
+	SSiano \textcolor{red}{$y_1,y_2$} due funzioni $C^2(I)$, soluzioni dell'integrale generale dell'omogena associata. Esse sono \textcolor{red}{linearmente indipendenti} se e solo se il determinante
+	della matrice Wroskiana ha valore diverso da zero per ogni $x \in I$
+	\begin{align*}
+		\begin{bmatrix}
+			y_1(x)  & y_2(x)  \\
+			y_1'(x) & y_2'(x)
+		\end{bmatrix}
+	\end{align*}
+
+\end{definition}
 
 
-\newpage
 
-\section{Teoremi EDO}
-\subsection{EDO di I ordine}
-\subsection{EDO di II ordine}
+\begin{theorem}{Struttura dell'integrale generale per EDO lineare di II ordine dell'omogenea associata}
+	SSia l'equazione dell'omogenea associata
+	\begin{align*}
+		ay''(x)+b(x)y'(x)+c(x)y(x) = 0 &  & \text{(omogenea associata)}
+	\end{align*}
+	\begin{enumerate}
+		\item Se \textcolor{red}{$b=c=0$} allora l'equazione diventa $ay''(x)=0$ e l'integrale generale dell'omogena associata è dato da
+		      \begin{align*}
+			      y_o(x) = c_1x+c_2 &  & c_1,c_2 \in \mathbb{R}
+		      \end{align*}
+		      che si ottiene integrando due volte $ay''(x)=0$.
+		\item Se \textcolor{red}{$b,c \neq 0$} allora distinguiamo tra 3 casi in base al delta $\Delta$ dell'equazione caratteristica
+		      \begin{center}
+			      \includegraphics[width=0.7\linewidth]{sol-edo-II-delta.png}
+		      \end{center}
+		\begin{proof}
+			\fbox{\textcolor{red}{Caso 1: $\Delta > 0$}}
+			Le soluzioni della EDO lineare omogenea sono quindi
+			\begin{align*}
+				y_1(x) = e^{\lambda_1 x}, y_2(x) = e^{\lambda_2 x}
+			\end{align*}
+			Voglio dimostrare che $y_o= c_1 e^{\lambda_1 x} + c_2  e^{\lambda_2 x}$
+			\begin{enumerate}
+				\item Verifico indipendenza lineare delle soluzioni tramite Wroskiana
+				\item Ogni soluzione è combinazione lineare di $y_1(x)$ e $y_2(x)$
+			\end{enumerate}
+		\end{proof}
+		\begin{proof}
+			\fbox{\textcolor{red}{Caso 2: $\Delta = 0$}}
+			Le soluzioni della EDO lineare omogenea sono quindi
+			\begin{align*}
+				y_1(x) = e^{\lambda x}, y_2(x) = xe^{\lambda x}
+			\end{align*}
+			Voglio dimostrare che $y_o= c_1 e^{\lambda x} + c_2  xe^{\lambda x}$
+			\begin{enumerate}
+				\item Verifico indipendenza lineare delle soluzioni tramite Wroskiana
+				\item Ogni soluzione è combinazione lineare di $y_1(x)$ e $y_2(x)$
+			\end{enumerate}
+		\end{proof}
+		\begin{proof}
+			\fbox{\textcolor{red}{Caso 3: $\Delta < 0$}}
+			Le soluzioni della EDO lineare omogenea sono quindi
+			\begin{align*}
+				y_1(x) = e^{\alpha x} \cos(\beta x), \quad y_2(x) = e^{\alpha x} \sin(\beta x)
+			\end{align*}
+			Voglio dimostrare che $y_o= e^{\alpha x} \cos(\beta x) + e^{\alpha x} \sin(\beta x)$
+			\begin{enumerate}
+				\item Verifico indipendenza lineare delle soluzioni tramite Wroskiana
+				\item Ogni soluzione è combinazione lineare di $y_1(x)$ e $y_2(x)$
+			\end{enumerate}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+\begin{theorem}{Teorema radice dell'eq. caratteristica}
+	SSia la EDO lineare di I ordine
+\end{theorem}
+\begin{theorem}{Metodo di variazione delle costanti}
+	SSia la EDO lineare di I ordine
+\end{theorem}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
